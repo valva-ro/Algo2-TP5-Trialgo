@@ -7,7 +7,7 @@ La finalidad de este proyecto es
 Hecho por:
 
   - [Alejo Villores](https://github.com/alejovillores)
-  - [Alex Teper](https://github.com/)
+  - [Alex Teper](https://github.com/AlexTeper99)
   - [Kevin Meaca](https://github.com/root-MKevin)
   - [Valentina Varela Rodriguez](https://github.com/valva-ro)
 

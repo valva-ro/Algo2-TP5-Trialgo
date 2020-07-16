@@ -2,7 +2,16 @@
 ================
 Trabajo Practico Grupal N5: 
 ------------
-La finalidad de este proyecto es 
+Este proyecto se encarga de brindar información al usuario sobre aeropuertos y vuelos. En el menú están las opciones
+- Aeropuertos
+  - Consultar por un aeropuerto
+  - Dar de alta un nuevo aeropuerto
+  - Dar de baja algun aeropuerto
+  - Mostrar todos los aeropuertos (in orden)
+  - Mostrar todos los aeropuertos (recorrido en ancho)
+- Vuelos
+  - Buscar vuelo entre partida y destino con menor costo
+  - Buscar vuelo entre partida y destino con menor duración
 
 Hecho por:
 

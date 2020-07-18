@@ -8,24 +8,62 @@ using namespace std;
 template <typename Tipo>
 class NodoABB {
 
+    // Atributos
     private:
         NodoABB<Tipo>* izquierda;
         NodoABB<Tipo>* derecha;
         NodoABB<Tipo>* padre;
         Tipo dato;
 
+    // Metodos
     public:
+
+        //  PRE: -
+        // POST: Construye el nodo con el dato recibido por parametro
         NodoABB(Tipo dato);
+
+        //  PRE: -
+        // POST: Devuelve el dato del nodo
         Tipo obtenerDato();
+
+        //  PRE: -
+        // POST: Devuelve el puntero izquierdo
         NodoABB<Tipo>* obtenerIzquierda();
+
+        //  PRE: -
+        // POST: Devuelve el puntero derecho
         NodoABB<Tipo>* obtenerDerecha();
+
+        //  PRE: -
+        // POST: Devuelve el puntero padre
         NodoABB<Tipo>* obtenerPadre();
+
+        //  PRE: -
+        // POST: Le asigna dato al atributo dato
         void asignarDato(Tipo dato);
+
+        //  PRE: -
+        // POST: Le asigna izquierda al atributo izquierda
         void asignarIzquierda(NodoABB<Tipo>* izquierda);
+
+        //  PRE: -
+        // POST: Le asigna derecha al atributo derecha
         void asignarDerecha(NodoABB<Tipo>* derecha);
+
+        //  PRE: -
+        // POST: Le asigna padre al atributo padre
         void asignarPadre(NodoABB<Tipo>* padre);
+
+        //  PRE: -
+        // POST: Devuelve true si el nodo es hoja, de lo contrario false
         bool esHoja();
+
+        //  PRE: -
+        // POST: Devuelve true si el nodo tiene hijo a la derecha, de lo contrario false
         bool soloHijoDerecha();
+
+        //  PRE: -
+        // POST: Devuelve true si el nodo tiene hijo a la izquierda, de lo contrario false
         bool soloHijoIzquierda();
 };
 
@@ -33,9 +71,9 @@ class NodoABB {
 template <typename Tipo>
 NodoABB<Tipo>:: NodoABB(Tipo dato) {
     this->dato = dato;
-    izquierda = NULL;
-    derecha = NULL;
-    padre = NULL;
+    izquierda = 0;
+    derecha = 0;
+    padre = 0;
 }
 
 /////////////////////////////////////////////
@@ -90,19 +128,19 @@ void NodoABB<Tipo>:: asignarPadre(NodoABB<Tipo>* padre) {
 /////////////////////////////////////////////
 template <typename Tipo>
 bool NodoABB<Tipo>:: esHoja() {
-    return (derecha == NULL && izquierda == NULL);
+    return (derecha == 0 && izquierda == 0);
 }
 
 /////////////////////////////////////////////
 template <typename Tipo>
 bool NodoABB<Tipo>:: soloHijoIzquierda() {
-    return (derecha == NULL && izquierda != NULL);
+    return (derecha == 0 && izquierda != 0);
 }
 
 /////////////////////////////////////////////
 template <typename Tipo>
 bool NodoABB<Tipo>:: soloHijoDerecha() {
-    return (derecha != NULL && izquierda == NULL);
+    return (derecha != 0 && izquierda == 0);
 }
 /* ------------------------------------------------------------------------------ */
 

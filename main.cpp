@@ -8,18 +8,6 @@
             Valentina Varela Rodriguez
 */
 
-#include "ABB.h"
 int main() {
-
-    ABB<int> arbol;
-    for (int i = 1; i < 10; i++) {
-        arbol.insertar(i);
-    }
-
-    arbol.mostrarData();
-
-    cout << "\tExiste 4: " << arbol.existe(4) << "\n";
-    cout << "\tExiste 12: " << arbol.existe(12) << "\n";
-
     return 0;
 }

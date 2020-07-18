@@ -122,7 +122,7 @@ class ABB {
         NodoABB<Tipo>* borradoDosHijos(NodoABB<Tipo>* nodo);
 
         //  PRE: -
-        // POST: Libera los recursos utilizados por el ABB
+        // POST: Primero borra todos los nodos hijos del nodo recibido, y luego el nodo recibido
         void borrarTodo(NodoABB<Tipo>* nodo);
 
         //  PRE: El dato debe ser el dato del nodo
@@ -192,24 +192,28 @@ NodoABB<Tipo>* ABB<Tipo>:: obtenerRaiz() {
 ////////////////////////////////////////////////
 template <typename Tipo>
 NodoABB<Tipo>* ABB<Tipo>:: obtenerMax(NodoABB<Tipo>* nodo) {
-    if (!raiz) {
-        cout <<  "El ABB esta vacio!" << endl;
-        return 0;
+    if (nodo != 0) {
+        while(nodo->obtenerDerecha())
+            nodo = nodo->obtenerDerecha();
     }
-    while(nodo->obtenerDerecha())
-        nodo = nodo->obtenerDerecha();
+    else {
+        cout <<  "El nodo no tiene subarbol a la derecha!" << endl;
+        nodo = 0;
+    }
     return nodo;
 }
 
 ////////////////////////////////////////////////
 template <typename Tipo>
 NodoABB<Tipo>* ABB<Tipo>:: obtenerMin(NodoABB<Tipo>* nodo) {
-    if (!raiz) {
-        cout <<  "El ABB esta vacio!" << endl;
-        return 0;
+    if (nodo != 0) {
+        while(nodo->obtenerIzquierda())
+            nodo = nodo->obtenerIzquierda();
     }
-    while(nodo->obtenerIzquierda())
-        nodo = nodo->obtenerIzquierda();
+    else {
+        cout <<  "El nodo no tiene subarbol a la izquierda!" << endl;
+        nodo = 0;
+    }
     return nodo;
 }
 

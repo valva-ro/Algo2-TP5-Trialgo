@@ -88,7 +88,7 @@ void Cola<Tipo>:: encolar(Tipo dato) {
     if (vacia())
         primero = nuevoNodo;
     else
-        ultimo->setNext(nuevoNodo);
+        ultimo->asignarSiguiente(nuevoNodo);
     ultimo = nuevoNodo;
     elementos++;
 }
@@ -101,7 +101,7 @@ void Cola<Tipo>:: desencolar() {
         if (primero == ultimo)
             primero = ultimo = 0;
         else
-            primero = primero->getNext();
+            primero = primero->obtenerSiguiente();
         delete aux;
         elementos--;
     }

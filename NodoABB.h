@@ -67,7 +67,7 @@ class NodoABB {
         bool soloHijoIzquierda();
 };
 
-/* ------------------------------- Public Methods ------------------------------- */
+/* ------------------------------- Metodos Publicos ------------------------------- */
 template <typename Tipo>
 NodoABB<Tipo>:: NodoABB(Tipo dato) {
     this->dato = dato;
@@ -142,6 +142,7 @@ template <typename Tipo>
 bool NodoABB<Tipo>:: soloHijoDerecha() {
     return (derecha != 0 && izquierda == 0);
 }
+
 /* ------------------------------------------------------------------------------ */
 
 #endif //TP5_TRIALGO_NODOABB_H

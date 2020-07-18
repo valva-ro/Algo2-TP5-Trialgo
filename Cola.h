@@ -47,6 +47,10 @@ class Cola {
         bool vacia();
 };
 
+
+/* ------------------------------- Metodos Publicos ------------------------------- */
+
+////////////////////////////////////////////////
 template < typename Tipo >
 Cola<Tipo>:: Cola () {
     primero = 0;
@@ -59,21 +63,25 @@ Cola<Tipo>:: ~Cola() {
         desencolar();
 }
 
+////////////////////////////////////////////////
 template < typename Tipo >
 int Cola<Tipo>:: obtenerElementos() {
     return elementos;
 }
 
+////////////////////////////////////////////////
 template < typename Tipo >
 Tipo Cola<Tipo>:: obtenerPrimero() {
     return primero->obtenerDato();
 }
 
+////////////////////////////////////////////////
 template < typename Tipo >
 bool Cola<Tipo>:: vacia() {
     return elementos == 0;
 }
 
+////////////////////////////////////////////////
 template < typename Tipo >
 void Cola<Tipo>:: encolar(Tipo dato) {
     Nodo<Tipo>* nuevoNodo = new Nodo<Tipo>(dato);
@@ -85,6 +93,7 @@ void Cola<Tipo>:: encolar(Tipo dato) {
     elementos++;
 }
 
+////////////////////////////////////////////////
 template < typename Tipo >
 void Cola<Tipo>:: desencolar() {
     if (!vacia()) {
@@ -97,5 +106,7 @@ void Cola<Tipo>:: desencolar() {
         elementos--;
     }
 }
+
+/* ------------------------------------------------------------------------------ */
 
 #endif //COLA_H

@@ -33,32 +33,40 @@ public:
     Nodo* obtenerSiguiente();
 };
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/* ------------------------------- Metodos Publicos ------------------------------- */
+
+////////////////////////////////////////////////
 template <typename Tipo>
 Nodo<Tipo>:: Nodo(Tipo datoExterno) {
     dato = datoExterno;
     pSig = 0;
 }
 
+////////////////////////////////////////////////
 template <typename Tipo>
 void Nodo<Tipo>:: asignarSiguiente(Nodo<Tipo>* pSigExterno) {
     pSig = pSigExterno;
 }
 
+////////////////////////////////////////////////
 template <typename Tipo>
 Nodo<Tipo>* Nodo<Tipo>:: obtenerSiguiente() {
     return pSig;
 }
 
+////////////////////////////////////////////////
 template <typename Tipo>
 void Nodo<Tipo>:: asignarDato(Tipo datoExterno) {
     dato = datoExterno;
 }
 
+////////////////////////////////////////////////
 template <typename Tipo>
 Tipo Nodo<Tipo>:: obtenerDato() {
     return dato;
 }
+
+/* ------------------------------------------------------------------------------ */
 
 #endif //TP4_RECOMENDACIONPELICULA_NODO_H

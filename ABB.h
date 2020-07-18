@@ -2,6 +2,7 @@
 #define TP5_TRIALGO_ABB_H
 
 #include "NodoABB.h"
+#include "Cola.h"
 using namespace std;
 
 template <typename Tipo>
@@ -68,15 +69,19 @@ class ABB {
 
         //  PRE: El arbol debe tener al menos un dato
         // POST: Muestra por pantalla el recorrido in order (izquierda, padre, derecha)
-        void inOrder();
+        void recorridoInOrder();
 
         //  PRE: El arbol debe tener al menos un dato
         // POST: Muestra por pantalla el recorrido pre order (padre, izquierda, derecha)
-        void preOrder();
+        void recorridoPreOrder();
 
         //  PRE: El arbol debe tener al menos un dato
         // POST: Muestra por pantalla el recorrido post order (izquierda, derecha, padre)
-        void postOrder();
+        void recorridoPostOrder();
+
+        //  PRE: El nodo debe pertenecer al arbol
+        // POST: Muestra por pantalla el recorrido en ancho
+        void recorridoEnAncho();
 
         //  PRE: -
         // POST: Muestra info basica del ABB
@@ -134,15 +139,19 @@ class ABB {
 
         //  PRE: El nodo debe pertenecer al arbol
         // POST: Muestra por pantalla el recorrido in order
-        void inOrder(NodoABB<Tipo>* nodo);
+        void recorridoInOrder(NodoABB<Tipo>* nodo);
 
         //  PRE: El nodo debe pertenecer al arbol
         // POST: Muestra por pantalla el recorrido pre order
-        void preOrder(NodoABB<Tipo>* nodo);
+        void recorridoPreOrder(NodoABB<Tipo>* nodo);
 
         //  PRE: El nodo debe pertenecer al arbol
         // POST: Muestra por pantalla el recorrido post order
-        void postOrder(NodoABB<Tipo>* nodo);
+        void recorridoPostOrder(NodoABB<Tipo>* nodo);
+
+        //  PRE: El nodo debe pertenecer al arbol
+        // POST: Muestra por pantalla el recorrido en ancho
+        void recorridoEnAncho(NodoABB<Tipo>* nodo);
 };
 
 
@@ -252,22 +261,29 @@ Tipo ABB<Tipo>::predecesor(Tipo dato) {
 
 ////////////////////////////////////////////////
 template <typename Tipo>
-void ABB<Tipo>:: inOrder() {
-    inOrder(raiz);
+void ABB<Tipo>:: recorridoInOrder() {
+    recorridoInOrder(raiz);
     cout << "\n";
 }
 
 ////////////////////////////////////////////////
 template <typename Tipo>
-void ABB<Tipo>:: preOrder() {
-    preOrder(raiz);
+void ABB<Tipo>:: recorridoPreOrder() {
+    recorridoPreOrder(raiz);
     cout << "\n";
 }
 
 ////////////////////////////////////////////////
 template <typename Tipo>
-void ABB<Tipo>:: postOrder() {
-    postOrder(raiz);
+void ABB<Tipo>:: recorridoPostOrder() {
+    recorridoPostOrder(raiz);
+    cout << "\n";
+}
+
+////////////////////////////////////////////////
+template <typename Tipo>
+void ABB<Tipo>:: recorridoEnAncho() {
+    recorridoEnAncho(raiz);
     cout << "\n";
 }
 
@@ -277,16 +293,18 @@ void ABB<Tipo>:: mostrarData() {
 
     cout << "\n\n\t__________________________________________\n";
     cout << "\tIn order: ";
-    inOrder();
+    recorridoInOrder();
     cout << "\tPre order: ";
-    preOrder();
+    recorridoPreOrder();
     cout << "\tPost order: ";
-    postOrder();
+    recorridoPostOrder();
+    cout << "\tEn amplitud: ";
+    recorridoEnAncho();
 
     cout << "\n\tLa raiz del ABB es: " << raiz->obtenerDato() << "\n";
     cout << "\tLa altura del ABB es: " << obtenerAltura() << "\n";
-    cout << "\tMax: " << obtenerMaxNodo(raiz)->obtenerDato() << "\n";
-    cout << "\tMin: " << obtenerMinNodo(raiz)->obtenerDato() << "\n";
+    cout << "\tMax: " << obtenerMax(raiz)->obtenerDato() << "\n";
+    cout << "\tMin: " << obtenerMin(raiz)->obtenerDato() << "\n";
 
     if (estaBalanceado())
         cout << "\tEl ABB esta balanceado! " << "\n\n";
@@ -459,33 +477,58 @@ Tipo ABB<Tipo>:: predecesor(NodoABB<Tipo>* nodo) {
 
 ////////////////////////////////////////////////
 template<typename Tipo>
-void ABB<Tipo>:: inOrder(NodoABB<Tipo>* nodo) {
-    if (!nodo)
-        return;
-    inOrder(nodo->obtenerIzquierda());
-    cout << nodo->obtenerDato() << " " ;
-    inOrder(nodo->obtenerDerecha());
+void ABB<Tipo>:: recorridoInOrder(NodoABB<Tipo>* nodo) {
+    if (nodo != 0) {
+        recorridoInOrder(nodo->obtenerIzquierda());
+        cout << nodo->obtenerDato() << " ";
+        recorridoInOrder(nodo->obtenerDerecha());
+    }
 }
 
 ////////////////////////////////////////////////
 template<typename Tipo>
-void ABB<Tipo>:: preOrder(NodoABB<Tipo>* nodo) {
-    if (!nodo)
-        return;
-    cout << nodo->obtenerDato() << " ";
-    preOrder(nodo->obtenerIzquierda());
-    preOrder(nodo->obtenerDerecha());
+void ABB<Tipo>:: recorridoPreOrder(NodoABB<Tipo>* nodo) {
+    if (nodo != 0) {
+        cout << nodo->obtenerDato() << " ";
+        recorridoPreOrder(nodo->obtenerIzquierda());
+        recorridoPreOrder(nodo->obtenerDerecha());
+    }
 }
 
 ////////////////////////////////////////////////
 template<typename Tipo>
-void ABB<Tipo>:: postOrder(NodoABB<Tipo>* nodo) {
-    if (!nodo)
-        return;
-    postOrder(nodo->obtenerIzquierda());
-    postOrder(nodo->obtenerDerecha());
-    cout << nodo->obtenerDato() << " ";
+void ABB<Tipo>:: recorridoPostOrder(NodoABB<Tipo>* nodo) {
+    if (nodo != 0) {
+        recorridoPostOrder(nodo->obtenerIzquierda());
+        recorridoPostOrder(nodo->obtenerDerecha());
+        cout << nodo->obtenerDato() << " ";
+    }
 }
+
+////////////////////////////////////////////////
+template <typename Tipo>
+void ABB<Tipo>:: recorridoEnAncho(NodoABB<Tipo> *nodo) {
+
+    if (nodo != 0) {
+
+        Cola<NodoABB<Tipo>*> cola;
+        cola.encolar(nodo);
+
+        while (!cola.vacia()) {
+
+            nodo = cola.obtenerPrimero();
+            cola.desencolar();
+            cout << nodo->obtenerDato() << " ";
+
+            if (nodo->obtenerIzquierda() != 0)
+                cola.encolar(nodo->obtenerIzquierda());
+
+            if (nodo->obtenerDerecha() != 0)
+                cola.encolar(nodo->obtenerDerecha());
+        }
+    }
+}
+
 /* ------------------------------------------------------------------------------ */
 
 #endif //TP5_TRIALGO_ABB_H

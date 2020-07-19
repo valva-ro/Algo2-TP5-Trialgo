@@ -34,6 +34,7 @@ void Cargador::cargadorDeABB(ABB<Diccionario> &arbolAeropuertos , ifstream archi
             //Inserto el dic en el arbol
             arbolAeropuertos.insertar(dicAeropuerto);
         }
+        cout << "Se han cargado los Aeropuertos en el arbol correctamente " << endl;
 
     }
     else{

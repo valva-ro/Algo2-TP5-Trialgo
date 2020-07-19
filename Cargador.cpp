@@ -10,6 +10,7 @@ void Cargador::cargadorDeABB(ABB<Diccionario> &arbolAeropuertos , ifstream archi
     double superficie;
     int cantidadTerminales,destinosNacionales,destinosInternacionales ;
 
+
     if(!archivo.fail())
     {
         while(!archivo.eof())
@@ -31,8 +32,11 @@ void Cargador::cargadorDeABB(ABB<Diccionario> &arbolAeropuertos , ifstream archi
             //Creo un diccionario y le paso por parametro el puntero y la clave del codigo
             Diccionario dicAeropuerto(codigoIATA,pAeropuerto);
 
-            //Inserto el dic en el arbol
-            arbolAeropuertos.insertar(dicAeropuerto);
+            /
+            Nodo<Diccionario> nodo(dicAeropuerto);
+
+            //Inserto el nodo en el arbol
+            arbolAeropuertos.insertar(nodo);
         }
         cout << "Se han cargado los Aeropuertos en el arbol correctamente " << endl;
 

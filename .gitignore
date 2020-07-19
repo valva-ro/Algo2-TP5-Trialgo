@@ -11,8 +11,8 @@ CTestTestfile.cmake
 _deps
 CMakeLists.txt
 #Code Blocks Ignore Files#
-*.layout
-*.depend
+TP5.layout
+TP5.depend
 bin/
 obj/
-*.cbp
+TP5.cbp

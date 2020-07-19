@@ -5,10 +5,15 @@
 #include<iostream>
 #include<string>
 
-//#include "ABB.h"
-//#include "Dicionario.h"
-//#include "Aeropuerto.h"
-//#include "Excepcion"
+#include "ABB.h"
+#include "Dicionario.h"
+#include "Aeropuerto.h"
+#include "Excepcion"
+
+const string rutaABB   = "Aeropuertos.txt";
+const string rutaGrafo = "Vuelos.txt"
+
+using namespace std;
 
 class Cargador
 {
@@ -20,15 +25,12 @@ public://Metodos
 
     //PRE : nombre de archivo
     //POST:carga los datos en el arbol binario de busqueda
-    void cargadorDeABB(& , ifstream archivo);
+    void cargadorDeABB(ABB<Diccionario> &arbolAeropuertos , ifstream archivo);
 
     //PRE: nombre de archivo
     //POST: carga los datos en el grafo
-    //void cargadorDeGafro(Grafo &grafo , ifstream archivo);
+    void cargadorDeGafro(Grafo &grafo , ifstream archivo);
 
 };
-
-
-
 
 #endif /*CARGADOR_H*/

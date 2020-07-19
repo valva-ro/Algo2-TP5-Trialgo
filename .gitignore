@@ -10,3 +10,9 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 CMakeLists.txt
+#Code Blocks Ignore Files#
+*.layout
+*.depend
+bin/
+obj/
+*.cbp

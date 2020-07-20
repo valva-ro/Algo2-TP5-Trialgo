@@ -1,15 +1,18 @@
 #ifndef CARGADOR_H
 #define CARGADOR_H
 
+//Librerias de C++
 #include<fstream>
 #include<iostream>
 #include<string>
 
+//Librerias locales
 #include "ABB.h"
 #include "Dicionario.h"
 #include "Aeropuerto.h"
 #include "Excepcion"
 
+//Estas constantes irian en el Menu
 const string rutaABB   = "Aeropuertos.txt";
 const string rutaGrafo = "Vuelos.txt"
 

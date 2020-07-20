@@ -27,7 +27,7 @@ void Cargador::cargadorDeABB(ABB<Diccionario> &arbolAeropuertos , ifstream archi
             archivo >> destinosNacionales;
             archivo >> destinosInternacionales;
 
-            pAeropuerto = new Aeropuerto(nombre,ciudad,pais,superficie,cantidadTerminales,destinosNacionales,destinosInternacionales);
+            pAeropuerto = new Aeropuerto(codigoIATA,nombre,ciudad,pais,superficie,cantidadTerminales,destinosNacionales,destinosInternacionales);
 
             //Creo un diccionario y le paso por parametro el puntero y la clave del codigo
             Diccionario dicAeropuerto(codigoIATA,pAeropuerto);

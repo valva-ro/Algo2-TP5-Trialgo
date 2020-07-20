@@ -11,25 +11,30 @@ void MenuVuelo::mostrarOpciones() {
     cout<<"Ingrese que operacion desea realizar:"<<endl;
     cout<<"1. Menor Costo"<<endl;
     cout<<"2. Menor Tiempo"<<endl;
+    cout<<"3. Volver al menu principal"<<endl;
     selectorOpcion();
 }
 
 void MenuVuelo::selectorOpcion() {
-    cout<<"Entraste al selector de opcion de Menu Vuelo"<<endl;
 
     cin>>opcion;
 
     switch (opcion) {
         case 1: menorCosto(); break;
         case 2: menorTiempo(); break;
-        default:cout<< "Valor incorrecto. Debe ingresar un numero del 1 al 2. Volviendo al Menu Vuelo"<<endl; mostrarOpciones(); break;
+        case 3: cout<<"Volviendo al menu principal"; break;
+        default:cout<< "Valor incorrecto. Debe ingresar un numero del 1 al 3. Volviendo al Menu Vuelo"<<endl; mostrarOpciones(); break;
+    }
+
+    if(opcion!=3){
+        mostrarOpciones();
     }
 }
 
 void MenuVuelo::menorCosto() {
-    cout<<"Entraste al menor costo de Menu vuelo"<<endl;
+    cout<<endl<<"Entraste al menor costo de Menu vuelo"<<endl;
 }
 
 void MenuVuelo::menorTiempo() {
-    cout<<"Entraste al menor tiempo de Menu vuelo"<<endl;
+    cout<<endl<<"Entraste al menor tiempo de Menu vuelo"<<endl;
 }

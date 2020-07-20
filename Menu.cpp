@@ -7,7 +7,7 @@
 
 
 void Menu::mostrarOpciones() {
-    cout<<endl<<"Menu principal"<<endl;
+    cout<<endl<<endl<<"Menu principal"<<endl;
     cout<<"Ingrese que operacion desea realizar:"<<endl;
     cout<<"1. Acceder al Menu del aeropuerto"<<endl;
     cout<<"2. Acceder al Menu de vuelos"<<endl;

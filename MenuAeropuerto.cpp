@@ -14,11 +14,11 @@ void MenuAeropuerto::mostrarOpciones() {
     cout<<"3. Eliminar"<<endl;
     cout<<"4. Mostrar in Order"<<endl;
     cout<<"5. Mostrar ancho"<<endl;
+    cout<<"6. Volver al Menu principal"<<endl;
     selectorOpcion();
 }
 
 void MenuAeropuerto::selectorOpcion() {
-    cout<<"Entraste al selector de opcion de Menu Aeropuerto"<<endl;
 
     cin>>opcion;
 
@@ -28,27 +28,32 @@ void MenuAeropuerto::selectorOpcion() {
         case 3: eliminar(); break;
         case 4: mostrarInOrder(); break;
         case 5: mostrarAncho(); break;
-        default: cout<< "Valor incorrecto. Debe ingresar un numero del 1 al 5. Volviendo al Menu Aeropuerto"<<endl; mostrarOpciones();
+        case 6: cout<<"Volviendo al menu principal"; break;
+        default: cout<< "Valor incorrecto. Debe ingresar un numero del 1 al 6. Volviendo al Menu Aeropuerto"<<endl; mostrarOpciones();
+    }
+
+    if(opcion!=6){
+        mostrarOpciones();
     }
 }
 
 void MenuAeropuerto::consultar() {
-    cout<<"Entraste al consultar de Menu Aeropuerto"<<endl;
+    cout<<endl<<"Entraste al consultar de Menu Aeropuerto"<<endl;
 }
 
 void MenuAeropuerto::agregar() {
-    cout<<"Entraste al agregar de Menu Aeropuerto"<<endl;
+    cout<<endl<<"Entraste al agregar de Menu Aeropuerto"<<endl;
 }
 
 void MenuAeropuerto::eliminar() {
-    cout<<"Entraste al eliminar de Menu Aeropuerto"<<endl;
+    cout<<endl<<"Entraste al eliminar de Menu Aeropuerto"<<endl;
 }
 
 void MenuAeropuerto::mostrarAncho() {
-    cout<<"Entraste al mostrarAncho de Menu Aeropuerto"<<endl;
+    cout<<endl<<"Entraste al mostrarAncho de Menu Aeropuerto"<<endl;
 }
 
 void MenuAeropuerto::mostrarInOrder() {
-    cout<<"Entraste al mostrar in order de Menu Aeropuerto"<<endl;
+    cout<<endl<<"Entraste al mostrar in order de Menu Aeropuerto"<<endl;
 }
 

@@ -4,7 +4,7 @@
 
 #ifndef TP5_TRIALGO_MENU_H
 #define TP5_TRIALGO_MENU_H
-
+#include <iostream>
 #include "MenuAeropuerto.h"
 #include "MenuVuelo.h"
 class Menu {
@@ -15,7 +15,7 @@ private:
 
 public:
     void mostrarOpciones();
-    bool selectorOpcion();
+    void selectorOpcion();
     void aeropuerto();
     void vuelos();
 

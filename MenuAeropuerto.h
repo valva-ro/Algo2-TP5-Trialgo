@@ -6,7 +6,18 @@
 #define TP5_TRIALGO_MENUAEROPUERTO_H
 
 
+
 class MenuAeropuerto {
+private:
+
+public:
+    void mostrarOpciones();
+    void selectorOpcion();
+    void consultar();
+    void agregar();
+    void eliminar();
+    void mostrarInOrder();
+    void mostrarAncho();
 
 };
 

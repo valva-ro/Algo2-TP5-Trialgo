@@ -4,10 +4,10 @@
 
 #include "Menu.h"
 
-using namespace std;
+
 
 void Menu::mostrarOpciones() {
-    cout<<endl<<"Bienvenido al menu principal"<<endl;
+    cout<<endl<<"Menu principal"<<endl;
     cout<<"Ingrese que operacion desea realizar:"<<endl;
     cout<<"1. Acceder al Menu del aeropuerto"<<endl;
     cout<<"2. Acceder al Menu de vuelos"<<endl;
@@ -19,9 +19,13 @@ void Menu::selectorOpcion() {
     cin>>opcion;
 
     switch (opcion) {
-        case 1:
-
+        case 1: menuAeropuerto.mostrarOpciones();break;
+        case 2: menuVuelo.mostrarOpciones();break;
+        case 3: cout<<endl<<"Muchas gracias por utilizar Trialgo"<<endl;break;
+        default: cout<< "Valor incorrecto. Ingrese un numero del 1 al 3: "; cin>>opcion; break;
     }
 
-
+    if(opcion!=3){
+        mostrarOpciones();
+    }
 }

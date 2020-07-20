@@ -5,10 +5,11 @@
 #ifndef TP5_TRIALGO_MENUAEROPUERTO_H
 #define TP5_TRIALGO_MENUAEROPUERTO_H
 
-
+#include <iostream>
 
 class MenuAeropuerto {
 private:
+    int opcion;
 
 public:
     void mostrarOpciones();

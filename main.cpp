@@ -7,7 +7,10 @@
             Kevin Meaca
             Valentina Varela Rodriguez
 */
-
+#include "Menu.h"
 int main() {
+    Menu menu;
+
+    menu.mostrarOpciones();
     return 0;
 }

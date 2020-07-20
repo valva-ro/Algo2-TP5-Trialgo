@@ -4,12 +4,16 @@
 
 #ifndef TP5_TRIALGO_MENU_H
 #define TP5_TRIALGO_MENU_H
+
 #include <iostream>
 #include "MenuAeropuerto.h"
 #include "MenuVuelo.h"
+
+using namespace std;
+
 class Menu {
 private:
-    char opcion;
+    int opcion;
     MenuAeropuerto menuAeropuerto;
     MenuVuelo menuVuelo;
 
@@ -18,6 +22,7 @@ public:
     void selectorOpcion();
     void aeropuerto();
     void vuelos();
+
 
 
 

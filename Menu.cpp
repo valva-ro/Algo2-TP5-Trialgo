@@ -22,7 +22,7 @@ void Menu::selectorOpcion() {
         case 1: menuAeropuerto.mostrarOpciones();break;
         case 2: menuVuelo.mostrarOpciones();break;
         case 3: cout<<endl<<"Muchas gracias por utilizar Trialgo"<<endl;break;
-        default: cout<< "Valor incorrecto. Ingrese un numero del 1 al 3: "; cin>>opcion; break;
+        default: cout<< "Valor incorrecto. Debe ingresar un numero del 1 al 3. Volviendo al Menu principal"<<endl; break;
     }
 
     if(opcion!=3){

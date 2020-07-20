@@ -7,6 +7,8 @@
 
 
 class Menu {
+    char opcion;
+
 
 };
 

@@ -13,15 +13,21 @@ using namespace std;
 
 class Menu {
 private:
-    int opcion;
+    char opcion;
     MenuAeropuerto menuAeropuerto;
     MenuVuelo menuVuelo;
 
 public:
+    //DESCRIPCION: Muestra las opciones del MENU
+    //PRE:
+    //POST: Muestra las opciones del MENU
     void mostrarOpciones();
+
+    //DESCRIPCION: selector de las opciones del MENU
+    //PRE:
+    //POST: selector de las opciones del MENU
     void selectorOpcion();
-    void aeropuerto();
-    void vuelos();
+
 
 
 

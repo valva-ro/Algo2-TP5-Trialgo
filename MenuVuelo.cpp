@@ -6,12 +6,16 @@
 
 using namespace std;
 
+const char MENOR_COSTO = '1';
+const char MENOR_TIEMPO = '2';
+const char VOLVER_MENU = '3';
+
 void MenuVuelo::mostrarOpciones() {
     cout<<endl<<"Menu Vuelo"<<endl;
     cout<<"Ingrese que operacion desea realizar:"<<endl;
-    cout<<"1. Menor Costo"<<endl;
-    cout<<"2. Menor Tiempo"<<endl;
-    cout<<"3. Volver al menu principal"<<endl;
+    cout<<MENOR_COSTO<<" Menor Costo"<<endl;
+    cout<<MENOR_TIEMPO<<" Menor Tiempo"<<endl;
+    cout<<VOLVER_MENU<<" Volver al menu principal"<<endl;
     selectorOpcion();
 }
 
@@ -20,13 +24,13 @@ void MenuVuelo::selectorOpcion() {
     cin>>opcion;
 
     switch (opcion) {
-        case 1: menorCosto(); break;
-        case 2: menorTiempo(); break;
-        case 3: cout<<"Volviendo al menu principal"; break;
+        case MENOR_COSTO: menorCosto(); break;
+        case MENOR_TIEMPO: menorTiempo(); break;
+        case VOLVER_MENU: cout<<"Volviendo al menu principal"; break;
         default:cout<< "Valor incorrecto. Debe ingresar un numero del 1 al 3. Volviendo al Menu Vuelo"<<endl; mostrarOpciones(); break;
     }
 
-    if(opcion!=3){
+    if(opcion!=VOLVER_MENU){
         mostrarOpciones();
     }
 }

@@ -6,15 +6,22 @@
 
 using namespace std;
 
+const char CONSULTAR = '1';
+const char AGREGAR = '2';
+const char ELIMINAR = '3';
+const char MOSTRAR_IN_ORDER = '4';
+const char MOSTRAR_ANCHO = '5';
+const char VOLVER_MENU = '6';
+
 void MenuAeropuerto::mostrarOpciones() {
     cout<<endl<<"Menu Aeropuerto"<<endl;
     cout<<"Ingrese que operacion desea realizar:"<<endl;
-    cout<<"1. Consultar"<<endl;
-    cout<<"2. Agregar"<<endl;
-    cout<<"3. Eliminar"<<endl;
-    cout<<"4. Mostrar in Order"<<endl;
-    cout<<"5. Mostrar ancho"<<endl;
-    cout<<"6. Volver al Menu principal"<<endl;
+    cout<<CONSULTAR<<" Consultar"<<endl;
+    cout<<AGREGAR<<" Agregar"<<endl;
+    cout<<ELIMINAR<<" Eliminar"<<endl;
+    cout<<MOSTRAR_IN_ORDER<<" Mostrar in Order"<<endl;
+    cout<<MOSTRAR_ANCHO<<" Mostrar ancho"<<endl;
+    cout<<VOLVER_MENU<<" Volver al Menu principal"<<endl;
     selectorOpcion();
 }
 
@@ -23,16 +30,16 @@ void MenuAeropuerto::selectorOpcion() {
     cin>>opcion;
 
     switch (opcion) {
-        case 1: consultar(); break;
-        case 2: agregar(); break;
-        case 3: eliminar(); break;
-        case 4: mostrarInOrder(); break;
-        case 5: mostrarAncho(); break;
-        case 6: cout<<"Volviendo al menu principal"; break;
+        case CONSULTAR: consultar(); break;
+        case AGREGAR: agregar(); break;
+        case ELIMINAR: eliminar(); break;
+        case MOSTRAR_IN_ORDER: mostrarInOrder(); break;
+        case MOSTRAR_ANCHO: mostrarAncho(); break;
+        case VOLVER_MENU: cout<<"Volviendo al menu principal"; break;
         default: cout<< "Valor incorrecto. Debe ingresar un numero del 1 al 6. Volviendo al Menu Aeropuerto"<<endl; mostrarOpciones();
     }
 
-    if(opcion!=6){
+    if(opcion!=VOLVER_MENU){
         mostrarOpciones();
     }
 }

@@ -40,10 +40,7 @@ void Cargador::cargadorDeABB(ABB<Diccionario> &arbolAeropuertos , &ifstream arch
     }
     else{
         //Tiro la excepcion
-        try {
-
-            throw(Excepcion(ExcepcionABB));
-        }
+        throw(Excepcion(ExcepcionABB));
         catch(Excepcion& e) {
             cout << e.what() << endl;
         }

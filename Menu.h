@@ -5,9 +5,6 @@
 #ifndef TP5_TRIALGO_MENU_H
 #define TP5_TRIALGO_MENU_H
 
-#include <iostream>
-#include "MenuAeropuerto.h"
-#include "MenuVuelo.h"
 
 using namespace std;
 

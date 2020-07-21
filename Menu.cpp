@@ -8,6 +8,8 @@ const char MENU_AEROPUERTO = '1';
 const char MENU_VUELO = '2';
 const char SALIR = '3';
 
+using namespace std;
+
 
 void Menu::mostrarOpciones() {
     cout<<endl<<endl<<"Menu principal"<<endl;

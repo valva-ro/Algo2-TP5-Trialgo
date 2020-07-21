@@ -1,11 +1,6 @@
-//
-// Created by alexteper on 20/7/20.
-//
-
 #include "Menu.h"
 #include <iostream>
-#include "MenuAeropuerto.h"
-#include "MenuVuelo.h"
+
 const char MENU_AEROPUERTO = '1';
 const char MENU_VUELO = '2';
 const char SALIR = '3';

@@ -12,9 +12,9 @@
 #include "Aeropuerto.h"
 #include "Excepcion"
 
-//Estas constantes irian en el Menu
-const string rutaABB   = "Aeropuertos.txt";
-const string rutaGrafo = "Vuelos.txt"
+//Constantes de excepcion
+const int ExcepcionABB   = 0;
+const int ExcepcionGrafo = 1;
 
 using namespace std;
 

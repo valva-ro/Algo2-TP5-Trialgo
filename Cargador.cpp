@@ -3,7 +3,7 @@ Cargador::Cargador()
 
 }
 
-void Cargador::cargadorDeABB(ABB<Diccionario> &arbolAeropuertos , ifstream archivo)
+void Cargador::cargadorDeABB(ABB<Diccionario> &arbolAeropuertos , &ifstream archivo)
 {
     //char[3] o string para el codigo IATA?
     string nombre ,ciudad ,pais,codigoIATA ;

@@ -10,7 +10,7 @@
 #include "ABB.h"
 #include "Dicionario.h"
 #include "Aeropuerto.h"
-#include "Exception.h"
+#include "Excepcion.h"
 
 //Constantes de excepcion
 const int ExcepcionABB   = 0;

@@ -1,4 +1,4 @@
-#include"Exception.h"
+#include "Excepcion.h"
 
 Excepcion::Excepcion(int motivo)
 {

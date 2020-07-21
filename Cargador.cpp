@@ -39,8 +39,14 @@ void Cargador::cargadorDeABB(ABB<Diccionario> &arbolAeropuertos , ifstream archi
 
     }
     else{
-        //Deberiamos throw the exception
-        cout << "No se ha podido abrir el archivo! " << endl;
+        //Tiro la excepcion
+        try {
+
+            throw(Excepcion(ExcepcionABB));
+        }
+        catch(Excepcion& e) {
+            cout << e.what() << endl;
+        }
     }
     archivo.close();
 

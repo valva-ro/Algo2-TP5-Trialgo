@@ -1,5 +1,5 @@
 //
-// Created by daseos on 20/7/20.
+// Created by root-MKevin on 20/7/20.
 //
 
 #include "Diccionario.h"
@@ -15,4 +15,8 @@ string Diccionario::obtenerClave(){
 
 Aeropuerto* Diccionario::obtenerValor(){
     return valor;
+}
+
+Diccionario::~Diccionario(){
+    delete valor;
 }

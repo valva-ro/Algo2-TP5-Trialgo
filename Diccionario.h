@@ -23,19 +23,23 @@ class Diccionario {
 
         //CONSTRUCTOR
 
-        //PRE: RECIBE UN STRING VALIDO Y UN PUNTERO DE TIPO AEROPUERTO.
+        //PRE: RECIBE UN STRING ALFABETICO DE SOLO TRES CARACTERES Y EN MAYUSCULA Y, UN PUNTERO DE TIPO AEROPUERTO.
         //POST: CONSTRUYE UN OBJETO DE TIPO DICCIONARIO.
         Diccionario( string claveRecibida, Aeropuerto *valorRecibido);
 
         //CONSULTORES
 
-        //PRE: NO RECIBE NADA.
-        //POST: DEVUELVE EL VALOR DE LA CAVE.
+        //PRE: -.
+        //POST: DEVUELVE EL VALOR DEL ATRIBUTO clave.
         string obtenerClave();
 
-        //PRE: NO RECIBE NADA.
-        //POST: DEVUELVE UN PUNTERO DE TIPO AEROPUERTO DIRECCIONADO AL MISMO LUGAR QUE EL ATRIBUTO VALOR.
+        //PRE: -.
+        //POST: DEVUELVE UN PUNTERO DE TIPO AEROPUERTO DIRECCIONADO AL MISMO LUGAR QUE EL ATRIBUTO valor.
         Aeropuerto* obtenerValor();
+
+        //PRE: -.
+        //POST: LIBERA LA MEMORIA ALOJADA EN EL ATRIBUTO valor.
+        ~Diccionario();
 };
 
 

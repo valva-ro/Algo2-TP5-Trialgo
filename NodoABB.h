@@ -23,6 +23,10 @@ class NodoABB {
         NodoABB(Tipo dato);
 
         //  PRE: -
+        // POST: Libera la memoria del dato
+        ~NodoABB();
+
+        //  PRE: -
         // POST: Devuelve el dato del nodo
         Tipo obtenerDato();
 
@@ -74,6 +78,12 @@ NodoABB<Tipo>:: NodoABB(Tipo dato) {
     izquierda = 0;
     derecha = 0;
     padre = 0;
+}
+
+/////////////////////////////////////////////
+template <typename Tipo>
+NodoABB<Tipo>:: ~NodoABB<Tipo>() {
+    delete dato;
 }
 
 /////////////////////////////////////////////

@@ -8,13 +8,13 @@
 
 //Librerias locales
 #include "ABB.h"
-#include "Dicionario.h"
+#include "Diccionario.h"
 #include "Aeropuerto.h"
 #include "Excepcion.h"
 
 //Constantes de excepcion
-const int ExcepcionABB   = 0;
-const int ExcepcionGrafo = 1;
+const int EXCEPCION_ABB   = 0;
+const int EXCEPCION_GRAFO = 1;
 
 using namespace std;
 
@@ -23,16 +23,13 @@ class Cargador
 
 public://Metodos
 
-    //Constructor
-    Cargador();
-
     //PRE : nombre de archivo
     //POST:carga los datos en el arbol binario de busqueda
-    void cargadorDeABB(ABB<Diccionario> &arbolAeropuertos , ifstream &archivo);
+    void cargadorDeABB(ABB<Diccionario*> &arbolAeropuertos , ifstream &archivo);
 
     //PRE: nombre de archivo
     //POST: carga los datos en el grafo
-    void cargadorDeGafro(Grafo &grafo , ifstream &archivo);
+    void cargadorDeGrafo(Grafo<Vuelo*> &grafo , ifstream &archivo);
 
 };
 

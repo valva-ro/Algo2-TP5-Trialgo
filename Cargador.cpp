@@ -1,23 +1,17 @@
-Cargador::Cargador()
-{
+#include "Cargador.h"
 
-}
-
-void Cargador::cargadorDeABB(ABB<Diccionario> &arbolAeropuertos , &ifstream archivo)
+void Cargador::cargadorDeABB(ABB<Diccionario*> &arbolAeropuertos , ifstream& archivo)
 {
-    //char[3] o string para el codigo IATA?
-    string nombre ,ciudad ,pais,codigoIATA ;
+    string nombre, ciudad, pais, codigoIATA;
     double superficie;
-    int cantidadTerminales,destinosNacionales,destinosInternacionales ;
+    int cantidadTerminales, destinosNacionales, destinosInternacionales;
 
 
     if(!archivo.fail())
     {
+        Aeropuerto *pAeropuerto;
         while(!archivo.eof())
         {
-            //Puntero a los datos del aeropuerto
-            Aeropuerto *pAeropuerto ;
-
             archivo >> codigoIATA;
             archivo >> nombre;
             archivo >> ciudad;
@@ -29,22 +23,24 @@ void Cargador::cargadorDeABB(ABB<Diccionario> &arbolAeropuertos , &ifstream arch
 
             pAeropuerto = new Aeropuerto(codigoIATA,nombre,ciudad,pais,superficie,cantidadTerminales,destinosNacionales,destinosInternacionales);
 
-            //Creo un diccionario y le paso por parametro el puntero y la clave del codigo
-            Diccionario dicAeropuerto(codigoIATA,pAeropuerto);
-
-            //Inserto el nodo en el arbol
+            Diccionario* dicAeropuerto = new Diccionario(codigoIATA, pAeropuerto);
             arbolAeropuertos.insertar(dicAeropuerto);
         }
-        cout << "Se han cargado los Aeropuertos en el arbol correctamente " << endl;
+        cout << "\n\tSe han cargado los Aeropuertos en el arbol correctamente\n";
 
     }
     else{
         //Tiro la excepcion
-        throw(Excepcion(ExcepcionABB));
+        try {
+            throw(Excepcion(EXCEPCION_ABB));
+        }
         catch(Excepcion& e) {
             cout << e.what() << endl;
         }
     }
     archivo.close();
+}
 
+void Cargador:: cargadorDeGrafo(int &grafo, ifstream &archivo) {
+    //TODO
 }

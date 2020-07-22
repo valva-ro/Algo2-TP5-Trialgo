@@ -1,7 +1,3 @@
-//
-// Created by root-MKevin on 20/7/20.
-//
-
 #include "Diccionario.h"
 
 Diccionario::Diccionario(string claveRecibida, Aeropuerto *valorRecibido){
@@ -19,4 +15,27 @@ Aeropuerto* Diccionario::obtenerValor(){
 
 Diccionario::~Diccionario(){
     delete valor;
+}
+
+Diccionario& Diccionario:: operator = (const Diccionario &diccionario) {
+    this->valor = diccionario.valor;
+    this->clave = diccionario.clave;
+    return *this;
+}
+
+bool Diccionario:: operator > (const Diccionario &diccionario) {
+    return this->valor > diccionario.valor;
+}
+
+bool Diccionario:: operator < (const Diccionario &diccionario) {
+    return this->valor < diccionario.valor;
+}
+
+bool Diccionario:: operator == (const Diccionario &diccionario) {
+    return (this->valor == diccionario.valor && this->clave == diccionario.clave);
+}
+
+ostream& operator << (ostream &out, const Diccionario &diccionario) {
+    out << "Clave: " << diccionario.clave << " Valor: " << diccionario.valor;
+    return out;
 }

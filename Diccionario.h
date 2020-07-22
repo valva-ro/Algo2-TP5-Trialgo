@@ -1,12 +1,8 @@
-//
-// Created by root-MKevin on 20/7/20.
-//
-
 #ifndef DICCIONARIO_H
 #define DICCIONARIO_H
 
 #include "Aeropuerto.h"
-#include<string>
+#include<iostream>
 using namespace std;
 
 class Diccionario {
@@ -36,6 +32,26 @@ class Diccionario {
         //PRE: -.
         //POST: DEVUELVE UN PUNTERO DE TIPO AEROPUERTO DIRECCIONADO AL MISMO LUGAR QUE EL ATRIBUTO valor.
         Aeropuerto* obtenerValor();
+
+        //PRE: -.
+        //POST: DEVUELVE UN DICCIONARIO CON LOS MISMOS ATRIBUTOS QUE EL DICCIONARIO RECIBIDO
+        Diccionario& operator = (const Diccionario &diccionario);
+
+        //PRE: -.
+        //POST: DEVUELVE TRUE SI EL PRIMER DICCIONARIO ES MAYOR AL RECIBIDO, DE LO CONTRARIO FALSE.
+        bool operator > (const Diccionario &diccionario);
+
+        //PRE: -.
+        //POST: DEVUELVE TRUE SI EL PRIMER DICCIONARIO ES MENOR AL RECIBIDO, DE LO CONTRARIO FALSE.
+        bool operator < (const Diccionario &diccionario);
+
+        //PRE: -.
+        //POST: DEVUELVE TRUE SI AMBOS DICCIONARIOS SON IGUALES, DE LO CONTRARIO FALSE.
+        bool operator == (const Diccionario &diccionario);
+
+        //PRE: -.
+        //POST: SOBRECARGA DEL OPERADOR << PARA MOSTRAR POR PANTALLA LA CLAVE Y EL VALOR DEL DICCIONARIO.
+        friend ostream& operator << (ostream &out, const Diccionario &diccionario);
 
         //PRE: -.
         //POST: LIBERA LA MEMORIA ALOJADA EN EL ATRIBUTO valor.

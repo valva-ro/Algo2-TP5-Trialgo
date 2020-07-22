@@ -1,5 +1,5 @@
-#include "MenuAeropuerto.h"
 #include <iostream>
+#include "MenuAeropuerto.h"
 
 using namespace std;
 
@@ -11,20 +11,20 @@ const char MOSTRAR_ANCHO = '5';
 const char VOLVER_MENU = '6';
 
 void MenuAeropuerto::mostrarOpciones() {
-    cout<<endl<<"Menu Aeropuerto"<<endl;
-    cout<<"Ingrese que operacion desea realizar:"<<endl;
-    cout<<CONSULTAR<<" Consultar"<<endl;
-    cout<<AGREGAR<<" Agregar"<<endl;
-    cout<<ELIMINAR<<" Eliminar"<<endl;
-    cout<<MOSTRAR_IN_ORDER<<" Mostrar in Order"<<endl;
-    cout<<MOSTRAR_ANCHO<<" Mostrar ancho"<<endl;
-    cout<<VOLVER_MENU<<" Volver al Menu principal"<<endl;
+    cout << "\n\t---------------- Menu  Aeropuerto ----------------";
+    cout << "\n\t" << CONSULTAR<<". Consultar";
+    cout << "\n\t" << AGREGAR<<". Agregar";
+    cout << "\n\t" << ELIMINAR<<". Eliminar";
+    cout << "\n\t" << MOSTRAR_IN_ORDER<<". Mostrar in order";
+    cout << "\n\t" << MOSTRAR_ANCHO<<". Mostrar ancho";
+    cout << "\n\t" << VOLVER_MENU<<". Volver al menu principal";
+    cout << "\n\tIngrese que operacion desea realizar: ";
     selectorOpcion();
 }
 
 void MenuAeropuerto::selectorOpcion() {
 
-    cin>>opcion;
+    cin >> opcion;
 
     switch (opcion) {
         case CONSULTAR: consultar(); break;
@@ -32,8 +32,8 @@ void MenuAeropuerto::selectorOpcion() {
         case ELIMINAR: eliminar(); break;
         case MOSTRAR_IN_ORDER: mostrarInOrder(); break;
         case MOSTRAR_ANCHO: mostrarAncho(); break;
-        case VOLVER_MENU: cout<<"Volviendo al menu principal"; break;
-        default: cout<< "Valor incorrecto. Debe ingresar un numero del 1 al 6. Volviendo al Menu Aeropuerto"<<endl; mostrarOpciones();
+        case VOLVER_MENU: cout << "\tVolviendo al menu principal"; break;
+        default: cout <<  "\tValor incorrecto. Debe ingresar un numero del 1 al 6. Volviendo al Menu Aeropuerto\n"; break;
     }
 
     if(opcion!=VOLVER_MENU){
@@ -42,22 +42,22 @@ void MenuAeropuerto::selectorOpcion() {
 }
 
 void MenuAeropuerto::consultar() {
-    cout<<endl<<"Entraste al consultar de Menu Aeropuerto"<<endl;
+    cout << "\n\tEntraste al consultar de Menu Aeropuerto\n";
 }
 
 void MenuAeropuerto::agregar() {
-    cout<<endl<<"Entraste al agregar de Menu Aeropuerto"<<endl;
+    cout << "\n\tEntraste al agregar de Menu Aeropuerto\n";
 }
 
 void MenuAeropuerto::eliminar() {
-    cout<<endl<<"Entraste al eliminar de Menu Aeropuerto"<<endl;
+    cout << "\n\tEntraste al eliminar de Menu Aeropuerto\n";
 }
 
 void MenuAeropuerto::mostrarAncho() {
-    cout<<endl<<"Entraste al mostrarAncho de Menu Aeropuerto"<<endl;
+    cout << "\n\tEntraste al mostrarAncho de Menu Aeropuerto\n";
 }
 
 void MenuAeropuerto::mostrarInOrder() {
-    cout<<endl<<"Entraste al mostrar in order de Menu Aeropuerto"<<endl;
+    cout << "\n\tEntraste al mostrar in order de Menu Aeropuerto\n";
 }
 

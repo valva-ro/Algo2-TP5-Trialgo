@@ -1,7 +1,3 @@
-//
-// Created by root-MKevin on 20/7/20.
-//
-
 #include "Aeropuerto.h"
 
 Aeropuerto::Aeropuerto(string codigoIataRecibido, string nombreRecibido, string ciudadRecibida, string paisRecibido,

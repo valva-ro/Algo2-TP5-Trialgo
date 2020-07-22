@@ -1,5 +1,5 @@
-#include "MenuVuelo.h"
 #include <iostream>
+#include "MenuVuelo.h"
 
 using namespace std;
 
@@ -8,23 +8,23 @@ const char MENOR_TIEMPO = '2';
 const char VOLVER_MENU = '3';
 
 void MenuVuelo::mostrarOpciones() {
-    cout<<endl<<"Menu Vuelo"<<endl;
-    cout<<"Ingrese que operacion desea realizar:"<<endl;
-    cout<<MENOR_COSTO<<" Menor Costo"<<endl;
-    cout<<MENOR_TIEMPO<<" Menor Tiempo"<<endl;
-    cout<<VOLVER_MENU<<" Volver al menu principal"<<endl;
+    cout << "\n\t------------------- Menu Vuelo -------------------\n";
+    cout << "\n\t" << MENOR_COSTO << ". Menor costo";
+    cout << "\n\t" << MENOR_TIEMPO << ". Menor tiempo";
+    cout << "\n\t" << VOLVER_MENU << ". Volver al menu principal";
+    cout << "\n\tIngrese que operacion desea realizar:  ";
     selectorOpcion();
 }
 
 void MenuVuelo::selectorOpcion() {
 
-    cin>>opcion;
+    cin >> opcion;
 
     switch (opcion) {
         case MENOR_COSTO: menorCosto(); break;
         case MENOR_TIEMPO: menorTiempo(); break;
-        case VOLVER_MENU: cout<<"Volviendo al menu principal"; break;
-        default:cout<< "Valor incorrecto. Debe ingresar un numero del 1 al 3. Volviendo al Menu Vuelo"<<endl; mostrarOpciones(); break;
+        case VOLVER_MENU: cout << "\tVolviendo al menu principal"; break;
+        default: cout << "\tValor incorrecto. Debe ingresar un numero del 1 al 3. Volviendo al Menu Vuelo\n"; break;
     }
 
     if(opcion!=VOLVER_MENU){
@@ -33,9 +33,9 @@ void MenuVuelo::selectorOpcion() {
 }
 
 void MenuVuelo::menorCosto() {
-    cout<<endl<<"Entraste al menor costo de Menu vuelo"<<endl;
+    cout << "\n\tEntraste al menor costo de Menu vuelo\n";
 }
 
 void MenuVuelo::menorTiempo() {
-    cout<<endl<<"Entraste al menor tiempo de Menu vuelo"<<endl;
+    cout << "\n\tEntraste al menor tiempo de Menu vuelo\n";
 }

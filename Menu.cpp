@@ -7,24 +7,23 @@ const char SALIR = '3';
 
 using namespace std;
 
-
 void Menu::mostrarOpciones() {
-    cout<<endl<<endl<<"Menu principal"<<endl;
-    cout<<"Ingrese que operacion desea realizar:"<<endl;
-    cout<<MENU_AEROPUERTO<<" Acceder al Menu del aeropuerto"<<endl;
-    cout<<MENU_VUELO<<" Acceder al Menu de vuelos"<<endl;
-    cout<<SALIR<<" Finalizar el programa"<<endl;
+    cout << "\n\n\t================= Menu Principal =================";
+    cout << "\n\t" << MENU_AEROPUERTO << ". Acceder al menu del aeropuerto";
+    cout << "\n\t" << MENU_VUELO << ". Acceder al menu de vuelos";
+    cout << "\n\t" << SALIR << ". Finalizar el programa";
+    cout << "\n\tIngrese que operacion desea realizar: ";
     selectorOpcion();
 }
 
 void Menu::selectorOpcion() {
-    cin>>opcion;
+    cin >> opcion;
 
     switch (opcion) {
-        case MENU_AEROPUERTO: menuAeropuerto.mostrarOpciones();break;
-        case MENU_VUELO: menuVuelo.mostrarOpciones();break;
-        case SALIR: cout<<endl<<"Muchas gracias por utilizar Trialgo"<<endl;break;
-        default: cout<< "Valor incorrecto. Debe ingresar un numero del 1 al 3. Volviendo al Menu principal"<<endl; break;
+        case MENU_AEROPUERTO: menuAeropuerto.mostrarOpciones(); break;
+        case MENU_VUELO: menuVuelo.mostrarOpciones(); break;
+        case SALIR: cout << "\n\tMuchas gracias por utilizar Trialgo\n"; break;
+        default: cout <<  "\tValor incorrecto. Debe ingresar un numero del 1 al 3. Volviendo al Menu principal\n"; break;
     }
 
     if(opcion!=SALIR){

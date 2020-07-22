@@ -20,12 +20,6 @@ public:
     //PRE:
     //POST: selector de las opciones del MENU
     void selectorOpcion();
-
-
-
-
-
 };
-
 
 #endif //TP5_TRIALGO_MENU_H

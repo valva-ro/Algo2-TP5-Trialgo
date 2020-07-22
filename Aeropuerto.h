@@ -1,11 +1,7 @@
-//
-// Created by root-MKevin on 20/7/20.
-// codigo_IATA nombre ciudad pais superficie #cantidad_terminales #destinos_nacionales #destinos_internacionales
-
 #ifndef TP5_TRIALGO_AEROPUERTO_H
 #define TP5_TRIALGO_AEROPUERTO_H
 
-#include <string>
+#include <iostream>
 using namespace std;
 
 class Aeropuerto {

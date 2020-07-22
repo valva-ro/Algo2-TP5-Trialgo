@@ -1,8 +1,8 @@
 #ifndef DICCIONARIO_H
 #define DICCIONARIO_H
 
+#include <iostream>
 #include "Aeropuerto.h"
-#include<iostream>
 using namespace std;
 
 class Diccionario {
@@ -34,6 +34,10 @@ class Diccionario {
         Aeropuerto* obtenerValor();
 
         //PRE: -.
+        //POST: LIBERA LA MEMORIA ALOJADA EN EL ATRIBUTO valor.
+        ~Diccionario();
+
+        //PRE: -.
         //POST: DEVUELVE UN DICCIONARIO CON LOS MISMOS ATRIBUTOS QUE EL DICCIONARIO RECIBIDO
         Diccionario& operator = (const Diccionario &diccionario);
 
@@ -52,10 +56,6 @@ class Diccionario {
         //PRE: -.
         //POST: SOBRECARGA DEL OPERADOR << PARA MOSTRAR POR PANTALLA LA CLAVE Y EL VALOR DEL DICCIONARIO.
         friend ostream& operator << (ostream &out, const Diccionario &diccionario);
-
-        //PRE: -.
-        //POST: LIBERA LA MEMORIA ALOJADA EN EL ATRIBUTO valor.
-        ~Diccionario();
 };
 
 

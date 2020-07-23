@@ -6,11 +6,12 @@
 void Cargador::cargarDatos(ABB<Diccionario*> &arbolAeropuertos ,string ruta)
 {
     ifstream archivo;
-    archivo.open(ruta.c_str(),ios::in)
+    archivo.open(ruta.c_str(),ios::in);
 
     try:
         if(archivo.fail()): throw(Excepcion(EXCEPCION_ABB));
         cargadorDeABB(arbolAeropuertos,archivo);
+        cout << "\n\tSe han cargado los Aeropuertos en el arbol correctamente\n";
 
     catch(Excepcion &e):
         cout << e.what() << endl;
@@ -21,13 +22,13 @@ void Cargador::cargarDatos(ABB<Diccionario*> &arbolAeropuertos ,string ruta)
 void Cargador::cargarDatos(Grafo<Vuelo*> &grafoVuelos , string ruta)
 {
     ifstream archivo;
-    archivo.open(ruta.c_str(),ios::in)
+    archivo.open(ruta.c_str(),ios::in);
 
     try:
         if(archivo.fail()): throw(Excepcion(EXCEPCION_GRAFO));
 
         cargadorDeGrafo(grafoVuelos,archivo);
-        cout << "\n\tSe han cargado los Aeropuertos en el arbol correctamente\n";
+        cout << "\n\tSe han cargado los vuelos en el arbol correctamente\n";
 
     catch(Excepcion &e):
         cout << e.what() << endl;

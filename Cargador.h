@@ -21,22 +21,22 @@ using namespace std;
 class Cargador
 {
 private:
-    //PRE : nombre de archivo
+    //PRE : ABB , archivo ya abierto
     //POST:carga los datos en el arbol binario de busqueda
     void cargadorDeABB(ABB<Diccionario*> &arbolAeropuertos , ifstream &archivo);
 
-    //PRE: nombre de archivo
+    //PRE: Grafo , archivo ya abierto
     //POST: carga los datos en el grafo
     void cargadorDeGrafo(Grafo<Vuelo*> &grafoVuelos , ifstream &archivo);
 
 public://Metodos
 
-    //PRE :Objeto Arbol, ruta al archivo
-    //POST: Abre el archivo y si este no falla ejecuta el cargadorDeABB y luego lo cierra , sino tira una excepcion
+    //PRE : Objeto Arbol, ruta al archivo
+    //POST: Abre el archivo y carga los datos , de fallar se ejecuta la excepcion
     void cargarDatos(ABB<Diccionario*> &arbolAeropuertos,string ruta);
 
     //PRE :Objeto Grafo, ruta al archivo
-    //POST: Abre el archivo y si este no falla ejecuta el cargadorDeGrafo y luego lo cierra , sino tira una excepcion
+    //POST:Abre el archivo y carga los datos , de fallar se ejecuta la excepcion
     void cargarDatos(Grafo<Vuelo*> &grafoVuelos,string ruta);
 
 };

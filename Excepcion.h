@@ -19,7 +19,7 @@ public:
     Excepcion(int motivo) throw();
 
     //Destructor
-    virtual ~Excepcion() throw();
+    //virtual ~Excepcion() throw();
 
     //PRE: -
     //POST: devuelve un mensaje describiendo la excepcion segun el motivo

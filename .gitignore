@@ -1,3 +1,4 @@
+/.idea/
 ### CLion Ignore Files ###
 CMakeLists.txt.user
 CMakeCache.txt
@@ -12,7 +13,7 @@ CTestTestfile.cmake
 _deps
 CMakeLists.txt
 /cmake-build-debug/
-### Code Blocks Ignore Files ###
+### Code Blocks Ignore Files #
 TP5.layout
 TP5.depend
 bin/

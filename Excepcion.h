@@ -27,4 +27,4 @@ public:
 
 };
 
-#endif //EXCEPCIONLECTURA_H
+#endif //EXCEPCION_H

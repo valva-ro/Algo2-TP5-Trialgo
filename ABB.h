@@ -367,7 +367,7 @@ NodoABB<Tipo>* ABB<Tipo>:: borradoUnHijo(NodoABB<Tipo>* nodo) {
 
     if (nodo->soloHijoDerecha()) {
         NodoABB<Tipo>* nodoDer = nodo->obtenerDerecha();
-        nodoDer->asignarPadre(nodo->obtenerParent());
+        nodoDer->asignarPadre(nodo->obtenerPadre());
         NodoABB<Tipo>* aux = nodo;
         delete aux;
         return nodoDer;
@@ -375,7 +375,7 @@ NodoABB<Tipo>* ABB<Tipo>:: borradoUnHijo(NodoABB<Tipo>* nodo) {
 
     else if (nodo->soloHijoIzquierda()) {
         NodoABB<Tipo>* nodoIzq = nodo->obtenerIzquierda();
-        nodoIzq->asignarPadre(nodo->obtenerParent());
+        nodoIzq->asignarPadre(nodo->obtenerPadre());
         NodoABB<Tipo>* aux = nodo;
         delete aux;
         return nodoIzq;

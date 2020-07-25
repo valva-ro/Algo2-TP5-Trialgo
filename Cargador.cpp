@@ -1,47 +1,50 @@
+#include<iostream>
 #include "Cargador.h"
 
     /// METODOS PRIVADOS ///
-//Sobre carga de metodos cargarDatos
 
-void Cargador::cargarDatos(ABB<Diccionario*> &arbolAeropuertos ,string ruta)
+void Cargador::cargarDatos(ABB<Diccionario*> &arbolAeropuertos, string ruta)
 {
     ifstream archivo;
     archivo.open(ruta.c_str(),ios::in);
 
-    try:
-        if(archivo.fail())
-            throw(Excepcion(EXCEPCION_ABB));
+    try {
+        if (archivo.fail())
+            throw (Excepcion(EXCEPCION_ABB));
 
-        cargadorDeABB(arbolAeropuertos,archivo);
+        cargadorDeABB(arbolAeropuertos, archivo);
         cout << "\n\tSe han cargado los Aeropuertos en el arbol correctamente\n";
-
-    catch(Excepcion &e):
+    }
+    catch(Excepcion &e) {
         cout << e.what() << endl;
+    }
 
     archivo.close();
 }
-
-void Cargador::cargarDatos(Grafo<Vuelo*> &grafoVuelos , string ruta)
+/*
+void Cargador::cargarDatos(Grafo<Vuelo*> &grafoVuelos, string ruta)
 {
     ifstream archivo;
     archivo.open(ruta.c_str(),ios::in);
 
-    try:
-        if(archivo.fail())
-            throw(Excepcion(EXCEPCION_GRAFO));
+    try {
+        if (archivo.fail())
+            throw (Excepcion(EXCEPCION_GRAFO));
 
-        cargadorDeGrafo(grafoVuelos,archivo);
+        cargadorDeGrafo(grafoVuelos, archivo);
         cout << "\n\tSe han cargado los vuelos en el arbol correctamente\n";
+    }
 
-    catch(Excepcion &e):
+    catch(Excepcion &e) {
         cout << e.what() << endl;
+    }
 
     archivo.close();
 }
-
+*/
     /// METODOS PUBLICOS ///
 
-void Cargador::cargadorDeABB(ABB<Diccionario*> &arbolAeropuertos , ifstream& archivo)
+void Cargador::cargadorDeABB(ABB<Diccionario*> &arbolAeropuertos, ifstream& archivo)
 {
     string nombre, ciudad, pais, codigoIATA;
     double superficie;
@@ -49,7 +52,7 @@ void Cargador::cargadorDeABB(ABB<Diccionario*> &arbolAeropuertos , ifstream& arc
 
     Aeropuerto *pAeropuerto;
 
-    while(!archivo.eof()){
+    while(!archivo.eof()) {
 
         archivo >> codigoIATA;
         archivo >> nombre;
@@ -60,14 +63,17 @@ void Cargador::cargadorDeABB(ABB<Diccionario*> &arbolAeropuertos , ifstream& arc
         archivo >> destinosNacionales;
         archivo >> destinosInternacionales;
 
-        pAeropuerto = new Aeropuerto(codigoIATA,nombre,ciudad,pais,superficie,cantidadTerminales,destinosNacionales,destinosInternacionales);
+        pAeropuerto = new Aeropuerto(codigoIATA, nombre, ciudad,
+                                     pais, superficie, cantidadTerminales,
+                                     destinosNacionales, destinosInternacionales);
 
         Diccionario* dicAeropuerto = new Diccionario(codigoIATA, pAeropuerto);
         arbolAeropuertos.insertar(dicAeropuerto);
     }
 
 }
-
+/*
 void Cargador:: cargadorDeGrafo(int &grafo, ifstream &archivo) {
     //TODO
 }
+*/

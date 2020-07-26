@@ -5,12 +5,12 @@
 #include "Cola.h"
 using namespace std;
 
-template <typename Tipo>
+template <typename Puntero, typename Dato>
 class ABB {
 
     // Atributos
     private:
-        NodoABB<Tipo>* raiz;
+        NodoABB<Puntero, Dato>* raiz;
 
     // Metodos
     public:
@@ -25,15 +25,15 @@ class ABB {
 
         //  PRE: -
         // POST: Devuelve la raiz
-        NodoABB<Tipo>* obtenerRaiz();
+        NodoABB<Puntero, Dato>* obtenerRaiz();
 
         //  PRE: El nodo tiene que pertenecer al ABB
         // POST: Devuelve el valor maximo desde el nodo
-        NodoABB<Tipo>* obtenerMax(NodoABB<Tipo>* nodo);
+        NodoABB<Puntero, Dato>* obtenerMax(NodoABB<Puntero, Dato>* nodo);
 
         //  PRE: El nodo tiene que pertenecer al ABB
         // POST: Devuelve el nodo minimo desde el nodo
-        NodoABB<Tipo>* obtenerMin(NodoABB<Tipo>* nodo);
+        NodoABB<Puntero, Dato>* obtenerMin(NodoABB<Puntero, Dato>* nodo);
 
         //  PRE: -
         // POST: Devuelve la altura
@@ -41,11 +41,11 @@ class ABB {
 
         //  PRE: -
         // POST: Si el dato no existe en el arbol lo agrega
-        void insertar(Tipo dato);
+        void insertar(Puntero dato);
 
         //  PRE: -
         // POST: Si el dato existe en el arbol lo borra
-        void borrarDato(Tipo dato);
+        void borrarDato(Puntero dato);
 
         //  PRE: -
         // POST: Libera los recursos del ABB
@@ -57,15 +57,15 @@ class ABB {
 
         //  PRE: -
         // POST: Devuelve true si el dato existe en el arbol, de lo contrario false
-        bool existe(Tipo dato);
+        bool existe(Puntero dato);
 
         //  PRE: -
         // POST: Si existe el dato, devuelve el sucesor del mismo
-        Tipo sucesor(Tipo dato);
+        Puntero sucesor(Puntero dato);
 
         //  PRE: -
         // POST: Si existe el dato, devuelve el predecesor del mismo
-        Tipo predecesor(Tipo dato);
+        Puntero predecesor(Puntero dato);
 
         //  PRE: El arbol debe tener al menos un dato
         // POST: Muestra por pantalla el recorrido in order (izquierda, padre, derecha)
@@ -91,86 +91,86 @@ class ABB {
 
         //  PRE: El dato no debe estar en el arbol, y ademas tiene que ser el dato del nodo
         // POST: Inserta el dato en el arbol
-        NodoABB<Tipo>* insertar(NodoABB<Tipo>* nodo, Tipo dato);
+        NodoABB<Puntero, Dato>* insertar(NodoABB<Puntero, Dato>* nodo, Puntero dato);
 
         //  PRE: -
         // POST: Devuelve true si el nodo esta balanceado, de lo contrario false
-        bool estaBalanceado(NodoABB<Tipo>* nodo);
+        bool estaBalanceado(NodoABB<Puntero, Dato>* nodo);
 
         //  PRE: -
         // POST: Devuelve la altura del nodo
-        int obtenerAltura(NodoABB<Tipo>*nodo);
+        int obtenerAltura(NodoABB<Puntero, Dato>*nodo);
 
         //  PRE: El dato debe ser el dato del nodo
         // POST: Si el dato existe en el arbol, lo elimina y devuelve el nodo que lo reemplazaria.
         //       De lo contrario devuelve el nodo recibido
-        NodoABB<Tipo>* borrarDato(NodoABB<Tipo>* nodo, Tipo dato);
+        NodoABB<Puntero, Dato>* borrarDato(NodoABB<Puntero, Dato>* nodo, Puntero dato);
 
         //  PRE: El nodo debe ser hoja
         // POST: Si el dato existe en el arbol, lo elimina y devuelve el nodo que lo reemplazaria.
         //       De lo contrario devuelve el nodo recibido
-        NodoABB<Tipo>* borradoHoja(NodoABB<Tipo>* nodo);
+        NodoABB<Puntero, Dato>* borradoHoja(NodoABB<Puntero, Dato>* nodo);
 
         //  PRE: El nodo debe tener solo un hijo
         // POST: Si el dato existe en el arbol, lo elimina y devuelve el nodo que lo reemplazaria.
         //       De lo contrario devuelve el nodo recibido
-        NodoABB<Tipo>* borradoUnHijo(NodoABB<Tipo>* nodo);
+        NodoABB<Puntero, Dato>* borradoUnHijo(NodoABB<Puntero, Dato>* nodo);
 
         //  PRE: El nodo debe tener ambos hijos
         // POST: Si el dato existe en el arbol, lo elimina y devuelve el nodo que lo reemplazaria.
         //       De lo contrario devuelve el nodo recibido
-        NodoABB<Tipo>* borradoDosHijos(NodoABB<Tipo>* nodo);
+        NodoABB<Puntero, Dato>* borradoDosHijos(NodoABB<Puntero, Dato>* nodo);
 
         //  PRE: -
         // POST: Primero borra todos los nodos hijos del nodo recibido, y luego el nodo recibido
-        void borrarTodo(NodoABB<Tipo>* nodo);
+        void borrarTodo(NodoABB<Puntero, Dato>* nodo);
 
         //  PRE: El dato debe ser el dato del nodo
         // POST: Devuelve true si el dato existe en el ABB, de lo contrario false
-        NodoABB<Tipo>* existe(NodoABB<Tipo>* nodo, Tipo dato);
+        NodoABB<Puntero, Dato>* existe(NodoABB<Puntero, Dato>* nodo, Puntero dato);
 
         //  PRE: El nodo debe existir en el ABB
         // POST: Devuelve el nodo sucesor de nodo
-        Tipo sucesor(NodoABB<Tipo>* nodo);
+        Puntero sucesor(NodoABB<Puntero, Dato>* nodo);
 
         //  PRE: El nodo debe existir en el ABB
         // POST: Devuelve el nodo predecesor de nodo
-        Tipo predecesor(NodoABB<Tipo>* nodo);
+        Puntero predecesor(NodoABB<Puntero, Dato>* nodo);
 
         //  PRE: El nodo debe pertenecer al arbol
         // POST: Muestra por pantalla el recorrido in order
-        void recorridoInOrder(NodoABB<Tipo>* nodo);
+        void recorridoInOrder(NodoABB<Puntero, Dato>* nodo);
 
         //  PRE: El nodo debe pertenecer al arbol
         // POST: Muestra por pantalla el recorrido pre order
-        void recorridoPreOrder(NodoABB<Tipo>* nodo);
+        void recorridoPreOrder(NodoABB<Puntero, Dato>* nodo);
 
         //  PRE: El nodo debe pertenecer al arbol
         // POST: Muestra por pantalla el recorrido post order
-        void recorridoPostOrder(NodoABB<Tipo>* nodo);
+        void recorridoPostOrder(NodoABB<Puntero, Dato>* nodo);
 
         //  PRE: El nodo debe pertenecer al arbol
         // POST: Muestra por pantalla el recorrido en ancho
-        void recorridoEnAncho(NodoABB<Tipo>* nodo);
+        void recorridoEnAncho(NodoABB<Puntero, Dato>* nodo);
 };
 
 
 /* ------------------------------- Metodos Publicos ------------------------------- */
 
-template <typename Tipo>
-ABB<Tipo>:: ABB() {
+template <typename Puntero, typename Dato>
+ABB<Puntero, Dato>:: ABB() {
     raiz = 0;
 }
 
 ////////////////////////////////////////////////
-template <typename Tipo>
-ABB<Tipo>:: ~ABB() {
+template <typename Puntero, typename Dato>
+ABB<Puntero, Dato>:: ~ABB() {
     borrarTodo();
 }
 
 ////////////////////////////////////////////////
-template <typename Tipo>
-void ABB<Tipo>:: insertar(Tipo dato) {
+template <typename Puntero, typename Dato>
+void ABB<Puntero, Dato>:: insertar(Puntero dato) {
     if (!existe(dato))
         raiz = insertar(raiz, dato);
     else
@@ -178,20 +178,20 @@ void ABB<Tipo>:: insertar(Tipo dato) {
 }
 
 ////////////////////////////////////////////////
-template <typename Tipo>
-int ABB<Tipo>:: obtenerAltura() {
+template <typename Puntero, typename Dato>
+int ABB<Puntero, Dato>:: obtenerAltura() {
     return obtenerAltura(raiz);
 }
 
 ////////////////////////////////////////////////
-template <typename Tipo>
-NodoABB<Tipo>* ABB<Tipo>:: obtenerRaiz() {
+template <typename Puntero, typename Dato>
+NodoABB<Puntero, Dato>* ABB<Puntero, Dato>:: obtenerRaiz() {
     return raiz;
 }
 
 ////////////////////////////////////////////////
-template <typename Tipo>
-NodoABB<Tipo>* ABB<Tipo>:: obtenerMax(NodoABB<Tipo>* nodo) {
+template <typename Puntero, typename Dato>
+NodoABB<Puntero, Dato>* ABB<Puntero, Dato>:: obtenerMax(NodoABB<Puntero, Dato>* nodo) {
     if (nodo != 0) {
         while(nodo->obtenerDerecha())
             nodo = nodo->obtenerDerecha();
@@ -204,8 +204,8 @@ NodoABB<Tipo>* ABB<Tipo>:: obtenerMax(NodoABB<Tipo>* nodo) {
 }
 
 ////////////////////////////////////////////////
-template <typename Tipo>
-NodoABB<Tipo>* ABB<Tipo>:: obtenerMin(NodoABB<Tipo>* nodo) {
+template <typename Puntero, typename Dato>
+NodoABB<Puntero, Dato>* ABB<Puntero, Dato>:: obtenerMin(NodoABB<Puntero, Dato>* nodo) {
     if (nodo != 0) {
         while(nodo->obtenerIzquierda())
             nodo = nodo->obtenerIzquierda();
@@ -218,8 +218,8 @@ NodoABB<Tipo>* ABB<Tipo>:: obtenerMin(NodoABB<Tipo>* nodo) {
 }
 
 ////////////////////////////////////////////////
-template <typename Tipo>
-void ABB<Tipo>:: borrarDato(Tipo dato) {
+template <typename Puntero, typename Dato>
+void ABB<Puntero, Dato>:: borrarDato(Puntero dato) {
     if (existe(dato))
         raiz = borrarDato(raiz, dato);
     else
@@ -227,73 +227,73 @@ void ABB<Tipo>:: borrarDato(Tipo dato) {
 }
 
 ////////////////////////////////////////////////
-template <typename Tipo>
-void ABB<Tipo>:: borrarTodo() {
+template <typename Puntero, typename Dato>
+void ABB<Puntero, Dato>:: borrarTodo() {
     borrarTodo(raiz);
 }
 
 ////////////////////////////////////////////////
-template <typename Tipo>
-bool ABB<Tipo>:: estaBalanceado() {
+template <typename Puntero, typename Dato>
+bool ABB<Puntero, Dato>:: estaBalanceado() {
     return estaBalanceado(raiz);
 }
 
 ////////////////////////////////////////////////
-template <typename Tipo>
-bool ABB<Tipo>:: existe(Tipo dato) {
-    NodoABB<Tipo>* result = existe(raiz, dato);
+template <typename Puntero, typename Dato>
+bool ABB<Puntero, Dato>:: existe(Puntero dato) {
+    NodoABB<Puntero, Dato>* result = existe(raiz, dato);
     return result != 0;
 }
 
 ////////////////////////////////////////////////
-template <typename Tipo>
-Tipo ABB<Tipo>::sucesor(Tipo dato) {
+template <typename Puntero, typename Dato>
+Puntero ABB<Puntero, Dato>::sucesor(Puntero dato) {
     if (existe(dato)) {
-        NodoABB<Tipo> *datoNodo = existe(raiz, dato);
+        NodoABB<Puntero, Dato> *datoNodo = existe(raiz, dato);
         return sucesor(datoNodo);
     }
 }
 
 ////////////////////////////////////////////////
-template <typename Tipo>
-Tipo ABB<Tipo>::predecesor(Tipo dato) {
+template <typename Puntero, typename Dato>
+Puntero ABB<Puntero, Dato>::predecesor(Puntero dato) {
     if (existe(dato)) {
-        NodoABB<Tipo> *datoNodo = existe(raiz, dato);
+        NodoABB<Puntero, Dato> *datoNodo = existe(raiz, dato);
         return predecesor(datoNodo);
     }
 }
 
 ////////////////////////////////////////////////
-template <typename Tipo>
-void ABB<Tipo>:: recorridoInOrder() {
+template <typename Puntero, typename Dato>
+void ABB<Puntero, Dato>:: recorridoInOrder() {
     recorridoInOrder(raiz);
     cout << "\n";
 }
 
 ////////////////////////////////////////////////
-template <typename Tipo>
-void ABB<Tipo>:: recorridoPreOrder() {
+template <typename Puntero, typename Dato>
+void ABB<Puntero, Dato>:: recorridoPreOrder() {
     recorridoPreOrder(raiz);
     cout << "\n";
 }
 
 ////////////////////////////////////////////////
-template <typename Tipo>
-void ABB<Tipo>:: recorridoPostOrder() {
+template <typename Puntero, typename Dato>
+void ABB<Puntero, Dato>:: recorridoPostOrder() {
     recorridoPostOrder(raiz);
     cout << "\n";
 }
 
 ////////////////////////////////////////////////
-template <typename Tipo>
-void ABB<Tipo>:: recorridoEnAncho() {
+template <typename Puntero, typename Dato>
+void ABB<Puntero, Dato>:: recorridoEnAncho() {
     recorridoEnAncho(raiz);
     cout << "\n";
 }
 
 ////////////////////////////////////////////////
-template <typename Tipo>
-void ABB<Tipo>:: mostrarData() {
+template <typename Puntero, typename Dato>
+void ABB<Puntero, Dato>:: mostrarData() {
 
     cout << "\n\n\t__________________________________________\n";
     cout << "\tIn order: ";
@@ -324,12 +324,12 @@ void ABB<Tipo>:: mostrarData() {
 /* ------------------------------- Metodos Privados ----------------------------- */
 
 ////////////////////////////////////////////////
-template <typename Tipo>
-NodoABB<Tipo>* ABB<Tipo>:: insertar(NodoABB<Tipo>* nodo, Tipo dato) {
+template <typename Puntero, typename Dato>
+NodoABB<Puntero, Dato>* ABB<Puntero, Dato>:: insertar(NodoABB<Puntero, Dato>* nodo, Puntero dato) {
     if (nodo == 0)
-        nodo = new NodoABB<Tipo>(dato);
+        nodo = new NodoABB<Puntero, Dato>(dato);
 
-    else if (dato > nodo->obtenerDato())
+    else if (dato > nodo->obtenerPuntero())
         nodo->asignarDerecha(insertar(nodo->obtenerDerecha(), dato));
 
     else
@@ -339,61 +339,61 @@ NodoABB<Tipo>* ABB<Tipo>:: insertar(NodoABB<Tipo>* nodo, Tipo dato) {
 }
 
 ////////////////////////////////////////////////
-template<typename Tipo>
-int ABB<Tipo>:: obtenerAltura(NodoABB<Tipo>* nodo) {
+template<typename Puntero, typename Dato>
+int ABB<Puntero, Dato>:: obtenerAltura(NodoABB<Puntero, Dato>* nodo) {
     if (!nodo)
         return 0;
     return 1 + max(obtenerAltura(nodo->obtenerIzquierda()), obtenerAltura(nodo->obtenerDerecha()));
 }
 
 ////////////////////////////////////////////////
-template<typename Tipo>
-bool ABB<Tipo>:: estaBalanceado(NodoABB<Tipo>* nodo) {
+template<typename Puntero, typename Dato>
+bool ABB<Puntero, Dato>:: estaBalanceado(NodoABB<Puntero, Dato>* nodo) {
     if (!nodo)
         return false;
     return abs(obtenerAltura(nodo->obtenerIzquierda()) - obtenerAltura(nodo->obtenerDerecha())) <= 1;
 }
 
 ////////////////////////////////////////////////
-template<typename Tipo>
-NodoABB<Tipo>* ABB<Tipo>:: borradoHoja(NodoABB<Tipo>* nodo) {
+template<typename Puntero, typename Dato>
+NodoABB<Puntero, Dato>* ABB<Puntero, Dato>:: borradoHoja(NodoABB<Puntero, Dato>* nodo) {
     delete nodo;
     return 0;
 }
 
 ////////////////////////////////////////////////
-template<typename Tipo>
-NodoABB<Tipo>* ABB<Tipo>:: borradoUnHijo(NodoABB<Tipo>* nodo) {
+template<typename Puntero, typename Dato>
+NodoABB<Puntero, Dato>* ABB<Puntero, Dato>:: borradoUnHijo(NodoABB<Puntero, Dato>* nodo) {
 
     if (nodo->soloHijoDerecha()) {
-        NodoABB<Tipo>* nodoDer = nodo->obtenerDerecha();
+        NodoABB<Puntero, Dato>* nodoDer = nodo->obtenerDerecha();
         nodoDer->asignarPadre(nodo->obtenerPadre());
-        NodoABB<Tipo>* aux = nodo;
+        NodoABB<Puntero, Dato>* aux = nodo;
         delete aux;
         return nodoDer;
     }
 
     else if (nodo->soloHijoIzquierda()) {
-        NodoABB<Tipo>* nodoIzq = nodo->obtenerIzquierda();
+        NodoABB<Puntero, Dato>* nodoIzq = nodo->obtenerIzquierda();
         nodoIzq->asignarPadre(nodo->obtenerPadre());
-        NodoABB<Tipo>* aux = nodo;
+        NodoABB<Puntero, Dato>* aux = nodo;
         delete aux;
         return nodoIzq;
     }
 }
 
 ////////////////////////////////////////////////
-template<typename Tipo>
-NodoABB<Tipo>* ABB<Tipo>:: borradoDosHijos(NodoABB<Tipo>* nodo) {
-    Tipo sucesorDato = sucesor(nodo->obtenerDato());
+template<typename Puntero, typename Dato>
+NodoABB<Puntero, Dato>* ABB<Puntero, Dato>:: borradoDosHijos(NodoABB<Puntero, Dato>* nodo) {
+    Puntero sucesorDato = sucesor(nodo->obtenerDato());
     nodo->asignarDato(sucesorDato);
     nodo->asignarDerecha(borrarDato(nodo->obtenerDerecha(), sucesorDato));
     return nodo;
 }
 
 ////////////////////////////////////////////////
-template<typename Tipo>
-NodoABB<Tipo>* ABB<Tipo>:: borrarDato(NodoABB<Tipo>* nodo, Tipo dato) {
+template<typename Puntero, typename Dato>
+NodoABB<Puntero, Dato>* ABB<Puntero, Dato>:: borrarDato(NodoABB<Puntero, Dato>* nodo, Puntero dato) {
 
     if (existe(nodo)) {
         if (nodo->obtenerDato() == dato) {
@@ -417,8 +417,8 @@ NodoABB<Tipo>* ABB<Tipo>:: borrarDato(NodoABB<Tipo>* nodo, Tipo dato) {
 }
 
 ////////////////////////////////////////////////
-template <typename Tipo>
-void ABB<Tipo>:: borrarTodo(NodoABB<Tipo>* nodo) {
+template <typename Puntero, typename Dato>
+void ABB<Puntero, Dato>:: borrarTodo(NodoABB<Puntero, Dato>* nodo) {
     if(nodo) {
         borrarTodo(nodo->obtenerIzquierda());
         borrarTodo(nodo->obtenerDerecha());
@@ -427,26 +427,26 @@ void ABB<Tipo>:: borrarTodo(NodoABB<Tipo>* nodo) {
 }
 
 ////////////////////////////////////////////////
-template <typename Tipo>
-NodoABB<Tipo>* ABB<Tipo>:: existe(NodoABB<Tipo> *nodo, Tipo dato) {
-    if (!nodo || nodo->obtenerDato() == dato)
+template <typename Puntero, typename Dato>
+NodoABB<Puntero, Dato>* ABB<Puntero, Dato>:: existe(NodoABB<Puntero, Dato> *nodo, Puntero dato) {
+    if (!nodo || nodo->obtenerPuntero() == dato)
         return nodo;
-    if (dato > nodo->obtenerDato())
+    if (dato > nodo->obtenerPuntero())
         return existe(nodo->obtenerDerecha(), dato);
     return existe(nodo->obtenerIzquierda(), dato);
 }
 
 ////////////////////////////////////////////////
-template<typename Tipo>
-Tipo ABB<Tipo>:: sucesor(NodoABB<Tipo>* nodo) {
+template<typename Puntero, typename Dato>
+Puntero ABB<Puntero, Dato>:: sucesor(NodoABB<Puntero, Dato>* nodo) {
 
     if (!nodo->soloHijoDerecha()) {
-        NodoABB<Tipo>* minNodo = obtenerMinNodo(nodo->obtenerDerecha());
+        NodoABB<Puntero, Dato>* minNodo = obtenerMinNodo(nodo->obtenerDerecha());
         return minNodo->obtenerDato();
     }
 
-    NodoABB<Tipo>* sucesor = 0;
-    NodoABB<Tipo>* predecesor = raiz;
+    NodoABB<Puntero, Dato>* sucesor = 0;
+    NodoABB<Puntero, Dato>* predecesor = raiz;
 
     while (predecesor != nodo) {
         if (nodo->obtenerDato() < predecesor->obtenerDato()) {
@@ -460,13 +460,13 @@ Tipo ABB<Tipo>:: sucesor(NodoABB<Tipo>* nodo) {
 }
 
 ////////////////////////////////////////////////
-template<typename Tipo>
-Tipo ABB<Tipo>:: predecesor(NodoABB<Tipo>* nodo) {
+template<typename Puntero, typename Dato>
+Puntero ABB<Puntero, Dato>:: predecesor(NodoABB<Puntero, Dato>* nodo) {
     if (!nodo->soloHijoIzquierda())
         return obtenerMinNodo(nodo->soloHijoIzquierda());
 
-    NodoABB<Tipo>* sucesor = 0;
-    NodoABB<Tipo>* predecesor = raiz;
+    NodoABB<Puntero, Dato>* sucesor = 0;
+    NodoABB<Puntero, Dato>* predecesor = raiz;
 
     while (predecesor != nodo) {
         if (nodo->obtenerDato() < predecesor->obtenerDato()) {
@@ -480,8 +480,8 @@ Tipo ABB<Tipo>:: predecesor(NodoABB<Tipo>* nodo) {
 }
 
 ////////////////////////////////////////////////
-template<typename Tipo>
-void ABB<Tipo>:: recorridoInOrder(NodoABB<Tipo>* nodo) {
+template<typename Puntero, typename Dato>
+void ABB<Puntero, Dato>:: recorridoInOrder(NodoABB<Puntero, Dato>* nodo) {
     if (nodo != 0) {
         recorridoInOrder(nodo->obtenerIzquierda());
         cout << nodo->obtenerDato() << " ";
@@ -490,8 +490,8 @@ void ABB<Tipo>:: recorridoInOrder(NodoABB<Tipo>* nodo) {
 }
 
 ////////////////////////////////////////////////
-template<typename Tipo>
-void ABB<Tipo>:: recorridoPreOrder(NodoABB<Tipo>* nodo) {
+template<typename Puntero, typename Dato>
+void ABB<Puntero, Dato>:: recorridoPreOrder(NodoABB<Puntero, Dato>* nodo) {
     if (nodo != 0) {
         cout << nodo->obtenerDato() << " ";
         recorridoPreOrder(nodo->obtenerIzquierda());
@@ -500,8 +500,8 @@ void ABB<Tipo>:: recorridoPreOrder(NodoABB<Tipo>* nodo) {
 }
 
 ////////////////////////////////////////////////
-template<typename Tipo>
-void ABB<Tipo>:: recorridoPostOrder(NodoABB<Tipo>* nodo) {
+template<typename Puntero, typename Dato>
+void ABB<Puntero, Dato>:: recorridoPostOrder(NodoABB<Puntero, Dato>* nodo) {
     if (nodo != 0) {
         recorridoPostOrder(nodo->obtenerIzquierda());
         recorridoPostOrder(nodo->obtenerDerecha());
@@ -510,12 +510,12 @@ void ABB<Tipo>:: recorridoPostOrder(NodoABB<Tipo>* nodo) {
 }
 
 ////////////////////////////////////////////////
-template <typename Tipo>
-void ABB<Tipo>:: recorridoEnAncho(NodoABB<Tipo> *nodo) {
+template <typename Puntero, typename Dato>
+void ABB<Puntero, Dato>:: recorridoEnAncho(NodoABB<Puntero, Dato> *nodo) {
 
     if (nodo != 0) {
 
-        Cola<NodoABB<Tipo>*> cola;
+        Cola<NodoABB<Puntero, Dato>*> cola;
         cola.encolar(nodo);
 
         while (!cola.vacia()) {

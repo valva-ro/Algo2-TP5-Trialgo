@@ -5,58 +5,62 @@
 
 using namespace std;
 
-template <typename Tipo>
+template <typename Puntero, typename Dato>
 class NodoABB {
 
     // Atributos
     private:
-        NodoABB<Tipo>* izquierda;
-        NodoABB<Tipo>* derecha;
-        NodoABB<Tipo>* padre;
-        Tipo dato;
+        NodoABB<Puntero, Dato>* izquierda;
+        NodoABB<Puntero, Dato>* derecha;
+        NodoABB<Puntero, Dato>* padre;
+        Puntero dato;
 
     // Metodos
     public:
 
         //  PRE: -
         // POST: Construye el nodo con el dato recibido por parametro
-        NodoABB(Tipo dato);
+        NodoABB(Puntero dato);
 
         //  PRE: -
         // POST: Libera la memoria del dato
         ~NodoABB();
 
         //  PRE: -
-        // POST: Devuelve el dato del nodo
-        Tipo obtenerDato();
+        // POST: Devuelve el puntero
+        Puntero obtenerPuntero();
+
+        //  PRE: -
+        // POST: Devuelve el dato al que apunta el puntero
+        Dato obtenerDato();
 
         //  PRE: -
         // POST: Devuelve el puntero izquierdo
-        NodoABB<Tipo>* obtenerIzquierda();
+        NodoABB<Puntero, Dato>* obtenerIzquierda();
 
         //  PRE: -
         // POST: Devuelve el puntero derecho
-        NodoABB<Tipo>* obtenerDerecha();
+        NodoABB<Puntero, Dato>* obtenerDerecha();
 
         //  PRE: -
         // POST: Devuelve el puntero padre
-        NodoABB<Tipo>* obtenerPadre();
+        NodoABB<Puntero, Dato>* obtenerPadre();
 
         //  PRE: -
         // POST: Le asigna dato al atributo dato
-        void asignarDato(Tipo dato);
+        void asignarDato(Puntero dato);
 
         //  PRE: -
         // POST: Le asigna izquierda al atributo izquierda
-        void asignarIzquierda(NodoABB<Tipo>* izquierda);
+        void asignarIzquierda(NodoABB<Puntero, Dato>* izquierda);
 
         //  PRE: -
         // POST: Le asigna derecha al atributo derecha
-        void asignarDerecha(NodoABB<Tipo>* derecha);
+        void asignarDerecha(NodoABB<Puntero, Dato>* derecha);
 
         //  PRE: -
         // POST: Le asigna padre al atributo padre
-        void asignarPadre(NodoABB<Tipo>* padre);
+        void asignarPadre(NodoABB<Puntero, Dato>* padre);
 
         //  PRE: -
         // POST: Devuelve true si el nodo es hoja, de lo contrario false
@@ -72,8 +76,8 @@ class NodoABB {
 };
 
 /* ------------------------------- Metodos Publicos ------------------------------- */
-template <typename Tipo>
-NodoABB<Tipo>:: NodoABB(Tipo dato) {
+template <typename Puntero, typename Dato>
+NodoABB<Puntero, Dato>:: NodoABB(Puntero dato) {
     this->dato = dato;
     izquierda = 0;
     derecha = 0;
@@ -81,75 +85,81 @@ NodoABB<Tipo>:: NodoABB(Tipo dato) {
 }
 
 /////////////////////////////////////////////
-template <typename Tipo>
-NodoABB<Tipo>:: ~NodoABB<Tipo>() {
+template <typename Puntero, typename Dato>
+NodoABB<Puntero, Dato>:: ~NodoABB<Puntero, Dato>() {
     delete dato;
 }
 
 /////////////////////////////////////////////
-template <typename Tipo>
-Tipo NodoABB<Tipo>:: obtenerDato() {
+template <typename Puntero, typename Dato>
+Puntero NodoABB<Puntero, Dato>:: obtenerPuntero() {
     return dato;
 }
 
 /////////////////////////////////////////////
-template <typename Tipo>
-NodoABB<Tipo>* NodoABB<Tipo>:: obtenerIzquierda() {
+template <typename Puntero, typename Dato>
+Dato NodoABB<Puntero, Dato>:: obtenerDato() {
+    return *dato;
+}
+
+/////////////////////////////////////////////
+template <typename Puntero, typename Dato>
+NodoABB<Puntero, Dato>* NodoABB<Puntero, Dato>:: obtenerIzquierda() {
     return izquierda;
 }
 
 /////////////////////////////////////////////
-template <typename Tipo>
-NodoABB<Tipo>* NodoABB<Tipo>:: obtenerDerecha() {
+template <typename Puntero, typename Dato>
+NodoABB<Puntero, Dato>* NodoABB<Puntero, Dato>:: obtenerDerecha() {
     return derecha;
 }
 
 /////////////////////////////////////////////
-template <typename Tipo>
-NodoABB<Tipo>* NodoABB<Tipo>:: obtenerPadre() {
+template <typename Puntero, typename Dato>
+NodoABB<Puntero, Dato>* NodoABB<Puntero, Dato>:: obtenerPadre() {
     return padre;
 }
 
 /////////////////////////////////////////////
-template <typename Tipo>
-void NodoABB<Tipo>:: asignarDato(Tipo dato) {
+template <typename Puntero, typename Dato>
+void NodoABB<Puntero, Dato>:: asignarDato(Puntero dato) {
     this->dato = dato;
 }
 
 /////////////////////////////////////////////
-template <typename Tipo>
-void NodoABB<Tipo>:: asignarIzquierda(NodoABB<Tipo>* izquierda) {
+template <typename Puntero, typename Dato>
+void NodoABB<Puntero, Dato>:: asignarIzquierda(NodoABB<Puntero, Dato>* izquierda) {
     this->izquierda = izquierda;
 }
 
 
 /////////////////////////////////////////////
-template <typename Tipo>
-void NodoABB<Tipo>:: asignarDerecha(NodoABB<Tipo>* derecha) {
+template <typename Puntero, typename Dato>
+void NodoABB<Puntero, Dato>:: asignarDerecha(NodoABB<Puntero, Dato>* derecha) {
     this->derecha = derecha;
 }
 
 /////////////////////////////////////////////
-template <typename Tipo>
-void NodoABB<Tipo>:: asignarPadre(NodoABB<Tipo>* padre) {
+template <typename Puntero, typename Dato>
+void NodoABB<Puntero, Dato>:: asignarPadre(NodoABB<Puntero, Dato>* padre) {
     this->padre = padre;
 }
 
 /////////////////////////////////////////////
-template <typename Tipo>
-bool NodoABB<Tipo>:: esHoja() {
+template <typename Puntero, typename Dato>
+bool NodoABB<Puntero, Dato>:: esHoja() {
     return (derecha == 0 && izquierda == 0);
 }
 
 /////////////////////////////////////////////
-template <typename Tipo>
-bool NodoABB<Tipo>:: soloHijoIzquierda() {
+template <typename Puntero, typename Dato>
+bool NodoABB<Puntero, Dato>:: soloHijoIzquierda() {
     return (derecha == 0 && izquierda != 0);
 }
 
 /////////////////////////////////////////////
-template <typename Tipo>
-bool NodoABB<Tipo>:: soloHijoDerecha() {
+template <typename Puntero, typename Dato>
+bool NodoABB<Puntero, Dato>:: soloHijoDerecha() {
     return (derecha != 0 && izquierda == 0);
 }
 

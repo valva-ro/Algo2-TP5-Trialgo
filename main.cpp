@@ -7,16 +7,6 @@
             Kevin Meaca
             Valentina Varela Rodriguez
 */
-#include "ABB.h"
 int main() {
-    ABB<int*, int> arbolEnteros;
-    for (int i = 0; i < 10; ++i) {
-        int* pInt = new int(i);
-        arbolEnteros.insertar(pInt);
-    }
-    arbolEnteros.recorridoInOrder();
-    arbolEnteros.recorridoPostOrder();
-    arbolEnteros.recorridoPreOrder();
-    arbolEnteros.recorridoEnAncho();
     return 0;
 }

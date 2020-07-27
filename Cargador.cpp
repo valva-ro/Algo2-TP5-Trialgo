@@ -3,7 +3,7 @@
 
     /// METODOS PRIVADOS ///
 
-void Cargador::cargarDatos(ABB<Diccionario*> &arbolAeropuertos, string ruta)
+void Cargador::cargarDatos(ABB<string clave,Aeropuerto*> &arbolAeropuertos, string ruta)
 {
     ifstream archivo;
     archivo.open(ruta.c_str(),ios::in);
@@ -44,7 +44,7 @@ void Cargador::cargarDatos(Grafo<Vuelo*> &grafoVuelos, string ruta)
 */
     /// METODOS PUBLICOS ///
 
-void Cargador::cargadorDeABB(ABB<Diccionario*> &arbolAeropuertos, ifstream& archivo)
+void Cargador::cargadorDeABB(ABB<string clave,Aeropuerto*> &arbolAeropuertos, ifstream& archivo)
 {
     string nombre, ciudad, pais, codigoIATA;
     double superficie;
@@ -67,8 +67,8 @@ void Cargador::cargadorDeABB(ABB<Diccionario*> &arbolAeropuertos, ifstream& arch
                                      pais, superficie, cantidadTerminales,
                                      destinosNacionales, destinosInternacionales);
 
-        Diccionario* dicAeropuerto = new Diccionario(codigoIATA, pAeropuerto);
-        arbolAeropuertos.insertar(dicAeropuerto);
+
+        arbolAeropuertos.insertar(codigoIATA,pAeropuerto);
     }
 
 }

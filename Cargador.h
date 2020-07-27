@@ -21,7 +21,7 @@ class Cargador
     private:
         //PRE : ABB , archivo ya abierto
         //POST:carga los datos en el arbol binario de busqueda
-        void cargadorDeABB(ABB<string clave,Aeropuerto*> &arbolAeropuertos, ifstream &archivo);
+        void cargadorDeDiccionario(Diccionario<string ,Aeropuerto*> &*arbolAeropuertos, ifstream &archivo);
 
         //PRE: Grafo , archivo ya abierto
         //POST: carga los datos en el grafo
@@ -30,7 +30,7 @@ class Cargador
     public:
         //PRE : Objeto Arbol, ruta al archivo
         //POST: Abre el archivo y carga los datos , de fallar se ejecuta la excepcion
-        void cargarDatos(ABB<string clave,Aeropuerto*> &arbolAeropuertos, string ruta);
+        void cargarDatos(Diccionario<string ,Aeropuerto*> &*arbolAeropuertos, string ruta);
 
         //PRE :Objeto Grafo, ruta al archivo
         //POST:Abre el archivo y carga los datos , de fallar se ejecuta la excepcion

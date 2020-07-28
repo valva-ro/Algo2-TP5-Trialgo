@@ -1,5 +1,5 @@
-#ifndef NODO_TEMPLATE_H
-#define NODO_TEMPLATE_H
+#ifndef NODO_LISTA_H
+#define NODO_LISTA_H
 
 
 template<typedef Dato>
@@ -80,4 +80,4 @@ NodoLista<Dato>* NodoLista<Dato>::getSiguiente()
 }
 
 
-#endif // NODO_TEMPLATE_H
+#endif // NODO_LISTA_H

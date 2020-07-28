@@ -68,7 +68,7 @@ void Cargador::cargadorDeDiccionario(Diccionario<string ,Aeropuerto*> &*arbolAer
                                      destinosNacionales, destinosInternacionales);
 
 
-        arbolAeropuertos.insertar(codigoIATA,pAeropuerto);
+        arbolAeropuertos->insertar(codigoIATA,pAeropuerto);
     }
 
 }

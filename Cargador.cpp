@@ -12,7 +12,7 @@ void Cargador::cargarDatos(Diccionario<string,Aeropuerto*> &*arbolAeropuertos, s
         if (archivo.fail())
             throw (Excepcion(EXCEPCION_ABB));
 
-        cargadorDeABB(arbolAeropuertos, archivo);
+        cargadorDeDiccionario(arbolAeropuertos, archivo);
         cout << "\n\tSe han cargado los Aeropuertos en el arbol correctamente\n";
     }
     catch(Excepcion &e) {
@@ -44,7 +44,7 @@ void Cargador::cargarDatos(Grafo<Vuelo*> &grafoVuelos, string ruta)
 */
     /// METODOS PUBLICOS ///
 
-void Cargador::cargadorDeABB(Diccionario<string ,Aeropuerto*> &*arbolAeropuertos, ifstream& archivo)
+void Cargador::cargadorDeDiccionario(Diccionario<string ,Aeropuerto*> &*arbolAeropuertos, ifstream& archivo)
 {
     string nombre, ciudad, pais, codigoIATA;
     double superficie;

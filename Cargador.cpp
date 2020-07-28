@@ -3,7 +3,7 @@
 
     /// METODOS PRIVADOS ///
 
-void Cargador::cargarDatos(Diccionario<string,Aeropuerto*> &*arbolAeropuertos, string ruta)
+void Cargador::cargarDatos(Diccionario<string,Aeropuerto*> *&arbolAeropuertos, string ruta)
 {
     ifstream archivo;
     archivo.open(ruta.c_str(),ios::in);
@@ -44,7 +44,7 @@ void Cargador::cargarDatos(Grafo<Vuelo*> &grafoVuelos, string ruta)
 */
     /// METODOS PUBLICOS ///
 
-void Cargador::cargadorDeDiccionario(Diccionario<string ,Aeropuerto*> &*arbolAeropuertos, ifstream& archivo)
+void Cargador::cargadorDeDiccionario(Diccionario<string ,Aeropuerto*> *&arbolAeropuertos, ifstream& archivo)
 {
     string nombre, ciudad, pais, codigoIATA;
     double superficie;

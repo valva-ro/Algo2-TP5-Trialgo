@@ -1,5 +1,5 @@
-#ifndef TP4_RECOMENDACIONPELICULA_NODO_H
-#define TP4_RECOMENDACIONPELICULA_NODO_H
+#ifndef NODO_H
+#define NODO_H
 
 #include <iostream>
 
@@ -69,4 +69,4 @@ Tipo Nodo<Tipo>:: obtenerDato() {
 
 /* ------------------------------------------------------------------------------ */
 
-#endif //TP4_RECOMENDACIONPELICULA_NODO_H
+#endif //NODO_H

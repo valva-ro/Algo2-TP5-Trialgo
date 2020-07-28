@@ -28,9 +28,9 @@ class Aeropuerto {
 
         // CONSULTORES
 
-        //PRE: NO RECIBE NADA.
-        //POST: IMPRIME LOS VALORES DE LOS ATRIBUTOS POR PANTALLA.
-        void datosAeropuerto();
+        //PRE: -.
+        //POST: SOBRECARGA DEL OPERADOR << PARA MOSTRAR LOS DATOS DEL AEROPUERTO POR PANTALLA.
+        friend ostream& operator << (ostream& o, Aeropuerto &aeropuerto);
 };
 
 

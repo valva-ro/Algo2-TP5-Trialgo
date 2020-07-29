@@ -1,11 +1,21 @@
 #ifndef TP5_TRIALGO_MENUAEROPUERTO_H
 #define TP5_TRIALGO_MENUAEROPUERTO_H
 
+#include "Cargador.h"
+#include "Aeropuerto.h"
+#include "Diccionario.h"
+
 class MenuAeropuerto {
 private:
     char opcion;
+    Diccionario<string, Aeropuerto*> *arbolAeropuertos;
 
 public:
+    //DESCRIPCION:
+    //PRE:
+    //POST:
+    void asignarArbolAeropuertos(Diccionario<string ,Aeropuerto*> *&arbolAeropuertosOut);
+
     //DESCRIPCION: Muestra las opciones del MENU
     //PRE:
     //POST: Muestra las opciones del MENU

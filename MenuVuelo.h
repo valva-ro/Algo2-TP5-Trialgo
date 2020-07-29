@@ -25,7 +25,6 @@ public:
     //PRE:
     //POST: se muesrta el camino de menor tiempo
     void menorTiempo();
-
 };
 
 

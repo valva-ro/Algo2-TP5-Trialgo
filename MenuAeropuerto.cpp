@@ -10,7 +10,7 @@ const char MOSTRAR_IN_ORDER = '4';
 const char MOSTRAR_ANCHO = '5';
 const char VOLVER_MENU = '6';
 
-void MenuAeropuerto::mostrarOpciones() {
+void MenuAeropuerto::mostrarOpciones(){
     cout << "\n\t---------------- Menu  Aeropuerto ----------------";
     cout << "\n\t" << CONSULTAR<<". Consultar";
     cout << "\n\t" << AGREGAR<<". Agregar";
@@ -59,5 +59,9 @@ void MenuAeropuerto::mostrarAncho() {
 
 void MenuAeropuerto::mostrarInOrder() {
     cout << "\n\tEntraste al mostrar in order de Menu Aeropuerto\n";
+}
+
+void MenuAeropuerto::asignarArbolAeropuertos(Diccionario<string, Aeropuerto *> *&arbolAeropuertosOut) {
+    this->arbolAeropuertos = arbolAeropuertosOut;
 }
 

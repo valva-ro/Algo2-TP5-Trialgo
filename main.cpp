@@ -9,7 +9,7 @@
 */
 #include "Menu.h"
 int main() {
-    Menu menu;
+    Menu menu("archivoAeropuertos.txt", "archivoVuelos.txt");
 
     menu.mostrarOpciones();
     return 0;

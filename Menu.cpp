@@ -8,17 +8,23 @@ const char SALIR = '3';
 using namespace std;
 
 Menu::Menu(string rutaArchAeropuertos, string rutaArchVuelos) {
-        Cargador cargador;
-        Diccionario<string, Aeropuerto*> *pDiccionario;
-        pDiccionario = new Diccionario<string, Aeropuerto*>;
+    Cargador cargador;
+    Diccionario<string, Aeropuerto*> *pDiccionario;
+    Diccionario<string, Aeropuerto*> DiccionarioOut;
+    pDiccionario = &DiccionarioOut;
+    cargador.cargarDatos(pDiccionario, rutaArchAeropuertos);
 
-        cargador.cargarDatos(pDiccionario,rutaArchAeropuertos);
-        menuAeropuerto.asignarArbolAeropuertos(pDiccionario);
+    this->menuAeropuerto.asignarArbolAeropuertos(pDiccionario);
 
-        //hacer esto mismo pero con el grafo cuando este lista la clase.
+    mostrarOpciones();
+
+
+    //hacer esto mismo pero con el grafo cuando este lista la clase.
 }
 
 void Menu::mostrarOpciones() {
+
+
     cout << "\n\n\t================= Menu Principal =================";
     cout << "\n\t" << MENU_AEROPUERTO << ". Acceder al menu del aeropuerto";
     cout << "\n\t" << MENU_VUELO << ". Acceder al menu de vuelos";

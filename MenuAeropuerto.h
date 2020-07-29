@@ -51,6 +51,8 @@ public:
     //POST:
     void mostrarAncho();
 
+    void mostrarTodo();
+
 };
 
 

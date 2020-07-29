@@ -42,11 +42,38 @@ void MenuAeropuerto::selectorOpcion() {
 }
 
 void MenuAeropuerto::consultar() {
+
+    /*
+    string claveOut;
     cout << "\n\tEntraste al consultar de Menu Aeropuerto\n";
+    cout<<"Ingrese la clave del aeropuerto para obtener los datos"<<endl;
+    cin>>claveOut;
+
+    cout<<arbolAeropuertos->obtenerValor(claveOut)<<endl<<endl;*/
 }
 
 void MenuAeropuerto::agregar() {
+    /*
+    string claveOut;
+    string codigoIataOut,  nombreOut,  ciudadOut,  paisOut;
+    double superficieOut;
+    int cantidadTerminalesOut,  destinosNacionalesOut, destinosInternacionalesOut;
+
     cout << "\n\tEntraste al agregar de Menu Aeropuerto\n";
+    cout<<"Ingrese una clave para agregar"<<endl;
+    cin>>claveOut;
+
+    while (arbolAeropuertos->existe(claveOut)){
+        cout<<"Esa clave ya se encuentra cargada, ingrese una nueva"<<endl;
+        cin>>claveOut;
+    }
+
+    cout<<"Ingrese la informacion de un nuevo aeropuerto para agregar"<<endl;
+
+    cin>> codigoIataOut; etc etc (hacer)
+
+    Aeropuerto aeropuertoOut(codigoIataOut,nombreOut,ciudadOut,paisOut,superficieOut,cantidadTerminalesOut,destinosNacionalesOut,destinosInternacionalesOut);
+    arbolAeropuertos->insertar(claveOut, &aeropuertoOut);*/
 }
 
 void MenuAeropuerto::eliminar() {
@@ -61,7 +88,12 @@ void MenuAeropuerto::mostrarInOrder() {
     cout << "\n\tEntraste al mostrar in order de Menu Aeropuerto\n";
 }
 
+
 void MenuAeropuerto::asignarArbolAeropuertos(Diccionario<string, Aeropuerto *> *&arbolAeropuertosOut) {
     this->arbolAeropuertos = arbolAeropuertosOut;
 }
 
+
+void MenuAeropuerto::mostrarTodo() {
+    this->arbolAeropuertos->mostrarData();
+}

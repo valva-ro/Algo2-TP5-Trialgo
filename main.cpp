@@ -9,8 +9,17 @@
 */
 #include "Menu.h"
 int main() {
-    Menu menu("archivoAeropuertos.txt", "archivoVuelos.txt");
 
-    menu.mostrarOpciones();
-    return 0;
+    Menu("archivoAeropuertos.txt", "archivoVuelos.txt");
+
+
+    /*
+    Cargador cargador;
+    Diccionario<string, Aeropuerto*> *pDiccionario;
+    Diccionario<string, Aeropuerto*> DiccionarioOut;
+    pDiccionario = &DiccionarioOut;
+
+    cargador.cargarDatos(pDiccionario, "archivoAeropuertos.txt");
+    pDiccionario->mostrarData();
+    return 0;*/
 }

@@ -42,14 +42,15 @@ void MenuAeropuerto::selectorOpcion() {
 }
 
 void MenuAeropuerto::consultar() {
-
-    /*
+/*
     string claveOut;
     cout << "\n\tEntraste al consultar de Menu Aeropuerto\n";
     cout<<"Ingrese la clave del aeropuerto para obtener los datos"<<endl;
     cin>>claveOut;
 
-    cout<<arbolAeropuertos->obtenerValor(claveOut)<<endl<<endl;*/
+    //cout << arbolAeropuertos->obtenerValor(claveOut);
+
+*/
 }
 
 void MenuAeropuerto::agregar() {
@@ -69,23 +70,53 @@ void MenuAeropuerto::agregar() {
     }
 
     cout<<"Ingrese la informacion de un nuevo aeropuerto para agregar"<<endl;
+    cout<<"Codigo IATA: "; cin>> codigoIataOut;
+    cout<<"Nombre Aeropuerto: ";
+    cin>>nombreOut;
+    cout<<"Ciudad: ";
+    cin>>ciudadOut;
+    cout<<"Pais: ";
+    cin>>paisOut;
+    cout<<"Superficie: ";
+    cin>>superficieOut;
+    cout<<"Cantidad de terminales: ";
+    cin>>cantidadTerminalesOut;
+    cout<<"Destinos Nacionales: ";
+    cin>>destinosInternacionalesOut;
+    cout<<"Destinos interacionales: ";
+    cin>>destinosInternacionalesOut;
 
-    cin>> codigoIataOut; etc etc (hacer)
 
     Aeropuerto aeropuertoOut(codigoIataOut,nombreOut,ciudadOut,paisOut,superficieOut,cantidadTerminalesOut,destinosNacionalesOut,destinosInternacionalesOut);
-    arbolAeropuertos->insertar(claveOut, &aeropuertoOut);*/
+
+    arbolAeropuertos->insertar(claveOut, &aeropuertoOut);
+
+*/
 }
 
 void MenuAeropuerto::eliminar() {
+    string claveOut;
     cout << "\n\tEntraste al eliminar de Menu Aeropuerto\n";
+    cout<<"Ingrese la clave del aeropuerto que desea borrar: ";
+    cin>>claveOut;
+
+    while (!arbolAeropuertos->existe(claveOut)){
+        cout<<"Esa clave no se encuentra cargada, ingrese una clave valida"<<endl;
+        cin>>claveOut;
+    }
+
+    arbolAeropuertos->borrarClave(claveOut);
+    cout<<endl<<"Clave borrada"<<endl;
 }
 
 void MenuAeropuerto::mostrarAncho() {
     cout << "\n\tEntraste al mostrarAncho de Menu Aeropuerto\n";
+    arbolAeropuertos->recorridoEnAncho();
 }
 
 void MenuAeropuerto::mostrarInOrder() {
     cout << "\n\tEntraste al mostrar in order de Menu Aeropuerto\n";
+    arbolAeropuertos->recorridoInOrder();
 }
 
 

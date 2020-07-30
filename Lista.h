@@ -2,10 +2,9 @@
 #define LISTA_H
 
 //Include del paquete Nodo
-#include"Nodo_Lista.h"
+#include"Nodo.h"
 
-//Libria iostream
-#include<iostream>
+
 
 
 template<typedef Dato>
@@ -15,7 +14,7 @@ class Lista
 private:
 
     // Primer elemento de la lista
-    NodoLista<Dato>* primero;
+    Nodo<Dato>* primero;
 
     // Tamaño de la lista
     unsigned tam;
@@ -66,7 +65,7 @@ template<typedef Dato>
 Lista<Dato>::~Lista()
 {
     while (!(this->lista_vacia()))
-        this->del_dato(1);
+        this->delDato(1);
 }
 
 template<typedef Dato>
@@ -78,16 +77,16 @@ bool Lista<Dato>::listaVacia()
 template<typedef Dato>
 void Lista<Dato>::insertar(Dato d)
  {
-    NodoLista<Dato>* pnodo = new NodoLista<Dato>(d);
-    NodoLista<Dato>* paux = primero;
+    Nodo<Dato>* pnodo = new Nodo<Dato>(d);
+    Nodo<Dato>* paux = primero;
     if (this->listaVacia()){
         primero = pnodo;
     }
     else{
-        while (paux->getSiguiente() != 0){
-            paux = paux->getSiguiente();
+        while (paux->obtenerSiguiente() != 0){
+            paux = paux->obtenerSiguiente();
         }
-        paux->setSiguiente(pnodo);
+        paux->asignarSiguiente(pnodo);
  }
  tam++;
 }
@@ -96,37 +95,37 @@ void Lista<Dato>::insertar(Dato d)
 template<typedef Dato>
 Dato Lista::getDato(unsigned pos)
 {
-    NodoLista<Dato>* paux = primero;
+    Nodo<Dato>* paux = primero;
 
     unsigned i = 1;
-    while (i < pos && paux->getSiguiente())
+    while (i < pos && paux->obtenerSiguiente())
     {
-        paux = paux->getSiguiente();
+        paux = paux->obtenerSiguiente();
         i++;
     }
 
-    return paux->getDato();
+    return paux->obtenerDato();
 }
 
 template<typedef Dato>
 void Lista::delDato(unsigned pos)
 {
-    NodoLista<Dato>* paux = primero;
-    if (pos == 1 || !(primero->getSiguiente()))
+    Nodo<Dato>* paux = primero;
+    if (pos == 1 || !(primero->obtenerSiguiente()))
     {
-        primero = paux->getSiguiente();
+        primero = paux->obtenerSiguiente();
     }
     else
     {
         unsigned i = 1;
-        NodoLista<Dato>* pant;
-        while (i < pos && paux->getSiguiente())
+        Nodo<Dato>* pant;
+        while (i < pos && paux->obtenerSiguiente())
         {
             pant = paux;
-            paux = paux->getSiguiente();
+            paux = paux->obtenerSiguiente();
             i++;
         }
-        pant->setSiguiente(paux->getSiguiente());
+        pant->asignarSiguiente(paux->obtenerSiguiente());
     }
     delete paux;
     tam--;

@@ -4,9 +4,6 @@
 //Include del paquete Nodo
 #include"Nodo.h"
 
-
-
-
 template<class Dato>
 class Lista
 {
@@ -16,7 +13,7 @@ private:
     // Primer elemento de la lista
     Nodo<Dato>* primero;
 
-    // Tamaño de la lista
+    // Tamanio de la lista
     unsigned tam;
 
  public:
@@ -32,7 +29,6 @@ private:
 
     // PRE: lista creada
     // POST: devuelve verdadero si la lista es vacia
-
     bool listaVacia();
 
     // PRE: lista creada
@@ -44,14 +40,13 @@ private:
     Dato getDato(unsigned pos);
 
     // PRE: - lista creada y no vacia
-    // POST: libera el nodo que esta en la posición pos
+    // POST: libera el nodo que esta en la posiciï¿½n pos
     void delDato(unsigned pos);
 
     // PRE: Lista creada
     // POST: Devuelve tam (cantidad de nodos de la lista)
     unsigned getTam();
 };
-
 
 
 //////////////////////////////////////////////////////////////////////

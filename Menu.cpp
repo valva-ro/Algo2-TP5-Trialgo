@@ -7,7 +7,7 @@ const char SALIR = '3';
 
 using namespace std;
 
-Menu::Menu(string rutaArchAeropuertos, string rutaArchVuelos) {
+Menu::Menu(const string& rutaArchAeropuertos, const string& rutaArchVuelos) {
     Cargador cargador;
     Diccionario<string, Aeropuerto*> *pDiccionario;
     Diccionario<string, Aeropuerto*> DiccionarioOut;

@@ -17,7 +17,7 @@ public:
     //DESCRIPCION:Constructor del Menu
     //PRE: Recibe los archivos aeropuertos y vuelos
     //POST: Crea el ABB y el grafo y llama a los metodos necesarios para completarlos con los archivos.
-    Menu(string rutaArchAeropuertos, string rutaArchVuelos);
+    Menu(const string& rutaArchAeropuertos, const string& rutaArchVuelos);
 
     //DESCRIPCION: Muestra las opciones del MENU
     //PRE:

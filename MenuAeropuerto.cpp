@@ -42,19 +42,24 @@ void MenuAeropuerto::selectorOpcion() {
 }
 
 void MenuAeropuerto::consultar() {
-/*
     string claveOut;
     cout << "\n\tEntraste al consultar de Menu Aeropuerto\n";
     cout<<"Ingrese la clave del aeropuerto para obtener los datos"<<endl;
     cin>>claveOut;
 
-    //cout << arbolAeropuertos->obtenerValor(claveOut);
+    while (!arbolAeropuertos->existe(claveOut)){
+        cout<<"Esa clave no exsiste en el programa, ingrese una que pertenezca al Diccionario de Aeropuertos"<<endl;
+        cin>>claveOut;
+    }
 
-*/
+    cout<<endl<<"El aeropuerto que quiere mostrar es: "<<endl;
+    cout<<*arbolAeropuertos->obtenerValor(claveOut);
+
+
 }
 
 void MenuAeropuerto::agregar() {
-    /*
+/*
     string claveOut;
     string codigoIataOut,  nombreOut,  ciudadOut,  paisOut;
     double superficieOut;
@@ -82,15 +87,18 @@ void MenuAeropuerto::agregar() {
     cout<<"Cantidad de terminales: ";
     cin>>cantidadTerminalesOut;
     cout<<"Destinos Nacionales: ";
-    cin>>destinosInternacionalesOut;
+    cin>>destinosNacionalesOut;
     cout<<"Destinos interacionales: ";
     cin>>destinosInternacionalesOut;
 
 
     Aeropuerto aeropuertoOut(codigoIataOut,nombreOut,ciudadOut,paisOut,superficieOut,cantidadTerminalesOut,destinosNacionalesOut,destinosInternacionalesOut);
 
-    arbolAeropuertos->insertar(claveOut, &aeropuertoOut);
+    cout<<endl<<"Mostrando el aeropuerto recien cargado"<<endl;
+    cout<<aeropuertoOut;
 
+    arbolAeropuertos->insertar(claveOut, &aeropuertoOut);
+    cout<<endl<<"Aeropuerto insertado en el diccionario"<<endl;
 */
 }
 

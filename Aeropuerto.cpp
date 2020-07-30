@@ -13,13 +13,13 @@ Aeropuerto::Aeropuerto(string codigoIataRecibido, string nombreRecibido, string 
     destinosInternacionales = destinosInternacionalesRecibidos;
 }
 
-void Aeropuerto::datosAeropuerto(){
-    cout << "\n\tAEROPUERTO: " << nombre << endl;
-    cout << "\tCODIGO IATA: " << codigoIata << endl;
-    cout << "\tPAIS: " << pais << endl;
-    cout << "\tCIUDAD: " << ciudad << endl;
-    cout << "\tSUPERFICIE: " << superficie << endl;
-    cout << "\tCANTIDAD DE TERMINALES: " << cantidadTerminales << endl;
-    cout << "\tTIENE " << destinosNacionales << " DESTINOS NACIONALES" << endl;
-    cout << "\tTIENE " << destinosInternacionales << " DESTINOS INTERNACIONALES" << endl;
+ostream& operator << (ostream& o, Aeropuerto &aeropuerto){
+    cout << "\n\tAEROPUERTO: " << aeropuerto.nombre << endl;
+    cout << "\tCODIGO IATA: " << aeropuerto.codigoIata << endl;
+    cout << "\tPAIS: " << aeropuerto.pais << endl;
+    cout << "\tCIUDAD: " << aeropuerto.ciudad << endl;
+    cout << "\tSUPERFICIE: " << aeropuerto.superficie << endl;
+    cout << "\tCANTIDAD DE TERMINALES: " << aeropuerto.cantidadTerminales << endl;
+    cout << "\tTIENE " << aeropuerto.destinosNacionales << " DESTINOS NACIONALES" << endl;
+    cout << "\tTIENE " << aeropuerto.destinosInternacionales << " DESTINOS INTERNACIONALES" << endl;
 }

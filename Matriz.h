@@ -254,12 +254,6 @@ void Matriz<Tipo>::eliminarFilaColumna(const int eliminarFila, const int elimina
 }
 
 template < typename Tipo >
-void Matriz<Tipo>::modificarElemento(Tipo elemento, const int posicionFila, const int posicionColumna){
-    if(!matrizVacia())
-        *( *(datos + posicionFila) + posicionColumna ) = elemento;
-}
-
-template < typename Tipo >
 void Matriz<Tipo>::inicializarMatriz(Tipo elementoDefault){
     for(int i = 0; i < filas; i++){
         for(int j = 0; j < columnas; j++){
@@ -327,8 +321,14 @@ void Matriz<Tipo>::memoriaEnAuxiliar(Tipo **&auxiliar, const int filasNuevas, co
 }
 
 template < typename Tipo >
+void Matriz<Tipo>::modificarElemento(Tipo elemento, const int posicionFila, const int posicionColumna){
+    if(!matrizVacia())
+        *( *(datos + posicionFila) + posicionColumna ) = elemento;
+}
+
+template < typename Tipo >
 void Matriz<Tipo>::redimensionar(const int filasNuevas, const int columnasNuevas) {
-    if (matrizVacia()) {
+    if (filas == SIN_INCREMENTO && columnas == SIN_INCREMENTO) {
         filas = filasNuevas;
         columnas = columnasNuevas;
         datos = new Tipo*[filasNuevas];
@@ -401,10 +401,8 @@ Tipo Matriz<Tipo>::obtenerValor(const int posicionFila, const int posicionColumn
 
 template < typename Tipo >
 Matriz<Tipo>::~Matriz(){
-    if(!matrizVacia()) {
-        liberarMemoriaColumnas();
-        delete[] datos;
-    }
+    liberarMemoriaColumnas();
+    delete[] datos;
 }
 
 #endif //MATRIZ_H

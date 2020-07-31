@@ -361,13 +361,13 @@ NodoDiccionario<Clave, Valor>* Diccionario<Clave, Valor>:: borradoCasoHoja(NodoD
 ////////////////////////////////////////////////
 template<typename Clave, typename Valor>
 NodoDiccionario<Clave, Valor>* Diccionario<Clave, Valor>:: borradoCasoUnHijo(NodoDiccionario<Clave, Valor>* nodo) {
-
+    NodoDiccionario<Clave, Valor>* pNodo = 0;
     if (nodo->soloHijoDerecha()) {
         NodoDiccionario<Clave, Valor>* derNodo = nodo->obtenerDerecha();
         derNodo->asignarPadre(nodo->obtenerPadre());
         NodoDiccionario<Clave, Valor>* aux = nodo;
         delete aux;
-        return derNodo;
+        pNodo = derNodo;
     }
 
     else if (nodo->soloHijoIzquierda()) {
@@ -375,8 +375,9 @@ NodoDiccionario<Clave, Valor>* Diccionario<Clave, Valor>:: borradoCasoUnHijo(Nod
         izqNodo->asignarPadre(nodo->obtenerPadre());
         NodoDiccionario<Clave, Valor>* aux = nodo;
         delete aux;
-        return izqNodo;
+        pNodo = izqNodo;
     }
+    return pNodo;
 }
 
 ////////////////////////////////////////////////

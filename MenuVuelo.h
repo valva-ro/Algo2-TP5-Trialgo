@@ -25,6 +25,11 @@ public:
     //PRE:
     //POST: se muesrta el camino de menor tiempo
     void menorTiempo();
+
+    //DESCRIPCION: Libera el grafo de memoria dinamica
+    //PRE:
+    //POST: Libera el grafo de memoria dinamica
+    void liberarRecursos();
 };
 
 

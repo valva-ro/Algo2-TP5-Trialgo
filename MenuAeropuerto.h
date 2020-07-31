@@ -28,12 +28,12 @@ public:
 
     //DESCRIPCION:  accede a los metodos necesarios para consultar
     //PRE:
-    //POST:
+    //POST: accede a los metodos necesarios para consultar
     void consultar();
 
     //DESCRIPCION: accede a los metodos necesarios para agregar
     //PRE:
-    //POST:
+    //POST: accede a los metodos necesarios para agregar
     void agregar();
 
     //DESCRIPCION:  accede a los metodos necesarios para eliminar
@@ -43,16 +43,17 @@ public:
 
     //DESCRIPCION: accede a los metodos necesarios para mostror in order
     //PRE:
-    //POST:
+    //POST: accede a los metodos necesarios para mostror in order
     void mostrarInOrder();
 
     //DESCRIPCION:  accede a los metodos necesarios para mostror en ancho
     //PRE:
-    //POST:
+    //POST: accede a los metodos necesarios para mostror en ancho
     void mostrarAncho();
 
-    void mostrarTodo();
-
+    //DESCRIPCION: Libera el diccionario de memoria dinamica
+    //PRE:
+    //POST: Libera el diccionario de memoria dinamica
     void liberarRecursos();
 
 };

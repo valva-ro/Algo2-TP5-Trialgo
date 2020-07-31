@@ -39,3 +39,7 @@ void MenuVuelo::menorCosto() {
 void MenuVuelo::menorTiempo() {
     cout << "\n\tEntraste al menor tiempo de Menu vuelo\n";
 }
+
+void MenuVuelo::liberarRecursos() {
+    //implementar cuando tengamos el grafo
+}

@@ -19,6 +19,9 @@ public:
     //POST: Crea el ABB y el grafo y llama a los metodos necesarios para completarlos con los archivos.
     Menu(const string& rutaArchAeropuertos, const string& rutaArchVuelos);
 
+    //DESCRIPCION:Destructor del Menu
+    //PRE:
+    //POST: Llama a liberarRecursos de los menuAeropuertos y menuVuelos
     ~Menu();
 
     //DESCRIPCION: Muestra las opciones del MENU

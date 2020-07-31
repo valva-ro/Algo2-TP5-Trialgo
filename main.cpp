@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
         case AEROPUERTO_Y_VUELOS_TXT: archAeropuertos= argv[1]; archVuelos=argv[2]; break;
     }
 
-    Menu("archivoAeropuertos.txt", "archivoVuelos.txt");
+    Menu(archAeropuertos,archVuelos);
 
 
     return 0;

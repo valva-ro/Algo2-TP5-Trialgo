@@ -190,7 +190,7 @@ NodoDiccionario<Clave, Valor>* Diccionario<Clave, Valor>:: obtenerRaiz() {
 template <typename Clave, typename Valor>
 NodoDiccionario<Clave, Valor>* Diccionario<Clave, Valor>:: obtenerMaxNodo(NodoDiccionario<Clave, Valor>* nodo) {
     if (!raiz) {
-        cout <<  "The Diccionario is empty!" << endl;
+        cout <<  "El diccionario esta vacio!" << endl;
         return 0;
     }
     while(nodo->obtenerDerecha())
@@ -202,7 +202,7 @@ NodoDiccionario<Clave, Valor>* Diccionario<Clave, Valor>:: obtenerMaxNodo(NodoDi
 template <typename Clave, typename Valor>
 NodoDiccionario<Clave, Valor>* Diccionario<Clave, Valor>:: obtenerMinNodo(NodoDiccionario<Clave, Valor>* nodo) {
     if (!raiz) {
-        cout <<  "The Diccionario is empty!" << endl;
+        cout <<  "El diccionario esta vacio!" << endl;
         return 0;
     }
     while(nodo->obtenerIzquierda())
@@ -247,16 +247,14 @@ bool Diccionario<Clave, Valor>:: existe(Clave clave) {
 template <typename Clave, typename Valor>
 Clave Diccionario<Clave, Valor>::sucesor(Clave clave) {
     NodoDiccionario<Clave, Valor>* nodoClave = buscar(raiz, clave);
-    if(nodoClave != 0)
-        return sucesor(nodoClave);
+    return sucesor(nodoClave);
 }
 
 ////////////////////////////////////////////////
 template <typename Clave, typename Valor>
 Clave Diccionario<Clave, Valor>::predecesor(Clave clave) {
     NodoDiccionario<Clave, Valor>* nodoClave = buscar(raiz, clave);
-    if(nodoClave != 0)
-        return predecesor(nodoClave);
+    return predecesor(nodoClave);
 
 }
 
@@ -298,10 +296,10 @@ void Diccionario<Clave, Valor>:: mostrarData() {
     cout << "\tPost order:\n";
     recorridoPostOrder();
 
-    cout << "\n\tThe raiz of this Diccionario is: " << raiz->obtenerClave() << "\n";
-    cout << "\tThe height of this Diccionario is: " << obtenerAltura() << "\n";
-    cout << "\tMax clave: " << obtenerMaxNodo(raiz)->obtenerClave() << " its valor is: " << obtenerMaxNodo(raiz)->obtenerValor() << "\n";
-    cout << "\tMin clave: " << obtenerMinNodo(raiz)->obtenerClave() << " its valor is: " << obtenerMinNodo(raiz)->obtenerValor() << "\n";
+    cout << "\n\tLa raiz del diccionario es: " << raiz->obtenerClave() << "\n";
+    cout << "\tLa altura del diccionario es: " << obtenerAltura() << "\n";
+    cout << "\tMax clave: " << obtenerMaxNodo(raiz)->obtenerClave() << " cuyo valor es: " << obtenerMaxNodo(raiz)->obtenerValor() << "\n";
+    cout << "\tMin clave: " << obtenerMinNodo(raiz)->obtenerClave() << " cuyo valor es: " << obtenerMinNodo(raiz)->obtenerValor() << "\n";
 
     if (estaBalanceado())
         cout << "\tDiccionario is balanced! " << "\n\n";

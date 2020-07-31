@@ -8,6 +8,7 @@ const char SALIR = '0';
 using namespace std;
 
 Menu::Menu(const string& rutaArchAeropuertos, const string& rutaArchVuelos) {
+    /*
     Cargador cargador;
     Diccionario<string, Aeropuerto*> *pDiccionario;
     Diccionario<string, Aeropuerto*> diccionario;
@@ -17,9 +18,18 @@ Menu::Menu(const string& rutaArchAeropuertos, const string& rutaArchVuelos) {
     this->menuAeropuerto.asignarArbolAeropuertos(pDiccionario);
 
     mostrarOpciones();
+*/
 
+    Cargador cargador;
+    Diccionario<string, Aeropuerto*> *pDiccionario = new Diccionario<string, Aeropuerto*>;
+    cargador.cargarDatos(pDiccionario, rutaArchAeropuertos);
+    this->menuAeropuerto.asignarArbolAeropuertos(pDiccionario);
 
     //hacer esto mismo pero con el grafo cuando este lista la clase.
+}
+
+Menu::~Menu() {
+    menuAeropuerto.liberarRecursos();
 }
 
 void Menu::mostrarOpciones() {

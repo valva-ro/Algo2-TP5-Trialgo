@@ -122,3 +122,7 @@ void MenuAeropuerto::asignarArbolAeropuertos(Diccionario<string, Aeropuerto *> *
 void MenuAeropuerto::mostrarTodo() {
     this->arbolAeropuertos->mostrarData();
 }
+
+void MenuAeropuerto::liberarRecursos() {
+    delete this->arbolAeropuertos;
+}

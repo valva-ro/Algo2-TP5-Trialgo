@@ -53,6 +53,8 @@ public:
 
     void mostrarTodo();
 
+    void liberarRecursos();
+
 };
 
 

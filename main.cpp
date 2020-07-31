@@ -34,7 +34,13 @@ int main(int argc, char *argv[]) {
             break;
     }
 
-    Menu(archAeropuertos,archVuelos);
+   // Menu(archAeropuertos,archVuelos);
+
+    Menu menu(archAeropuertos,archVuelos);
+    menu.mostrarOpciones();
+
+
+
 
     return 0;
 }

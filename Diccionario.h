@@ -302,9 +302,9 @@ void Diccionario<Clave, Valor>:: mostrarData() {
     cout << "\tMin clave: " << obtenerMinNodo(raiz)->obtenerClave() << " cuyo valor es: " << obtenerMinNodo(raiz)->obtenerValor() << "\n";
 
     if (estaBalanceado())
-        cout << "\tDiccionario is balanced! " << "\n\n";
+        cout << "\tDiccionario esta balanceado! " << "\n\n";
     else
-        cout << "\tDiccionario is not balanced! " << "\n\n";
+        cout << "\tDiccionario no esta balanceado! " << "\n\n";
 
     cout << "____________________________________\n";
 }

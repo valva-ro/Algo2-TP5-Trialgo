@@ -54,12 +54,9 @@ void MenuAeropuerto::consultar() {
 
     cout<<endl<<"El aeropuerto que quiere mostrar es: "<<endl;
     cout<<*arbolAeropuertos->obtenerValor(claveOut);
-
-
 }
 
 void MenuAeropuerto::agregar() {
-
     string claveOut;
     string nombreOut,  ciudadOut,  paisOut;
     double superficieOut;

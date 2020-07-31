@@ -22,4 +22,6 @@ ostream& operator << (ostream& o, Aeropuerto &aeropuerto){
     cout << "\tCANTIDAD DE TERMINALES: " << aeropuerto.cantidadTerminales << endl;
     cout << "\tTIENE " << aeropuerto.destinosNacionales << " DESTINOS NACIONALES" << endl;
     cout << "\tTIENE " << aeropuerto.destinosInternacionales << " DESTINOS INTERNACIONALES" << endl;
+
+
 }

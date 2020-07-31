@@ -42,18 +42,17 @@ void MenuAeropuerto::selectorOpcion() {
 }
 
 void MenuAeropuerto::consultar() {
-    string claveOut;
-    cout << "\n\tEntraste al consultar de Menu Aeropuerto\n";
-    cout<<"Ingrese la clave del aeropuerto para obtener los datos"<<endl;
-    cin>>claveOut;
+    string clave;
+    cout << "\t\n\tEntraste al consultar de Menu Aeropuerto\n";
+    cout << "\tIngrese el codigo IATA del aeropuerto: ";
+    cin >> clave;
 
-    while (!arbolAeropuertos->existe(claveOut)){
-        cout<<"Esa clave no exsiste en el programa, ingrese una que pertenezca al Diccionario de Aeropuertos"<<endl;
-        cin>>claveOut;
+    if (arbolAeropuertos->existe(clave)) {
+        cout << "\n\tEl aeropuerto es:\n";
+        cout << *arbolAeropuertos->obtenerValor(clave);
     }
-
-    cout<<endl<<"El aeropuerto que quiere mostrar es: "<<endl;
-    cout<<*arbolAeropuertos->obtenerValor(claveOut);
+    else
+        cout << "\tNo se encontro el codigo IATA " << clave << "\n";
 }
 
 void MenuAeropuerto::agregar() {

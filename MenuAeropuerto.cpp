@@ -42,8 +42,7 @@ void MenuAeropuerto::selectorOpcion() {
 
 void MenuAeropuerto::consultar() {
     string clave;
-    cout << "\n\tEntraste al consultar de Menu Aeropuerto\n";
-    cout<<"\tIngrese la clave del aeropuerto para obtener los datos: ";
+    cout<<"\n\tIngrese la clave del aeropuerto para obtener los datos: ";
     cin>>clave;
 
     if (!arbolAeropuertos->existe(clave)){
@@ -52,6 +51,7 @@ void MenuAeropuerto::consultar() {
         cout<<endl<<"\tEl aeropuerto que quiere mostrar es: \n";
         cout<<*arbolAeropuertos->obtenerValor(clave);
     }
+
 }
 
 void MenuAeropuerto::agregar() {
@@ -60,7 +60,6 @@ void MenuAeropuerto::agregar() {
     double superficie;
     int cantidadTerminales,  destinosNacionales, destinosInternacionales;
 
-    cout << "\n\tEntraste al agregar de Menu Aeropuerto\n";
     cout<<"\tIngrese un codigo IATA para agregar: ";
     cin >> codigoIATA;
 
@@ -109,12 +108,10 @@ void MenuAeropuerto::eliminar() {
 }
 
 void MenuAeropuerto::mostrarAncho() {
-    cout << "\n\tEntraste al mostrarAncho de Menu Aeropuerto\n";
     arbolAeropuertos->recorridoEnAncho();
 }
 
 void MenuAeropuerto::mostrarInOrder() {
-    cout << "\n\tEntraste al mostrar in order de Menu Aeropuerto\n";
     arbolAeropuertos->recorridoInOrder();
 }
 

@@ -8,7 +8,7 @@ const char AGREGAR = '2';
 const char ELIMINAR = '3';
 const char MOSTRAR_IN_ORDER = '4';
 const char MOSTRAR_ANCHO = '5';
-const char VOLVER_MENU = '6';
+const char VOLVER_MENU = '0';
 
 void MenuAeropuerto::mostrarOpciones(){
     cout << "\n\t---------------- Menu  Aeropuerto ----------------";
@@ -33,7 +33,7 @@ void MenuAeropuerto::selectorOpcion() {
         case MOSTRAR_IN_ORDER: mostrarInOrder(); break;
         case MOSTRAR_ANCHO: mostrarAncho(); break;
         case VOLVER_MENU: cout << "\tVolviendo al menu principal"; break;
-        default: cout <<  "\tValor incorrecto. Debe ingresar un numero del 1 al 6. Volviendo al Menu Aeropuerto\n"; break;
+        default: cout <<  "\tValor incorrecto. Debe ingresar un numero del 0 al 5. Volviendo al Menu Aeropuerto\n"; break;
     }
 
     if(opcion!=VOLVER_MENU){
@@ -42,74 +42,74 @@ void MenuAeropuerto::selectorOpcion() {
 }
 
 void MenuAeropuerto::consultar() {
-    string claveOut;
+    string clave;
     cout << "\n\tEntraste al consultar de Menu Aeropuerto\n";
     cout<<"Ingrese la clave del aeropuerto para obtener los datos"<<endl;
-    cin>>claveOut;
+    cin>>clave;
 
-    while (!arbolAeropuertos->existe(claveOut)){
+    while (!arbolAeropuertos->existe(clave)){
         cout<<"Esa clave no exsiste en el programa, ingrese una que pertenezca al Diccionario de Aeropuertos"<<endl;
-        cin>>claveOut;
+        cin>>clave;
     }
 
     cout<<endl<<"El aeropuerto que quiere mostrar es: "<<endl;
-    cout<<*arbolAeropuertos->obtenerValor(claveOut);
+    cout<<*arbolAeropuertos->obtenerValor(clave);
 }
 
 void MenuAeropuerto::agregar() {
-    string claveOut;
-    string nombreOut,  ciudadOut,  paisOut;
-    double superficieOut;
-    int cantidadTerminalesOut,  destinosNacionalesOut, destinosInternacionalesOut;
+    string clave;
+    string nombre,  ciudad,  pais;
+    double superficie;
+    int cantidadTerminales,  destinosNacionales, destinosInternacionales;
 
     cout << "\n\tEntraste al agregar de Menu Aeropuerto\n";
     cout<<"Ingrese una clave para agregar"<<endl;
-    cin>>claveOut;
+    cin >> clave;
 
-    while (arbolAeropuertos->existe(claveOut)){
+    while (arbolAeropuertos->existe(clave)){
         cout<<"Esa clave ya se encuentra cargada, ingrese una nueva"<<endl;
-        cin>>claveOut;
+        cin >> clave;
     }
 
     cout<<"Ingrese la informacion de un nuevo aeropuerto para agregar"<<endl;
 
     cout<<"Nombre Aeropuerto: ";
-    cin>>nombreOut;
+    cin >> nombre;
     cout<<"Ciudad: ";
-    cin>>ciudadOut;
+    cin >> ciudad;
     cout<<"Pais: ";
-    cin>>paisOut;
+    cin >> pais;
     cout<<"Superficie: ";
-    cin>>superficieOut;
+    cin >> superficie;
     cout<<"Cantidad de terminales: ";
-    cin>>cantidadTerminalesOut;
+    cin >> cantidadTerminales;
     cout<<"Destinos Nacionales: ";
-    cin>>destinosNacionalesOut;
+    cin >> destinosNacionales;
     cout<<"Destinos interacionales: ";
-    cin>>destinosInternacionalesOut;
+    cin >> destinosInternacionales;
 
-    Aeropuerto *pAeropuerto = new Aeropuerto(claveOut,nombreOut,ciudadOut,paisOut,superficieOut,cantidadTerminalesOut,destinosNacionalesOut,destinosInternacionalesOut);
+    Aeropuerto *pAeropuerto = new Aeropuerto(clave, nombre, ciudad, pais, superficie, cantidadTerminales, destinosNacionales, destinosInternacionales);
 
     cout<<endl<<"Mostrando el aeropuerto recien cargado"<<endl;
     cout<<*pAeropuerto;
 
-    arbolAeropuertos->insertar(claveOut, pAeropuerto);
+    arbolAeropuertos->insertar(clave, pAeropuerto);
     cout<<endl<<"Aeropuerto insertado en el diccionario"<<endl;
 
 }
 
 void MenuAeropuerto::eliminar() {
-    string claveOut;
+    string clave;
     cout << "\n\tEntraste al eliminar de Menu Aeropuerto\n";
     cout<<"Ingrese la clave del aeropuerto que desea borrar: ";
-    cin>>claveOut;
+    cin >> clave;
 
-    while (!arbolAeropuertos->existe(claveOut)){
+    while (!arbolAeropuertos->existe(clave)){
         cout<<"Esa clave no se encuentra cargada, ingrese una clave valida"<<endl;
-        cin>>claveOut;
+        cin >> clave;
     }
 
-    arbolAeropuertos->borrarClave(claveOut);
+    arbolAeropuertos->borrarClave(clave);
     cout<<endl<<"Clave borrada"<<endl;
 }
 

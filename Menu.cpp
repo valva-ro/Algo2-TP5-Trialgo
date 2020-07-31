@@ -3,15 +3,15 @@
 
 const char MENU_AEROPUERTO = '1';
 const char MENU_VUELO = '2';
-const char SALIR = '3';
+const char SALIR = '0';
 
 using namespace std;
 
 Menu::Menu(const string& rutaArchAeropuertos, const string& rutaArchVuelos) {
     Cargador cargador;
     Diccionario<string, Aeropuerto*> *pDiccionario;
-    Diccionario<string, Aeropuerto*> DiccionarioOut;
-    pDiccionario = &DiccionarioOut;
+    Diccionario<string, Aeropuerto*> diccionario;
+    pDiccionario = &diccionario;
     cargador.cargarDatos(pDiccionario, rutaArchAeropuertos);
 
     this->menuAeropuerto.asignarArbolAeropuertos(pDiccionario);

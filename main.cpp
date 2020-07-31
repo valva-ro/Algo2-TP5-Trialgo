@@ -15,16 +15,16 @@ const int AEROPUERTO_Y_VUELOS_TXT = 3;
 
 
 int main(int argc, char *argv[]) {
-    /*
-     argc: obtener el numero de argumentos totales pasados en la linea de comando
-     argv: es un array con los argumentos pasados en la linea de comando
-     */
+
+    string archAeropuertos = "archivoAeropuertos.txt";
+    string archVuelos = "archivoVuelos.txt";
 
     switch (argc) {
-        case EJECUTABLE: Menu("archivoAeropuertos.txt", "archivoVuelos.txt"); break;
-        case AEROPUERTOS_TXT: Menu(argv[1],"archivoVuelos.txt"); break;
-        case AEROPUERTO_Y_VUELOS_TXT: Menu(argv[1],argv[2]);
+        case AEROPUERTOS_TXT: archAeropuertos= argv[1]; break;
+        case AEROPUERTO_Y_VUELOS_TXT: archAeropuertos= argv[1]; archVuelos=argv[2]; break;
     }
+
+    Menu("archivoAeropuertos.txt", "archivoVuelos.txt");
 
 
     return 0;

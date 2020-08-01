@@ -41,7 +41,7 @@ private:
 
     //PRE:- Lista creada y no vacia
     //POST: Devuelve la posicion de un objeto , de no existir devuelve -1
-    using getPosicion(Dato d);
+    unsigned getPosicion(Dato d);
 
     // PRE: - lista creada y no vacia
     // POST: libera el nodo que esta en la posici�n pos

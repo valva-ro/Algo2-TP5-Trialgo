@@ -14,24 +14,25 @@ private:
     MenuVuelo menuVuelo;
 
 public:
-    //DESCRIPCION:Constructor del Menu
-    //PRE: Recibe los archivos aeropuertos y vuelos
+    //DESCRIPCION: Constructor del Menu
+    //PRE: Recibe la ruta de los archivos aeropuertos y vuelos
     //POST: Crea el ABB y el grafo y llama a los metodos necesarios para completarlos con los archivos.
     Menu(const string& rutaArchAeropuertos, const string& rutaArchVuelos);
 
-    //DESCRIPCION:Destructor del Menu
-    //PRE:
+    //DESCRIPCION: Destructor del Menu
+    //PRE: -
     //POST: Llama a liberarRecursos de los menuAeropuertos y menuVuelos
     ~Menu();
 
-    //DESCRIPCION: Muestra las opciones del MENU
-    //PRE:
-    //POST: Muestra las opciones del MENU
+    //DESCRIPCION: Muestra las opciones del Menu
+    //PRE: -
+    //POST: Muestra las opciones del Menu y llama al metodo selectorOpcion()
     void mostrarOpciones();
 
-    //DESCRIPCION: selector de las opciones del MENU
-    //PRE:
-    //POST: selector de las opciones del MENU
+    //DESCRIPCION: Selector de las opciones del Menu
+    //PRE: -
+    //POST: Pide el ingreso de una opcion y abre el submenu correspondiente.
+    //      Si la opcion ingresada es distinta de SALIR llama al metodo mostrarOpciones().
     void selectorOpcion();
 };
 

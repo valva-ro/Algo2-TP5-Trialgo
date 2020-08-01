@@ -6,28 +6,29 @@ private:
     char opcion;
 
 public:
-    //DESCRIPCION: Muestra las opciones del MENU
-    //PRE:
-    //POST: Muestra las opciones del MENU
+    //DESCRIPCION: Muestra las opciones del Menu
+    //PRE: -
+    //POST: Muestra las opciones del Menu y llama al metodo selectorOpcion()
     void mostrarOpciones();
 
-    //DESCRIPCION: selector las opciones del MENU
-    //PRE:
-    //POST: selector de las opciones del MENU
+    //DESCRIPCION: Selector las opciones del Menu
+    //PRE: -
+    //POST: Pide el ingreso de una opcion y abre el metodo correspondiente.
+    //      Si la opcion ingresada es distinta de VOLVER_MENU llama al metodo mostrarOpciones().
     void selectorOpcion();
 
-    //DESCRIPCION: accede a los metodos necesarios para mostrar el camino de menor costo
-    //PRE:
-    //POST: se muestra el camino de menor costo
+    //DESCRIPCION: Accede a los metodos necesarios para mostrar el camino de menor costo
+    //PRE: -
+    //POST: Se muestra el camino de menor costo
     void menorCosto();
 
-    //DESCRIPCION: accede a los metodos necesarios para mostrar el camino de menor tiempo
-    //PRE:
-    //POST: se muesrta el camino de menor tiempo
+    //DESCRIPCION: Accede a los metodos necesarios para mostrar el camino de menor tiempo
+    //PRE: -
+    //POST: Se muesrta el camino de menor tiempo
     void menorTiempo();
 
     //DESCRIPCION: Libera el grafo de memoria dinamica
-    //PRE:
+    //PRE: El grafo debe estar cargado
     //POST: Libera el grafo de memoria dinamica
     void liberarRecursos();
 };

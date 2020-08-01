@@ -1,8 +1,8 @@
 //
 // Created by root-MKevin on 28/7/20.
-// LOS METODOS SE ENCUENTRAN CLASIFICADOS POR EL TIPO DE METODO (CONSTRUCTOR, CONSULTORES, ETC.) Y, ADEMAS
-// ESTAN ORDENADOS ALFABETICAMENTE. SI HUBIESE UN CONSTRUCTOR Y/O UN DESTRUCTOR SE ENCUENTRAN AL PRINCIPIO
-// Y AL FINAL RESPECTIVAMENTE.
+// LOS METODOS SE ENCUENTRAN ORDENADOS ALFABETICAMENTE. ESTOS ULTIMOS SE ENCUENTRAN CLASIFICADOS POR EL TIPO
+// DE METODO (CONSTRUCTOR, CONSULTORES, ETC.). SI HUBIESE UN CONSTRUCTOR Y/O UN DESTRUCTOR SE ENCUENTRAR AL
+// PRINCIPIO Y AL FINAL RESPECTIVAMENTE.
 
 #ifndef MATRIZ_H
 #define MATRIZ_H
@@ -26,18 +26,21 @@ private :
 
     // PRE:  RECIBE UN ENTERO MAYOR QUE CERO.
     // POST: CREA EN MEMORIA DINAMICA COLUMNAS NUEVAS.
-    void columnasEnMemoria(const int columnasNuevas);
+    void crearColumnas(const int columnasNuevas);
 
-    // PRE:  RECIBE UN PUNTERO DE TIPO 'Tipo' CON MEMORIA DINAMICA ASIGNADA PARA LAS FILAS Y
-    //       DOS ENTERO MAYOR QUE CERO.
+    // PRE:  RECIBE UN PUNTERO CON MEMORIA DINAMICA ASIGNADA PARA LAS FILAS Y DOS ENTERO MAYORES QUE CERO.
     // POST: CREA EN MEMORIA DINAMINA LAS COLUMNAS NUEVAS PARA LA MATRIZ AUXILIAR.
-    void columnasEnMemoria(Tipo **&auxiliar, const int filasNuevas, const int columnasNuevas);
+    void crearColumnas(Tipo **&auxiliar, const int filasNuevas, const int columnasNuevas);
 
     // PRE:  RECIBE DOS ENTEROS DENTRO DE LOS SIGUIENTES INTERVALOS: 0 <= eliminarFila < filas;
     //       0 <= eliminarColumna < columnas
     // POST: ELIMINA DE LA MATRIZ LA FILA Y LA COLUMNA CORRESPONDIENTE. DECREMENTA EN UNO LA FILA Y/O LA COLUMNA
     //       DEPENDIENDO DE LO QUE SE ELIMINE.
     void eliminacion(const int eliminarFila, const int eliminarColumna);
+
+    // PRE:  -
+    // POST: LIBERA LA MEMORIA Y PONE A LA MATRIZ COMO SI SE HUBIESE CONSTRUIDO SIN NINGUN ARGUMENTO.
+    void eliminacionTotal();
 
     // PRE:  RECIBE UN ELEMENTO DEL MISMO TIPO QUE LA MATRIZ.
     // POST: INICIALIZA TODOS LOS ELEMENTOS DE LA MATRIZ CON EL ELEMENTO RECIBIDO.
@@ -47,10 +50,11 @@ private :
     // POST: LIBERA LA MEMORIA ALOJADA EN LAS COLUMNAS.
     void liberarMemoriaColumnas();
 
-    //PRE:  RECIBE UN PUNTERO DE TIPO <Tipo> CON MEMORIA ALOJADA TANTO PARA FILAS COMO PARA COLUMNAS.
-    //POST: ELIMINA LA MATRIZ EXISTENTE Y GENERA UNA MATRIZ MAYOR CON LA CANTIDAD DE FILAS Y COLUMNAS
-    //      CORRESPONDIENTES
-    void matrizMayor(Tipo **auxiliar);
+    //PRE:  RECIBE UN PUNTERO CON MEMORIA ALOJADA TANTO PARA FILAS COMO PARA COLUMNAS Y UN DATO DEL MISMO QUE LA
+    //      MATRIZ.
+    //POST: GENERA UNA MATRIZ MAYOR CON LOS MISMOS DATOS Y CON EL DATO RECIBIDO EN DONDE SE HAYA AGREGADO UNA
+    //      FILA Y/O UNA COLUMNA.
+    void matrizMayor(Tipo **auxiliar, const int filasNuevas, const int columnasNuevas, Tipo elementoInicializacion);
 
     // PRE:  RECIBE UN PUNTERO DE TIPO 'Tipo' CON MEMORIA ALOJADA TANTO PARA FILAS COMO PARA COLUMNAS Y DOS ENTEROS
     //       DENTRO DE LOS INTERVALOS: 0 <= eliminarFila < filas ; 0 <= eliminarColumna < columnas. SI SE ELIMINA
@@ -63,9 +67,9 @@ private :
     //POST: LE ASIGNA MEMORIA DINAMICA AL PUNTERO, TANTO FILAS COMO COLUMNAS.
     void memoriaEnAuxiliar(Tipo **&auxiliar, const int filasNuevas, const int columnasNuevas);
 
-    // PRE:  RECIBE DOS ENTEROS MAYORES A CERO.
-    // POST: REDIMENSIONA EL TAMANIO DE LAS FILAS Y LAS COLUMNAS.
-    void redimensionar(const int filasNuevas, const int columnasNuevas);
+    // PRE:  RECIBE UN DATO DEL MISMO TIPO QUE LA MATRIZ Y RECIBE DOS ENTEROS MAYORES A CERO.
+    // POST: REDIMENSIONA EL TAMANIO DE LAS FILAS Y LAS COLUMNAS Y LAS INICIALIZA CON EL DATO RECIBIDO.
+    void redimensionar(Tipo elementoInicializacion, const int filasNuevas, const int columnasNuevas);
 
 public:
     // METODOS
@@ -76,10 +80,6 @@ public:
     // POST: CONSTRUYE UN OBJETO DE TIPO MATRIZ CON SUS ATRIBUTOS IGUALADOS A CERO.( El ATRIBUTO 'datos' EN NULL )
     Matriz();
 
-    // PRE:  RECIBE DOS ENTEROS MAYORES O IGUALES A CERO.
-    // POST: CONSTRUYE UN OBJETO DE TIPO MATRIZ DE TAMANIO filas*columnas CON SUS ELEMENTOS SIN INICIALIZAR.
-    Matriz(const int filasNuevas, const int columnasNuevas);
-
     // PRE:  RECIBE UN ELEMENTO DEL MISMO TIPO QUE LA MATRIZ Y DOS ENTEROS MAYORES O IGUALES A CERO.
     // POST: CONSTRUYE UN OBJETO DE TIPO MATRIZ DE TAMANIO filas*columnas CON TODOS SUS ELEMENTOS IGUALADOS AL
     //       ELEMENTO RECIBIDO COMO DEFAULT.
@@ -87,17 +87,10 @@ public:
 
     // MODIFICADORES
 
-    // PRE:  RECIBE UN ENTERO MAYOR QUE CERO.
-    // POST: AGREGA TANTAS COLUMNAS COMO EL ENTERO RECIBIDO. SE INCREMENTA DE IGUAL FORMA EL ATRIBUTO columnas
-    void agregarColumnas(const int columnasNuevas);
-
-    // PRE:  RECIBE UN ENTERO MAYOR A CERO.
-    // POST: AGREGA TANTAS FILAS COMO EL ENTERO RECIBIDO. SE INCREMENTA DE IGUAL FORMA EL ATRIBUTO filas
-    void agregarFilas(const int filasNuevas);
-
-    // PRE:  RECIBE DOS ENTEROS MAYORES QUE CERO.
-    // POST: AGREGA TANTAS FILAS Y COLUMNAS COMO LOS ENTEROS RECIBIDOS.
-    void agregarFilasColumnas(const int filasNuevas, const int columnasNuevas);
+    // PRE:  RECIBE UN DATO DEL MISMO TIPO QUE LA MATRIZ Y RECIBE DOS ENTEROS MAYORES QUE CERO.
+    // POST: AGREGA TANTAS FILAS Y COLUMNAS COMO LOS ENTEROS RECIBIDOS Y LAS INICIALIZA CON EL DATO RECIBIDO.
+    //       ADEMAS INCREMENTA LOS ATRIBUTOS filas Y columnas.
+    void agregarFilasColumnas(Tipo elementoInicializacion, const int filasNuevas, const int columnasNuevas);
 
     //PRE:  RECIBE UN ENTERO EN EL SIGUIENTE INTERVALO. 0 <= posicionColumna < columna.
     //POST: ELIMINA TODA LA COLUMNA DE LA MATRIZ. DECREMENTA EN UNO EL VALOR DEL ATRIBUTO columnas.
@@ -109,7 +102,7 @@ public:
 
     // PRE:  RECIBE DOS ENTEROS DENTRO DE LOS SIGUIENTES INTERVALOS: 0 <= eliminarFila < filas ;
     //       0 <= eliminarColumna < columnas;
-    // PRE:  ELIMINA DE LA MATRIZ DICHA FILA Y DICHA COLUMNA.
+    // PRE:  ELIMINA DE LA MATRIZ DICHA FILA Y/O DICHA COLUMNA DICHA COLUMNA.
     void eliminarFilaColumna(const int eliminarFila, const int eliminarColumna);
 
     // PRE:  RECIBE UN ELEMENTO DEL MISMO TIPO QUE LA MATRIZ Y DOS ENTEROS DENTRO DE LOS SIGUIENTES INTERVALOS:
@@ -163,36 +156,18 @@ Matriz<Tipo>::Matriz(){
 }
 
 template < typename Tipo >
-Matriz<Tipo>::Matriz(const int filasNuevas, const int columnasNuevas){
-    filas = SIN_INCREMENTO;
-    columnas = SIN_INCREMENTO;
-    redimensionar(filasNuevas, columnasNuevas);
-}
-
-template < typename Tipo >
 Matriz<Tipo>::Matriz(Tipo elementoInicializacion, const int filasNuevas, const int columnasNuevas){
     filas = SIN_INCREMENTO;
     columnas = SIN_INCREMENTO;
-    redimensionar(filasNuevas, columnasNuevas);
-    inicializarMatriz(elementoInicializacion);
+    redimensionar(elementoInicializacion, filasNuevas, columnasNuevas);
 }
 
 //--------------------------------------------------MODIFICADORES--------------------------------------------------//
 
 
 template < typename Tipo >
-void Matriz<Tipo>::agregarColumnas(const int columnasNuevas){
-    redimensionar(filas, columnas + columnasNuevas);
-}
-
-template < typename Tipo >
-void Matriz<Tipo>::agregarFilas(const int filasNuevas){
-    redimensionar(filas + filasNuevas,columnas );
-}
-
-template < typename Tipo >
-void Matriz<Tipo>::agregarFilasColumnas(const int filasNuevas, const int columnasNuevas){
-    redimensionar(filas + filasNuevas, columnas + columnasNuevas);
+void Matriz<Tipo>::agregarFilasColumnas(Tipo elementoInicializacion, const int filasNuevas, const int columnasNuevas){
+    redimensionar(elementoInicializacion,filas + filasNuevas, columnas + columnasNuevas);
 }
 
 template < typename Tipo >
@@ -237,20 +212,40 @@ void Matriz<Tipo>::eliminacion(const int eliminarFila, const int eliminarColumna
 
 template < typename Tipo >
 void Matriz<Tipo>::eliminarColumna(const int posicionColumna){
-    if(columnas>0)
+    if(columnas > 1) {
         eliminacion(POSICION_INVALIDA, posicionColumna);
+    }
+    else{
+        eliminacionTotal();
+    }
 }
 
 template < typename Tipo >
 void Matriz<Tipo>::eliminarFila(const int posicionFila){
-    if(filas > 0)
+    if(filas > 1) {
         eliminacion(posicionFila, POSICION_INVALIDA);
+    }
+    else{
+        eliminacionTotal();
+    }
 }
 
 template < typename Tipo >
 void Matriz<Tipo>::eliminarFilaColumna(const int eliminarFila, const int eliminarColumna) {
-    if(!matrizVacia())
+    if (filas > 1 && columnas > 1){
         eliminacion(eliminarFila, eliminarColumna);
+    }else{
+        eliminacionTotal();
+    }
+}
+
+template < typename Tipo >
+void Matriz<Tipo>::eliminacionTotal(){
+    liberarMemoriaColumnas();
+    delete[] datos;
+    datos = 0;
+    filas = SIN_INCREMENTO;
+    columnas = SIN_INCREMENTO;
 }
 
 template < typename Tipo >
@@ -262,7 +257,6 @@ void Matriz<Tipo>::inicializarMatriz(Tipo elementoDefault){
     }
 }
 
-
 template < typename Tipo >
 void Matriz<Tipo>::liberarMemoriaColumnas(){
     for(int i = 0; i < filas; i ++){
@@ -271,10 +265,15 @@ void Matriz<Tipo>::liberarMemoriaColumnas(){
 }
 
 template < typename Tipo >
-void Matriz<Tipo>::matrizMayor(Tipo **auxiliar){
-    for(int i = 0; i < filas; i++){
-        for(int j = 0; j < columnas; j++){
-            *( *(auxiliar + i) + j ) = *( *(datos + i) + j );
+void Matriz<Tipo>::matrizMayor(Tipo **auxiliar, const int filasNuevas, const int columnasNuevas, Tipo elementoInicializacion){
+    for(int i = 0; i < filasNuevas; i++){
+        for(int j = 0; j < columnasNuevas; j++){
+            if( i >= filas || j >= columnas ) {
+                *(*(auxiliar + i) + j) = elementoInicializacion;
+            }
+            else{
+                *(*(auxiliar + i) + j) = *(*(datos + i) + j);
+            }
         }
     }
 }
@@ -327,17 +326,18 @@ void Matriz<Tipo>::modificarElemento(Tipo elemento, const int posicionFila, cons
 }
 
 template < typename Tipo >
-void Matriz<Tipo>::redimensionar(const int filasNuevas, const int columnasNuevas) {
+void Matriz<Tipo>::redimensionar(Tipo elementoInicializacion, const int filasNuevas, const int columnasNuevas) {
     if (filas == SIN_INCREMENTO && columnas == SIN_INCREMENTO) {
         filas = filasNuevas;
         columnas = columnasNuevas;
         datos = new Tipo*[filasNuevas];
         columnasEnMemoria(columnasNuevas);
+        inicializarMatriz(elementoInicializacion);
     }
     else {
         Tipo **auxiliar = 0;
         memoriaEnAuxiliar(auxiliar, filasNuevas, columnasNuevas);
-        matrizMayor(auxiliar);
+        matrizMayor(auxiliar, filasNuevas, columnasNuevas, elementoInicializacion);
         liberarMemoriaColumnas();
         delete[] datos;
         datos = auxiliar;

@@ -29,7 +29,7 @@ class Cargador
     public:
         //PRE : Objeto Arbol, ruta al archivo
         //POST: Abre el archivo y carga los datos , de fallar se ejecuta la excepcion
-        void cargarDatos(Diccionario<string ,Aeropuerto*> *&arbolAeropuertos, string ruta);
+        void cargarDatos(Diccionario<string ,Aeropuerto*> *&arbolAeropuertos, const string& ruta);
 
         //PRE :Objeto Grafo, ruta al archivo
         //POST:Abre el archivo y carga los datos , de fallar se ejecuta la excepcion

@@ -3,7 +3,7 @@
 
     /// METODOS PRIVADOS ///
 
-void Cargador::cargarDatos(Diccionario<string,Aeropuerto*> *&arbolAeropuertos, string ruta)
+void Cargador::cargarDatos(Diccionario<string,Aeropuerto*> *&arbolAeropuertos, const string& ruta)
 {
     ifstream archivo;
     archivo.open(ruta.c_str(),ios::in);

@@ -1,11 +1,21 @@
 #ifndef TP5_TRIALGO_MENUAEROPUERTO_H
 #define TP5_TRIALGO_MENUAEROPUERTO_H
 
+#include "Cargador.h"
+#include "Aeropuerto.h"
+#include "Diccionario.h"
+
 class MenuAeropuerto {
 private:
     char opcion;
+    Diccionario<string, Aeropuerto*> *arbolAeropuertos;
 
 public:
+    //DESCRIPCION:
+    //PRE:
+    //POST:
+    void asignarArbolAeropuertos(Diccionario<string ,Aeropuerto*> *&arbolAeropuertosOut);
+
     //DESCRIPCION: Muestra las opciones del MENU
     //PRE:
     //POST: Muestra las opciones del MENU
@@ -18,12 +28,12 @@ public:
 
     //DESCRIPCION:  accede a los metodos necesarios para consultar
     //PRE:
-    //POST:
+    //POST: accede a los metodos necesarios para consultar
     void consultar();
 
     //DESCRIPCION: accede a los metodos necesarios para agregar
     //PRE:
-    //POST:
+    //POST: accede a los metodos necesarios para agregar
     void agregar();
 
     //DESCRIPCION:  accede a los metodos necesarios para eliminar
@@ -33,13 +43,18 @@ public:
 
     //DESCRIPCION: accede a los metodos necesarios para mostror in order
     //PRE:
-    //POST:
+    //POST: accede a los metodos necesarios para mostror in order
     void mostrarInOrder();
 
     //DESCRIPCION:  accede a los metodos necesarios para mostror en ancho
     //PRE:
-    //POST:
+    //POST: accede a los metodos necesarios para mostror en ancho
     void mostrarAncho();
+
+    //DESCRIPCION: Libera el diccionario de memoria dinamica
+    //PRE:
+    //POST: Libera el diccionario de memoria dinamica
+    void liberarRecursos();
 
 };
 

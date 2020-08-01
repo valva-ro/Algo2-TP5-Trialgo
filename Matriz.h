@@ -171,14 +171,14 @@ void Matriz<Tipo>::agregarFilasColumnas(Tipo elementoInicializacion, const int f
 }
 
 template < typename Tipo >
-void Matriz<Tipo>::columnasEnMemoria(const int columnasNuevas){
+void Matriz<Tipo>::crearColumnas(const int columnasNuevas){
     for(int i = 0; i < filas; i ++){
         *(datos + i) = new Tipo[columnasNuevas];
     }
 }
 
 template < typename Tipo >
-void Matriz<Tipo>::columnasEnMemoria(Tipo **&auxiliar, const int filasNuevas, const int columnasNuevas){
+void Matriz<Tipo>::crearColumnas(Tipo **&auxiliar, const int filasNuevas, const int columnasNuevas){
     for(int i = 0; i< filasNuevas; i++){
         *( auxiliar + i ) = new Tipo[columnasNuevas];
     }
@@ -307,14 +307,14 @@ void Matriz<Tipo>::memoriaEnAuxiliar(Tipo **&auxiliar, const int filasNuevas, co
     if (filasNuevas != 0) {
         auxiliar = new Tipo*[filasNuevas];
         if (columnasNuevas != 0) {
-            columnasEnMemoria(auxiliar, filasNuevas, columnasNuevas);
+            crearColumnas(auxiliar, filasNuevas, columnasNuevas);
         }
         else {
-            columnasEnMemoria(auxiliar, filasNuevas, this->columnas);
+            crearColumnas(auxiliar, filasNuevas, this->columnas);
         }
     } else if (columnasNuevas != 0) {
         auxiliar = new Tipo*[this->filas];
-        columnasEnMemoria(auxiliar, this->filas, columnasNuevas);
+        crearColumnas(auxiliar, this->filas, columnasNuevas);
     }
 
 }
@@ -331,7 +331,7 @@ void Matriz<Tipo>::redimensionar(Tipo elementoInicializacion, const int filasNue
         filas = filasNuevas;
         columnas = columnasNuevas;
         datos = new Tipo*[filasNuevas];
-        columnasEnMemoria(columnasNuevas);
+        crearColumnas(columnasNuevas);
         inicializarMatriz(elementoInicializacion);
     }
     else {

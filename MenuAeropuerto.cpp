@@ -8,9 +8,9 @@ const char AGREGAR = '2';
 const char ELIMINAR = '3';
 const char MOSTRAR_IN_ORDER = '4';
 const char MOSTRAR_ANCHO = '5';
-const char VOLVER_MENU = '6';
+const char VOLVER_MENU = '0';
 
-void MenuAeropuerto::mostrarOpciones() {
+void MenuAeropuerto::mostrarOpciones(){
     cout << "\n\t---------------- Menu  Aeropuerto ----------------";
     cout << "\n\t" << CONSULTAR<<". Consultar";
     cout << "\n\t" << AGREGAR<<". Agregar";
@@ -23,7 +23,6 @@ void MenuAeropuerto::mostrarOpciones() {
 }
 
 void MenuAeropuerto::selectorOpcion() {
-
     cin >> opcion;
 
     switch (opcion) {
@@ -33,7 +32,7 @@ void MenuAeropuerto::selectorOpcion() {
         case MOSTRAR_IN_ORDER: mostrarInOrder(); break;
         case MOSTRAR_ANCHO: mostrarAncho(); break;
         case VOLVER_MENU: cout << "\tVolviendo al menu principal"; break;
-        default: cout <<  "\tValor incorrecto. Debe ingresar un numero del 1 al 6. Volviendo al Menu Aeropuerto\n"; break;
+        default: cout <<  "\tValor incorrecto. Debe ingresar un numero del 0 al 5. Volviendo al Menu Aeropuerto\n"; break;
     }
 
     if(opcion!=VOLVER_MENU){
@@ -42,22 +41,84 @@ void MenuAeropuerto::selectorOpcion() {
 }
 
 void MenuAeropuerto::consultar() {
-    cout << "\n\tEntraste al consultar de Menu Aeropuerto\n";
+    string clave;
+    cout<<"\n\tIngrese la clave del aeropuerto para obtener los datos: ";
+    cin>>clave;
+
+    if (!arbolAeropuertos->existe(clave)){
+        cout<<"\tEsa clave no exsiste en el programa, volviendo al menu aeropuertos\n";
+    }else {
+        cout<<endl<<"\tEl aeropuerto que quiere mostrar es: \n";
+        cout<<*arbolAeropuertos->obtenerValor(clave);
+    }
+
 }
 
 void MenuAeropuerto::agregar() {
-    cout << "\n\tEntraste al agregar de Menu Aeropuerto\n";
+    string codigoIATA;
+    string nombre,  ciudad,  pais;
+    double superficie;
+    int cantidadTerminales,  destinosNacionales, destinosInternacionales;
+
+    cout<<"\tIngrese un codigo IATA para agregar: ";
+    cin >> codigoIATA;
+
+    if (arbolAeropuertos->existe(codigoIATA)){
+        cout<<"\tEse codigo ya se encuentra cargado, volviendo al menu aeropuerto\n";
+    }else {
+        cout<<"\tIngrese la informacion de un nuevo aeropuerto para agregar\n";
+
+        cout<<"\tNombre Aeropuerto: ";
+        cin >> nombre;
+        cout<<"\tCiudad: ";
+        cin >> ciudad;
+        cout<<"\tPais: ";
+        cin >> pais;
+        cout<<"\tSuperficie: ";
+        cin >> superficie;
+        cout<<"\tCantidad de terminales: ";
+        cin >> cantidadTerminales;
+        cout<<"\tDestinos Nacionales: ";
+        cin >> destinosNacionales;
+        cout<<"\tDestinos interacionales: ";
+        cin >> destinosInternacionales;
+
+        Aeropuerto *pAeropuerto = new Aeropuerto(codigoIATA, nombre, ciudad, pais, superficie, cantidadTerminales, destinosNacionales, destinosInternacionales);
+
+        cout<<endl<<"\tMostrando el aeropuerto recien cargado\n";
+        cout<<*pAeropuerto;
+
+        arbolAeropuertos->insertar(codigoIATA, pAeropuerto);
+        cout<<endl<<"\tAeropuerto insertado en el diccionario\n";
+    }
 }
 
 void MenuAeropuerto::eliminar() {
+    string clave;
     cout << "\n\tEntraste al eliminar de Menu Aeropuerto\n";
+    cout<<"\tIngrese la clave del aeropuerto que desea borrar: ";
+    cin >> clave;
+
+    if (!arbolAeropuertos->existe(clave)){
+        cout<<"\n\tEsa clave no se encuentra cargada, volviendo al menu aeropuertos\n";
+    }else {
+        arbolAeropuertos->borrarClave(clave);
+        cout<<endl<<"\tClave borrada\n";
+    }
 }
 
 void MenuAeropuerto::mostrarAncho() {
-    cout << "\n\tEntraste al mostrarAncho de Menu Aeropuerto\n";
+    arbolAeropuertos->recorridoEnAncho();
 }
 
 void MenuAeropuerto::mostrarInOrder() {
-    cout << "\n\tEntraste al mostrar in order de Menu Aeropuerto\n";
+    arbolAeropuertos->recorridoInOrder();
 }
 
+void MenuAeropuerto::asignarArbolAeropuertos(Diccionario<string, Aeropuerto *> *&arbolAeropuertosOut) {
+    this->arbolAeropuertos = arbolAeropuertosOut;
+}
+
+void MenuAeropuerto::liberarRecursos() {
+    delete this->arbolAeropuertos;
+}

@@ -4,7 +4,7 @@
    Faltan los metodos necesarios para realizar el camino minimo
 
  * Estoy asumiendo:
-    * Que en la clase Lista existe un metodo 'int obtenerPosicion(Tipo dato)' que devuelve la posicion
+    * Que en la clase Lista existe un metodo 'int getPosicion(Tipo dato)' que devuelve la posicion
       en la que se encuentra el dato recibido
     * Que la clase Matriz tiene un metodo 'Tipo obtenerDato(fila, columna)' que recibe dos enteros, el primero
       se corresponde con la fila y el segundo con la columna, y devuelve el dato que esta en esa posicion
@@ -17,7 +17,7 @@
 #ifndef GRAPHTEMPLATES_GRAPH_H
 #define GRAPHTEMPLATES_GRAPH_H
 
-#include "Vuelo.h"
+#include "string.h"
 #include "Matriz.h"
 #include "Lista.h"
 
@@ -31,7 +31,7 @@ class Grafo {
     private:
         Matriz<float>* aristasTiempo;
         Matriz<int>* aristasPrecio;
-        Lista<Vuelo>* vertices;
+        Lista<string>* vertices;
         int elementos;
 
     public:
@@ -42,7 +42,7 @@ class Grafo {
 
         //  PRE: -
         // POST: Crea un grafo conectando origen y destino con peso precio y tiempo
-        Grafo(Vuelo origen, Vuelo destino, int precio, float tiempo);
+        Grafo(string origen, string destino, int precio, float tiempo);
 
         //  PRE: -
         // POST: Libera los recursos del grafo
@@ -50,23 +50,23 @@ class Grafo {
 
         //  PRE: No debe existir una arista conectando origen y destino
         // POST: Agrega una nueva arista con el costo precio
-        void agregarArista(Vuelo origen, Vuelo destino, int precio, float tiempo);
+        void agregarArista(string origen, string destino, int precio, float tiempo);
 
         //  PRE: -
         // POST: Devuelve true si el vuelo existe, de lo contrario false
-        bool existeVertice(Vuelo vuelo);
+        bool existeVertice(string vuelo);
 
         //  PRE: -
         // POST: Devuelve true si existe la arista de orgen a destino, de lo contrario false
-        bool existeArista(Vuelo origen, Vuelo destino);
+        bool existeArista(string origen, string destino);
 
         // PRE: -
         // POST: Devuelve el precio de ir de origen a destino
-        int obtenerPrecio(Vuelo origen, Vuelo destino);
+        int obtenerPrecio(string origen, string destino);
 
         // PRE: -
         // POST: Devuelve el tiempo de ir de origen a destino
-        float obtenerTiempo(Vuelo origen, Vuelo destino);
+        float obtenerTiempo(string origen, string destino);
 
         // PRE: -
         // POST: Muestra la matriz con los precios
@@ -81,18 +81,17 @@ class Grafo {
 
 Grafo:: Grafo() {
     aristasPrecio = 0;
-    aristasTiempo = 0
+    aristasTiempo = 0;
     vertices = 0;
     elementos = 0;
 }
 
-Grafo:: Grafo(Vuelo origen, Vuelo destino, int precio, float tiempo) {
+Grafo:: Grafo(string origen, string destino, int precio, float tiempo) {
     elementos = 0;
-    vertices = new Lista<Vuelo>;
-    aristasPrecio = new Matriz<int>(elementos, ENT_INFINITO);
-    aristasTiempo = new Matriz<float>(elementos, FLO_INFINITO);
-    agregarArista(origen, destino, precio);
-    agregarArista(origen, destino, tiempo);
+    vertices = new Lista<string>;
+    aristasPrecio = new Matriz<int>(ENT_INFINITO, elementos, elementos);
+    aristasTiempo = new Matriz<float>(FLO_INFINITO, elementos, elementos);
+    agregarArista(origen, destino, precio, tiempo);
 }
 
 Grafo:: ~Grafo() {
@@ -101,56 +100,66 @@ Grafo:: ~Grafo() {
     delete vertices;
 }
 
-int Grafo:: obtenerPrecio(Vuelo origen, Vuelo destino) {
+int Grafo:: obtenerPrecio(string origen, string destino) {
     int precio = ENT_INFINITO;
     if (existeArista(origen, destino)) {
-        int begPos = vertices->obtenerPosicion(origen);
-        int destinoPos = vertices->obtenerPosicion(destino);
-        precio = aristasPrecio->obtenerDato(begPos, destinoPos);
+        int begPos = vertices->getPosicion(origen);
+        int destinoPos = vertices->getPosicion(destino);
+        precio = aristasPrecio->obtenerValor(begPos, destinoPos);
     }
     return precio;
 }
 
 void Grafo:: mostrarMatrizPrecios() {
     cout << "\n\t\tPrecios\n";
-    aristasPrecio->mostrar();
+    for (int i = 0; i < aristasPrecio->longitudFilas(); ++i) {
+        for (int j = 0; j < aristasPrecio->longitudColumnas(); ++j) {
+            cout << "\t\t" << aristasPrecio->obtenerValor(i, j) << "\t";
+        }
+        cout << "\n";
+    }
 }
 
 void Grafo:: mostrarMatrizTiempos() {
     cout << "\n\t\tTiempos\n";
-    aristasTiempo->mostrar();
+    for (int i = 0; i < aristasTiempo->longitudFilas(); ++i) {
+        for (int j = 0; j < aristasTiempo->longitudColumnas(); ++j) {
+            cout << "\t\t" << aristasTiempo->obtenerValor(i, j) << "\t";
+        }
+        cout << "\n";
+    }
 }
 
-void Grafo:: agregarArista(Vuelo origen, Vuelo destino, int precio, float tiempo) {
+void Grafo:: agregarArista(string origen, string destino, int precio, float tiempo) {
     if (!existeArista(origen, destino)) {
         if (existeVertice(origen) && existeVertice(destino)) {
-            aristasPrecio->insertar(precio, vertices->obtenerPosicion(origen), vertices->obtenerPosicion(destino));
-            aristasTiempo->insertar(tiempo, vertices->obtenerPosicion(origen), vertices->obtenerPosicion(destino));
+            aristasPrecio->modificarElemento(precio, vertices->getPosicion(origen), vertices->getPosicion(destino));
+            aristasTiempo->modificarElemento(tiempo, vertices->getPosicion(origen), vertices->getPosicion(destino));
         }
         else if (existeVertice(origen)) {
-            aristasPrecio->redimensionar(elementos + 1);
-            aristasTiempo->redimensionar(elementos + 1);
+            aristasPrecio->agregarFilasColumnas(elementos + 1, elementos + 1);
+            aristasTiempo->agregarFilasColumnas(elementos + 1, elementos + 1);
             vertices->insertar(destino);
-            aristasPrecio->insertar(precio, vertices->obtenerPosicion(origen), elementos);
-            aristasTiempo->insertar(tiempo, vertices->obtenerPosicion(origen), elementos);
+            aristasPrecio->modificarElemento(precio, vertices->getPosicion(origen), elementos);
+            aristasTiempo->modificarElemento(tiempo, vertices->getPosicion(origen), elementos);
             elementos += 1;
         }
         else if(existeVertice(destino)) {
-            aristasPrecio->redimensionar(elementos + 1);
-            aristasTiempo->redimensionar(elementos + 1);
+            aristasPrecio->agregarFilasColumnas(elementos + 1, elementos + 1);
+            aristasTiempo->agregarFilasColumnas(elementos + 1, elementos + 1);
             vertices->insertar(origen);
-            aristasPrecio->insertar(precio, elementos, vertices->obtenerPosicion(destino));
-            aristasTiempo->insertar(tiempo, elementos, vertices->obtenerPosicion(destino));
+            aristasPrecio->modificarElemento(precio, elementos, vertices->getPosicion(destino));
+            aristasTiempo->modificarElemento(tiempo, elementos, vertices->getPosicion(destino));
             elementos += 1;
         }
         else {
-            aristasPrecio->redimensionar(elementos + 2);
-            aristasTiempo->redimensionar(elementos + 2);
+            aristasPrecio->agregarFilasColumnas(elementos + 2, elementos + 2);
+            aristasTiempo->agregarFilasColumnas(elementos + 2, elementos + 2);
             vertices->insertar(origen);
             vertices->insertar(destino);
             elementos += 2;
-            aristasPrecio->insertar(precio, vertices->obtenerPosicion(origen), vertices->obtenerPosicion(destino));
-            aristasTiempo->insertar(tiempo, vertices->obtenerPosicion(origen), vertices->obtenerPosicion(destino));
+            aristasPrecio->modificarElemento(precio, vertices->getPosicion(origen), vertices->getPosicion(destino));
+            aristasTiempo->modificarElemento(tiempo, vertices->getPosicion(origen), vertices->getPosicion(destino));
         }
         cout << "\t\tVuelo conectando " << origen << " y " << destino << " con precio " << precio << " y duracion "
              << tiempo <<" agregado con exito!\n";
@@ -158,7 +167,7 @@ void Grafo:: agregarArista(Vuelo origen, Vuelo destino, int precio, float tiempo
     else
         cout << "\t\tYa existe un vuelo que conecta " << origen << " y " << destino << "!\n";
 }
-bool Grafo:: existeVertice(Vuelo vuelo) {
+bool Grafo:: existeVertice(string vuelo) {
     bool existe = false;
     for (int i = 1; i <= vertices->getTam() ; ++i) {
         if (vertices->getDato(i) == vuelo)
@@ -167,12 +176,12 @@ bool Grafo:: existeVertice(Vuelo vuelo) {
     return existe;
 }
 
-bool Grafo:: existeArista(Vuelo origen, Vuelo destino) {
+bool Grafo:: existeArista(string origen, string destino) {
     bool existe = true;
     if (!existeVertice(origen) || !existeVertice(destino))
         existe = false;
     else {
-        if (aristasPrecio->obtenerDato(vertices->obtenerPosicion(origen), vertices->obtenerPosicion(destino)) == ENT_INFINITO)
+        if (aristasPrecio->obtenerValor(vertices->getPosicion(origen), vertices->getPosicion(destino)) == ENT_INFINITO)
             existe = false;
     }
     return existe;

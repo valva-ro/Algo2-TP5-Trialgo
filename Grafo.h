@@ -11,8 +11,8 @@
 
 class Grafo {
 private:
-    Matriz<int>* precio;
-    Matriz<float>* distancia;
+    Matriz<int>* precioMatriz;
+    Matriz<float>* distanciaMatriz;
     int elementos;
     Lista<string>* vertices;
 
@@ -61,7 +61,7 @@ public:
     //DESCRIPCION:
     //PRE:
     //POST:
-    int obtenerDistancia(string origen, string destino);
+    float obtenerDistancia(string origen, string destino);
 
 };
 

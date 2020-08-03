@@ -26,7 +26,7 @@ Grafo::~Grafo() {
 bool Grafo::existeArista(string origen, string destino) {
     bool exsiste= true;
     if (existeVertice(origen)&&existeVertice(destino)){
-        if (distanciaMatriz->obtenerValor(vertices->getPosicion(origen),vertices->getPosicion(destino))>INFINITO)
+        if ((distanciaMatriz->obtenerValor(vertices->getPosicion(origen),vertices->getPosicion(destino))>INFINITO)&&(precioMatriz->obtenerValor(vertices->getPosicion(origen),vertices->getPosicion(destino))>INFINITO))
             exsiste = false;
     }
 
@@ -44,14 +44,24 @@ bool Grafo::existeVertice(string vertice) {
 }
 
 float Grafo::obtenerDistancia(string origen, string destino) {
+    float distancia= INFINITO;
+    if (existeArista(origen,destino)){
+        distancia= distanciaMatriz->obtenerValor(vertices->getPosicion(origen),vertices->getPosicion(destino));
+    }
 
+    return  distancia;
 }
 
 int Grafo::obtenerPrecio(string origen, string destino) {
+    int precio = INFINITO;
+    if(existeArista(origen,destino)){
+        precio= precioMatriz->obtenerValor(vertices->getPosicion(origen),vertices->getPosicion(destino));
+    }
+
+    return precio;
 
 }
 
 void Grafo::insertarArista(string origen, string destino, int precio, float distancia) {
-
 
 }

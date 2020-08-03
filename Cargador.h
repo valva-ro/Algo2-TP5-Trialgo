@@ -6,6 +6,7 @@
 
 //Librerias locales
 #include "Diccionario.h"
+#include "Grafo.h"
 #include "Aeropuerto.h"
 #include "Excepcion.h"
 
@@ -24,7 +25,7 @@ class Cargador
 
         //PRE: Grafo , archivo ya abierto
         //POST: carga los datos en el grafo
-        //void cargadorDeGrafo(Grafo<Vuelo*> &grafoVuelos , ifstream &archivo);
+        void cargadorDeGrafo(Grafo *&grafoVuelos , ifstream &archivo);
 
     public:
         //PRE : Objeto Arbol, ruta al archivo
@@ -33,7 +34,7 @@ class Cargador
 
         //PRE :Objeto Grafo, ruta al archivo
         //POST:Abre el archivo y carga los datos , de fallar se ejecuta la excepcion
-        //void cargarDatos(Grafo<Vuelo*> &grafoVuelos,string ruta);
+        void cargarDatos(Grafo *&grafoVuelos, const string& ruta);
 };
 
 #endif /*CARGADOR_H*/

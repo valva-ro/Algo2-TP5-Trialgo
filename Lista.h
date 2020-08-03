@@ -2,7 +2,7 @@
 #define LISTA_H
 
 //Include del paquete Nodo
-#include"Nodo.h"
+#include "Nodo.h"
 
 template<class Dato>
 class Lista
@@ -82,12 +82,12 @@ void Lista<Dato>::insertar(Dato d)
         primero = pNodo;
     }
     else{
-        while (paux->obtenerSiguiente() != 0){
+        while (pAux->obtenerSiguiente() != 0){
             pAux = pAux->obtenerSiguiente();
         }
-        pAux->asignarSiguiente(pnodo);
- }
- tam++;
+        pAux->asignarSiguiente(pNodo);
+    }
+    tam++;
 }
 
 
@@ -103,7 +103,7 @@ Dato Lista<Dato>::obtenerDato(unsigned pos)
         i++;
     }
 
-    return paux->obtenerDato();
+    return pAux->obtenerDato();
 }
 
 template<class Dato>
@@ -148,8 +148,6 @@ unsigned Lista<Dato>::obtenerPosicion(Dato d)
 
         i++;
     }
-
-
     return posicion;
 }
 

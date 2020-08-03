@@ -39,6 +39,10 @@ private:
     // POST: devuelve el dato que esta en la posicion pos
     Dato getDato(unsigned pos);
 
+    //PRE:- Lista creada y no vacia
+    //POST: Devuelve la posicion de un objeto , de no existir devuelve -1
+    unsigned getPosicion(Dato d);
+
     // PRE: - lista creada y no vacia
     // POST: libera el nodo que esta en la posici�n pos
     void delDato(unsigned pos);
@@ -124,6 +128,32 @@ void Lista<Dato>::delDato(unsigned pos)
     }
     delete paux;
     tam--;
+}
+
+template<class Dato>
+unsigned Lista<Dato>::getPosicion(Dato d)
+{
+    bool estaEnLista  = false;
+    unsigned i = 1 ,posicion ;
+
+    while( i <= this->getTam() || !estaEnLista)
+    {
+        Dato datoLista = this->getDato(i);
+
+        if(datoLista == d)
+        {
+            estaEnLista = true;
+            posicion = i;
+        }
+
+        i++;
+    }
+
+    if(!estaEnLista)
+        posicion = -1;
+
+
+    return posicion
 }
 
 template<class Dato>

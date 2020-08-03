@@ -10,11 +10,8 @@ class Lista
 
 private:
 
-    // Primer elemento de la lista
     Nodo<Dato>* primero;
-
-    // Tamanio de la lista
-    unsigned tam;
+    int tam;
 
  public:
     // Constructor
@@ -49,7 +46,7 @@ private:
 
     // PRE: Lista creada
     // POST: Devuelve tam (cantidad de nodos de la lista)
-    unsigned getTam();
+    int getTam();
 };
 
 
@@ -57,7 +54,7 @@ private:
 template<class Dato>
 Lista<Dato>::Lista()
 {
-    primero = 0 ;
+    primero = 0;
     tam = 0;
 }
 template<class Dato>
@@ -86,8 +83,8 @@ void Lista<Dato>::insertar(Dato d)
             paux = paux->obtenerSiguiente();
         }
         paux->asignarSiguiente(pnodo);
- }
- tam++;
+    }
+    tam++;
 }
 
 
@@ -133,31 +130,24 @@ void Lista<Dato>::delDato(unsigned pos)
 template<class Dato>
 unsigned Lista<Dato>::getPosicion(Dato d)
 {
-    bool estaEnLista  = false;
-    unsigned i = 1 ,posicion ;
+    bool estaEnLista = false;
+    unsigned i = 1, posicion = -1;
 
-    while( i <= this->getTam() || !estaEnLista)
+    while(i <= this->tam && !estaEnLista)
     {
         Dato datoLista = this->getDato(i);
-
         if(datoLista == d)
         {
             estaEnLista = true;
             posicion = i;
         }
-
         i++;
     }
-
-    if(!estaEnLista)
-        posicion = -1;
-
-
-    return posicion
+    return posicion;
 }
 
 template<class Dato>
-unsigned Lista<Dato>::getTam()
+int Lista<Dato>::getTam()
 {
     return tam;
 }

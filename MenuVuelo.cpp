@@ -7,6 +7,10 @@ const char MENOR_COSTO = '1';
 const char MENOR_TIEMPO = '2';
 const char VOLVER_MENU = '0';
 
+void MenuVuelo::asignarGrafoVuelos(Grafo *&grafoVuelos) {
+    this->vuelos = grafoVuelos;
+}
+
 void MenuVuelo::mostrarOpciones() {
     cout << "\n\t------------------- Menu Vuelo -------------------\n";
     cout << "\n\t" << MENOR_COSTO << ". Menor costo";
@@ -34,12 +38,14 @@ void MenuVuelo::selectorOpcion() {
 
 void MenuVuelo::menorCosto() {
     cout << "\n\tEntraste al menor costo de Menu vuelo\n";
+    vuelos->mostrarMatrizPrecios();
 }
 
 void MenuVuelo::menorTiempo() {
     cout << "\n\tEntraste al menor tiempo de Menu vuelo\n";
+    vuelos->mostrarMatrizTiempos();
 }
 
 void MenuVuelo::liberarRecursos() {
-    //implementar cuando tengamos el grafo
+    delete vuelos;
 }

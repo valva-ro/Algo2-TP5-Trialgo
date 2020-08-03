@@ -1,11 +1,19 @@
 #ifndef TP5_TRIALGO_MENUVUELO_H
 #define TP5_TRIALGO_MENUVUELO_H
 
+#include "Grafo.h"
+
 class MenuVuelo {
 private:
+    Grafo* vuelos;
     char opcion;
 
 public:
+    //DESCRIPCION: Le asigna el puntero recibido al atributo por referencia
+    //PRE: -
+    //POST: Le asigna el puntero recibido al atributo por referencia
+    void asignarGrafoVuelos(Grafo *&grafoVuelosOut);
+
     //DESCRIPCION: Muestra las opciones del Menu
     //PRE: -
     //POST: Muestra las opciones del Menu y llama al metodo selectorOpcion()

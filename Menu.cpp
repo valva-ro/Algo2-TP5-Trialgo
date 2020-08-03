@@ -1,5 +1,7 @@
-#include "Menu.h"
 #include <iostream>
+
+#include "Menu.h"
+#include "Cargador.h"
 
 const char MENU_AEROPUERTO = '1';
 const char MENU_VUELO = '2';
@@ -13,7 +15,9 @@ Menu::Menu(const string& rutaArchAeropuertos, const string& rutaArchVuelos) {
     cargador.cargarDatos(pDiccionario, rutaArchAeropuertos);
     this->menuAeropuerto.asignarArbolAeropuertos(pDiccionario);
 
-    //hacer esto mismo pero con el grafo cuando este lista la clase.
+    Grafo* pVuelos = new Grafo();
+    cargador.cargarDatos(pVuelos, rutaArchVuelos);
+    this->menuVuelo.asignarGrafoVuelos(pVuelos);
 }
 
 Menu::~Menu() {

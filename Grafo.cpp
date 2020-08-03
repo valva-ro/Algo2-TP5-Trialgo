@@ -63,5 +63,38 @@ int Grafo::obtenerPrecio(string origen, string destino) {
 }
 
 void Grafo::insertarArista(string origen, string destino, int precio, float distancia) {
+    int posicionOrigen = vertices->getPosicion(origen);
+    int posicionDestino = vertices->getPosicion(destino);
 
+    if(!existeArista(origen,destino)){
+        if(existeVertice(origen)&&existeVertice(destino)) { //si exsisten los dos vertices exsiste una fila columna en las matrices por lo que solo modifico el dato
+            precioMatriz->modificarElemento(precio,posicionOrigen,posicionDestino);
+            distanciaMatriz->modificarElemento(distancia,posicionOrigen,posicionDestino);
+        }else if(existeVertice(origen)){ //si solo exsiste el origen
+            precioMatriz->agregarFilasColumnas(1,1); //redimensiono para agregar el destino
+            distanciaMatriz->agregarFilasColumnas(1,1);
+            vertices->insertar(destino); //agrego el dato nuevo a la lista de vertices
+            precioMatriz->modificarElemento(precio,posicionOrigen,posicionDestino); //con la matriz ya armada correcta modifico el precio.
+            distanciaMatriz->modificarElemento(distancia,posicionOrigen,posicionDestino);
+            elementos ++;
+        }else if (existeVertice(destino)){
+            precioMatriz->agregarFilasColumnas(1,1);
+            distanciaMatriz->agregarFilasColumnas(1,1);
+            vertices->insertar(origen);
+            precioMatriz->modificarElemento(precio,posicionOrigen,posicionDestino);
+            distanciaMatriz->modificarElemento(distancia,posicionOrigen,posicionDestino);
+            elementos ++;
+        }else  { //no exsiste ni el origen ni el destino
+            precioMatriz->agregarFilasColumnas(2,2); //tengo que agregar una fila/columna para origen y una para destino
+            distanciaMatriz->agregarFilasColumnas(2,2);
+            vertices->insertar(origen);
+            vertices->insertar(destino);
+            elementos = elementos+2;
+            precioMatriz->modificarElemento(precio,posicionOrigen,posicionDestino);
+            distanciaMatriz->modificarElemento(distancia,posicionOrigen,posicionDestino);
+        }
+
+        cout<<"\n\t Arista conectada correctamente\n";
+    }else
+        cout<<"\n\t Ya exsiste una arista que los une \n";
 }

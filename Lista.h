@@ -153,7 +153,7 @@ unsigned Lista<Dato>::getPosicion(Dato d)
         posicion = -1;
 
 
-    return posicion
+    return posicion;
 }
 
 template<class Dato>

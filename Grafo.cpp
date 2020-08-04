@@ -3,6 +3,68 @@
 const int E_INFINITO = 999999;
 const float F_INFINITO = 999998.9;
 
+void Grafo::mostrarCaminosMinimosPrecios() {
+    Matriz<int>* recorridosMin = caminoMinimoPrecio();
+    for (int i = 0; i < recorridosMin->longitudFilas(); ++i) {
+        for (int j = 0; j < recorridosMin->longitudColumnas(); ++j) {
+            cout << "\t" << recorridosMin->obtenerValor(i, j);
+        }
+        cout << "\n";
+    }
+    delete recorridosMin;
+}
+
+void Grafo::mostrarCaminosMinimosTiempos() {
+    Matriz<float>* recorridosMin = caminoMinimoTiempo();
+    for (int i = 0; i < recorridosMin->longitudFilas(); ++i) {
+        for (int j = 0; j < recorridosMin->longitudColumnas(); ++j) {
+            cout << "\t" << recorridosMin->obtenerValor(i, j);
+        }
+        cout << "\n";
+    }
+    delete recorridosMin;
+}
+
+Matriz<int>* Grafo::caminoMinimoPrecio() {
+
+    Matriz<int>* precio = new Matriz<int>(precioMatriz->obtenerInicializador(), precioMatriz->longitudFilas(), precioMatriz->longitudColumnas());
+    for (int i = 0; i < precioMatriz->longitudFilas(); ++i) {
+        for (int j = 0; j < precioMatriz->longitudColumnas(); ++j) {
+            precio->modificarElemento(precioMatriz->obtenerValor(i,j), i, j);
+        }
+    }
+
+    for(int k = 0; k < precio->longitudFilas(); k++) {
+        for (int i = 0; i < precio->longitudFilas(); i++) {
+            for (int j = 0; j < precio->longitudFilas(); j++) {
+                if (precio->obtenerValor(i, j) > precio->obtenerValor(i, k) + precio->obtenerValor(k, j))
+                    precio->modificarElemento((precio->obtenerValor(i, k) + precio->obtenerValor(k, j)), i, j);
+            }
+        }
+    }
+    return precio;
+}
+
+Matriz<float>* Grafo::caminoMinimoTiempo() {
+
+    Matriz<float>* tiempo = new Matriz<float>(tiempoMatriz->obtenerInicializador(), tiempoMatriz->longitudFilas(), tiempoMatriz->longitudColumnas());
+    for (int i = 0; i < tiempo->longitudFilas(); ++i) {
+        for (int j = 0; j < tiempo->longitudColumnas(); ++j) {
+            tiempo->modificarElemento(tiempoMatriz->obtenerValor(i,j), i, j);
+        }
+    }
+
+    for(int k = 0; k < tiempo->longitudFilas(); k++) {
+        for (int i = 0; i < tiempo->longitudFilas(); i++) {
+            for (int j = 0; j < tiempo->longitudFilas(); j++) {
+                if (tiempo->obtenerValor(i, j) > tiempo->obtenerValor(i, k) + tiempo->obtenerValor(k, j))
+                    tiempo->modificarElemento((tiempo->obtenerValor(i, k) + tiempo->obtenerValor(k, j)), i, j);
+            }
+        }
+    }
+    return tiempo;
+}
+
 void Grafo::mostrarMatrizPrecios() {
     for (int i = 0; i < precioMatriz->longitudFilas(); ++i) {
         for (int j = 0; j < precioMatriz->longitudColumnas(); ++j) {

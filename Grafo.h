@@ -24,7 +24,6 @@ class Grafo {
         //POST: Crea un objeto grafo asignando los atributos con los valores recibidos
         Grafo(Matriz<int>* precio, Matriz<float>* distancia, int elementos, Lista<string>* vertices);
 
-
         //DESCRIPCION: Destructor del grafo
         //PRE:
         //POST: Libera los recursos
@@ -55,8 +54,37 @@ class Grafo {
         //POST:
         float obtenerTiempo(string origen, string destino);
 
+        //DESCRIPCION: Muestra por pantalla la matriz de precios
+        //PRE: La matriz debe estar cargada
+        //POST: Muestra por pantalla la matriz de precios
         void mostrarMatrizPrecios();
+
+        //DESCRIPCION: Muestra por pantalla la matriz de tiempos
+        //PRE: La matriz debe estar cargada
+        //POST: Muestra por pantalla la matriz de tiempos
         void mostrarMatrizTiempos();
+
+        //DESCRIPCION: Muestra por pantalla la matriz los caminos minimos de precios
+        //PRE: La matriz debe estar cargada
+        //POST: Muestra por pantalla la matriz los caminos minimos de precios
+        void mostrarCaminosMinimosPrecios();
+
+        //DESCRIPCION: Muestra por pantalla la matriz los caminos minimos de tiempos
+        //PRE: La matriz debe estar cargada
+        //POST: Muestra por pantalla la matriz los caminos minimos de tiempos
+        void mostrarCaminosMinimosTiempos();
+
+    private:
+
+        //DESCRIPCION: Devuelve una matriz con los caminos minimos de precios
+        //PRE: La matriz de precios debe estar cargada
+        //POST: Devuelve una matriz con los caminos minimos de precios
+        Matriz<int>* caminoMinimoPrecio();
+
+        //DESCRIPCION: Devuelve una matriz con los caminos minimos de tiempos
+        //PRE: La matriz de tiempos debe estar cargada
+        //POST: Devuelve una matriz con los caminos minimos de tiempos
+        Matriz<float>* caminoMinimoTiempo();
 };
 
 #endif //TP5_TRIALGO_GRAFO_H

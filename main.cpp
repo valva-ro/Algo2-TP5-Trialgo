@@ -44,44 +44,22 @@ int main(int argc, char *argv[]) {
 }
 */
 
-#include "Menu.h"
 #include "Grafo.h"
-#include "Matriz.h"
-#include "Lista.h"
-
-const int AEROPUERTOS_TXT = 2;
-const int AEROPUERTO_Y_VUELOS_TXT = 3;
 
 int main(int argc, char *argv[]) {
 
     Grafo* pVuelos = new Grafo();
 
-
     pVuelos->insertarArista("LAX","PAN",22,11);
-    cout<<endl<<"YA INSERTE ENTRE LAX Y PAN"<<endl;
+    cout << boolalpha << "\n\tSE INSERTO LA ARISTA LAX -> PAN CON PRECIO 22 Y TIEMPO 11\n";
 
-    cout<<pVuelos->existeArista("LAX","PAN");
-    cout<<pVuelos->existeVertice("LAX");
-    cout<<pVuelos->existeVertice("PAN");
-    cout<<endl<<"Hasta aca todo bien si hay 3 unos"<<endl;
+    cout << "\n\tExiste vertice LAX: " << pVuelos->existeVertice("LAX");
+    cout << "\n\tExiste vertice PAN: " << pVuelos->existeVertice("PAN");
+    cout << "\n\tExiste arista LAX -> PAN: " << pVuelos->existeArista("LAX","PAN");
+    cout << "\n\tExiste arista PAN -> LAX: " << pVuelos->existeArista("PAN","LAX");
+    cout << "\n\tPrecio de LAX -> PAN: " << pVuelos->obtenerPrecio("LAX","PAN");
+    cout << "\n\tDistancia de LAX -> PAN: " << pVuelos->obtenerTiempo("LAX","PAN") << endl;
 
-    //ERROR
-  //  cout<<pVuelos->existeArista("PAN","LAX");
-
-
-
-
-    //cout<<pVuelos->existeArista("PAN","LAX");
-
-
-
-
-
-
-
-
-
-
-
+    delete pVuelos;
     return 0;
 }

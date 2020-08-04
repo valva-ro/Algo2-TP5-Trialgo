@@ -1,118 +1,111 @@
-//
-// Created by alexteper on 2/8/20.
-//
-
 #include "Grafo.h"
 
-const int INFINITO = 100000;
-const float INFINITOF = 10000.2;
+const int E_INFINITO = 100000;
+const float F_INFINITO = 100000.0;
 
 Grafo::Grafo() {
-    this->distanciaMatriz = new Matriz<float>(INFINITOF,0,0);
-    this->elementos= 0;
-    this->precioMatriz= new Matriz<int>(INFINITO,0,0);
-    this->vertices =new Lista<string>;
+    this->elementos = 0;
+    this->precioMatriz = new Matriz<int>;
+    this->tiempoMatriz = new Matriz<float>;
+    this->vertices = new Lista<string>;
+    precioMatriz->asignarInicializador(E_INFINITO);
+    tiempoMatriz->asignarInicializador(F_INFINITO);
 }
 
-Grafo::Grafo(Matriz<int> *precio, Matriz<float> *distancia, int elementos, Lista<string> *vertices) {
-    this->distanciaMatriz = distancia;
-    this->elementos= vertices->obtenerTam();
-    this->precioMatriz= precio;
-    this->vertices =vertices;
+Grafo::Grafo(Matriz<int> *precio, Matriz<float> *tiempo, int elementos, Lista<string> *vertices) {
+    this->tiempoMatriz = tiempo;
+    this->elementos = vertices->obtenerTam();
+    this->precioMatriz = precio;
+    this->vertices = vertices;
 }
 
 Grafo::~Grafo() {
-
+    delete precioMatriz;
+    delete tiempoMatriz;
+    delete vertices;
 }
 
 bool Grafo::existeArista(string origen, string destino) {
-    bool existe = true;
-    if ((existeVertice(origen)) && (existeVertice(destino))) {
-        int posicionOrigen =   vertices->obtenerPosicion(origen);
-        int posicionDestino =  vertices->obtenerPosicion(destino);
-        if ((distanciaMatriz->obtenerValor(posicionOrigen,posicionDestino)>INFINITO) && (precioMatriz->obtenerValor(posicionOrigen,posicionDestino)>INFINITO))
-            existe = false;
+    bool existe = false;
+    if (existeVertice(origen) && existeVertice(destino)) {
+        int posicionOrigen = vertices->obtenerPosicion(origen);
+        int posicionDestino = vertices->obtenerPosicion(destino);
+        if (tiempoMatriz->obtenerValor(posicionOrigen, posicionDestino < E_INFINITO) &&
+            precioMatriz->obtenerValor(posicionOrigen, posicionDestino < F_INFINITO))
+            existe = true;
     }
-    else
-        existe = false;
-
     return existe;
 }
 
 bool Grafo::existeVertice(string vertice) {
-    bool exsiste;
-    if (vertices->obtenerPosicion(vertice) != -1) // obtenerPosicion devuelve un -1 si no exsiste ese elemento en la lista
-        exsiste = true;
-    else
-        exsiste= false;
-
-    return  exsiste;
+    bool existe = false;
+    if (vertices->obtenerPosicion(vertice) != -1)
+        existe = true;
+    return  existe;
 }
 
-float Grafo::obtenerDistancia(string origen, string destino) {
-    float distancia= INFINITO;
-    if (existeArista(origen,destino)){
-        distancia= distanciaMatriz->obtenerValor(vertices->obtenerPosicion(origen),vertices->obtenerPosicion(destino));
-    }
-    return  distancia;
+float Grafo::obtenerTiempo(string origen, string destino) {
+    float tiempo = F_INFINITO;
+    if(existeArista(origen,destino))
+        tiempo = tiempoMatriz->obtenerValor(vertices->obtenerPosicion(origen),vertices->obtenerPosicion(destino));
+    return tiempo;
 }
 
 int Grafo::obtenerPrecio(string origen, string destino) {
-    int precio = INFINITO;
-    if(existeArista(origen,destino)){
-        precio= precioMatriz->obtenerValor(vertices->obtenerPosicion(origen),vertices->obtenerPosicion(destino));
-    }
+    int precio = E_INFINITO;
+    if(existeArista(origen,destino))
+        precio = precioMatriz->obtenerValor(vertices->obtenerPosicion(origen),vertices->obtenerPosicion(destino));
     return precio;
 
 }
 
-void Grafo::insertarArista(string origen, string destino, int precio, float distancia) {
-  //  int posicionOrigen = vertices->obtenerPosicion(origen);
-   // int posicionDestino = vertices->obtenerPosicion(destino);
+void Grafo::insertarArista(string origen, string destino, int precio, float tiempo) {
     int posicionDestino;
     int posicionOrigen;
 
-    if(!existeArista(origen,destino)){
-        if(existeVertice(origen)&&existeVertice(destino)) { //si exsisten los dos vertices exsiste una fila columna en las matrices por lo que solo modifico el dato
+    if(!existeArista(origen,destino)) {
+
+        if(existeVertice(origen) && existeVertice(destino)) {
             posicionOrigen= vertices->obtenerPosicion(origen);
             posicionDestino = vertices->obtenerPosicion(destino);
-            precioMatriz->modificarElemento(precio,posicionOrigen,posicionDestino);
-            distanciaMatriz->modificarElemento(distancia,posicionOrigen,posicionDestino);
-            cout<<endl<<"Exsistian ambos vertices"<<endl;
-        }else if(existeVertice(origen)){ //si solo exsiste el origen
-            precioMatriz->agregarFilasColumnas(1,1); //redimensiono para agregar el destino
-            distanciaMatriz->agregarFilasColumnas(1,1);
-            vertices->insertar(destino); //agrego el dato nuevo a la lista de vertices
-            posicionOrigen= vertices->obtenerPosicion(origen);
-            posicionDestino = vertices->obtenerPosicion(destino);
-            precioMatriz->modificarElemento(precio,posicionOrigen,posicionDestino); //con la matriz ya armada correcta modifico el precio.
-            distanciaMatriz->modificarElemento(distancia,posicionOrigen,posicionDestino);
-            elementos ++;
-            cout<<endl<<"Exsistian origen vertices"<<endl;
-        }else if (existeVertice(destino)){
+            precioMatriz->modificarElemento(precio, posicionOrigen, posicionDestino);
+            tiempoMatriz->modificarElemento(tiempo, posicionOrigen, posicionDestino);
+        }
+
+        else if(existeVertice(origen)) {
             precioMatriz->agregarFilasColumnas(1,1);
-            distanciaMatriz->agregarFilasColumnas(1,1);
+            tiempoMatriz->agregarFilasColumnas(1,1);
+            vertices->insertar(destino);
+            posicionOrigen= vertices->obtenerPosicion(origen);
+            posicionDestino = vertices->obtenerPosicion(destino);
+            precioMatriz->modificarElemento(precio, posicionOrigen, posicionDestino);
+            tiempoMatriz->modificarElemento(tiempo, posicionOrigen, posicionDestino);
+            elementos ++;
+        }
+
+        else if (existeVertice(destino)) {
+            precioMatriz->agregarFilasColumnas(1,1);
+            tiempoMatriz->agregarFilasColumnas(1,1);
             vertices->insertar(origen);
             posicionOrigen= vertices->obtenerPosicion(origen);
             posicionDestino = vertices->obtenerPosicion(destino);
-            precioMatriz->modificarElemento(precio,posicionOrigen,posicionDestino);
-            distanciaMatriz->modificarElemento(distancia,posicionOrigen,posicionDestino);
+            precioMatriz->modificarElemento(precio, posicionOrigen, posicionDestino);
+            tiempoMatriz->modificarElemento(tiempo, posicionOrigen, posicionDestino);
             elementos ++;
-            cout<<endl<<"Exsistian destino vertices"<<endl;
-        }else  { //no exsiste ni el origen ni el destino
-            precioMatriz->agregarFilasColumnas(2,2); //tengo que agregar una fila/columna para origen y una para destino
-            distanciaMatriz->agregarFilasColumnas(2,2);
+        }
+
+        else {
+            precioMatriz->agregarFilasColumnas(2,2);
+            tiempoMatriz->agregarFilasColumnas(2,2);
             vertices->insertar(origen);
             vertices->insertar(destino);
             posicionOrigen= vertices->obtenerPosicion(origen);
             posicionDestino = vertices->obtenerPosicion(destino);
-            elementos = elementos+2;
-            precioMatriz->modificarElemento(precio,posicionOrigen,posicionDestino);
-            distanciaMatriz->modificarElemento(distancia,posicionOrigen,posicionDestino);
-            cout<<endl<<"No Exsistian vertices"<<endl;
+            precioMatriz->modificarElemento(precio, posicionOrigen, posicionDestino);
+            tiempoMatriz->modificarElemento(tiempo, posicionOrigen, posicionDestino);
+            elementos += 2;
         }
-
-        cout<<"\n\t Arista conectada correctamente\n";
-    }else
-        cout<<"\n\t Ya exsiste una arista que los une \n";
+    }
+    else
+        cout<<"\n\tYa existe una ruta que conecta " << origen << " con " << destino;
 }

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "MenuAeropuerto.h"
+#include "Validaciones.h"
 
 using namespace std;
 
@@ -41,13 +42,18 @@ void MenuAeropuerto::selectorOpcion() {
 }
 
 void MenuAeropuerto::consultar() {
+    Validaciones validacion;
     string clave;
-    cout<<"\n\tIngrese la clave del aeropuerto para obtener los datos: ";
-    cin>>clave;
+    cout << "\n\tIngrese la clave del aeropuerto para obtener los datos: ";
+    cin >> clave;
 
-    if (!arbolAeropuertos->existe(clave)){
-        cout<<"\tEsa clave no exsiste en el programa, volviendo al menu aeropuertos\n";
-    }else {
+    validacion.longitudString(clave, 3);
+    validacion.convertirEnMayusculas(clave);
+
+    if (!arbolAeropuertos->existe(clave))
+        cout << "\tEsa clave no exsiste en el programa, volviendo al menu aeropuertos\n";
+
+    else {
         cout<<endl<<"\tEl aeropuerto que quiere mostrar es: \n";
         cout<<*arbolAeropuertos->obtenerValor(clave);
     }
@@ -55,53 +61,65 @@ void MenuAeropuerto::consultar() {
 }
 
 void MenuAeropuerto::agregar() {
-    string codigoIATA;
-    string nombre,  ciudad,  pais;
-    double superficie;
-    int cantidadTerminales,  destinosNacionales, destinosInternacionales;
+    Validaciones validacion;
+    string codigoIATA, nombre, ciudad, pais, superficieAux, cdadTerminalesAux, destNacionalesAux, destInternacionalesAux;
+    float superficie;
+    int cantidadTerminales, destinosNacionales, destinosInternacionales;
 
     cout<<"\tIngrese un codigo IATA para agregar: ";
     cin >> codigoIATA;
+    validacion.longitudString(codigoIATA, 3);
+    validacion.convertirEnMayusculas(codigoIATA);
 
-    if (arbolAeropuertos->existe(codigoIATA)){
+    if (arbolAeropuertos->existe(codigoIATA))
         cout<<"\tEse codigo ya se encuentra cargado, volviendo al menu aeropuerto\n";
-    }else {
+
+    else {
         cout<<"\tIngrese la informacion de un nuevo aeropuerto para agregar\n";
 
-        cout<<"\tNombre Aeropuerto: ";
+        cout << "\tNombre Aeropuerto: ";
         cin >> nombre;
-        cout<<"\tCiudad: ";
+        cout << "\tCiudad: ";
         cin >> ciudad;
-        cout<<"\tPais: ";
+        cout << "\tPais: ";
         cin >> pais;
-        cout<<"\tSuperficie: ";
-        cin >> superficie;
-        cout<<"\tCantidad de terminales: ";
-        cin >> cantidadTerminales;
-        cout<<"\tDestinos Nacionales: ";
-        cin >> destinosNacionales;
-        cout<<"\tDestinos interacionales: ";
-        cin >> destinosInternacionales;
+        cout << "\tSuperficie: ";
+        cin >> superficieAux;
+        superficie = validacion.esFlotante(superficieAux);
+        cout << "\tCantidad de terminales: ";
+        cin >> cdadTerminalesAux;
+        cantidadTerminales = validacion.esEntero(cdadTerminalesAux);
+        cout << "\tDestinos Nacionales: ";
+        cin >> destNacionalesAux;
+        destinosNacionales = validacion.esEntero(destNacionalesAux);
+        cout << "\tDestinos interacionales: ";
+        cin >> destInternacionalesAux;
+        destinosInternacionales = validacion.esEntero(destInternacionalesAux);
 
         Aeropuerto *pAeropuerto = new Aeropuerto(codigoIATA, nombre, ciudad, pais, superficie, cantidadTerminales, destinosNacionales, destinosInternacionales);
 
-        cout<<endl<<"\tMostrando el aeropuerto recien cargado\n";
-        cout<<*pAeropuerto;
+        cout << endl << "\tMostrando el aeropuerto recien cargado\n";
+        cout << *pAeropuerto;
 
         arbolAeropuertos->insertar(codigoIATA, pAeropuerto);
-        cout<<endl<<"\tAeropuerto insertado en el diccionario\n";
+        cout << endl << "\tAeropuerto insertado en el diccionario\n";
     }
 }
 
 void MenuAeropuerto::eliminar() {
+    Validaciones validacion;
     string clave;
     cout << "\n\tEntraste al eliminar de Menu Aeropuerto\n";
     cout<<"\tIngrese la clave del aeropuerto que desea borrar: ";
     cin >> clave;
 
-    if (!arbolAeropuertos->existe(clave)){
+    validacion.longitudString(clave, 3);
+    validacion.convertirEnMayusculas(clave);
+
+    if (!arbolAeropuertos->existe(clave))
         cout<<"\n\tEsa clave no se encuentra cargada, volviendo al menu aeropuertos\n";
-    }else {
+
+    else {
         arbolAeropuertos->borrarClave(clave);
         cout<<endl<<"\tClave borrada\n";
     }

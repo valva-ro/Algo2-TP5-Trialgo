@@ -3,25 +3,17 @@
 const int E_INFINITO = 999999;
 const float F_INFINITO = 999998.9;
 
-void Grafo::mostrarCaminosMinimosPrecios() {
+void Grafo::mostrarCaminosMinimosPrecios(string origen, string destino) {
     Matriz<int>* recorridosMin = caminoMinimoPrecio();
-    for (int i = 0; i < recorridosMin->longitudFilas(); ++i) {
-        for (int j = 0; j < recorridosMin->longitudColumnas(); ++j) {
-            cout << "\t" << recorridosMin->obtenerValor(i, j);
-        }
-        cout << "\n";
-    }
+    if(existeArista(origen,destino))
+        cout << "\tPrecio Minimo:\t" << recorridosMin->obtenerValor(vertices->obtenerPosicion(origen), vertices->obtenerPosicion(destino));
     delete recorridosMin;
 }
 
-void Grafo::mostrarCaminosMinimosTiempos() {
+void Grafo::mostrarCaminosMinimosTiempos(string origen, string destino) {
     Matriz<float>* recorridosMin = caminoMinimoTiempo();
-    for (int i = 0; i < recorridosMin->longitudFilas(); ++i) {
-        for (int j = 0; j < recorridosMin->longitudColumnas(); ++j) {
-            cout << "\t" << recorridosMin->obtenerValor(i, j);
-        }
-        cout << "\n";
-    }
+    if(existeArista(origen,destino))
+        cout << "\tTiempo Minimo:\t" << recorridosMin->obtenerValor(vertices->obtenerPosicion(origen), vertices->obtenerPosicion(destino));
     delete recorridosMin;
 }
 
@@ -37,7 +29,7 @@ Matriz<int>* Grafo::caminoMinimoPrecio() {
     for(int k = 0; k < precio->longitudFilas(); k++) {
         for (int i = 0; i < precio->longitudFilas(); i++) {
             for (int j = 0; j < precio->longitudFilas(); j++) {
-                if (precio->obtenerValor(i, j) > precio->obtenerValor(i, k) + precio->obtenerValor(k, j))
+                if (precio->obtenerValor(i, k) + precio->obtenerValor(k, j) < precio->obtenerValor(i, j))
                     precio->modificarElemento((precio->obtenerValor(i, k) + precio->obtenerValor(k, j)), i, j);
             }
         }
@@ -57,7 +49,7 @@ Matriz<float>* Grafo::caminoMinimoTiempo() {
     for(int k = 0; k < tiempo->longitudFilas(); k++) {
         for (int i = 0; i < tiempo->longitudFilas(); i++) {
             for (int j = 0; j < tiempo->longitudFilas(); j++) {
-                if (tiempo->obtenerValor(i, j) > tiempo->obtenerValor(i, k) + tiempo->obtenerValor(k, j))
+                if (tiempo->obtenerValor(i, k) + tiempo->obtenerValor(k, j) < tiempo->obtenerValor(i, j))
                     tiempo->modificarElemento((tiempo->obtenerValor(i, k) + tiempo->obtenerValor(k, j)), i, j);
             }
         }

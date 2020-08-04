@@ -67,14 +67,12 @@ class Grafo {
         //DESCRIPCION: Muestra por pantalla la matriz los caminos minimos de precios
         //PRE: La matriz debe estar cargada
         //POST: Muestra por pantalla la matriz los caminos minimos de precios
-        void mostrarCaminosMinimosPrecios();
+        void mostrarCaminosMinimosPrecios(string origen, string destino);
 
         //DESCRIPCION: Muestra por pantalla la matriz los caminos minimos de tiempos
         //PRE: La matriz debe estar cargada
         //POST: Muestra por pantalla la matriz los caminos minimos de tiempos
-        void mostrarCaminosMinimosTiempos();
-
-    private:
+        void mostrarCaminosMinimosTiempos(string origen, string destino);
 
         //DESCRIPCION: Devuelve una matriz con los caminos minimos de precios
         //PRE: La matriz de precios debe estar cargada

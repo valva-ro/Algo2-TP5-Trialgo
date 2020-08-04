@@ -86,12 +86,7 @@ void MenuVuelo::menorCosto() {
     validacion.convertirEnMayusculas(destino);
 
     mostrarDatosAeropuerto(origen, destino);
-
-    //TODO: mostrar el camino con menor costo desde origen hasta destino (a traves de la clase vuelos)
-    //      por ahora muestro las matrices con los caminos minimos
-
-    cout << "\n\tMostrando matriz de costos\n";
-    vuelos->mostrarCaminosMinimosPrecios();
+    vuelos->mostrarCaminosMinimosPrecios(origen, destino);
 }
 
 void MenuVuelo::menorTiempo() {
@@ -110,12 +105,7 @@ void MenuVuelo::menorTiempo() {
     validacion.convertirEnMayusculas(destino);
 
     mostrarDatosAeropuerto(origen, destino);
-
-    //TODO: mostrar el camino con menor duracion desde origen hasta destino (a traves de la clase vuelos)
-    //      por ahora muestro las matrices con los caminos minimos
-
-    cout << "\n\tMostrando matriz de tiempos\n";
-    vuelos->mostrarCaminosMinimosTiempos();
+    vuelos->mostrarCaminosMinimosTiempos(origen, destino);
 }
 
 void MenuVuelo::liberarRecursos() {

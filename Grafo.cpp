@@ -1,33 +1,37 @@
 #include "Grafo.h"
-const int INFINITO = 999999;
+
+const int E_INFINITO = 100000;
+const float F_INFINITO = 100000.0;
 
 Grafo::Grafo() {
-    this->elementos= 0;
-    this->precioMatriz= new Matriz<int>;
-    this->distanciaMatriz = new Matriz<float>;
+    this->elementos = 0;
+    this->precioMatriz = new Matriz<int>;
+    this->tiempoMatriz = new Matriz<float>;
     this->vertices = new Lista<string>;
-    precioMatriz->asignarInicializador(INFINITO);
-    distanciaMatriz->asignarInicializador(INFINITO);
+    precioMatriz->asignarInicializador(E_INFINITO);
+    tiempoMatriz->asignarInicializador(F_INFINITO);
 }
 
-Grafo::Grafo(Matriz<int> *precio, Matriz<float> *distancia, int elementos, Lista<string> *vertices) {
-    this->distanciaMatriz = distancia;
+Grafo::Grafo(Matriz<int> *precio, Matriz<float> *tiempo, int elementos, Lista<string> *vertices) {
+    this->tiempoMatriz = tiempo;
     this->elementos = vertices->obtenerTam();
     this->precioMatriz = precio;
     this->vertices = vertices;
 }
 
 Grafo::~Grafo() {
-    delete distanciaMatriz;
     delete precioMatriz;
+    delete tiempoMatriz;
     delete vertices;
 }
 
 bool Grafo::existeArista(string origen, string destino) {
     bool existe = false;
-    if (existeVertice(origen) && existeVertice(destino)){
-        if ((distanciaMatriz->obtenerValor(vertices->obtenerPosicion(origen),vertices->obtenerPosicion(destino)) < INFINITO) &&
-            (precioMatriz->obtenerValor(vertices->obtenerPosicion(origen),vertices->obtenerPosicion(destino)) < INFINITO))
+    if (existeVertice(origen) && existeVertice(destino)) {
+        int posicionOrigen = vertices->obtenerPosicion(origen);
+        int posicionDestino = vertices->obtenerPosicion(destino);
+        if (tiempoMatriz->obtenerValor(posicionOrigen, posicionDestino < E_INFINITO) &&
+            precioMatriz->obtenerValor(posicionOrigen, posicionDestino < F_INFINITO))
             existe = true;
     }
     return existe;
@@ -37,89 +41,71 @@ bool Grafo::existeVertice(string vertice) {
     bool existe = false;
     if (vertices->obtenerPosicion(vertice) != -1)
         existe = true;
-    return existe;
+    return  existe;
 }
 
-float Grafo::obtenerDistancia(string origen, string destino) {
-    float distancia = INFINITO;
-    if (existeArista(origen, destino))
-        distancia= distanciaMatriz->obtenerValor(vertices->obtenerPosicion(origen),vertices->obtenerPosicion(destino));
-
-    return  distancia;
+float Grafo::obtenerTiempo(string origen, string destino) {
+    float tiempo = F_INFINITO;
+    if(existeArista(origen,destino))
+        tiempo = tiempoMatriz->obtenerValor(vertices->obtenerPosicion(origen),vertices->obtenerPosicion(destino));
+    return tiempo;
 }
 
 int Grafo::obtenerPrecio(string origen, string destino) {
-    int precio = INFINITO;
-    if (existeArista(origen, destino))
+    int precio = E_INFINITO;
+    if(existeArista(origen,destino))
         precio = precioMatriz->obtenerValor(vertices->obtenerPosicion(origen),vertices->obtenerPosicion(destino));
-
     return precio;
+
 }
 
-void Grafo::insertarArista(string origen, string destino, int precio, float distancia) {
+void Grafo::insertarArista(string origen, string destino, int precio, float tiempo) {
+    int posicionDestino;
+    int posicionOrigen;
 
-    if(!existeArista(origen,destino)){
-        int posicionOrigen;
-        int posicionDestino;
-        if(existeVertice(origen)&&existeVertice(destino)) {
-            posicionOrigen = vertices->obtenerPosicion(origen);
+    if(!existeArista(origen,destino)) {
+
+        if(existeVertice(origen) && existeVertice(destino)) {
+            posicionOrigen= vertices->obtenerPosicion(origen);
             posicionDestino = vertices->obtenerPosicion(destino);
             precioMatriz->modificarElemento(precio, posicionOrigen, posicionDestino);
-            distanciaMatriz->modificarElemento(distancia, posicionOrigen, posicionDestino);
+            tiempoMatriz->modificarElemento(tiempo, posicionOrigen, posicionDestino);
         }
 
-        else if(existeVertice(origen)){
+        else if(existeVertice(origen)) {
             precioMatriz->agregarFilasColumnas(1,1);
-            distanciaMatriz->agregarFilasColumnas(1,1);
+            tiempoMatriz->agregarFilasColumnas(1,1);
             vertices->insertar(destino);
-            posicionOrigen = vertices->obtenerPosicion(origen);
+            posicionOrigen= vertices->obtenerPosicion(origen);
             posicionDestino = vertices->obtenerPosicion(destino);
             precioMatriz->modificarElemento(precio, posicionOrigen, posicionDestino);
-            distanciaMatriz->modificarElemento(distancia, posicionOrigen, posicionDestino);
+            tiempoMatriz->modificarElemento(tiempo, posicionOrigen, posicionDestino);
             elementos ++;
         }
 
-        else if (existeVertice(destino)){
+        else if (existeVertice(destino)) {
             precioMatriz->agregarFilasColumnas(1,1);
-            distanciaMatriz->agregarFilasColumnas(1,1);
+            tiempoMatriz->agregarFilasColumnas(1,1);
             vertices->insertar(origen);
-            posicionOrigen = vertices->obtenerPosicion(origen);
+            posicionOrigen= vertices->obtenerPosicion(origen);
             posicionDestino = vertices->obtenerPosicion(destino);
             precioMatriz->modificarElemento(precio, posicionOrigen, posicionDestino);
-            distanciaMatriz->modificarElemento(distancia, posicionOrigen, posicionDestino);
+            tiempoMatriz->modificarElemento(tiempo, posicionOrigen, posicionDestino);
             elementos ++;
         }
 
-        else{
+        else {
             precioMatriz->agregarFilasColumnas(2,2);
-            distanciaMatriz->agregarFilasColumnas(2,2);
+            tiempoMatriz->agregarFilasColumnas(2,2);
             vertices->insertar(origen);
             vertices->insertar(destino);
-            posicionOrigen = vertices->obtenerPosicion(origen);
+            posicionOrigen= vertices->obtenerPosicion(origen);
             posicionDestino = vertices->obtenerPosicion(destino);
             precioMatriz->modificarElemento(precio, posicionOrigen, posicionDestino);
-            distanciaMatriz->modificarElemento(distancia, posicionOrigen, posicionDestino);
+            tiempoMatriz->modificarElemento(tiempo, posicionOrigen, posicionDestino);
             elementos += 2;
         }
     }
     else
-        cout<<"\n\tYa existe una arista que une " << origen << " y " << destino << "\n";
-}
-
-void Grafo:: mostrarMatrizPrecios() {
-    for (int i = 0; i < precioMatriz->longitudFilas(); ++i) {
-        for (int j = 0; j < precioMatriz->longitudColumnas(); ++j) {
-            cout << "\t" << precioMatriz->obtenerValor(i, j) << "\t";
-        }
-        cout << "\n";
-    }
-}
-
-void Grafo:: mostrarMatrizTiempos() {
-    for (int i = 0; i < distanciaMatriz->longitudFilas(); ++i) {
-        for (int j = 0; j < distanciaMatriz->longitudColumnas(); ++j) {
-            cout << "\t" << distanciaMatriz->obtenerValor(i, j) << "\t";
-        }
-        cout << "\n";
-    }
+        cout<<"\n\tYa existe una ruta que conecta " << origen << " con " << destino;
 }

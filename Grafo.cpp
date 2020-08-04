@@ -1,19 +1,15 @@
-//
-// Created by alexteper on 2/8/20.
-//
-
 #include "Grafo.h"
 
-const int INFINITO = 100000;
-const float INFINITOF = 100000.0;
+const int E_INFINITO = 100000;
+const float F_INFINITO = 100000.0;
 
 Grafo::Grafo() {
     this->elementos = 0;
     this->precioMatriz = new Matriz<int>;
     this->tiempoMatriz = new Matriz<float>;
     this->vertices = new Lista<string>;
-    precioMatriz->asignarInicializador(INFINITO);
-    tiempoMatriz->asignarInicializador(INFINITOF);
+    precioMatriz->asignarInicializador(E_INFINITO);
+    tiempoMatriz->asignarInicializador(F_INFINITO);
 }
 
 Grafo::Grafo(Matriz<int> *precio, Matriz<float> *tiempo, int elementos, Lista<string> *vertices) {
@@ -34,8 +30,8 @@ bool Grafo::existeArista(string origen, string destino) {
     if (existeVertice(origen) && existeVertice(destino)) {
         int posicionOrigen = vertices->obtenerPosicion(origen);
         int posicionDestino = vertices->obtenerPosicion(destino);
-        if (tiempoMatriz->obtenerValor(posicionOrigen, posicionDestino < INFINITO) &&
-            precioMatriz->obtenerValor(posicionOrigen, posicionDestino < INFINITOF))
+        if (tiempoMatriz->obtenerValor(posicionOrigen, posicionDestino < E_INFINITO) &&
+            precioMatriz->obtenerValor(posicionOrigen, posicionDestino < F_INFINITO))
             existe = true;
     }
     return existe;
@@ -49,14 +45,14 @@ bool Grafo::existeVertice(string vertice) {
 }
 
 float Grafo::obtenerTiempo(string origen, string destino) {
-    float tiempo = INFINITOF;
+    float tiempo = F_INFINITO;
     if(existeArista(origen,destino))
         tiempo = tiempoMatriz->obtenerValor(vertices->obtenerPosicion(origen),vertices->obtenerPosicion(destino));
     return tiempo;
 }
 
 int Grafo::obtenerPrecio(string origen, string destino) {
-    int precio = INFINITO;
+    int precio = E_INFINITO;
     if(existeArista(origen,destino))
         precio = precioMatriz->obtenerValor(vertices->obtenerPosicion(origen),vertices->obtenerPosicion(destino));
     return precio;
@@ -69,20 +65,20 @@ void Grafo::insertarArista(string origen, string destino, int precio, float tiem
 
     if(!existeArista(origen,destino)) {
 
-        if(existeVertice(origen) && existeVertice(destino)) { //si existen los dos vertices existe una fila columna en las matrices por lo que solo modifico el dato
+        if(existeVertice(origen) && existeVertice(destino)) {
             posicionOrigen= vertices->obtenerPosicion(origen);
             posicionDestino = vertices->obtenerPosicion(destino);
             precioMatriz->modificarElemento(precio, posicionOrigen, posicionDestino);
             tiempoMatriz->modificarElemento(tiempo, posicionOrigen, posicionDestino);
         }
 
-        else if(existeVertice(origen)) { //si solo existe el origen
-            precioMatriz->agregarFilasColumnas(1,1); //redimensiono para agregar el destino
+        else if(existeVertice(origen)) {
+            precioMatriz->agregarFilasColumnas(1,1);
             tiempoMatriz->agregarFilasColumnas(1,1);
-            vertices->insertar(destino); //agrego el dato nuevo a la lista de vertices
+            vertices->insertar(destino);
             posicionOrigen= vertices->obtenerPosicion(origen);
             posicionDestino = vertices->obtenerPosicion(destino);
-            precioMatriz->modificarElemento(precio, posicionOrigen, posicionDestino); //con la matriz ya armada correcta modifico el precio.
+            precioMatriz->modificarElemento(precio, posicionOrigen, posicionDestino);
             tiempoMatriz->modificarElemento(tiempo, posicionOrigen, posicionDestino);
             elementos ++;
         }
@@ -98,8 +94,8 @@ void Grafo::insertarArista(string origen, string destino, int precio, float tiem
             elementos ++;
         }
 
-        else { //no existe ni el origen ni el destino
-            precioMatriz->agregarFilasColumnas(2,2); //tengo que agregar una fila/columna para origen y una para destino
+        else {
+            precioMatriz->agregarFilasColumnas(2,2);
             tiempoMatriz->agregarFilasColumnas(2,2);
             vertices->insertar(origen);
             vertices->insertar(destino);
@@ -109,8 +105,7 @@ void Grafo::insertarArista(string origen, string destino, int precio, float tiem
             tiempoMatriz->modificarElemento(tiempo, posicionOrigen, posicionDestino);
             elementos += 2;
         }
-        cout<<"\n\tArista conectada correctamente\n";
     }
     else
-        cout<<"\n\tYa existe una arista que los une " << origen << " y " << destino;
+        cout<<"\n\tYa existe una ruta que conecta " << origen << " con " << destino;
 }

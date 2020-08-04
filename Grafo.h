@@ -61,7 +61,7 @@ public:
     //DESCRIPCION:
     //PRE:
     //POST:
-    float obtenerDistancia(string origen, string destino);
+    float obtenerTiempo(string origen, string destino);
 
 };
 

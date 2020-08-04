@@ -37,12 +37,12 @@ void MenuVuelo::selectorOpcion() {
 }
 
 void MenuVuelo::menorCosto() {
-    cout << "\n\tEntraste al menor costo de Menu vuelo\n";
+    cout << "\n\tMostrando matriz de costos\n";
     vuelos->mostrarMatrizPrecios();
 }
 
 void MenuVuelo::menorTiempo() {
-    cout << "\n\tEntraste al menor tiempo de Menu vuelo\n";
+    cout << "\n\tMostrando matriz de tiempos\n";
     vuelos->mostrarMatrizTiempos();
 }
 

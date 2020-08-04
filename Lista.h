@@ -64,7 +64,7 @@ template<class Dato>
 Lista<Dato>::~Lista()
 {
     while (!(this->listaVacia()))
-        this->eliminarDato(1);
+        this->eliminarDato(0);
 }
 
 template<class Dato>
@@ -96,7 +96,7 @@ Dato Lista<Dato>::obtenerDato(unsigned pos)
 {
     Nodo<Dato>* pAux = primero;
 
-    unsigned i = 1;
+    unsigned i = 0;
     while (i < pos && pAux->obtenerSiguiente())
     {
         pAux = pAux->obtenerSiguiente();
@@ -110,13 +110,13 @@ template<class Dato>
 void Lista<Dato>::eliminarDato(unsigned pos)
 {
     Nodo<Dato>* pAux = primero;
-    if (pos == 1 || !(primero->obtenerSiguiente()))
+    if (pos == 0 || !(primero->obtenerSiguiente()))
     {
         primero = pAux->obtenerSiguiente();
     }
     else
     {
-        unsigned i = 1;
+        unsigned i = 0;
         Nodo<Dato>* pAnt;
         while (i < pos && pAux->obtenerSiguiente())
         {
@@ -134,16 +134,16 @@ template<class Dato>
 unsigned Lista<Dato>::obtenerPosicion(Dato d)
 {
     bool estaEnLista  = false;
-    unsigned i = 1 ,posicion = -1 ;
+    unsigned i = 0 ,posicion = -1 ;
 
-    while( i <= this->tam && !estaEnLista)
+    while( i < tam && !estaEnLista)
     {
         Dato datoLista = this->obtenerDato(i);
 
         if(datoLista == d)
         {
             estaEnLista = true;
-            posicion = i;
+            posicion = i  ;
         }
 
         i++;

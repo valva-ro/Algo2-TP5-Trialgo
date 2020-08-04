@@ -2,7 +2,7 @@
 #define LISTA_H
 
 //Include del paquete Nodo
-#include"Nodo.h"
+#include "Nodo.h"
 
 template<class Dato>
 class Lista
@@ -37,19 +37,19 @@ private:
 
     // PRE: - lista creada y no vacia
     // POST: devuelve el dato que esta en la posicion pos
-    Dato getDato(unsigned pos);
+    Dato obtenerDato(unsigned pos);
 
     //PRE:- Lista creada y no vacia
     //POST: Devuelve la posicion de un objeto , de no existir devuelve -1
-    unsigned getPosicion(Dato d);
+    unsigned obtenerPosicion(Dato d);
 
     // PRE: - lista creada y no vacia
     // POST: libera el nodo que esta en la posici�n pos
-    void delDato(unsigned pos);
+    void eliminarDato(unsigned pos);
 
     // PRE: Lista creada
     // POST: Devuelve tam (cantidad de nodos de la lista)
-    unsigned getTam();
+    unsigned obtenerTam();
 };
 
 
@@ -64,7 +64,7 @@ template<class Dato>
 Lista<Dato>::~Lista()
 {
     while (!(this->listaVacia()))
-        this->delDato(1);
+        this->eliminarDato(1);
 }
 
 template<class Dato>
@@ -76,69 +76,69 @@ bool Lista<Dato>::listaVacia()
 template<class Dato>
 void Lista<Dato>::insertar(Dato d)
  {
-    Nodo<Dato>* pnodo = new Nodo<Dato>(d);
-    Nodo<Dato>* paux = primero;
+    Nodo<Dato>* pNodo = new Nodo<Dato>(d);
+    Nodo<Dato>* pAux = primero;
     if (this->listaVacia()){
-        primero = pnodo;
+        primero = pNodo;
     }
     else{
-        while (paux->obtenerSiguiente() != 0){
-            paux = paux->obtenerSiguiente();
+        while (pAux->obtenerSiguiente() != 0){
+            pAux = pAux->obtenerSiguiente();
         }
-        paux->asignarSiguiente(pnodo);
- }
- tam++;
+        pAux->asignarSiguiente(pNodo);
+    }
+    tam++;
 }
 
 
 template<class Dato>
-Dato Lista<Dato>::getDato(unsigned pos)
+Dato Lista<Dato>::obtenerDato(unsigned pos)
 {
-    Nodo<Dato>* paux = primero;
+    Nodo<Dato>* pAux = primero;
 
     unsigned i = 1;
-    while (i < pos && paux->obtenerSiguiente())
+    while (i < pos && pAux->obtenerSiguiente())
     {
-        paux = paux->obtenerSiguiente();
+        pAux = pAux->obtenerSiguiente();
         i++;
     }
 
-    return paux->obtenerDato();
+    return pAux->obtenerDato();
 }
 
 template<class Dato>
-void Lista<Dato>::delDato(unsigned pos)
+void Lista<Dato>::eliminarDato(unsigned pos)
 {
-    Nodo<Dato>* paux = primero;
+    Nodo<Dato>* pAux = primero;
     if (pos == 1 || !(primero->obtenerSiguiente()))
     {
-        primero = paux->obtenerSiguiente();
+        primero = pAux->obtenerSiguiente();
     }
     else
     {
         unsigned i = 1;
-        Nodo<Dato>* pant;
-        while (i < pos && paux->obtenerSiguiente())
+        Nodo<Dato>* pAnt;
+        while (i < pos && pAux->obtenerSiguiente())
         {
-            pant = paux;
-            paux = paux->obtenerSiguiente();
+            pAnt = pAux;
+            pAux = pAux->obtenerSiguiente();
             i++;
         }
-        pant->asignarSiguiente(paux->obtenerSiguiente());
+        pAnt->asignarSiguiente(pAux->obtenerSiguiente());
     }
-    delete paux;
+    delete pAux;
     tam--;
 }
 
 template<class Dato>
-unsigned Lista<Dato>::getPosicion(Dato d)
+unsigned Lista<Dato>::obtenerPosicion(Dato d)
 {
     bool estaEnLista  = false;
-    unsigned i = 1 ,posicion ;
+    unsigned i = 1 ,posicion = -1 ;
 
-    while( i <= this->getTam() || !estaEnLista)
+    while( i <= this->tam && !estaEnLista)
     {
-        Dato datoLista = this->getDato(i);
+        Dato datoLista = this->obtenerDato(i);
 
         if(datoLista == d)
         {
@@ -148,16 +148,11 @@ unsigned Lista<Dato>::getPosicion(Dato d)
 
         i++;
     }
-
-    if(!estaEnLista)
-        posicion = -1;
-
-
     return posicion;
 }
 
 template<class Dato>
-unsigned Lista<Dato>::getTam()
+unsigned Lista<Dato>::obtenerTam()
 {
     return tam;
 }

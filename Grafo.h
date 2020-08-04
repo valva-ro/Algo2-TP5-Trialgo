@@ -17,7 +17,7 @@
 
 #include <string>
 #include "Matriz.h"
-#include "ListaVal.h"
+#include "Lista.h"
 
 using namespace std;
 

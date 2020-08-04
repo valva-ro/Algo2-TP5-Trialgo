@@ -54,22 +54,32 @@ void Grafo:: mostrarMatrizTiempos() {
 void Grafo:: agregarArista(string origen, string destino, int precio, float tiempo) {
 
     if (!existeArista(origen, destino)) {
+
+        int posOrigen;
+        int posDestino;
+
         if (existeVertice(origen) && existeVertice(destino)) {
-            aristasPrecio->modificarElemento(precio, vertices->obtenerPosicion(origen), vertices->obtenerPosicion(destino));
-            aristasTiempo->modificarElemento(tiempo, vertices->obtenerPosicion(origen), vertices->obtenerPosicion(destino));
+            posOrigen = vertices->obtenerPosicion(origen);
+            posDestino = vertices->obtenerPosicion(destino);
+            aristasPrecio->modificarElemento(precio, posOrigen, posDestino);
+            aristasTiempo->modificarElemento(tiempo, posOrigen, posDestino);
         }
         else if (existeVertice(origen)) {
             aristasPrecio->agregarFilasColumnas(ENT_INFINITO, elementos + 1, elementos + 1);
             aristasTiempo->agregarFilasColumnas(FLO_INFINITO, elementos + 1, elementos + 1);
             vertices->agregarAlFinal(destino);
-            aristasPrecio->modificarElemento(precio, vertices->obtenerPosicion(origen), elementos);
-            aristasTiempo->modificarElemento(tiempo, vertices->obtenerPosicion(origen), elementos);
+            posOrigen = vertices->obtenerPosicion(origen);
+            posDestino = vertices->obtenerPosicion(destino);
+            aristasPrecio->modificarElemento(precio, posOrigen, posDestino);
+            aristasTiempo->modificarElemento(tiempo, posOrigen, posDestino);
             elementos += 1;
         }
         else if(existeVertice(destino)) {
             aristasPrecio->agregarFilasColumnas(ENT_INFINITO, elementos + 1, elementos + 1);
             aristasTiempo->agregarFilasColumnas(FLO_INFINITO, elementos + 1, elementos + 1);
             vertices->agregarAlFinal(origen);
+            posOrigen = vertices->obtenerPosicion(origen);
+            posDestino = vertices->obtenerPosicion(destino);
             aristasPrecio->modificarElemento(precio, elementos, vertices->obtenerPosicion(destino));
             aristasTiempo->modificarElemento(tiempo, elementos, vertices->obtenerPosicion(destino));
             elementos += 1;
@@ -79,9 +89,11 @@ void Grafo:: agregarArista(string origen, string destino, int precio, float tiem
             aristasTiempo->agregarFilasColumnas(FLO_INFINITO, elementos + 2, elementos + 2);
             vertices->agregarAlFinal(origen);
             vertices->agregarAlFinal(destino);
+            posOrigen = vertices->obtenerPosicion(origen);
+            posDestino = vertices->obtenerPosicion(destino);
+            aristasPrecio->modificarElemento(precio, posOrigen, posDestino);
+            aristasTiempo->modificarElemento(tiempo, posOrigen, posDestino);
             elementos += 2;
-            aristasPrecio->modificarElemento(precio, vertices->obtenerPosicion(origen), vertices->obtenerPosicion(destino));
-            aristasTiempo->modificarElemento(tiempo, vertices->obtenerPosicion(origen), vertices->obtenerPosicion(destino));
         }
         cout << "\t\tVuelo conectando " << origen << " y " << destino << " con precio " << precio << " y duracion "
              << tiempo <<" agregado con exito!\n";

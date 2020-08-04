@@ -12,7 +12,7 @@
 class Grafo {
 private:
     Matriz<int>* precioMatriz;
-    Matriz<float>* distanciaMatriz;
+    Matriz<float>* tiempoMatriz;
     int elementos;
     Lista<string>* vertices;
 

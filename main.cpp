@@ -66,22 +66,9 @@ int main(int argc, char *argv[]) {
     cout<<endl<<"Hasta aca todo bien si hay 3 unos"<<endl;
 
     //ERROR
-  //  cout<<pVuelos->existeArista("PAN","LAX");
-
-
-
-
+   //  cout<<pVuelos->existeArista("PAN","LAX");
     //cout<<pVuelos->existeArista("PAN","LAX");
 
-
-
-
-
-
-
-
-
-
-
+    delete pVuelos;
     return 0;
 }

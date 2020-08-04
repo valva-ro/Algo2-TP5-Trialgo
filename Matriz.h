@@ -145,6 +145,10 @@ public:
     // POST: DEVUELVE EL VALOR QUE SE ENCUENTRA EN LA POSICION DE FILA Y COLUMNAS RECIBIDAS.
     Tipo obtenerValor(const unsigned posicionFila, const unsigned posicionColumna);
 
+    // PRE:  -
+    // POST: DEVUELVE EL INICIALIZADOR
+    Tipo obtenerInicializador();
+
     // DESTRUCTOR
 
     // PRE:  -
@@ -406,12 +410,18 @@ bool Matriz<Tipo>::matrizVacia(){
     return ( (filas == SIN_INCREMENTO) || (columnas == SIN_INCREMENTO) );
 }
 
-
 template < class Tipo >
 Tipo Matriz<Tipo>::obtenerValor(const unsigned posicionFila, const unsigned posicionColumna){
     if(!matrizVacia())
         return *( *( datos + posicionFila ) + posicionColumna );
     else
+        return inicializador;
+}
+
+
+template < class Tipo >
+Tipo Matriz<Tipo>::obtenerInicializador() {
+    if (inicializadorAsignado)
         return inicializador;
 }
 

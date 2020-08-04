@@ -136,7 +136,7 @@ unsigned Lista<Dato>::obtenerPosicion(Dato d)
     bool estaEnLista  = false;
     unsigned i = 0 ,posicion = -1 ;
 
-    while( i <= this->tam && !estaEnLista)
+    while( i < tam && !estaEnLista)
     {
         Dato datoLista = this->obtenerDato(i);
 

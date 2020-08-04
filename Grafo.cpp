@@ -57,9 +57,11 @@ int Grafo::obtenerPrecio(string origen, string destino) {
 void Grafo::insertarArista(string origen, string destino, int precio, float distancia) {
 
     if(!existeArista(origen,destino)){
+        int posicionOrigen;
+        int posicionDestino;
         if(existeVertice(origen)&&existeVertice(destino)) {
-            int posicionOrigen = vertices->obtenerPosicion(origen);
-            int posicionDestino = vertices->obtenerPosicion(destino);
+            posicionOrigen = vertices->obtenerPosicion(origen);
+            posicionDestino = vertices->obtenerPosicion(destino);
             precioMatriz->modificarElemento(precio, posicionOrigen, posicionDestino);
             distanciaMatriz->modificarElemento(distancia, posicionOrigen, posicionDestino);
         }
@@ -68,8 +70,8 @@ void Grafo::insertarArista(string origen, string destino, int precio, float dist
             precioMatriz->agregarFilasColumnas(1,1);
             distanciaMatriz->agregarFilasColumnas(1,1);
             vertices->insertar(destino);
-            int posicionOrigen = vertices->obtenerPosicion(origen);
-            int posicionDestino = vertices->obtenerPosicion(destino);
+            posicionOrigen = vertices->obtenerPosicion(origen);
+            posicionDestino = vertices->obtenerPosicion(destino);
             precioMatriz->modificarElemento(precio, posicionOrigen, posicionDestino);
             distanciaMatriz->modificarElemento(distancia, posicionOrigen, posicionDestino);
             elementos ++;
@@ -79,8 +81,8 @@ void Grafo::insertarArista(string origen, string destino, int precio, float dist
             precioMatriz->agregarFilasColumnas(1,1);
             distanciaMatriz->agregarFilasColumnas(1,1);
             vertices->insertar(origen);
-            int posicionOrigen = vertices->obtenerPosicion(origen);
-            int posicionDestino = vertices->obtenerPosicion(destino);
+            posicionOrigen = vertices->obtenerPosicion(origen);
+            posicionDestino = vertices->obtenerPosicion(destino);
             precioMatriz->modificarElemento(precio, posicionOrigen, posicionDestino);
             distanciaMatriz->modificarElemento(distancia, posicionOrigen, posicionDestino);
             elementos ++;
@@ -91,11 +93,11 @@ void Grafo::insertarArista(string origen, string destino, int precio, float dist
             distanciaMatriz->agregarFilasColumnas(2,2);
             vertices->insertar(origen);
             vertices->insertar(destino);
-            int posicionOrigen = vertices->obtenerPosicion(origen);
-            int posicionDestino = vertices->obtenerPosicion(destino);
-            elementos += 2;
+            posicionOrigen = vertices->obtenerPosicion(origen);
+            posicionDestino = vertices->obtenerPosicion(destino);
             precioMatriz->modificarElemento(precio, posicionOrigen, posicionDestino);
             distanciaMatriz->modificarElemento(distancia, posicionOrigen, posicionDestino);
+            elementos += 2;
         }
 
         cout<<"\n\t Arista conectada correctamente\n";

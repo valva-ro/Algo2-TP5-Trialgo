@@ -17,9 +17,12 @@
 */
 #include "Grafo.h"
 
-int main(int argc, char *argv[]) {
+int main() {
 
     Grafo vuelos;
-    vuelos.insertarArista("EZE", "BRC", 1,1.0);
+    vuelos.insertarArista("EZE", "BRC", 1,5.0);
+    cout << "\t\tDistancia entre EZE y BRC: " << vuelos.obtenerDistancia("EZE", "BRC") << endl;
+    cout << "\t\tPrecio entre EZE y BRC: " << vuelos.obtenerPrecio("EZE", "BRC") << endl;
+
     return 0;
 }

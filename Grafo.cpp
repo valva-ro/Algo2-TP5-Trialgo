@@ -2,9 +2,9 @@
 const int INFINITO = 999999;
 
 Grafo::Grafo() {
-    this->distanciaMatriz = new Matriz<float>(INFINITO,2,2);
     this->elementos= 0;
-    this->precioMatriz= new Matriz<int>(INFINITO,2,2);
+    this->precioMatriz= new Matriz<int>(INFINITO,0, 0);
+    this->distanciaMatriz = new Matriz<float>(INFINITO,0, 0);
     this->vertices = new Lista<string>;
 }
 

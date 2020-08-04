@@ -5,14 +5,14 @@ const float F_INFINITO = 999998.9;
 
 void Grafo::mostrarCaminosMinimosPrecios(string origen, string destino) {
     Matriz<int>* recorridosMin = caminoMinimoPrecio();
-    if(existeArista(origen,destino))
+    if(existeVertice(origen) && existeVertice(destino))
         cout << "\tPrecio Minimo:\t" << recorridosMin->obtenerValor(vertices->obtenerPosicion(origen), vertices->obtenerPosicion(destino));
     delete recorridosMin;
 }
 
 void Grafo::mostrarCaminosMinimosTiempos(string origen, string destino) {
     Matriz<float>* recorridosMin = caminoMinimoTiempo();
-    if(existeArista(origen,destino))
+    if(existeVertice(origen) && existeVertice(destino))
         cout << "\tTiempo Minimo:\t" << recorridosMin->obtenerValor(vertices->obtenerPosicion(origen), vertices->obtenerPosicion(destino));
     delete recorridosMin;
 }
@@ -20,8 +20,8 @@ void Grafo::mostrarCaminosMinimosTiempos(string origen, string destino) {
 Matriz<int>* Grafo::caminoMinimoPrecio() {
 
     Matriz<int>* precio = new Matriz<int>(precioMatriz->obtenerInicializador(), precioMatriz->longitudFilas(), precioMatriz->longitudColumnas());
-    for (int i = 0; i < precioMatriz->longitudFilas(); ++i) {
-        for (int j = 0; j < precioMatriz->longitudColumnas(); ++j) {
+    for (int i = 0; i < precioMatriz->longitudFilas(); i++) {
+        for (int j = 0; j < precioMatriz->longitudColumnas(); j++) {
             precio->modificarElemento(precioMatriz->obtenerValor(i,j), i, j);
         }
     }
@@ -40,8 +40,8 @@ Matriz<int>* Grafo::caminoMinimoPrecio() {
 Matriz<float>* Grafo::caminoMinimoTiempo() {
 
     Matriz<float>* tiempo = new Matriz<float>(tiempoMatriz->obtenerInicializador(), tiempoMatriz->longitudFilas(), tiempoMatriz->longitudColumnas());
-    for (int i = 0; i < tiempo->longitudFilas(); ++i) {
-        for (int j = 0; j < tiempo->longitudColumnas(); ++j) {
+    for (int i = 0; i < tiempo->longitudFilas(); i++) {
+        for (int j = 0; j < tiempo->longitudColumnas(); j++) {
             tiempo->modificarElemento(tiempoMatriz->obtenerValor(i,j), i, j);
         }
     }
@@ -58,8 +58,8 @@ Matriz<float>* Grafo::caminoMinimoTiempo() {
 }
 
 void Grafo::mostrarMatrizPrecios() {
-    for (int i = 0; i < precioMatriz->longitudFilas(); ++i) {
-        for (int j = 0; j < precioMatriz->longitudColumnas(); ++j) {
+    for (int i = 0; i < precioMatriz->longitudFilas(); i++) {
+        for (int j = 0; j < precioMatriz->longitudColumnas(); j++) {
             cout << "\t" << precioMatriz->obtenerValor(i, j);
         }
         cout << "\n";
@@ -67,8 +67,8 @@ void Grafo::mostrarMatrizPrecios() {
 }
 
 void Grafo::mostrarMatrizTiempos() {
-    for (int i = 0; i < tiempoMatriz->longitudFilas(); ++i) {
-        for (int j = 0; j < tiempoMatriz->longitudColumnas(); ++j) {
+    for (int i = 0; i < tiempoMatriz->longitudFilas(); i++) {
+        for (int j = 0; j < tiempoMatriz->longitudColumnas(); j++) {
             cout << "\t" << tiempoMatriz->obtenerValor(i, j);
         }
         cout << "\n";

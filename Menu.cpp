@@ -22,8 +22,7 @@ Menu::Menu(const string& rutaArchAeropuertos, const string& rutaArchVuelos) {
 
 Menu::~Menu() {
     menuAeropuerto.liberarRecursos();
-
-    //menuVuelo.liberarRecursos(); //implementar cuando tengamos el grafo
+    menuVuelo.liberarRecursos();
 }
 
 void Menu::mostrarOpciones() {

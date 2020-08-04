@@ -12,30 +12,29 @@ private:
 
     // Primer elemento de la lista
     Nodo<Dato>* primero;
-
     // Tamanio de la lista
     unsigned tam;
 
  public:
     // Constructor
-    // PRE: ninguna
+    // PRE: -
     // POST: construye una lista vacia
     Lista();
 
     // Destructor
-    // PRE: lista creada
+    // PRE: -
     // POST: Libera todos los recursos de la lista
      ~Lista();
 
-    // PRE: lista creada
+    // PRE: -
     // POST: devuelve verdadero si la lista es vacia
     bool listaVacia();
 
-    // PRE: lista creada
+    // PRE: -
     // POST: agrega un dato (dentro de un nodo) al final
     void insertar(Dato d);
 
-    // PRE: - lista creada y no vacia
+    // PRE: -
     // POST: devuelve el dato que esta en la posicion pos
     Dato obtenerDato(unsigned pos);
 
@@ -43,11 +42,11 @@ private:
     //POST: Devuelve la posicion de un objeto , de no existir devuelve -1
     unsigned obtenerPosicion(Dato d);
 
-    // PRE: - lista creada y no vacia
+    // PRE: -
     // POST: libera el nodo que esta en la posici�n pos
     void eliminarDato(unsigned pos);
 
-    // PRE: Lista creada
+    // PRE: -
     // POST: Devuelve tam (cantidad de nodos de la lista)
     unsigned obtenerTam();
 };

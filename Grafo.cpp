@@ -1,5 +1,5 @@
 #include "Grafo.h"
-const int INFINITO = 100000;
+const int INFINITO = 999999;
 
 Grafo::Grafo() {
     this->distanciaMatriz = new Matriz<float>(INFINITO,2,2);
@@ -99,15 +99,12 @@ void Grafo::insertarArista(string origen, string destino, int precio, float dist
             distanciaMatriz->modificarElemento(distancia, posicionOrigen, posicionDestino);
             elementos += 2;
         }
-
-        cout<<"\n\t Arista conectada correctamente\n";
     }
     else
-        cout<<"\n\t Ya existe una arista que los une \n";
+        cout<<"\n\tYa existe una arista que une " << origen << " y " << destino << "\n";
 }
 
 void Grafo:: mostrarMatrizPrecios() {
-    cout << "\t";
     for (int i = 0; i < precioMatriz->longitudFilas(); ++i) {
         for (int j = 0; j < precioMatriz->longitudColumnas(); ++j) {
             cout << "\t" << precioMatriz->obtenerValor(i, j) << "\t";
@@ -117,7 +114,6 @@ void Grafo:: mostrarMatrizPrecios() {
 }
 
 void Grafo:: mostrarMatrizTiempos() {
-    cout << "\t";
     for (int i = 0; i < distanciaMatriz->longitudFilas(); ++i) {
         for (int j = 0; j < distanciaMatriz->longitudColumnas(); ++j) {
             cout << "\t" << distanciaMatriz->obtenerValor(i, j) << "\t";

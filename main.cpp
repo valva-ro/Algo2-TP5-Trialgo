@@ -15,14 +15,27 @@
     - Tres argumentos -> los nombres de los archivos seran el segundo argumento para
                          los aeropuertos y el tercer argumento para los vuelos
 */
-#include "Grafo.h"
+#include "Menu.h"
+const int AEROPUERTOS_TXT = 2;
+const int AEROPUERTO_Y_VUELOS_TXT = 3;
 
-int main() {
+int main(int argc, char *argv[]) {
 
-    Grafo vuelos;
-    vuelos.insertarArista("EZE", "BRC", 1,5.0);
-    cout << "\t\tDistancia entre EZE y BRC: " << vuelos.obtenerDistancia("EZE", "BRC") << endl;
-    cout << "\t\tPrecio entre EZE y BRC: " << vuelos.obtenerPrecio("EZE", "BRC") << endl;
+    string archAeropuertos = "archivoAeropuertos.txt";
+    string archVuelos = "archivoVuelos.txt";
+
+    switch (argc) {
+        case AEROPUERTOS_TXT:
+            archAeropuertos = argv[1];
+            break;
+        case AEROPUERTO_Y_VUELOS_TXT:
+            archAeropuertos = argv[1];
+            archVuelos = argv[2];
+            break;
+    }
+
+    Menu menu(archAeropuertos,archVuelos);
+    menu.mostrarOpciones();
 
     return 0;
 }

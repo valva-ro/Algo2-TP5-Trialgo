@@ -411,6 +411,8 @@ template < class Tipo >
 Tipo Matriz<Tipo>::obtenerValor(const unsigned posicionFila, const unsigned posicionColumna){
     if(!matrizVacia())
         return *( *( datos + posicionFila ) + posicionColumna );
+    else
+        return inicializador;
 }
 
 //--------------------------------------------------DESTRUCTOR--------------------------------------------------//

@@ -22,7 +22,7 @@ public:
     //DESCRIPCION: Constructor sin parametros
     //PRE: -
     //POST: Crea un grafo vacio
-    Grafo();
+    //Grafo();
 
     //DESCRIPCION: Constructor con parametros
     //PRE:

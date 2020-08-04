@@ -5,12 +5,13 @@
 #include "Grafo.h"
 
 const int INFINITO = 100000;
+/*
 Grafo::Grafo() {
     this->distanciaMatriz = NULL;
     this->elementos= 0;
     this->precioMatriz= NULL;
     this->vertices =NULL;
-}
+}*/
 
 Grafo::Grafo(Matriz<int> *precio, Matriz<float> *distancia, int elementos, Lista<string> *vertices) {
     this->distanciaMatriz = distancia;
@@ -64,14 +65,19 @@ int Grafo::obtenerPrecio(string origen, string destino) {
 }
 
 void Grafo::insertarArista(string origen, string destino, int precio, float distancia) {
-    int posicionOrigen = vertices->obtenerPosicion(origen);
-    int posicionDestino = vertices->obtenerPosicion(destino);
+  //  int posicionOrigen = vertices->obtenerPosicion(origen);
+   // int posicionDestino = vertices->obtenerPosicion(destino);
+    int posicionDestino;
+    int posicionOrigen;
 
     if(!existeArista(origen,destino)){
         if(existeVertice(origen)&&existeVertice(destino)) { //si exsisten los dos vertices exsiste una fila columna en las matrices por lo que solo modifico el dato
+            posicionOrigen= vertices->obtenerPosicion(origen);
+            posicionDestino = vertices->obtenerPosicion(destino);
             precioMatriz->modificarElemento(precio,posicionOrigen,posicionDestino);
             distanciaMatriz->modificarElemento(distancia,posicionOrigen,posicionDestino);
         }else if(existeVertice(origen)){ //si solo exsiste el origen
+            posicionOrigen= vertices->obtenerPosicion(origen);
             precioMatriz->agregarFilasColumnas(1,1); //redimensiono para agregar el destino
             distanciaMatriz->agregarFilasColumnas(1,1);
             vertices->insertar(destino); //agrego el dato nuevo a la lista de vertices
@@ -79,6 +85,7 @@ void Grafo::insertarArista(string origen, string destino, int precio, float dist
             distanciaMatriz->modificarElemento(distancia,posicionOrigen,posicionDestino);
             elementos ++;
         }else if (existeVertice(destino)){
+            posicionDestino = vertices->obtenerPosicion(destino);
             precioMatriz->agregarFilasColumnas(1,1);
             distanciaMatriz->agregarFilasColumnas(1,1);
             vertices->insertar(origen);

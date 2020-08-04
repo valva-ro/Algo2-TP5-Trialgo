@@ -18,6 +18,7 @@ Menu::Menu(const string& rutaArchAeropuertos, const string& rutaArchVuelos) {
     Grafo* pVuelos = new Grafo();
     cargador.cargarDatos(pVuelos, rutaArchVuelos);
     this->menuVuelo.asignarGrafoVuelos(pVuelos);
+    this->menuVuelo.asignarArbolAeropuertos(pDiccionario);
 }
 
 Menu::~Menu() {

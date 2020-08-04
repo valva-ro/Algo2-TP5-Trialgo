@@ -2,10 +2,13 @@
 #define TP5_TRIALGO_MENUVUELO_H
 
 #include "Grafo.h"
+#include "Diccionario.h"
+#include "Aeropuerto.h"
 
 class MenuVuelo {
 private:
     Grafo* vuelos;
+    Diccionario<string, Aeropuerto*>* aeropuertos;
     char opcion;
 
 public:
@@ -14,10 +17,17 @@ public:
     //POST: Le asigna el puntero recibido al atributo por referencia
     void asignarGrafoVuelos(Grafo *&grafoVuelosOut);
 
+    //DESCRIPCION: Le asigna el puntero recibido al atributo por referencia
+    //PRE: -
+    //POST: Le asigna el puntero recibido al atributo por referencia
+    void asignarArbolAeropuertos(Diccionario<string, Aeropuerto*> *&arbolAeropuertosOut);
+
     //DESCRIPCION: Muestra las opciones del Menu
     //PRE: -
     //POST: Muestra las opciones del Menu y llama al metodo selectorOpcion()
     void mostrarOpciones();
+
+    void mostrarDatosAeropuerto(string origenIATA, string destinoIATA);
 
     //DESCRIPCION: Selector las opciones del Menu
     //PRE: -

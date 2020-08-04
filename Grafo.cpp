@@ -3,9 +3,11 @@ const int INFINITO = 999999;
 
 Grafo::Grafo() {
     this->elementos= 0;
-    this->precioMatriz= new Matriz<int>(INFINITO,0, 0);
-    this->distanciaMatriz = new Matriz<float>(INFINITO,0, 0);
+    this->precioMatriz= new Matriz<int>;
+    this->distanciaMatriz = new Matriz<float>;
     this->vertices = new Lista<string>;
+    precioMatriz->asignarInicializador(INFINITO);
+    distanciaMatriz->asignarInicializador(INFINITO);
 }
 
 Grafo::Grafo(Matriz<int> *precio, Matriz<float> *distancia, int elementos, Lista<string> *vertices) {

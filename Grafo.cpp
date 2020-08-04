@@ -28,7 +28,8 @@ bool Grafo::existeArista(string origen, string destino) {
     if (existeVertice(origen)&&existeVertice(destino)){
         if ((distanciaMatriz->obtenerValor(vertices->obtenerPosicion(origen),vertices->obtenerPosicion(destino))>INFINITO)&&(precioMatriz->obtenerValor(vertices->obtenerPosicion(origen),vertices->obtenerPosicion(destino))>INFINITO))
             exsiste = false;
-    }
+    }else
+        exsiste = false;
 
     return exsiste;
 }

@@ -54,6 +54,9 @@ class Grafo {
         //PRE:
         //POST:
         float obtenerTiempo(string origen, string destino);
+
+        void mostrarMatrizPrecios();
+        void mostrarMatrizTiempos();
 };
 
 #endif //TP5_TRIALGO_GRAFO_H

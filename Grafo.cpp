@@ -1,8 +1,25 @@
 #include "Grafo.h"
 
-const int E_INFINITO = 100000;
-const float F_INFINITO = 100000.0;
+const int E_INFINITO = 999999;
+const float F_INFINITO = 999998.9;
 
+void Grafo::mostrarMatrizPrecios() {
+    for (int i = 0; i < precioMatriz->longitudFilas(); ++i) {
+        for (int j = 0; j < precioMatriz->longitudColumnas(); ++j) {
+            cout << "\t" << precioMatriz->obtenerValor(i, j);
+        }
+        cout << "\n";
+    }
+}
+
+void Grafo::mostrarMatrizTiempos() {
+    for (int i = 0; i < tiempoMatriz->longitudFilas(); ++i) {
+        for (int j = 0; j < tiempoMatriz->longitudColumnas(); ++j) {
+            cout << "\t" << tiempoMatriz->obtenerValor(i, j);
+        }
+        cout << "\n";
+    }
+}
 Grafo::Grafo() {
     this->elementos = 0;
     this->precioMatriz = new Matriz<int>;

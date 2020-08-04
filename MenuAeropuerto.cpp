@@ -72,7 +72,7 @@ void MenuAeropuerto::agregar() {
     validacion.convertirEnMayusculas(codigoIATA);
 
     if (arbolAeropuertos->existe(codigoIATA))
-        cout<<"\tEse codigo ya se encuentra cargado, volviendo al menu aeropuerto\n";
+        cout<<"\n\tEse codigo ya se encuentra cargado, volviendo al menu aeropuerto\n";
 
     else {
         cout<<"\tIngrese la informacion de un nuevo aeropuerto para agregar\n";
@@ -83,18 +83,26 @@ void MenuAeropuerto::agregar() {
         cin >> ciudad;
         cout << "\tPais: ";
         cin >> pais;
+
         cout << "\tSuperficie: ";
         cin >> superficieAux;
         superficie = validacion.esFlotante(superficieAux);
+        validacion.esPositivo(superficie);
+
         cout << "\tCantidad de terminales: ";
         cin >> cdadTerminalesAux;
         cantidadTerminales = validacion.esEntero(cdadTerminalesAux);
+        validacion.esPositivo(cantidadTerminales);
+
         cout << "\tDestinos Nacionales: ";
         cin >> destNacionalesAux;
         destinosNacionales = validacion.esEntero(destNacionalesAux);
+        validacion.esPositivo(destinosNacionales);
+
         cout << "\tDestinos interacionales: ";
         cin >> destInternacionalesAux;
         destinosInternacionales = validacion.esEntero(destInternacionalesAux);
+        validacion.esPositivo(destinosInternacionales);
 
         Aeropuerto *pAeropuerto = new Aeropuerto(codigoIATA, nombre, ciudad, pais, superficie, cantidadTerminales, destinosNacionales, destinosInternacionales);
 

@@ -30,8 +30,7 @@ bool Grafo::existeArista(string origen, string destino) {
     if (existeVertice(origen) && existeVertice(destino)) {
         int posicionOrigen = vertices->obtenerPosicion(origen);
         int posicionDestino = vertices->obtenerPosicion(destino);
-        if (tiempoMatriz->obtenerValor(posicionOrigen, posicionDestino < E_INFINITO) &&
-            precioMatriz->obtenerValor(posicionOrigen, posicionDestino < F_INFINITO))
+        if ((tiempoMatriz->obtenerValor(posicionOrigen, posicionDestino) < F_INFINITO) && (precioMatriz->obtenerValor(posicionOrigen, posicionDestino) < E_INFINITO))
             existe = true;
     }
     return existe;
@@ -41,7 +40,7 @@ bool Grafo::existeVertice(string vertice) {
     bool existe = false;
     if (vertices->obtenerPosicion(vertice) != -1)
         existe = true;
-    return  existe;
+    return existe;
 }
 
 float Grafo::obtenerTiempo(string origen, string destino) {

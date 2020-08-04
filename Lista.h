@@ -12,30 +12,29 @@ private:
 
     // Primer elemento de la lista
     Nodo<Dato>* primero;
-
     // Tamanio de la lista
     unsigned tam;
 
  public:
     // Constructor
-    // PRE: ninguna
+    // PRE: -
     // POST: construye una lista vacia
     Lista();
 
     // Destructor
-    // PRE: lista creada
+    // PRE: -
     // POST: Libera todos los recursos de la lista
      ~Lista();
 
-    // PRE: lista creada
+    // PRE: -
     // POST: devuelve verdadero si la lista es vacia
     bool listaVacia();
 
-    // PRE: lista creada
+    // PRE: -
     // POST: agrega un dato (dentro de un nodo) al final
     void insertar(Dato d);
 
-    // PRE: - lista creada y no vacia
+    // PRE: -
     // POST: devuelve el dato que esta en la posicion pos
     Dato obtenerDato(unsigned pos);
 
@@ -43,11 +42,11 @@ private:
     //POST: Devuelve la posicion de un objeto , de no existir devuelve -1
     unsigned obtenerPosicion(Dato d);
 
-    // PRE: - lista creada y no vacia
+    // PRE: -
     // POST: libera el nodo que esta en la posici�n pos
     void eliminarDato(unsigned pos);
 
-    // PRE: Lista creada
+    // PRE: -
     // POST: Devuelve tam (cantidad de nodos de la lista)
     unsigned obtenerTam();
 };
@@ -64,7 +63,7 @@ template<class Dato>
 Lista<Dato>::~Lista()
 {
     while (!(this->listaVacia()))
-        this->eliminarDato(1);
+        this->eliminarDato(0);
 }
 
 template<class Dato>
@@ -96,7 +95,7 @@ Dato Lista<Dato>::obtenerDato(unsigned pos)
 {
     Nodo<Dato>* pAux = primero;
 
-    unsigned i = 1;
+    unsigned i = 0;
     while (i < pos && pAux->obtenerSiguiente())
     {
         pAux = pAux->obtenerSiguiente();
@@ -110,13 +109,13 @@ template<class Dato>
 void Lista<Dato>::eliminarDato(unsigned pos)
 {
     Nodo<Dato>* pAux = primero;
-    if (pos == 1 || !(primero->obtenerSiguiente()))
+    if (pos == 0 || !(primero->obtenerSiguiente()))
     {
         primero = pAux->obtenerSiguiente();
     }
     else
     {
-        unsigned i = 1;
+        unsigned i = 0;
         Nodo<Dato>* pAnt;
         while (i < pos && pAux->obtenerSiguiente())
         {
@@ -134,16 +133,16 @@ template<class Dato>
 unsigned Lista<Dato>::obtenerPosicion(Dato d)
 {
     bool estaEnLista  = false;
-    unsigned i = 1 ,posicion = -1 ;
+    unsigned i = 0 ,posicion = -1 ;
 
-    while( i <= this->tam && !estaEnLista)
+    while( i < tam && !estaEnLista)
     {
         Dato datoLista = this->obtenerDato(i);
 
         if(datoLista == d)
         {
             estaEnLista = true;
-            posicion = i;
+            posicion = i  ;
         }
 
         i++;

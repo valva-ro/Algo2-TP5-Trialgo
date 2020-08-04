@@ -105,3 +105,23 @@ void Grafo::insertarArista(string origen, string destino, int precio, float dist
     else
         cout<<"\n\t Ya existe una arista que los une \n";
 }
+
+void Grafo:: mostrarMatrizPrecios() {
+    cout << "\t";
+    for (int i = 0; i < precioMatriz->longitudFilas(); ++i) {
+        for (int j = 0; j < precioMatriz->longitudColumnas(); ++j) {
+            cout << "\t" << precioMatriz->obtenerValor(i, j) << "\t";
+        }
+        cout << "\n";
+    }
+}
+
+void Grafo:: mostrarMatrizTiempos() {
+    cout << "\t";
+    for (int i = 0; i < distanciaMatriz->longitudFilas(); ++i) {
+        for (int j = 0; j < distanciaMatriz->longitudColumnas(); ++j) {
+            cout << "\t" << distanciaMatriz->obtenerValor(i, j) << "\t";
+        }
+        cout << "\n";
+    }
+}

@@ -53,6 +53,9 @@ public:
     //PRE:
     //POST:
     float obtenerDistancia(string origen, string destino);
+
+    void mostrarMatrizPrecios();
+    void mostrarMatrizTiempos();
 };
 
 

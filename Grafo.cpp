@@ -65,9 +65,9 @@ void Grafo:: agregarArista(string origen, string destino, int precio, float tiem
             aristasTiempo->modificarElemento(tiempo, posOrigen, posDestino);
         }
         else if (existeVertice(origen)) {
-            aristasPrecio->agregarFilasColumnas(ENT_INFINITO, elementos + 1, elementos + 1);
-            aristasTiempo->agregarFilasColumnas(FLO_INFINITO, elementos + 1, elementos + 1);
-            vertices->agregarAlFinal(destino);
+            aristasPrecio->agregarFilasColumnas(elementos + 1, elementos + 1);
+            aristasTiempo->agregarFilasColumnas(elementos + 1, elementos + 1);
+            vertices->insertar(destino);
             posOrigen = vertices->obtenerPosicion(origen);
             posDestino = vertices->obtenerPosicion(destino);
             aristasPrecio->modificarElemento(precio, posOrigen, posDestino);
@@ -75,9 +75,9 @@ void Grafo:: agregarArista(string origen, string destino, int precio, float tiem
             elementos += 1;
         }
         else if(existeVertice(destino)) {
-            aristasPrecio->agregarFilasColumnas(ENT_INFINITO, elementos + 1, elementos + 1);
-            aristasTiempo->agregarFilasColumnas(FLO_INFINITO, elementos + 1, elementos + 1);
-            vertices->agregarAlFinal(origen);
+            aristasPrecio->agregarFilasColumnas(elementos + 1, elementos + 1);
+            aristasTiempo->agregarFilasColumnas(elementos + 1, elementos + 1);
+            vertices->insertar(origen);
             posOrigen = vertices->obtenerPosicion(origen);
             posDestino = vertices->obtenerPosicion(destino);
             aristasPrecio->modificarElemento(precio, elementos, vertices->obtenerPosicion(destino));
@@ -85,10 +85,10 @@ void Grafo:: agregarArista(string origen, string destino, int precio, float tiem
             elementos += 1;
         }
         else {
-            aristasPrecio->agregarFilasColumnas(ENT_INFINITO, elementos + 2, elementos + 2);
-            aristasTiempo->agregarFilasColumnas(FLO_INFINITO, elementos + 2, elementos + 2);
-            vertices->agregarAlFinal(origen);
-            vertices->agregarAlFinal(destino);
+            aristasPrecio->agregarFilasColumnas(elementos + 2, elementos + 2);
+            aristasTiempo->agregarFilasColumnas(elementos + 2, elementos + 2);
+            vertices->insertar(origen);
+            vertices->insertar(destino);
             posOrigen = vertices->obtenerPosicion(origen);
             posDestino = vertices->obtenerPosicion(destino);
             aristasPrecio->modificarElemento(precio, posOrigen, posDestino);
@@ -103,8 +103,8 @@ void Grafo:: agregarArista(string origen, string destino, int precio, float tiem
 }
 bool Grafo:: existeVertice(string vuelo) {
     bool existe = false;
-    if (vertices->obtenerCantidadElementos() > 0) {
-        for (int i = 1; i <= vertices->obtenerCantidadElementos(); ++i) {
+    if (vertices->obtenerTam() > 0) {
+        for (int i = 1; i <= vertices->obtenerTam(); ++i) {
             if (vertices->obtenerDato(i) == vuelo)
                 existe = true;
         }

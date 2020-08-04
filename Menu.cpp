@@ -13,7 +13,12 @@ Menu::Menu(const string& rutaArchAeropuertos, const string& rutaArchVuelos) {
     cargador.cargarDatos(pDiccionario, rutaArchAeropuertos);
     this->menuAeropuerto.asignarArbolAeropuertos(pDiccionario);
 
+    /*
     //hacer esto mismo pero con el grafo cuando este lista la clase.
+    Grafo* pVuelos = new Grafo();
+    cargador.cargarDatos(pVuelos,rutaArchVuelos);
+    this->menuVuelo.asignarGragoVuelos(pVuelos);
+  */
 }
 
 Menu::~Menu() {

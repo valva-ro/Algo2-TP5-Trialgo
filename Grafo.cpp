@@ -5,13 +5,14 @@
 #include "Grafo.h"
 
 const int INFINITO = 100000;
-/*
+const float INFINITOF = 10000.2;
+
 Grafo::Grafo() {
-    this->distanciaMatriz = NULL;
+    this->distanciaMatriz = new Matriz<float>(INFINITOF,0,0);
     this->elementos= 0;
-    this->precioMatriz= NULL;
-    this->vertices =NULL;
-}*/
+    this->precioMatriz= new Matriz<int>(INFINITO,0,0);
+    this->vertices =new Lista<string>;
+}
 
 Grafo::Grafo(Matriz<int> *precio, Matriz<float> *distancia, int elementos, Lista<string> *vertices) {
     this->distanciaMatriz = distancia;
@@ -25,14 +26,17 @@ Grafo::~Grafo() {
 }
 
 bool Grafo::existeArista(string origen, string destino) {
-    bool exsiste= true;
-    if (existeVertice(origen)&&existeVertice(destino)){
-        if ((distanciaMatriz->obtenerValor(vertices->obtenerPosicion(origen),vertices->obtenerPosicion(destino))>INFINITO)&&(precioMatriz->obtenerValor(vertices->obtenerPosicion(origen),vertices->obtenerPosicion(destino))>INFINITO))
-            exsiste = false;
-    }else
-        exsiste = false;
+    bool existe = true;
+    if ((existeVertice(origen)) && (existeVertice(destino))) {
+        int posicionOrigen =   vertices->obtenerPosicion(origen);
+        int posicionDestino =  vertices->obtenerPosicion(destino);
+        if ((distanciaMatriz->obtenerValor(posicionOrigen,posicionDestino)>INFINITO) && (precioMatriz->obtenerValor(posicionOrigen,posicionDestino)>INFINITO))
+            existe = false;
+    }
+    else
+        existe = false;
 
-    return exsiste;
+    return existe;
 }
 
 bool Grafo::existeVertice(string vertice) {
@@ -50,7 +54,6 @@ float Grafo::obtenerDistancia(string origen, string destino) {
     if (existeArista(origen,destino)){
         distancia= distanciaMatriz->obtenerValor(vertices->obtenerPosicion(origen),vertices->obtenerPosicion(destino));
     }
-
     return  distancia;
 }
 
@@ -59,7 +62,6 @@ int Grafo::obtenerPrecio(string origen, string destino) {
     if(existeArista(origen,destino)){
         precio= precioMatriz->obtenerValor(vertices->obtenerPosicion(origen),vertices->obtenerPosicion(destino));
     }
-
     return precio;
 
 }
@@ -76,30 +78,38 @@ void Grafo::insertarArista(string origen, string destino, int precio, float dist
             posicionDestino = vertices->obtenerPosicion(destino);
             precioMatriz->modificarElemento(precio,posicionOrigen,posicionDestino);
             distanciaMatriz->modificarElemento(distancia,posicionOrigen,posicionDestino);
+            cout<<endl<<"Exsistian ambos vertices"<<endl;
         }else if(existeVertice(origen)){ //si solo exsiste el origen
-            posicionOrigen= vertices->obtenerPosicion(origen);
             precioMatriz->agregarFilasColumnas(1,1); //redimensiono para agregar el destino
             distanciaMatriz->agregarFilasColumnas(1,1);
             vertices->insertar(destino); //agrego el dato nuevo a la lista de vertices
+            posicionOrigen= vertices->obtenerPosicion(origen);
+            posicionDestino = vertices->obtenerPosicion(destino);
             precioMatriz->modificarElemento(precio,posicionOrigen,posicionDestino); //con la matriz ya armada correcta modifico el precio.
             distanciaMatriz->modificarElemento(distancia,posicionOrigen,posicionDestino);
             elementos ++;
+            cout<<endl<<"Exsistian origen vertices"<<endl;
         }else if (existeVertice(destino)){
-            posicionDestino = vertices->obtenerPosicion(destino);
             precioMatriz->agregarFilasColumnas(1,1);
             distanciaMatriz->agregarFilasColumnas(1,1);
             vertices->insertar(origen);
+            posicionOrigen= vertices->obtenerPosicion(origen);
+            posicionDestino = vertices->obtenerPosicion(destino);
             precioMatriz->modificarElemento(precio,posicionOrigen,posicionDestino);
             distanciaMatriz->modificarElemento(distancia,posicionOrigen,posicionDestino);
             elementos ++;
+            cout<<endl<<"Exsistian destino vertices"<<endl;
         }else  { //no exsiste ni el origen ni el destino
             precioMatriz->agregarFilasColumnas(2,2); //tengo que agregar una fila/columna para origen y una para destino
             distanciaMatriz->agregarFilasColumnas(2,2);
             vertices->insertar(origen);
             vertices->insertar(destino);
+            posicionOrigen= vertices->obtenerPosicion(origen);
+            posicionDestino = vertices->obtenerPosicion(destino);
             elementos = elementos+2;
             precioMatriz->modificarElemento(precio,posicionOrigen,posicionDestino);
             distanciaMatriz->modificarElemento(distancia,posicionOrigen,posicionDestino);
+            cout<<endl<<"No Exsistian vertices"<<endl;
         }
 
         cout<<"\n\t Arista conectada correctamente\n";

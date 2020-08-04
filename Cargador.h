@@ -2,10 +2,11 @@
 #define CARGADOR_H
 
 //Librerias de C++
-#include<fstream>
+#include <fstream>
 
 //Librerias locales
 #include "Diccionario.h"
+#include "Grafo.h"
 #include "Aeropuerto.h"
 #include "Excepcion.h"
 
@@ -18,22 +19,22 @@ using namespace std;
 class Cargador
 {
     private:
-        //PRE : ABB , archivo ya abierto
-        //POST:carga los datos en el arbol binario de busqueda
-        void cargadorDeDiccionario(Diccionario<string ,Aeropuerto*> *&arbolAeropuertos, ifstream &archivo);
+        //PRE : -
+        //POST: Carga los datos del archivo en el diccionario
+        void cargadorDeDiccionario(Diccionario<string, Aeropuerto*> *&arbolAeropuertos, ifstream &archivo);
 
-        //PRE: Grafo , archivo ya abierto
-        //POST: carga los datos en el grafo
-        //void cargadorDeGrafo(Grafo<Vuelo*> &grafoVuelos , ifstream &archivo);
+        //PRE : -
+        //POST: Carga los datos del archivo en el grafo
+        void cargadorDeGrafo(Grafo *&grafoVuelos, ifstream &archivo);
 
     public:
-        //PRE : Objeto Arbol, ruta al archivo
-        //POST: Abre el archivo y carga los datos , de fallar se ejecuta la excepcion
-        void cargarDatos(Diccionario<string ,Aeropuerto*> *&arbolAeropuertos, const string& ruta);
+        //PRE : El string es la ruta al archivo
+        //POST: Abre el archivo y carga los datos, de fallar se lanza la excepcion
+        void cargarDatos(Diccionario<string, Aeropuerto*> *&arbolAeropuertos, const string& ruta);
 
-        //PRE :Objeto Grafo, ruta al archivo
-        //POST:Abre el archivo y carga los datos , de fallar se ejecuta la excepcion
-        //void cargarDatos(Grafo<Vuelo*> &grafoVuelos,string ruta);
+        //PRE : El string es la ruta al archivo
+        //POST: Abre el archivo y carga los datos, de fallar se lanza la excepcion
+        void cargarDatos(Grafo *&grafoVuelos, const string& ruta);
 };
 
 #endif /*CARGADOR_H*/

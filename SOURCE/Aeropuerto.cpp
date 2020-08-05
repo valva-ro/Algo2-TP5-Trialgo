@@ -1,4 +1,4 @@
-#include "Aeropuerto.h"
+#include "../HEADERS/Aeropuerto.h"
 
 Aeropuerto::Aeropuerto(string codigoIataRecibido, string nombreRecibido, string ciudadRecibida, string paisRecibido,
         double superficieRecibida, int cantidadTerminalesRecibidas, int destinosNacionalesRecibidos,

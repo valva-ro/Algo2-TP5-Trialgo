@@ -1,4 +1,4 @@
-#include "Grafo.h"
+#include "../HEADERS/Grafo.h"
 
 const int E_INFINITO = 999999;
 const float F_INFINITO = 999998.9;

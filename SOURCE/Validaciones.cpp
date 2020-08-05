@@ -1,7 +1,7 @@
 #include <regex>    // Se utiliza en validarEntero() y validarDouble()
 #include <iostream>
 
-#include "Validaciones.h"
+#include "../HEADERS/Validaciones.h"
 
 int Validaciones:: esEntero(string num) {
 

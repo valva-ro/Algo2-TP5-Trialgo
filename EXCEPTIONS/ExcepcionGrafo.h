@@ -7,16 +7,7 @@ using namespace std;
 
 class ExcepcionGrafo: public exception
 {
-    private:
-        int motivo;
-
     public:
-        // Constructor de la excepcion con el nombre del archivo
-        //PRE: -
-        //POST: Crea un objeto ExcepcionGrafo
-        ExcepcionGrafo() throw();
-
-
         //PRE: -
         //POST: devuelve un mensaje describiendo la excepcion
         virtual const char* what() const throw();

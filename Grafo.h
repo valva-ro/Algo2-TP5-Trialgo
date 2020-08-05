@@ -62,26 +62,25 @@ class Grafo {
         //POST: Genera  la matriz de recorrido para el algoritmo
         Matriz<string>* generarRecorrido();
 
-
         //PRE:  Matriz cargada
         //POST: Devuelve la matriz con los recorridos minimos y modifica la matriz de tiempo
         Matriz<string>* caminoMinimo(Matriz<float>* &tiempoMatriz);
 
         //PRE:  Matriz cargada
         //POST: Devuelve la matriz con los recorridos minimos y modifica la matriz de precio
-        Matriz<string>* caminoMinimo(Matriz<int>* &precioMatriz;)
+        Matriz<string>* caminoMinimo(Matriz<int>* &precioMatriz);
 
         //PRE:  Matriz cargada
         //POST: Devuelve una lista con las escalas del viaje
-        Lista<string>* armarEscalas(int posOrigen , int posDestino , Matriz<string>* &recorridoMatriz);
+        Lista<string>* armarEscalas(int posOrigen, int posDestino, Matriz<string>* &recorridoMatriz);
 
         //PRE :Recibe el destino y el origen validados
         //POST:Arma el pasaje del vuelo , de no se posible , corre la excepcion de vuelo
-        void minimoPrecio(string origen , string destino);
+        void minimoPrecio(string origen, string destino);
 
         //PRE :Recibe el destino y el origen ya validados
         //POST:Arma el pasaje del vuelo , de no se posible , corre la excepcion de vuelo
-        void minimoTiempo(string origen , string destino );
+        void minimoTiempo(string origen, string destino);
 };
 
 #endif //TP5_TRIALGO_GRAFO_H

@@ -34,10 +34,21 @@ void MenuVuelo::selectorOpcion() {
 
 void MenuVuelo::menorCosto() {
     cout << "\n\tEntraste al menor costo de Menu vuelo\n";
+
+    //string origen , destino = validarAeropuertos() ;
+    cout << "\nArmando tu mejor opcion...\n";
+
+    grafo->minimoPrecio(origen,destino);
 }
 
 void MenuVuelo::menorTiempo() {
     cout << "\n\tEntraste al menor tiempo de Menu vuelo\n";
+
+    //string origen , destino = validarAeropuertos() ;
+    cout << "\nArmando tu mejor opcion...\n";
+
+    grafo->minimoTiempo(origen,destino);
+
 }
 
 void MenuVuelo::liberarRecursos() {

@@ -3,6 +3,7 @@
 
 #include <string>
 
+
 using namespace std;
 
 class Validaciones {
@@ -44,6 +45,7 @@ class Validaciones {
         // PRE: El string debe contener unicamente letras
         // POST: Convierte cada letra del string a mayuscula
         void convertirEnMayusculas(string &s);
+
 };
 
 #endif //VALIDACIONES_H

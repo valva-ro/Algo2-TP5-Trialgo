@@ -4,6 +4,7 @@
 #include "Lista.h"
 #include "Aeropuerto.h"
 #include "Matriz.h"
+#include "ExcepcionVuelo.h"
 
 class Grafo {
 
@@ -56,6 +57,31 @@ class Grafo {
         //POST: Si origen y destino pertenecen al grafo y existe una arista que los conecte,
         //      devuelve el tiempo de la arista. Sino devuelve F_INFINITO
         float obtenerTiempo(string origen, string destino);
+
+        //PRE:  Matriz inicializada con NONE(x)
+        //POST: Genera  la matriz de recorrido para el algoritmo
+        Matriz<string>* generarRecorrido();
+
+
+        //PRE:  Matriz cargada
+        //POST: Devuelve la matriz con los recorridos minimos y modifica la matriz de tiempo
+        void caminoMinimo(Matriz<float>* &tiempoMatriz);
+
+        //PRE:  Matriz cargada
+        //POST: Devuelve la matriz con los recorridos minimos y modifica la matriz de precio
+        void caminoMinimo(Matriz<int>* &precioMatriz;)
+
+        //PRE:  Matriz cargada
+        //POST: Devuelve una lista con las escalas del viaje
+        Lista<string>* armarEscalas(string origen , string destino , Matriz<string>* &recorridoMatriz);
+
+        //PRE :Recibe el destino y el origen validados
+        //POST:Arma el pasaje del vuelo , de no se posible , corre la excepcion de vuelo
+        void minimoPrecio(string  , string );
+
+        //PRE :Recibe el destino y el origen ya validados
+        //POST:Arma el pasaje del vuelo , de no se posible , corre la excepcion de vuelo
+        void minimoTiempo(string , string );
 };
 
 #endif //TP5_TRIALGO_GRAFO_H

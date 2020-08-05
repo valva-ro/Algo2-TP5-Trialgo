@@ -65,11 +65,11 @@ class Grafo {
 
         //PRE:  Matriz cargada
         //POST: Devuelve la matriz con los recorridos minimos y modifica la matriz de tiempo
-        void caminoMinimo(Matriz<float>* &tiempoMatriz);
+        Matriz<string>* caminoMinimo(Matriz<float>* &tiempoMatriz);
 
         //PRE:  Matriz cargada
         //POST: Devuelve la matriz con los recorridos minimos y modifica la matriz de precio
-        void caminoMinimo(Matriz<int>* &precioMatriz;)
+        Matriz<string>* caminoMinimo(Matriz<int>* &precioMatriz;)
 
         //PRE:  Matriz cargada
         //POST: Devuelve una lista con las escalas del viaje
@@ -77,11 +77,11 @@ class Grafo {
 
         //PRE :Recibe el destino y el origen validados
         //POST:Arma el pasaje del vuelo , de no se posible , corre la excepcion de vuelo
-        void minimoPrecio(string  , string );
+        void minimoPrecio(string origen , string destino);
 
         //PRE :Recibe el destino y el origen ya validados
         //POST:Arma el pasaje del vuelo , de no se posible , corre la excepcion de vuelo
-        void minimoTiempo(string , string );
+        void minimoTiempo(string origen , string destino );
 };
 
 #endif //TP5_TRIALGO_GRAFO_H

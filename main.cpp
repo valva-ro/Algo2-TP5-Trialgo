@@ -38,7 +38,5 @@ int main(int argc, char *argv[]) {
     Menu menu(archAeropuertos,archVuelos);
     menu.mostrarOpciones();
 
-
-
     return 0;
 }

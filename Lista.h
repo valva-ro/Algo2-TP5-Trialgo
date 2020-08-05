@@ -7,48 +7,47 @@
 template<class Dato>
 class Lista
 {
+    private:
 
-private:
+        // Primer elemento de la lista
+        Nodo<Dato>* primero;
+        // Tamanio de la lista
+        unsigned tam;
 
-    // Primer elemento de la lista
-    Nodo<Dato>* primero;
-    // Tamanio de la lista
-    unsigned tam;
+     public:
+        // Constructor
+        // PRE: -
+        // POST: Construye una lista vacia
+        Lista();
 
- public:
-    // Constructor
-    // PRE: -
-    // POST: construye una lista vacia
-    Lista();
+        // Destructor
+        // PRE: -
+        // POST: Libera todos los recursos de la lista
+         ~Lista();
 
-    // Destructor
-    // PRE: -
-    // POST: Libera todos los recursos de la lista
-     ~Lista();
+        // PRE: -
+        // POST: Devuelve verdadero si la lista es vacia
+        bool listaVacia();
 
-    // PRE: -
-    // POST: devuelve verdadero si la lista es vacia
-    bool listaVacia();
+        // PRE: -
+        // POST: Agrega un dato (dentro de un nodo) al final
+        void insertar(Dato d);
 
-    // PRE: -
-    // POST: agrega un dato (dentro de un nodo) al final
-    void insertar(Dato d);
+        // PRE: -
+        // POST: Devuelve el dato que esta en la posicion pos
+        Dato obtenerDato(unsigned pos);
 
-    // PRE: -
-    // POST: devuelve el dato que esta en la posicion pos
-    Dato obtenerDato(unsigned pos);
+        //PRE: -
+        //POST: Devuelve la posicion de un objeto , de no existir devuelve -1
+        unsigned obtenerPosicion(Dato d);
 
-    //PRE:- Lista creada y no vacia
-    //POST: Devuelve la posicion de un objeto , de no existir devuelve -1
-    unsigned obtenerPosicion(Dato d);
+        // PRE: -
+        // POST: libera el nodo que esta en la posici�n pos
+        void eliminarDato(unsigned pos);
 
-    // PRE: -
-    // POST: libera el nodo que esta en la posici�n pos
-    void eliminarDato(unsigned pos);
-
-    // PRE: -
-    // POST: Devuelve tam (cantidad de nodos de la lista)
-    unsigned obtenerTam();
+        // PRE: -
+        // POST: Devuelve tam (cantidad de nodos de la lista)
+        unsigned obtenerTam();
 };
 
 

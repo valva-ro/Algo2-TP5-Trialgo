@@ -6,6 +6,7 @@
 #include "Cargador.h"
 #include "Aeropuerto.h"
 #include "Diccionario.h"
+#include "Grafo.h"
 
 class Menu {
 private:

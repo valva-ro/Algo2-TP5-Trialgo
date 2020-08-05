@@ -3,58 +3,116 @@
 const int E_INFINITO = 999999;
 const float F_INFINITO = 999998.9;
 
+
 void Grafo::mostrarCaminosMinimosPrecios(string origen, string destino) {
-    Matriz<int>* recorridosMin = caminoMinimoPrecio();
-    if(existeVertice(origen) && existeVertice(destino))
-        cout << "\tPrecio Minimo:\t" << recorridosMin->obtenerValor(vertices->obtenerPosicion(origen), vertices->obtenerPosicion(destino));
-    delete recorridosMin;
+    CaminoMinimoPrecio minPrecio = caminoMinimoPrecio();
+    bool encontrado = false;
+    if(existeVertice(origen) && existeVertice(destino)) {
+        int posOrigen = vertices->obtenerPosicion(origen);
+        int posDestino = vertices->obtenerPosicion(destino);
+        cout << "\tPrecio Minimo:\t" << minPrecio.precios->obtenerValor(posOrigen, posDestino);
+        while (!encontrado) {
+            if (minPrecio.rutas->obtenerValor(posOrigen, posDestino) == destino)
+                encontrado = true;
+            cout << "\t" << minPrecio.rutas->obtenerValor(posOrigen, posDestino) << "\n";
+            posOrigen = vertices->obtenerPosicion(minPrecio.rutas->obtenerValor(posOrigen, posDestino));
+        }
+    }
+    delete minPrecio.precios;
+    delete minPrecio.rutas;
 }
 
 void Grafo::mostrarCaminosMinimosTiempos(string origen, string destino) {
-    Matriz<float>* recorridosMin = caminoMinimoTiempo();
-    if(existeVertice(origen) && existeVertice(destino))
-        cout << "\tTiempo Minimo:\t" << recorridosMin->obtenerValor(vertices->obtenerPosicion(origen), vertices->obtenerPosicion(destino));
-    delete recorridosMin;
+    CaminoMinimoTiempo minTiempo = caminoMinimoTiempo();
+    if(existeVertice(origen) && existeVertice(destino)) {
+        int posOrigen = vertices->obtenerPosicion(origen);
+        int posDestino = vertices->obtenerPosicion(destino);
+        cout << "\tTiempo Minimo:\t" << minTiempo.tiempos->obtenerValor(posOrigen, posDestino);
+        cout << "\tA traves de:\n";
+        while (minTiempo.rutas->obtenerValor(posOrigen, posDestino) != destino) {
+            cout << "\t" << minTiempo.rutas->obtenerValor(posOrigen, posDestino) << "\n";
+            posOrigen = vertices->obtenerPosicion(minTiempo.rutas->obtenerValor(posOrigen, posDestino));
+        }
+    }
+    delete minTiempo.tiempos;
+    delete minTiempo.rutas;
 }
 
-Matriz<int>* Grafo::caminoMinimoPrecio() {
+CaminoMinimoPrecio Grafo::caminoMinimoPrecio() {
 
-    Matriz<int>* precio = new Matriz<int>(precioMatriz->obtenerInicializador(), precioMatriz->longitudFilas(), precioMatriz->longitudColumnas());
+    CaminoMinimoPrecio minPrecio;
+
+    minPrecio.precios = new Matriz<int>(precioMatriz->obtenerInicializador(), precioMatriz->longitudFilas(), precioMatriz->longitudColumnas());
+    Matriz<string>* rutasK = new Matriz<string>("-", precioMatriz->longitudFilas(), precioMatriz->longitudColumnas());
+    Matriz<string>* rutasI = new Matriz<string>("-", precioMatriz->longitudFilas(), precioMatriz->longitudColumnas());
+    Matriz<string>* rutasJ = new Matriz<string>("-", precioMatriz->longitudFilas(), precioMatriz->longitudColumnas());
+
     for (int i = 0; i < precioMatriz->longitudFilas(); i++) {
         for (int j = 0; j < precioMatriz->longitudColumnas(); j++) {
-            precio->modificarElemento(precioMatriz->obtenerValor(i,j), i, j);
+            minPrecio.precios->modificarElemento(precioMatriz->obtenerValor(i,j), i, j);
         }
     }
 
-    for(int k = 0; k < precio->longitudFilas(); k++) {
-        for (int i = 0; i < precio->longitudFilas(); i++) {
-            for (int j = 0; j < precio->longitudFilas(); j++) {
-                if (precio->obtenerValor(i, k) + precio->obtenerValor(k, j) < precio->obtenerValor(i, j))
-                    precio->modificarElemento((precio->obtenerValor(i, k) + precio->obtenerValor(k, j)), i, j);
+    for(int k = 0; k < minPrecio.precios->longitudFilas(); k++) {
+        for (int i = 0; i < minPrecio.precios->longitudFilas(); i++) {
+            for (int j = 0; j < minPrecio.precios->longitudFilas(); j++) {
+                if (i != j && minPrecio.precios->obtenerValor(i, k) + minPrecio.precios->obtenerValor(k, j) < minPrecio.precios->obtenerValor(i, j)) {
+                    minPrecio.precios->modificarElemento((minPrecio.precios->obtenerValor(i, k) + minPrecio.precios->obtenerValor(k, j)), i, j);
+                    rutasK->modificarElemento(vertices->obtenerDato(k), i, j);
+                    rutasI->modificarElemento(vertices->obtenerDato(i), i, j);
+                    rutasJ->modificarElemento(vertices->obtenerDato(j), i, j);
+                }
             }
         }
     }
-    return precio;
+
+    cout << "\n------------- RUTAS K -------------\n";
+    for (int i = 0; i < rutasK->longitudFilas(); ++i) {
+        for (int j = 0; j < rutasK->longitudColumnas(); ++j) {
+            cout << "\t" << rutasK->obtenerValor(i,j);
+        }
+        cout << "\n";
+    }
+    cout << "\n------------- RUTAS I -------------\n";
+    for (int i = 0; i < rutasI->longitudFilas(); ++i) {
+        for (int j = 0; j < rutasI->longitudColumnas(); ++j) {
+            cout << "\t" << rutasI->obtenerValor(i,j);
+        }
+        cout << "\n";
+    }
+    cout << "\n------------- RUTAS J -------------\n";
+    for (int i = 0; i < rutasJ->longitudFilas(); ++i) {
+        for (int j = 0; j < rutasJ->longitudColumnas(); ++j) {
+            cout << "\t" << rutasJ->obtenerValor(i,j);
+        }
+        cout << "\n";
+    }
+    return minPrecio;
 }
 
-Matriz<float>* Grafo::caminoMinimoTiempo() {
+CaminoMinimoTiempo Grafo::caminoMinimoTiempo() {
 
-    Matriz<float>* tiempo = new Matriz<float>(tiempoMatriz->obtenerInicializador(), tiempoMatriz->longitudFilas(), tiempoMatriz->longitudColumnas());
-    for (int i = 0; i < tiempo->longitudFilas(); i++) {
-        for (int j = 0; j < tiempo->longitudColumnas(); j++) {
-            tiempo->modificarElemento(tiempoMatriz->obtenerValor(i,j), i, j);
+    CaminoMinimoTiempo minTiempo;
+
+    minTiempo.tiempos = new Matriz<float>(tiempoMatriz->obtenerInicializador(), tiempoMatriz->longitudFilas(), tiempoMatriz->longitudColumnas());
+    minTiempo.rutas = new Matriz<string>("-", precioMatriz->longitudFilas(), precioMatriz->longitudColumnas());
+    for (int i = 0; i < minTiempo.tiempos->longitudFilas(); i++) {
+        for (int j = 0; j < minTiempo.tiempos->longitudColumnas(); j++) {
+            minTiempo.tiempos->modificarElemento(tiempoMatriz->obtenerValor(i,j), i, j);
         }
     }
 
-    for(int k = 0; k < tiempo->longitudFilas(); k++) {
-        for (int i = 0; i < tiempo->longitudFilas(); i++) {
-            for (int j = 0; j < tiempo->longitudFilas(); j++) {
-                if (tiempo->obtenerValor(i, k) + tiempo->obtenerValor(k, j) < tiempo->obtenerValor(i, j))
-                    tiempo->modificarElemento((tiempo->obtenerValor(i, k) + tiempo->obtenerValor(k, j)), i, j);
+    for(int k = 0; k < minTiempo.tiempos->longitudFilas(); k++) {
+        for (int i = 0; i < minTiempo.tiempos->longitudFilas(); i++) {
+            for (int j = 0; j < minTiempo.tiempos->longitudFilas(); j++) {
+                if (i != j && minTiempo.tiempos->obtenerValor(i, k) + minTiempo.tiempos->obtenerValor(k, j) < minTiempo.tiempos->obtenerValor(i, j)) {
+                    minTiempo.tiempos->modificarElemento((minTiempo.tiempos->obtenerValor(i, k) + minTiempo.tiempos->obtenerValor(k, j)), i, j);
+                    minTiempo.rutas->modificarElemento(vertices->obtenerDato(k),i,j);
+                }
             }
         }
     }
-    return tiempo;
+    return minTiempo;
 }
 
 void Grafo::mostrarMatrizPrecios() {

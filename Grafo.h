@@ -5,6 +5,16 @@
 #include "Aeropuerto.h"
 #include "Matriz.h"
 
+struct CaminoMinimoPrecio{
+    Matriz<int>* precios;
+    Matriz<string>* rutas;
+};
+
+struct CaminoMinimoTiempo{
+    Matriz<float>* tiempos;
+    Matriz<string>* rutas;
+};
+
 class Grafo {
     private:
         Matriz<int>* precioMatriz;
@@ -77,12 +87,12 @@ class Grafo {
         //DESCRIPCION: Devuelve una matriz con los caminos minimos de precios
         //PRE: La matriz de precios debe estar cargada
         //POST: Devuelve una matriz con los caminos minimos de precios
-        Matriz<int>* caminoMinimoPrecio();
+        CaminoMinimoPrecio caminoMinimoPrecio();
 
         //DESCRIPCION: Devuelve una matriz con los caminos minimos de tiempos
         //PRE: La matriz de tiempos debe estar cargada
         //POST: Devuelve una matriz con los caminos minimos de tiempos
-        Matriz<float>* caminoMinimoTiempo();
+        CaminoMinimoTiempo caminoMinimoTiempo();
 };
 
 #endif //TP5_TRIALGO_GRAFO_H

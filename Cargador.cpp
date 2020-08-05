@@ -3,7 +3,7 @@
 
     /// METODOS PRIVADOS ///
 
-void Cargador::cargarDatos(Diccionario<string,Aeropuerto*> *&arbolAeropuertos, const string& ruta)
+void Cargador::cargarDatos(Diccionario<string, Aeropuerto*> *&arbolAeropuertos, const string& ruta)
 {
     ifstream archivo;
     archivo.open(ruta.c_str(),ios::in);
@@ -13,7 +13,7 @@ void Cargador::cargarDatos(Diccionario<string,Aeropuerto*> *&arbolAeropuertos, c
             throw (Excepcion(EXCEPCION_ABB));
 
         cargadorDeDiccionario(arbolAeropuertos, archivo);
-        cout << "\n\tSe han cargado los Aeropuertos en el arbol correctamente\n";
+        cout << "\n\tSe han cargado los aeropuertos en el arbol correctamente\n";
     }
     catch(Excepcion &e) {
         cout << e.what() << endl;
@@ -21,8 +21,8 @@ void Cargador::cargarDatos(Diccionario<string,Aeropuerto*> *&arbolAeropuertos, c
 
     archivo.close();
 }
-/*
-void Cargador::cargarDatos(Grafo<Vuelo*> &grafoVuelos, string ruta)
+
+void Cargador::cargarDatos(Grafo *&grafoVuelos, string ruta)
 {
     ifstream archivo;
     archivo.open(ruta.c_str(),ios::in);
@@ -32,7 +32,7 @@ void Cargador::cargarDatos(Grafo<Vuelo*> &grafoVuelos, string ruta)
             throw (Excepcion(EXCEPCION_GRAFO));
 
         cargadorDeGrafo(grafoVuelos, archivo);
-        cout << "\n\tSe han cargado los vuelos en el arbol correctamente\n";
+        cout << "\n\tSe han cargado los vuelos en el grafo correctamente\n";
     }
 
     catch(Excepcion &e) {
@@ -41,10 +41,10 @@ void Cargador::cargarDatos(Grafo<Vuelo*> &grafoVuelos, string ruta)
 
     archivo.close();
 }
-*/
+
     /// METODOS PUBLICOS ///
 
-void Cargador::cargadorDeDiccionario(Diccionario<string ,Aeropuerto*> *&arbolAeropuertos, ifstream& archivo)
+void Cargador::cargadorDeDiccionario(Diccionario<string, Aeropuerto*> *&arbolAeropuertos, ifstream& archivo)
 {
     string nombre, ciudad, pais, codigoIATA;
     double superficie;
@@ -67,13 +67,23 @@ void Cargador::cargadorDeDiccionario(Diccionario<string ,Aeropuerto*> *&arbolAer
                                      pais, superficie, cantidadTerminales,
                                      destinosNacionales, destinosInternacionales);
 
-
         arbolAeropuertos->insertar(codigoIATA,pAeropuerto);
     }
 
 }
-/*
-void Cargador:: cargadorDeGrafo(int &grafo, ifstream &archivo) {
-    //TODO
+
+void Cargador:: cargadorDeGrafo(Grafo *&grafoVuelos, ifstream &archivo)
+{
+    string origen, destino;
+    int precio;
+    float horas;
+
+    while(!archivo.eof()) {
+        archivo >> origen;
+        archivo >> destino;
+        archivo >> precio;
+        archivo >> horas;
+        grafoVuelos->agregarArista(origen, destino, precio, horas);
+    }
 }
-*/
+

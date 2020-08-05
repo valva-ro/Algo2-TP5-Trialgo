@@ -8,11 +8,10 @@
 #include "Diccionario.h"
 #include "Grafo.h"
 #include "Aeropuerto.h"
-#include "Excepcion.h"
+#include "ExcepcionGrafo.h"
+#include "ExcepcionDiccionario.h"
 
-//Constantes de excepcion
-const int EXCEPCION_ABB   = 0;
-const int EXCEPCION_GRAFO = 1;
+
 
 using namespace std;
 

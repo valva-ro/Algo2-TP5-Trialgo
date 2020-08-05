@@ -1,4 +1,4 @@
-#include<iostream>
+#include <iostream>
 #include "Cargador.h"
 
     /// METODOS PRIVADOS ///
@@ -10,12 +10,12 @@ void Cargador::cargarDatos(Diccionario<string, Aeropuerto*> *&arbolAeropuertos, 
 
     try {
         if (archivo.fail())
-            throw (Excepcion(EXCEPCION_ABB));
+            throw (ExcepcionDiccionario());
 
         cargadorDeDiccionario(arbolAeropuertos, archivo);
         cout << "\n\tSe han cargado los aeropuertos en el arbol correctamente\n";
     }
-    catch(Excepcion &e) {
+    catch(ExcepcionDiccionario &e) {
         cout << e.what() << endl;
     }
 
@@ -29,13 +29,13 @@ void Cargador::cargarDatos(Grafo *&grafoVuelos, string ruta)
 
     try {
         if (archivo.fail())
-            throw (Excepcion(EXCEPCION_GRAFO));
+            throw (ExcepcionGrafo());
 
         cargadorDeGrafo(grafoVuelos, archivo);
         cout << "\n\tSe han cargado los vuelos en el grafo correctamente\n";
     }
 
-    catch(Excepcion &e) {
+    catch(ExcepcionGrafo &e) {
         cout << e.what() << endl;
     }
 

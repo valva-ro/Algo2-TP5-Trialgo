@@ -73,7 +73,7 @@ class Grafo {
 
         //PRE:  Matriz cargada
         //POST: Devuelve una lista con las escalas del viaje
-        Lista<string>* armarEscalas(string origen , string destino , Matriz<string>* &recorridoMatriz);
+        Lista<string>* armarEscalas(int posOrigen , int posDestino , Matriz<string>* &recorridoMatriz);
 
         //PRE :Recibe el destino y el origen validados
         //POST:Arma el pasaje del vuelo , de no se posible , corre la excepcion de vuelo

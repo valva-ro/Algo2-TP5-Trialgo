@@ -1,41 +1,41 @@
-#include<iostream>
+#include <iostream>
 #include "Cargador.h"
 
     /// METODOS PRIVADOS ///
 
-void Cargador::cargarDatos(Diccionario<string,Aeropuerto*> *&arbolAeropuertos, const string& ruta)
+void Cargador::cargarDatos(Diccionario<string, Aeropuerto*> *&arbolAeropuertos, const string& ruta)
 {
     ifstream archivo;
     archivo.open(ruta.c_str(),ios::in);
 
     try {
         if (archivo.fail())
-            throw (Excepcion(EXCEPCION_ABB));
+            throw (ExcepcionDiccionario());
 
         cargadorDeDiccionario(arbolAeropuertos, archivo);
-        cout << "\n\tSe han cargado los Aeropuertos en el arbol correctamente\n";
+        cout << "\n\tSe han cargado los aeropuertos en el arbol correctamente\n";
     }
-    catch(Excepcion &e) {
+    catch(ExcepcionDiccionario &e) {
         cout << e.what() << endl;
     }
 
     archivo.close();
 }
 
-void Cargador::cargarDatos(Grafo *&grafoVuelos, const string& ruta)
+void Cargador::cargarDatos(Grafo *&grafoVuelos, string ruta)
 {
     ifstream archivo;
     archivo.open(ruta.c_str(),ios::in);
 
     try {
         if (archivo.fail())
-            throw (Excepcion(EXCEPCION_GRAFO));
+            throw (ExcepcionGrafo());
 
         cargadorDeGrafo(grafoVuelos, archivo);
         cout << "\n\tSe han cargado los vuelos en el grafo correctamente\n";
     }
 
-    catch(Excepcion &e) {
+    catch(ExcepcionGrafo &e) {
         cout << e.what() << endl;
     }
 
@@ -44,7 +44,7 @@ void Cargador::cargarDatos(Grafo *&grafoVuelos, const string& ruta)
 
     /// METODOS PUBLICOS ///
 
-void Cargador::cargadorDeDiccionario(Diccionario<string ,Aeropuerto*> *&arbolAeropuertos, ifstream& archivo)
+void Cargador::cargadorDeDiccionario(Diccionario<string, Aeropuerto*> *&arbolAeropuertos, ifstream& archivo)
 {
     string nombre, ciudad, pais, codigoIATA;
     double superficie;
@@ -78,14 +78,12 @@ void Cargador:: cargadorDeGrafo(Grafo *&grafoVuelos, ifstream &archivo)
     int precio;
     float horas;
 
-    while(!archivo.eof())
-    {
+    while(!archivo.eof()) {
         archivo >> origen;
         archivo >> destino;
         archivo >> precio;
         archivo >> horas;
-
-        grafoVuelos->insertarArista(origen, destino, precio, horas);
+        grafoVuelos->agregarArista(origen, destino, precio, horas);
     }
 }
 

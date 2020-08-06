@@ -9,10 +9,6 @@ class ExcepcionGrafo: public exception
 {
 
     public:
-        // Constructor de la excepcion con el nombre del archivo
-        //PRE: -
-        //POST: Crea un objeto ExcepcionGrafo
-        ExcepcionGrafo() throw();
 
 
         //PRE: -

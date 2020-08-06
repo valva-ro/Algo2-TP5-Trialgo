@@ -8,8 +8,8 @@
 #include "Diccionario.h"
 #include "Grafo.h"
 #include "Aeropuerto.h"
-#include "ExcepcionGrafo.h"
-#include "ExcepcionDiccionario.h"
+#include "../EXCEPTIONS/ExcepcionGrafo.h"
+#include "../EXCEPTIONS/ExcepcionDiccionario.h"
 
 
 

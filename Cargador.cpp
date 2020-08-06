@@ -83,7 +83,7 @@ void Cargador:: cargadorDeGrafo(Grafo *&grafoVuelos, ifstream &archivo)
         archivo >> destino;
         archivo >> precio;
         archivo >> horas;
-        grafoVuelos->agregarArista(origen, destino, precio, horas);
+        grafoVuelos->insertarArista(origen, destino, precio, horas);
     }
 }
 

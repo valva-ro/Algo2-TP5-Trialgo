@@ -22,7 +22,7 @@ void Cargador::cargarDatos(Diccionario<string, Aeropuerto*> *&arbolAeropuertos, 
     archivo.close();
 }
 
-void Cargador::cargarDatos(Grafo *&grafoVuelos, string ruta)
+void Cargador::cargarDatos(Grafo *&grafoVuelos, const string& ruta)
 {
     ifstream archivo;
     archivo.open(ruta.c_str(),ios::in);

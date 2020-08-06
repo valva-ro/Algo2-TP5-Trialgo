@@ -147,20 +147,43 @@ void Grafo::mostrarCaminosMinimosTiempos(string origen, string destino, Dicciona
     delete minTiempo.rutas;
 }
 
-CaminoMinimoPrecio Grafo::caminoMinimoPrecio() {
+CaminoMinimoPrecio Grafo::inicializarMatricesPrecio() {
 
-    CaminoMinimoPrecio minPrecio;
+    CaminoMinimoPrecio inicializado;
+    inicializado.precios = new Matriz<int>(precioMatriz->obtenerInicializador(), elementos, elementos);
+    inicializado.rutas = new Matriz<string>(NULO, elementos, elementos);
 
-    minPrecio.precios = new Matriz<int>(precioMatriz->obtenerInicializador(), elementos, elementos);
-    minPrecio.rutas = new Matriz<string>(NULO, elementos, elementos);
-
-    for (int i = 0; i < vertices->obtenerTam(); i++) {
-        for (int j = 0; j < minPrecio.rutas->longitudFilas(); j++) {
-            minPrecio.precios->modificarElemento(precioMatriz->obtenerValor(i,j), i, j);
-            if (i != j)
-                minPrecio.rutas->modificarElemento(vertices->obtenerDato(i), j, i);
+    for (int i = 0; i < elementos; i++) {
+        for (int j = 0; j < elementos; j++) {
+            if (i != j) {
+                inicializado.precios->modificarElemento(precioMatriz->obtenerValor(i,j), i, j);
+                inicializado.rutas->modificarElemento(vertices->obtenerDato(i), j, i);
+            }
         }
     }
+    return inicializado;
+}
+
+CaminoMinimoTiempo Grafo::inicializarMatricesTiempo() {
+
+    CaminoMinimoTiempo inicializado;
+    inicializado.tiempos = new Matriz<float>(tiempoMatriz->obtenerInicializador(), elementos, elementos);
+    inicializado.rutas = new Matriz<string>(NULO, elementos, elementos);
+
+    for (int i = 0; i < elementos; i++) {
+        for (int j = 0; j < elementos; j++) {
+            if (i != j) {
+                inicializado.tiempos->modificarElemento(precioMatriz->obtenerValor(i,j), i, j);
+                inicializado.rutas->modificarElemento(vertices->obtenerDato(i), j, i);
+            }
+        }
+    }
+    return inicializado;
+}
+
+CaminoMinimoPrecio Grafo::caminoMinimoPrecio() {
+
+    CaminoMinimoPrecio minPrecio = inicializarMatricesPrecio();
 
     for(int k = 0; k < minPrecio.precios->longitudFilas(); k++) {
         for (int i = 0; i < minPrecio.precios->longitudFilas(); i++) {
@@ -177,18 +200,7 @@ CaminoMinimoPrecio Grafo::caminoMinimoPrecio() {
 
 CaminoMinimoTiempo Grafo::caminoMinimoTiempo() {
 
-    CaminoMinimoTiempo minTiempo;
-
-    minTiempo.tiempos = new Matriz<float>(tiempoMatriz->obtenerInicializador(), elementos, elementos);
-    minTiempo.rutas = new Matriz<string>(NULO, elementos, elementos);
-
-    for (int i = 0; i < minTiempo.tiempos->longitudFilas(); i++) {
-        for (int j = 0; j < minTiempo.tiempos->longitudColumnas(); j++) {
-            minTiempo.tiempos->modificarElemento(tiempoMatriz->obtenerValor(i,j), i, j);
-            if (i != j)
-                minTiempo.rutas->modificarElemento(vertices->obtenerDato(i), j, i);
-        }
-    }
+    CaminoMinimoTiempo minTiempo = inicializarMatricesTiempo();
 
     for(int k = 0; k < minTiempo.tiempos->longitudFilas(); k++) {
         for (int i = 0; i < minTiempo.tiempos->longitudFilas(); i++) {

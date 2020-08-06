@@ -80,14 +80,24 @@ class Grafo {
 
     private:
 
-        //DESCRIPCION: Devuelve una matriz con los caminos minimos de precios
+        //DESCRIPCION: Devuelve un struct con las matrices inicializadas
         //PRE: La matriz de precios debe estar cargada
-        //POST: Devuelve una matriz con los caminos minimos de precios
+        //POST: Devuelve un struct con las matrices inicializadas
+        CaminoMinimoPrecio inicializarMatricesPrecio();
+
+        //DESCRIPCION: Devuelve un struct con las matrices inicializadas
+        //PRE: La matriz de tiempos debe estar cargada
+        //POST: Devuelve un struct con las matrices inicializadas
+        CaminoMinimoTiempo inicializarMatricesTiempo();
+
+        //DESCRIPCION: Devuelve un struct que contiene las matrices con los caminos minimos de precios
+        //PRE: La matriz de precios debe estar cargada
+        //POST: Devuelve un struct que contiene las matrices con los caminos minimos de precios
         CaminoMinimoPrecio caminoMinimoPrecio();
 
-        //DESCRIPCION: Devuelve una matriz con los caminos minimos de tiempos
+        //DESCRIPCION: Devuelve un struct que contiene las matrices con los caminos minimos de tiempos
         //PRE: La matriz de tiempos debe estar cargada
-        //POST: Devuelve una matriz con los caminos minimos de tiempos
+        //POST: Devuelve un struct que contiene las matrices con los caminos minimos de tiempos
         CaminoMinimoTiempo caminoMinimoTiempo();
 };
 

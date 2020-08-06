@@ -68,16 +68,6 @@ class Grafo {
         //      devuelve el tiempo de la arista. Sino devuelve F_INFINITO
         float obtenerTiempo(string origen, string destino);
 
-        //DESCRIPCION: Muestra por pantalla la matriz de precios
-        //PRE: La matriz debe estar cargada
-        //POST: Muestra por pantalla la matriz de precios
-        void mostrarMatrizPrecios();
-
-        //DESCRIPCION: Muestra por pantalla la matriz de tiempos
-        //PRE: La matriz debe estar cargada
-        //POST: Muestra por pantalla la matriz de tiempos
-        void mostrarMatrizTiempos();
-
         //DESCRIPCION: Muestra por pantalla la matriz los caminos minimos de precios
         //PRE: La matriz debe estar cargada
         //POST: Muestra por pantalla la matriz los caminos minimos de precios
@@ -87,6 +77,8 @@ class Grafo {
         //PRE: La matriz debe estar cargada
         //POST: Muestra por pantalla la matriz los caminos minimos de tiempos
         void mostrarCaminosMinimosTiempos(string origen, string destino, Diccionario<string, Aeropuerto*> *&aeropuertos);
+
+    private:
 
         //DESCRIPCION: Devuelve una matriz con los caminos minimos de precios
         //PRE: La matriz de precios debe estar cargada

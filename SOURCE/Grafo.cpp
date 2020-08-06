@@ -7,26 +7,9 @@ const float F_INFINITO = 999998.9;
 void Grafo::mostrarCaminosMinimosPrecios(string origen, string destino, Diccionario<string, Aeropuerto*> *&aeropuertos) {
 
     CaminoMinimoPrecio minPrecio = caminoMinimoPrecio();
-/*
-    cout << "\n\t------------ PESOS ------------\n";
-    for (int i = 0; i < minPrecio.precios->longitudFilas(); ++i) {
-        for (int j = 0; j < minPrecio.precios->longitudColumnas(); ++j) {
-            cout << "\t" << minPrecio.precios->obtenerValor(i,j);
-        }
-        cout << "\n";
-    }
-
-    cout << "\n\t--------- RECORRIDOS ---------\n";
-    for (int i = 0; i < minPrecio.rutas->longitudFilas(); ++i) {
-        for (int j = 0; j < minPrecio.rutas->longitudColumnas(); ++j) {
-            cout << "\t" << minPrecio.rutas->obtenerValor(i,j);
-        }
-        cout << "\n";
-    }
-    cout << "\n\n";
-*/
     int posOrigen = vertices->obtenerPosicion(origen);
     int posDestino = vertices->obtenerPosicion(destino);
+
     cout << "\n\tPrecio Minimo:\t$ " << minPrecio.precios->obtenerValor(posOrigen, posDestino);
     cout << "\n\tCon escalas en:\n";
     while (minPrecio.rutas->obtenerValor(posOrigen, posDestino) != destino) {
@@ -42,26 +25,9 @@ void Grafo::mostrarCaminosMinimosPrecios(string origen, string destino, Dicciona
 void Grafo::mostrarCaminosMinimosTiempos(string origen, string destino, Diccionario<string, Aeropuerto*> *&aeropuertos) {
 
     CaminoMinimoTiempo minTiempo = caminoMinimoTiempo();
-/*
-    cout << "\n\t------------ PESOS ------------\n";
-    for (int i = 0; i < minTiempo.tiempos->longitudFilas(); ++i) {
-        for (int j = 0; j < minTiempo.tiempos->longitudColumnas(); ++j) {
-            cout << "\t" << minTiempo.tiempos->obtenerValor(i,j);
-        }
-        cout << "\n";
-    }
-
-    cout << "\n\t--------- RECORRIDOS ---------\n";
-    for (int i = 0; i < minTiempo.rutas->longitudFilas(); ++i) {
-        for (int j = 0; j < minTiempo.rutas->longitudColumnas(); ++j) {
-            cout << "\t" << minTiempo.rutas->obtenerValor(i,j);
-        }
-        cout << "\n";
-    }
-    cout << "\n\n";
-*/
     int posOrigen = vertices->obtenerPosicion(origen);
     int posDestino = vertices->obtenerPosicion(destino);
+
     cout << "\n\tTiempo Minimo:\t" << minTiempo.tiempos->obtenerValor(posOrigen, posDestino);
     cout << "hs\n\tCon escalas en:\n";
     while (minTiempo.rutas->obtenerValor(posOrigen, posDestino) != destino) {

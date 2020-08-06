@@ -1,0 +1,16 @@
+EZE Ministro-Pistarini Ezeiza Argentina 34.75 4 12 46
+HOS Aeropuerto-de-Chos-Malal Chos-Malal Argentina 23.5 9 43 30
+LAX Aeropuerto-Internacional-de-los-Angeles Los-Angeles EEUU 14 9 87 69
+CRR Aeropuerto-Ceres Ceres Argentina 31.4 8 23 6
+BRC Aeropuerto-Internacional-Teniente-Luis-Candelaria Bariloche Argentina 33.2 4 12 43
+ARR Aeropuerto-Alto-Rio-Senguer Alto-Rio-Senguer Argentina 21.5 3 10 6
+BHI Aeropuerto-Comandante-Espora Bahia-Blanca Argentina 35 5 12 13
+AEP Aeroparque-Jorge-Newbery Buenos-Aires Argentina 32.62 3 5 5
+CVI Aerodromo-Caleta-Olivia Caleta-Olivia Argentina 43.4 6 7 9
+IYK Aeropuerto-de-Inyokern Inyokern EEUU 48 12 21 40
+ILD Aerodromo-Casilda Casilda Argentina 23.4 2 12 33
+CCT Aeropuerto-Colonia-Catriel Catriel Argentina 22.4 5 10 62
+CVH Aeropuerto-de-Caviahue Caviahue Argentina 32.4 8 24 14
+SFO Aeropuerto-Internacional-de-San-Francisco San-Francisco EEUU 54.3 10 32 54
+CLX Aeropuerto-Clorinda Clorinda Argentina 43.6 9 12 4
+WHP Aeropuerto-Whiteman Los-Angeles EEUU 43.3 12 34 42

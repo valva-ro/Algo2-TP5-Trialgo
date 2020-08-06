@@ -1,18 +1,16 @@
 #ifndef TP5_TRIALGO_MENUVUELO_H
 #define TP5_TRIALGO_MENUVUELO_H
 
-// TODO:
-//      - Agregar *grafo y *diccionario como atribtuos
-//      - Agregar metodos asignarGrafo() y asignarDiccionario()
-//      - Agregar en liberarRecursos() la liberacion de memoria del grafo (del diccionario no, porque la libera
-//        el destructor del Menu con el metodo liberarRecursos() de la clase MenuAeropuerto)
-//      - Pedir y validar codigo IATA de origen y destino del vuelo (para los caminos minimos)
-//      - ¿Agregar método que reciba el codigo IATA del vuelo y muestre los datos del aeropuerto?
+#include "Grafo.h"
+#include "Aeropuerto.h"
+#include "Diccionario.h"
 
 class MenuVuelo {
 
     private:
         char opcion;
+        Grafo* vuelos;
+        Diccionario<string, Aeropuerto*>* aeropuertos;
 
     public:
         //DESCRIPCION: Muestra las opciones del Menu
@@ -25,6 +23,16 @@ class MenuVuelo {
         //POST: Pide el ingreso de una opcion y abre el metodo correspondiente.
         //      Si la opcion ingresada es distinta de VOLVER_MENU llama al metodo mostrarOpciones().
         void selectorOpcion();
+
+        //DESCRIPCION: Le asigna el puntero recibido al atributo por referencia
+        //PRE: -
+        //POST: Le asigna el puntero recibido al atributo por referencia
+        void asignarGrafoVuelos(Grafo *&grafoVuelosOut);
+
+        //DESCRIPCION: Le asigna el puntero recibido al atributo por referencia
+        //PRE: -
+        //POST: Le asigna el puntero recibido al atributo por referencia
+        void asignarArbolAeropuertos(Diccionario<string, Aeropuerto*> *&arbolAeropuertosOut);
 
         //DESCRIPCION: Accede a los metodos necesarios para mostrar el camino de menor costo
         //PRE: -

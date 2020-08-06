@@ -1,5 +1,6 @@
 #include <iostream>
 #include "MenuVuelo.h"
+#include "Validaciones.h"
 
 using namespace std;
 
@@ -14,6 +15,14 @@ void MenuVuelo::mostrarOpciones() {
     cout << "\n\t" << VOLVER_MENU << ". Volver al menu principal";
     cout << "\n\tIngrese que operacion desea realizar:  ";
     selectorOpcion();
+}
+
+void MenuVuelo::asignarGrafoVuelos(Grafo *&grafoVuelos) {
+    this->vuelos = grafoVuelos;
+}
+
+void MenuVuelo::asignarArbolAeropuertos(Diccionario<string, Aeropuerto *> *&arbolAeropuertosOut) {
+    this->aeropuertos = arbolAeropuertosOut;
 }
 
 void MenuVuelo::selectorOpcion() {
@@ -33,13 +42,57 @@ void MenuVuelo::selectorOpcion() {
 }
 
 void MenuVuelo::menorCosto() {
-    cout << "\n\tEntraste al menor costo de Menu vuelo\n";
+    Validaciones validacion;
+    string origen, destino;
+
+    cout << "\tIngrese la clave IATA del origen: ";
+    cin >> origen;
+    validacion.longitudString(origen, 3);
+    validacion.convertirEnMayusculas(origen);
+
+    cout << "\tIngrese la clave IATA del destino: ";
+    cin >> destino;
+    validacion.longitudString(destino, 3);
+    validacion.convertirEnMayusculas(destino);
+
+    if (vuelos->existeVertice(origen) && vuelos->existeVertice(destino)) {
+        cout << "\n\t--- Origen ---" << *aeropuertos->obtenerValor(origen);
+        cout << "\n\t--  Destino --" << *aeropuertos->obtenerValor(destino);
+        cout << "\n\t\tPrecio: $"; // TODO: mostrar precio minimo
+        cout << "\n\t-- Con escalas en --\n";
+        //TODO: mostrar camino minimo
+        cout << "\n\t--------------------\n";
+    }
+    else
+        cout << "\tNo existe el aeropuerto de origen o destino\n";
 }
 
 void MenuVuelo::menorTiempo() {
-    cout << "\n\tEntraste al menor tiempo de Menu vuelo\n";
+    Validaciones validacion;
+    string origen, destino;
+
+    cout << "\tIngrese la clave IATA del origen: ";
+    cin >> origen;
+    validacion.longitudString(origen, 3);
+    validacion.convertirEnMayusculas(origen);
+
+    cout << "\tIngrese la clave IATA del destino: ";
+    cin >> destino;
+    validacion.longitudString(destino, 3);
+    validacion.convertirEnMayusculas(destino);
+
+    if (vuelos->existeVertice(origen) && vuelos->existeVertice(destino)) {
+        cout << "\n\t--- Origen ---" << *aeropuertos->obtenerValor(origen);
+        cout << "\n\t--  Destino --" << *aeropuertos->obtenerValor(destino);
+        cout << "\n\t\tDuracion: " << /*TODO: mostrar precio minimo*/ "hs";
+        cout << "\n\t-- Con escalas en --\n";
+        //TODO: mostrar camino minimo
+        cout << "\n\t--------------------\n";
+    }
+    else
+        cout << "\tNo existe el aeropuerto de origen o destino\n";
 }
 
 void MenuVuelo::liberarRecursos() {
-    //implementar cuando tengamos el grafo
+    delete vuelos;
 }

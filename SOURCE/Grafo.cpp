@@ -4,10 +4,10 @@ const int E_INFINITO = 999999;
 const float F_INFINITO = 999998.9;
 
 
-void Grafo::mostrarCaminosMinimosPrecios(string origen, string destino) {
+void Grafo::mostrarCaminosMinimosPrecios(string origen, string destino, Diccionario<string, Aeropuerto*> *&aeropuertos) {
 
     CaminoMinimoPrecio minPrecio = caminoMinimoPrecio();
-
+/*
     cout << "\n\t------------ PESOS ------------\n";
     for (int i = 0; i < minPrecio.precios->longitudFilas(); ++i) {
         for (int j = 0; j < minPrecio.precios->longitudColumnas(); ++j) {
@@ -24,25 +24,25 @@ void Grafo::mostrarCaminosMinimosPrecios(string origen, string destino) {
         cout << "\n";
     }
     cout << "\n\n";
-
-    if (existeVertice(origen) && existeVertice(destino)) {
-        int posOrigen = vertices->obtenerPosicion(origen);
-        int posDestino = vertices->obtenerPosicion(destino);
-        cout << "\tPrecio Minimo:\t" << minPrecio.precios->obtenerValor(posOrigen, posDestino);
-        while (minPrecio.rutas->obtenerValor(posOrigen, posDestino) != destino) {
-            // FIXME: No se muestran todas las conexiones, solo la ultima
-            cout << "\t" << minPrecio.rutas->obtenerValor(posOrigen, posDestino) << "\n";
-            posOrigen = vertices->obtenerPosicion(minPrecio.rutas->obtenerValor(posOrigen, posDestino));
-        }
+*/
+    int posOrigen = vertices->obtenerPosicion(origen);
+    int posDestino = vertices->obtenerPosicion(destino);
+    cout << "\n\tPrecio Minimo:\t$ " << minPrecio.precios->obtenerValor(posOrigen, posDestino);
+    cout << "\n\tCon escalas en:\n";
+    while (minPrecio.rutas->obtenerValor(posOrigen, posDestino) != destino) {
+        string escala = minPrecio.rutas->obtenerValor(posOrigen, posDestino);
+        cout << *aeropuertos->obtenerValor(escala) << "\n";
+        posOrigen = vertices->obtenerPosicion(minPrecio.rutas->obtenerValor(posOrigen, posDestino));
     }
+
     delete minPrecio.precios;
     delete minPrecio.rutas;
 }
 
-void Grafo::mostrarCaminosMinimosTiempos(string origen, string destino) {
+void Grafo::mostrarCaminosMinimosTiempos(string origen, string destino, Diccionario<string, Aeropuerto*> *&aeropuertos) {
 
     CaminoMinimoTiempo minTiempo = caminoMinimoTiempo();
-
+/*
     cout << "\n\t------------ PESOS ------------\n";
     for (int i = 0; i < minTiempo.tiempos->longitudFilas(); ++i) {
         for (int j = 0; j < minTiempo.tiempos->longitudColumnas(); ++j) {
@@ -59,18 +59,17 @@ void Grafo::mostrarCaminosMinimosTiempos(string origen, string destino) {
         cout << "\n";
     }
     cout << "\n\n";
-
-    if (existeVertice(origen) && existeVertice(destino)) {
-        int posOrigen = vertices->obtenerPosicion(origen);
-        int posDestino = vertices->obtenerPosicion(destino);
-        cout << "\tTiempo Minimo:\t" << minTiempo.tiempos->obtenerValor(posOrigen, posDestino);
-        cout << "\tA traves de:\n";
-        while (minTiempo.rutas->obtenerValor(posOrigen, posDestino) != destino) {
-            // FIXME: No se muestran todas las conexiones, solo la ultima
-            cout << "\t" << minTiempo.rutas->obtenerValor(posOrigen, posDestino) << "\n";
-            posOrigen = vertices->obtenerPosicion(minTiempo.rutas->obtenerValor(posOrigen, posDestino));
-        }
+*/
+    int posOrigen = vertices->obtenerPosicion(origen);
+    int posDestino = vertices->obtenerPosicion(destino);
+    cout << "\n\tTiempo Minimo:\t" << minTiempo.tiempos->obtenerValor(posOrigen, posDestino);
+    cout << "hs\n\tCon escalas en:\n";
+    while (minTiempo.rutas->obtenerValor(posOrigen, posDestino) != destino) {
+        string escala = minTiempo.rutas->obtenerValor(posOrigen, posDestino);
+        cout << *aeropuertos->obtenerValor(escala) << "\n";
+        posOrigen = vertices->obtenerPosicion(minTiempo.rutas->obtenerValor(posOrigen, posDestino));
     }
+
     delete minTiempo.tiempos;
     delete minTiempo.rutas;
 }

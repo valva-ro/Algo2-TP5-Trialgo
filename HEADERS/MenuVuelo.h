@@ -27,8 +27,6 @@ public:
     //POST: Muestra las opciones del Menu y llama al metodo selectorOpcion()
     void mostrarOpciones();
 
-    void mostrarDatosAeropuerto(string origenIATA, string destinoIATA);
-
     //DESCRIPCION: Selector las opciones del Menu
     //PRE: -
     //POST: Pide el ingreso de una opcion y abre el metodo correspondiente.

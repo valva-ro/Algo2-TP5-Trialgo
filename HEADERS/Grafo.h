@@ -2,6 +2,7 @@
 #define TP5_TRIALGO_GRAFO_H
 
 #include "Lista.h"
+#include "Diccionario.h"
 #include "Aeropuerto.h"
 #include "Matriz.h"
 
@@ -80,12 +81,12 @@ class Grafo {
         //DESCRIPCION: Muestra por pantalla la matriz los caminos minimos de precios
         //PRE: La matriz debe estar cargada
         //POST: Muestra por pantalla la matriz los caminos minimos de precios
-        void mostrarCaminosMinimosPrecios(string origen, string destino);
+        void mostrarCaminosMinimosPrecios(string origen, string destino, Diccionario<string, Aeropuerto*> *&aeropuertos);
 
         //DESCRIPCION: Muestra por pantalla la matriz los caminos minimos de tiempos
         //PRE: La matriz debe estar cargada
         //POST: Muestra por pantalla la matriz los caminos minimos de tiempos
-        void mostrarCaminosMinimosTiempos(string origen, string destino);
+        void mostrarCaminosMinimosTiempos(string origen, string destino, Diccionario<string, Aeropuerto*> *&aeropuertos);
 
         //DESCRIPCION: Devuelve una matriz con los caminos minimos de precios
         //PRE: La matriz de precios debe estar cargada

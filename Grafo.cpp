@@ -1,4 +1,5 @@
 #include "Grafo.h"
+#include "ExcepcionVuelo.h"
 
 const int E_INFINITO = 100000;
 const float F_INFINITO = 100000.0;
@@ -130,23 +131,21 @@ Matriz<string>* Grafo::generarRecorrido()
 }
 
 
-Matriz<string>* Grafo::caminoMinimo(Matriz<int>* &precioMatriz)
+
+
+Matriz<string>* Grafo::caminoMinimoPrecio(Matriz<int>* &matrizAux)
 {
-    //Inicializo la matriz de Recorrido ...
+
+    precioMatriz->copiarMatriz(matrizAux);
     Matriz<string>* recorridoMatriz = generarRecorrido();
 
-    //k = es el intermediario -> la letra de base
-    for(int k = 0 ; k < elementos ; k ++)
-    {
-        for(int i = 0 ;  i < elementos ; i ++)
-        {
-            for(int j = 0 ; j < elementos ; j++)
-            {
-                //Distancia acumulada
+    for(int k = 0 ; k < elementos ; k ++) {
+        for(int i = 0 ;  i < elementos ; i ++) {
+            for(int j = 0 ; j < elementos ; j++) {
+
                 int distancia = precioMatriz->obtenerValor(i,k) + precioMatriz->obtenerValor(k,j);
 
-                if(distancia < precioMatriz->obtenerValor(i,j))
-                {
+                if(i != j && distancia < precioMatriz->obtenerValor(i,j)) {
                     precioMatriz->modificarElemento(distancia,i,j);
                     string aeropuerto = vertices->obtenerDato(k);
                     recorridoMatriz->modificarElemento(aeropuerto,i,j);
@@ -158,103 +157,97 @@ Matriz<string>* Grafo::caminoMinimo(Matriz<int>* &precioMatriz)
 }
 
 
-Matriz<string>* Grafo::caminoMinimo(Matriz<float>* &tiempoMatriz)
+Matriz<string>* Grafo::caminoMinimoTiempo(Matriz<float>* &matrizAux)
 {
-    //Inicializo la matriz de Recorrido ...
-    Matriz<string>* recorridoMatriz = generarRecorrido();  ///LIBERAR DESPUES
+    tiempoMatriz->copiarMatriz(matrizAux);
+    Matriz<string>* recorridoMatriz = generarRecorrido();
 
-    //k = es el intermediario -> la letra de base
-    for(int k = 0 ; k < elementos ; k ++)
-    {
-        for(int i = 0 ;  i < elementos ; i ++)
-        {
-            for(int j = 0 ; j < elementos ; j++)
-            {
-                //Distancia acumulada
-                int distancia = tiempoMatriz->obtenerValor(i,k) + tiempoMatriz->obtenerValor(k,j);
+    for(int k = 0 ; k < elementos ; k ++) {
+        for(int i = 0 ;  i < elementos ; i ++) {
+            for(int j = 0 ; j < elementos ; j++) {
 
-                if(distancia < tiempoMatriz->obtenerValor(i,j)) {
-                    tiempoMatriz->modificarElemento(distancia, i, j);
+                int distancia = precioMatriz->obtenerValor(i,k) + precioMatriz->obtenerValor(k,j);
+
+                if(i != j && distancia < precioMatriz->obtenerValor(i,j)) {
+                    precioMatriz->modificarElemento(distancia,i,j);
                     string aeropuerto = vertices->obtenerDato(k);
-                    recorridoMatriz->modificarElemento(aeropuerto, i, j);
+                    recorridoMatriz->modificarElemento(aeropuerto,i,j);
                 }
             }
         }
     }
+
     return recorridoMatriz;
 }
 
-Lista<string>* Grafo::armarEscalas(int posOrigen, int posDestino, Matriz<string>* &recorridoMatriz)
+
+void Grafo::mostrarEscalas(unsigned posOrigen, unsigned posDestino, Matriz<string>* &recorridoMatriz,Diccionario<string, Aeropuerto*>* &pDiccionario)
 {
-    Lista<string>* escalas = new Lista<string>; //Lista que posee las escalas
 
     string escala = recorridoMatriz->obtenerValor(posOrigen,posDestino);
-
-    while(escala != VACIO)
+    while(escala != vertices->obtenerDato(posDestino))
     {
-        escalas->insertar(escala);
-        int posEscala = vertices->obtenerPosicion(escala);
+        cout << "\tESCALA EN:";
+
+        Aeropuerto *pAeropuerto = pDiccionario->obtenerValor(escala);
+        cout << "\n\t"<<*pAeropuerto;
+
+        unsigned posEscala = vertices->obtenerPosicion(escala);
         escala =  recorridoMatriz->obtenerValor(posEscala , posDestino);
+
     }
-    return escalas;
 }
 
-void Grafo::minimoTiempo(string origen , string destino)
+void Grafo::minimoTiempo(string origen , string destino , Diccionario<string, Aeropuerto*>* &pDiccionario)
 {
-    Matriz<string>* recorridoMatriz = caminoMinimo(this->tiempoMatriz);
+
+    Matriz<float>* matrizAux = new Matriz<float>(F_INFINITO,elementos,elementos);
+    Matriz<string>* recorridoMatriz = caminoMinimoTiempo(matrizAux);
 
     //Posiciones de los aeropuertos
     unsigned posOrigen  = vertices->obtenerPosicion(origen);
     unsigned posDestino = vertices->obtenerPosicion(destino);
 
-    int tiempoMinimo = tiempoMatriz->obtenerValor(posOrigen,posDestino); //Aca tengo el tiempo minimo entre el origen y destino
+    float tiempoMinimo = tiempoMatriz->obtenerValor(posOrigen,posDestino);
 
     try {
-        if (tiempoMinimo == E_INFINITO)
+        if (tiempoMinimo == F_INFINITO)
             throw (ExcepcionVuelo());
 
-        cout << "\n\tTiempo de vuelo:\t"<<tiempoMinimo<<"\n";
-        Lista<string>* escalas = armarEscalas(posOrigen, posDestino, recorridoMatriz) ;
+        cout << "\n\t\tDURACION: "<<tiempoMinimo<<"\n";
+        mostrarEscalas( posOrigen, posDestino,recorridoMatriz,pDiccionario);
 
-        cout << "\tEscalas:";
-        for(int i = 0 ; i < escalas->obtenerTam() ; i++)
-            cout << "\t"<<escalas->obtenerDato(i);
-
-        delete escalas;
     }
 
     catch(ExcepcionVuelo &e) {
         cout << e.what() << endl;
     }
+    delete matrizAux;
     delete recorridoMatriz;
 }
 
-void Grafo::minimoPrecio(string origen , string destino)
+void Grafo::minimoPrecio(string origen , string destino , Diccionario<string, Aeropuerto*>* &pDiccionario)
 {
-    Matriz<string>* recorridoMatriz = caminoMinimo(this->precioMatriz);
+    Matriz<int>* matrizAux = new Matriz<int>(E_INFINITO,elementos,elementos);
+    Matriz<string>* recorridoMatriz = caminoMinimoPrecio(matrizAux);
 
     //Posiciones de los aeropuertos
     unsigned posOrigen  = vertices->obtenerPosicion(origen);
     unsigned posDestino = vertices->obtenerPosicion(destino);
 
-    int precioMinimo = precioMatriz->obtenerValor(posOrigen,posDestino); //Aca tengo el tiempo minimo entre el origen y destino
-
+    int precioMinimo = matrizAux->obtenerValor(posOrigen,posDestino);
     try {
-        if (precioMinimo == F_INFINITO)
+        if (precioMinimo == E_INFINITO)
             throw (ExcepcionVuelo());
 
-        cout << "\n\tPrecio:\t"<<precioMinimo<<"\n";
-        Lista<string>* escalas = armarEscalas(posOrigen, posDestino, recorridoMatriz);
+        cout << "\n\t\tPRECIO:"<<precioMinimo<<"$\n";
+        mostrarEscalas(posOrigen,posDestino,recorridoMatriz,pDiccionario);
 
-        cout << "\tEscalas:";
-        for(int i = 0 ; i < escalas->obtenerTam() ; i++)
-            cout << "\t"<<escalas->obtenerDato(i);
-
-        delete escalas;
     }
 
     catch(ExcepcionVuelo &e) {
         cout << e.what() << endl;
     }
+    delete matrizAux;
     delete recorridoMatriz;
 }

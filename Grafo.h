@@ -3,8 +3,9 @@
 
 #include "Lista.h"
 #include "Aeropuerto.h"
+#include "Diccionario.h"
 #include "Matriz.h"
-#include "ExcepcionVuelo.h"
+
 
 class Grafo {
 
@@ -64,23 +65,23 @@ class Grafo {
 
         //PRE:  Matriz cargada
         //POST: Devuelve la matriz con los recorridos minimos y modifica la matriz de tiempo
-        Matriz<string>* caminoMinimo(Matriz<float>* &tiempoMatriz);
+        Matriz<string>* caminoMinimoTiempo(Matriz<float>* &tiempoMatriz);
 
         //PRE:  Matriz cargada
         //POST: Devuelve la matriz con los recorridos minimos y modifica la matriz de precio
-        Matriz<string>* caminoMinimo(Matriz<int>* &precioMatriz);
+        Matriz<string>* caminoMinimoPrecio(Matriz<int>* &precioMatriz);
 
         //PRE:  Matriz cargada
         //POST: Devuelve una lista con las escalas del viaje
-        Lista<string>* armarEscalas(int posOrigen, int posDestino, Matriz<string>* &recorridoMatriz);
+        void mostrarEscalas(unsigned posOrigen, unsigned posDestino, Matriz<string>* &recorridoMatriz,Diccionario<string, Aeropuerto*>* &pDiccionario);
 
         //PRE :Recibe el destino y el origen validados
         //POST:Arma el pasaje del vuelo , de no se posible , corre la excepcion de vuelo
-        void minimoPrecio(string origen, string destino);
+        void minimoPrecio(string origen, string destino , Diccionario<string, Aeropuerto*>* &pDiccionario);
 
         //PRE :Recibe el destino y el origen ya validados
         //POST:Arma el pasaje del vuelo , de no se posible , corre la excepcion de vuelo
-        void minimoTiempo(string origen, string destino);
+        void minimoTiempo(string origen, string destino,Diccionario<string, Aeropuerto*>* &pDiccionario);
 };
 
 #endif //TP5_TRIALGO_GRAFO_H

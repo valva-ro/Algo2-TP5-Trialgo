@@ -143,6 +143,10 @@ public:
     // POST: DEVUELVE EL VALOR QUE SE ENCUENTRA EN LA POSICION DE FILA Y COLUMNAS RECIBIDAS.
     Tipo obtenerValor(const unsigned posicionFila, const unsigned posicionColumna);
 
+    //PRE  :RECIBE UN PUNTERO A UNA MATRIZ POR REFERENCIA
+    //POST :COPIA LA MATRIZ A LA OTRA AUXILIAR
+    void copiarMatriz(Matriz<Tipo>* &aux);
+
     // DESTRUCTOR
 
     // PRE:  -
@@ -411,6 +415,23 @@ Tipo Matriz<Tipo>::obtenerValor(const unsigned posicionFila, const unsigned posi
         return *( *( datos + posicionFila ) + posicionColumna );
     else
         return inicializador;
+}
+
+template < class Tipo>
+void Matriz<Tipo>::copiarMatriz(Matriz<Tipo>* &aux)
+{
+    Tipo valor;
+    for(unsigned i = 0 ; i < filas; i++)
+    {
+        for(unsigned j = 0 ; j < columnas ; j ++ )
+        {
+            valor = this->obtenerValor(i,j);
+
+            aux->modificarElemento(valor,i,j);
+
+        }
+
+    }
 }
 
 //--------------------------------------------------DESTRUCTOR--------------------------------------------------//

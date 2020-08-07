@@ -58,8 +58,6 @@ void MenuVuelo::menorCosto() {
     if (vuelos->existeVertice(origen) && vuelos->existeVertice(destino)) {
         cout << "\n\t--- Origen ---" << *aeropuertos->obtenerValor(origen);
         cout << "\n\t--  Destino --" << *aeropuertos->obtenerValor(destino);
-        cout << "\n\t\tPrecio: $"; // TODO: mostrar precio minimo
-        cout << "\n\t-- Con escalas en --\n";
         //TODO: mostrar camino minimo
         cout << "\n\t--------------------\n";
     }
@@ -84,8 +82,6 @@ void MenuVuelo::menorTiempo() {
     if (vuelos->existeVertice(origen) && vuelos->existeVertice(destino)) {
         cout << "\n\t--- Origen ---" << *aeropuertos->obtenerValor(origen);
         cout << "\n\t--  Destino --" << *aeropuertos->obtenerValor(destino);
-        cout << "\n\t\tDuracion: " << /*TODO: mostrar precio minimo*/ "hs";
-        cout << "\n\t-- Con escalas en --\n";
         //TODO: mostrar camino minimo
         cout << "\n\t--------------------\n";
     }

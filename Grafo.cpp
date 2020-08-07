@@ -202,10 +202,17 @@ void Grafo::mostrarEscalas(unsigned posOrigen, unsigned posDestino, Matriz<strin
     while(escala != vertices->obtenerDato(posDestino))
     {
         cout << "\t--Escala en:";
+        if(pDiccionario->existe(escala))
+        {
+            Aeropuerto *pAeropuerto = pDiccionario->obtenerValor(escala);
+            cout << "\n\t"<<*pAeropuerto;
 
-        Aeropuerto *pAeropuerto = pDiccionario->obtenerValor(escala);
-        cout << "\n\t"<<*pAeropuerto;
+        }
+        else
+        {
+            cout << "\n\t" << escala ;
 
+        }
         unsigned posEscala = vertices->obtenerPosicion(escala);
         escala =  recorridoMatriz->obtenerValor(posEscala , posDestino);
     }

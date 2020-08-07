@@ -149,16 +149,19 @@ Matriz<string>* Grafo::caminoMinimoPrecio(Matriz<int>* &matrizAux)
     precioMatriz->copiarMatriz(matrizAux);
     Matriz<string>* recorridoMatriz = generarRecorrido();
 
-    for(int k = 0 ; k < elementos ; k ++) {
-        for(int i = 0 ;  i < elementos ; i ++) {
-            for(int j = 0 ; j < elementos ; j++) {
+    for(unsigned k = 0 ; k < elementos ; k ++) {
+        for(unsigned i = 0 ;  i < elementos ; i ++) {
+            for(unsigned j = 0 ; j < elementos ; j++) {
 
-                int distancia = precioMatriz->obtenerValor(i,k) + precioMatriz->obtenerValor(k,j);
+                int distancia = precioMatriz->obtenerValor(i,k) + matrizAux->obtenerValor(k,j);
 
-                if(i != j && distancia < precioMatriz->obtenerValor(i,j)) {
-                    precioMatriz->modificarElemento(distancia,i,j);
+                if(distancia < matrizAux->obtenerValor(i,j) && i != j) {
+                    matrizAux->modificarElemento(distancia,i,j);
+
                     string aeropuerto = vertices->obtenerDato(k);
                     recorridoMatriz->modificarElemento(aeropuerto,i,j);
+
+
                 }
             }
         }
@@ -172,21 +175,23 @@ Matriz<string>* Grafo::caminoMinimoTiempo(Matriz<float>* &matrizAux)
     tiempoMatriz->copiarMatriz(matrizAux);
     Matriz<string>* recorridoMatriz = generarRecorrido();
 
-    for(int k = 0 ; k < elementos ; k ++) {
-        for(int i = 0 ;  i < elementos ; i ++) {
-            for(int j = 0 ; j < elementos ; j++) {
+    for(unsigned k = 0 ; k < elementos ; k ++) {
+        for(unsigned i = 0 ;  i < elementos ; i ++) {
+            for(unsigned j = 0 ; j < elementos ; j++) {
 
-                int distancia = precioMatriz->obtenerValor(i,k) + precioMatriz->obtenerValor(k,j);
+                float distancia = matrizAux->obtenerValor(i,k) + matrizAux->obtenerValor(k,j);
 
-                if(i != j && distancia < precioMatriz->obtenerValor(i,j)) {
-                    precioMatriz->modificarElemento(distancia,i,j);
+                if(distancia < matrizAux->obtenerValor(i,j) && i!= j) {
+                    matrizAux->modificarElemento(distancia,i,j);
+
                     string aeropuerto = vertices->obtenerDato(k);
                     recorridoMatriz->modificarElemento(aeropuerto,i,j);
+
+
                 }
             }
         }
     }
-
     return recorridoMatriz;
 }
 

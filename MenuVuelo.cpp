@@ -60,7 +60,7 @@ void MenuVuelo::menorCosto() {
         cout << "\n\t--- Origen ---" << *aeropuertos->obtenerValor(origen);
         cout << "\n\t--  Destino --" << *aeropuertos->obtenerValor(destino);
         vuelos->minimoPrecio(origen,destino,aeropuertos);
-        cout << "\n\t--------------------\n";
+
     }
     else
         cout << "\tNo existe el aeropuerto de origen o destino\n";
@@ -84,7 +84,7 @@ void MenuVuelo::menorTiempo() {
         cout << "\n\t--- Origen ---" << *aeropuertos->obtenerValor(origen);
         cout << "\n\t--  Destino --" << *aeropuertos->obtenerValor(destino);
         vuelos->minimoTiempo(origen,destino,aeropuertos);
-        cout << "\n\t--------------------\n"; //Por salida sale medio feo
+
     }
     else
         cout << "\tNo existe el aeropuerto de origen o destino\n";

@@ -117,6 +117,17 @@ void Grafo::mostrarCaminosMinimosPrecios(string origen, string destino, Dicciona
     int posOrigen = vertices->obtenerPosicion(origen);
     int posDestino = vertices->obtenerPosicion(destino);
 
+    cout << "\n\t----- Origen ----";
+    if (aeropuertos->existe(origen))
+        cout << *aeropuertos->obtenerValor(origen);
+    else
+        cout << "\n\t" << origen;
+    cout << "\n\t---- Destino ----";
+    if (aeropuertos->existe(destino))
+        cout << *aeropuertos->obtenerValor(destino);
+    else
+        cout << "\n\t" << destino;
+
     cout << "\n\tPrecio Minimo:\t$ " << minPrecio.precios->obtenerValor(posOrigen, posDestino);
     cout << "\n\tCon escalas en:\n";
     int i = 1;
@@ -140,6 +151,17 @@ void Grafo::mostrarCaminosMinimosTiempos(string origen, string destino, Dicciona
     CaminoMinimoTiempo minTiempo = caminoMinimoTiempo();
     int posOrigen = vertices->obtenerPosicion(origen);
     int posDestino = vertices->obtenerPosicion(destino);
+
+    cout << "\n\t----- Origen ----";
+    if (aeropuertos->existe(origen))
+        cout << *aeropuertos->obtenerValor(origen);
+    else
+        cout << "\n\t" << origen;
+    cout << "\n\t---- Destino ----";
+    if (aeropuertos->existe(destino))
+        cout << *aeropuertos->obtenerValor(destino);
+    else
+        cout << "\n\t" << destino;
 
     cout << "\n\tTiempo Minimo:\t" << minTiempo.tiempos->obtenerValor(posOrigen, posDestino);
     cout << "hs\n\tCon escalas en:\n";
@@ -206,6 +228,22 @@ CaminoMinimoPrecio Grafo::caminoMinimoPrecio() {
                 }
             }
         }
+    }
+
+    cout << "\n\t--------------- PRECIOS ---------------\n";
+    for (int i = 0; i < elementos; ++i) {
+        for (int j = 0; j < elementos; ++j) {
+            cout << "\t" << minPrecio.precios->obtenerValor(i, j);
+        }
+        cout << "\n";
+    }
+
+    cout << "\n\t--------------- RUTAS ---------------\n";
+    for (int i = 0; i < elementos; ++i) {
+        for (int j = 0; j < elementos; ++j) {
+            cout << "\t" << minPrecio.rutas->obtenerValor(i, j);
+        }
+        cout << "\n";
     }
     return minPrecio;
 }

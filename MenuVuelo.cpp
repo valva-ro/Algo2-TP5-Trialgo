@@ -83,7 +83,7 @@ void MenuVuelo::menorTiempo() {
         cout << "\n\t--- Origen ---" << *aeropuertos->obtenerValor(origen);
         cout << "\n\t--  Destino --" << *aeropuertos->obtenerValor(destino);
         vuelos->minimoTiempo(origen,destino,aeropuertos);
-        cout << "\n\t--------------------\n";
+        cout << "\n\t--------------------\n"; //Por salida sale medio feo
     }
     else
         cout << "\tNo existe el aeropuerto de origen o destino\n";
@@ -91,5 +91,5 @@ void MenuVuelo::menorTiempo() {
 }
 
 void MenuVuelo::liberarRecursos() {
-    //implementar cuando tengamos el grafo
+    delete vuelos;
 }

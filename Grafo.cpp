@@ -130,9 +130,6 @@ Matriz<string>* Grafo::generarRecorrido()
     return recorridoMatriz;
 }
 
-
-
-
 Matriz<string>* Grafo::caminoMinimoPrecio(Matriz<int>* &matrizAux)
 {
 
@@ -183,7 +180,6 @@ Matriz<string>* Grafo::caminoMinimoTiempo(Matriz<float>* &matrizAux)
 
 void Grafo::mostrarEscalas(unsigned posOrigen, unsigned posDestino, Matriz<string>* &recorridoMatriz,Diccionario<string, Aeropuerto*>* &pDiccionario)
 {
-
     string escala = recorridoMatriz->obtenerValor(posOrigen,posDestino);
     while(escala != vertices->obtenerDato(posDestino))
     {
@@ -194,17 +190,15 @@ void Grafo::mostrarEscalas(unsigned posOrigen, unsigned posDestino, Matriz<strin
 
         unsigned posEscala = vertices->obtenerPosicion(escala);
         escala =  recorridoMatriz->obtenerValor(posEscala , posDestino);
-
     }
 }
 
 void Grafo::minimoTiempo(string origen , string destino , Diccionario<string, Aeropuerto*>* &pDiccionario)
 {
-
     Matriz<float>* matrizAux = new Matriz<float>(F_INFINITO,elementos,elementos);
     Matriz<string>* recorridoMatriz = caminoMinimoTiempo(matrizAux);
 
-    //Posiciones de los aeropuertos
+
     unsigned posOrigen  = vertices->obtenerPosicion(origen);
     unsigned posDestino = vertices->obtenerPosicion(destino);
 

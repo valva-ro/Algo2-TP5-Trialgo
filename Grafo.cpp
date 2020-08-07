@@ -1,15 +1,16 @@
 #include "Grafo.h"
 #include "ExcepcionVuelo.h"
 
-const int E_INFINITO = 100000;
+const int E_INFINITO   = 100000;
 const float F_INFINITO = 100000.0;
-const string VACIO = "X";
+const string VACIO     = "X";
 
 Grafo::Grafo() {
     this->elementos = 0;
     this->precioMatriz = new Matriz<int>;
     this->tiempoMatriz = new Matriz<float>;
     this->vertices = new Lista<string>;
+
     precioMatriz->asignarInicializador(E_INFINITO);
     tiempoMatriz->asignarInicializador(F_INFINITO);
 }
@@ -29,33 +30,45 @@ Grafo::~Grafo() {
 
 bool Grafo::existeArista(string origen, string destino) {
     bool existe = false;
+
     if (existeVertice(origen) && existeVertice(destino)) {
         int posicionOrigen = vertices->obtenerPosicion(origen);
         int posicionDestino = vertices->obtenerPosicion(destino);
         if ((tiempoMatriz->obtenerValor(posicionOrigen, posicionDestino) < F_INFINITO) && (precioMatriz->obtenerValor(posicionOrigen, posicionDestino) < E_INFINITO))
             existe = true;
     }
+
     return existe;
 }
 
 bool Grafo::existeVertice(string vertice) {
     bool existe = false;
+
     if (vertices->obtenerPosicion(vertice) != -1)
+    {
         existe = true;
+    }
+
     return existe;
 }
 
 float Grafo::obtenerTiempo(string origen, string destino) {
     float tiempo = F_INFINITO;
+
     if(existeArista(origen,destino))
+    {
         tiempo = tiempoMatriz->obtenerValor(vertices->obtenerPosicion(origen),vertices->obtenerPosicion(destino));
+    }
+
     return tiempo;
 }
 
 int Grafo::obtenerPrecio(string origen, string destino) {
     int precio = E_INFINITO;
+
     if(existeArista(origen,destino))
         precio = precioMatriz->obtenerValor(vertices->obtenerPosicion(origen),vertices->obtenerPosicion(destino));
+
     return precio;
 }
 
@@ -216,6 +229,7 @@ void Grafo::minimoTiempo(string origen , string destino , Diccionario<string, Ae
     catch(ExcepcionVuelo &e) {
         cout << e.what() << endl;
     }
+
     delete matrizAux;
     delete recorridoMatriz;
 }
@@ -242,6 +256,7 @@ void Grafo::minimoPrecio(string origen , string destino , Diccionario<string, Ae
     catch(ExcepcionVuelo &e) {
         cout << e.what() << endl;
     }
+
     delete matrizAux;
     delete recorridoMatriz;
 }

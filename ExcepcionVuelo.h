@@ -10,12 +10,6 @@ class ExcepcionVuelo: public exception
 
 
     public:
-        // Constructor de la excepcion con el nombre del archivo
-        //PRE: -
-        //POST: Crea un objeto ExcepcionVuelo
-        ExcepcionVuelo() throw();
-
-
 
         //PRE: -
         //POST: devuelve un mensaje describiendo la excepcion

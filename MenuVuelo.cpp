@@ -4,9 +4,9 @@
 
 using namespace std;
 
-const char MENOR_COSTO = '1';
+const char MENOR_COSTO  = '1';
 const char MENOR_TIEMPO = '2';
-const char VOLVER_MENU = '0';
+const char VOLVER_MENU  = '0';
 
 void MenuVuelo::mostrarOpciones() {
     cout << "\n\t------------------- Menu Vuelo -------------------\n";

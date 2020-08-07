@@ -187,7 +187,7 @@ void Grafo::mostrarEscalas(unsigned posOrigen, unsigned posDestino, Matriz<strin
     string escala = recorridoMatriz->obtenerValor(posOrigen,posDestino);
     while(escala != vertices->obtenerDato(posDestino))
     {
-        cout << "\tESCALA EN:";
+        cout << "\t--Escala en:";
 
         Aeropuerto *pAeropuerto = pDiccionario->obtenerValor(escala);
         cout << "\n\t"<<*pAeropuerto;
@@ -214,7 +214,7 @@ void Grafo::minimoTiempo(string origen , string destino , Diccionario<string, Ae
         if (tiempoMinimo == F_INFINITO)
             throw (ExcepcionVuelo());
 
-        cout << "\n\t\tDURACION: "<<tiempoMinimo<<"\n";
+        cout << "\n\t\t---Duracion---: "<<tiempoMinimo<<"hrs\n";
         mostrarEscalas( posOrigen, posDestino,recorridoMatriz,pDiccionario);
 
     }
@@ -240,7 +240,7 @@ void Grafo::minimoPrecio(string origen , string destino , Diccionario<string, Ae
         if (precioMinimo == E_INFINITO)
             throw (ExcepcionVuelo());
 
-        cout << "\n\t\tPRECIO:"<<precioMinimo<<"$\n";
+        cout << "\n\t\t---Precio---:"<<precioMinimo<<"$\n";
         mostrarEscalas(posOrigen,posDestino,recorridoMatriz,pDiccionario);
 
     }

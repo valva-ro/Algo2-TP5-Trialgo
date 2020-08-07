@@ -1,5 +1,6 @@
 #include <iostream>
 #include "MenuVuelo.h"
+#include "Validaciones.h"
 
 using namespace std;
 
@@ -32,22 +33,60 @@ void MenuVuelo::selectorOpcion() {
     }
 }
 
+void MenuVuelo::asignarGrafoVuelos(Grafo *&grafoVuelos) {
+    this->vuelos = grafoVuelos;
+}
+
+void MenuVuelo::asignarArbolAeropuertos(Diccionario<string, Aeropuerto *> *&arbolAeropuertosOut) {
+    this->aeropuertos = arbolAeropuertosOut;
+}
+
 void MenuVuelo::menorCosto() {
-    cout << "\n\tEntraste al menor costo de Menu vuelo\n";
+    Validaciones validacion;
+    string origen, destino;
 
-    //string origen , destino = validarAeropuertos() ;
-    cout << "\nArmando tu mejor opcion...\n";
+    cout << "\tIngrese la clave IATA del origen: ";
+    cin >> origen;
+    validacion.longitudString(origen, 3);
+    validacion.convertirEnMayusculas(origen);
 
-    grafo->minimoPrecio(origen,destino);
+    cout << "\tIngrese la clave IATA del destino: ";
+    cin >> destino;
+    validacion.longitudString(destino, 3);
+    validacion.convertirEnMayusculas(destino);
+
+    if (vuelos->existeVertice(origen) && vuelos->existeVertice(destino)) {
+        cout << "\n\t--- Origen ---" << *aeropuertos->obtenerValor(origen);
+        cout << "\n\t--  Destino --" << *aeropuertos->obtenerValor(destino);
+        vuelos->minimoPrecio(origen,destino,aeropuertos);
+        cout << "\n\t--------------------\n";
+    }
+    else
+        cout << "\tNo existe el aeropuerto de origen o destino\n";
 }
 
 void MenuVuelo::menorTiempo() {
-    cout << "\n\tEntraste al menor tiempo de Menu vuelo\n";
+    Validaciones validacion;
+    string origen, destino;
 
-    //string origen , destino = validarAeropuertos() ;
-    cout << "\nArmando tu mejor opcion...\n";
+    cout << "\tIngrese la clave IATA del origen: ";
+    cin >> origen;
+    validacion.longitudString(origen, 3);
+    validacion.convertirEnMayusculas(origen);
 
-    grafo->minimoTiempo(origen,destino);
+    cout << "\tIngrese la clave IATA del destino: ";
+    cin >> destino;
+    validacion.longitudString(destino, 3);
+    validacion.convertirEnMayusculas(destino);
+
+    if (vuelos->existeVertice(origen) && vuelos->existeVertice(destino)) {
+        cout << "\n\t--- Origen ---" << *aeropuertos->obtenerValor(origen);
+        cout << "\n\t--  Destino --" << *aeropuertos->obtenerValor(destino);
+        vuelos->minimoTiempo(origen,destino,aeropuertos);
+        cout << "\n\t--------------------\n";
+    }
+    else
+        cout << "\tNo existe el aeropuerto de origen o destino\n";
 
 }
 

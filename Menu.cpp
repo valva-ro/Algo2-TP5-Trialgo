@@ -9,22 +9,21 @@ using namespace std;
 
 Menu::Menu(const string& rutaArchAeropuertos, const string& rutaArchVuelos) {
     Cargador cargador;
+
     Diccionario<string, Aeropuerto*> *pDiccionario = new Diccionario<string, Aeropuerto*>;
     cargador.cargarDatos(pDiccionario, rutaArchAeropuertos);
     this->menuAeropuerto.asignarArbolAeropuertos(pDiccionario);
 
-    /*
-    //hacer esto mismo pero con el grafo cuando este lista la clase.
     Grafo* pVuelos = new Grafo();
-    cargador.cargarDatos(pVuelos,rutaArchVuelos);
-    this->menuVuelo.asignarGragoVuelos(pVuelos);
-  */
+    cargador.cargarDatos(pVuelos, rutaArchVuelos);
+    this->menuVuelo.asignarGrafoVuelos(pVuelos);
+    this->menuVuelo.asignarArbolAeropuertos(pDiccionario);
 }
 
 Menu::~Menu() {
-    menuAeropuerto.liberarRecursos();
 
-    //menuVuelo.liberarRecursos(); //implementar cuando tengamos el grafo
+    menuAeropuerto.liberarRecursos();
+    menuVuelo.liberarRecursos();
 }
 
 void Menu::mostrarOpciones() {

@@ -426,11 +426,8 @@ void Matriz<Tipo>::copiarMatriz(Matriz<Tipo>* &aux)
         for(unsigned j = 0 ; j < columnas ; j ++ )
         {
             valor = this->obtenerValor(i,j);
-
             aux->modificarElemento(valor,i,j);
-
         }
-
     }
 }
 

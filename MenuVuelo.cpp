@@ -57,8 +57,18 @@ void MenuVuelo::menorCosto() {
     validacion.convertirEnMayusculas(destino);
 
     if (vuelos->existeVertice(origen) && vuelos->existeVertice(destino)) {
-        cout << "\n\t--- Origen ---" << *aeropuertos->obtenerValor(origen);
-        cout << "\n\t--  Destino --" << *aeropuertos->obtenerValor(destino);
+        cout << "\n\tOrigen:";
+        if (aeropuertos->existe(origen))
+            cout << *aeropuertos->obtenerValor(origen);
+        else
+            cout << "\n\t" << origen << "\n";
+
+        cout << "\n\tDestino:";
+        if (aeropuertos->existe(destino))
+            cout << *aeropuertos->obtenerValor(destino);
+        else
+            cout << "\n\t" << destino << "\n";
+
         vuelos->minimoPrecio(origen,destino,aeropuertos);
 
     }
@@ -81,8 +91,19 @@ void MenuVuelo::menorTiempo() {
     validacion.convertirEnMayusculas(destino);
 
     if (vuelos->existeVertice(origen) && vuelos->existeVertice(destino)) {
-        cout << "\n\t--- Origen ---" << *aeropuertos->obtenerValor(origen);
-        cout << "\n\t--  Destino --" << *aeropuertos->obtenerValor(destino);
+        cout << "\n\tOrigen:";
+        if (aeropuertos->existe(origen))
+            cout << *aeropuertos->obtenerValor(origen);
+        else
+            cout << "\n\t" << origen << "\n";
+
+        cout << "\n\tDestino:";
+
+        if (aeropuertos->existe(destino))
+            cout << *aeropuertos->obtenerValor(destino);
+        else
+            cout << "\n\t" << destino << "\n";
+
         vuelos->minimoTiempo(origen,destino,aeropuertos);
 
     }

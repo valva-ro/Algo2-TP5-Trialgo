@@ -145,7 +145,6 @@ Matriz<string>* Grafo::generarRecorrido()
 
 Matriz<string>* Grafo::caminoMinimoPrecio(Matriz<int>* &matrizAux)
 {
-
     precioMatriz->copiarMatriz(matrizAux);
     Matriz<string>* recorridoMatriz = generarRecorrido();
 
@@ -160,8 +159,6 @@ Matriz<string>* Grafo::caminoMinimoPrecio(Matriz<int>* &matrizAux)
 
                     string aeropuerto = vertices->obtenerDato(k);
                     recorridoMatriz->modificarElemento(aeropuerto,i,j);
-
-
                 }
             }
         }
@@ -206,19 +203,17 @@ void Grafo::mostrarEscalas(unsigned posOrigen, unsigned posDestino, Matriz<strin
         {
             Aeropuerto *pAeropuerto = pDiccionario->obtenerValor(escala);
             cout << "\n\t"<<*pAeropuerto;
-
         }
         else
         {
             cout << "\n\t" << escala ;
-
         }
         unsigned posEscala = vertices->obtenerPosicion(escala);
         escala =  recorridoMatriz->obtenerValor(posEscala , posDestino);
     }
 }
 
-void Grafo::minimoTiempo(string origen , string destino , Diccionario<string, Aeropuerto*>* &pDiccionario)
+void Grafo::minimoTiempo(string origen, string destino, Diccionario<string, Aeropuerto*>* &pDiccionario)
 {
     Matriz<float>* matrizAux = new Matriz<float>(F_INFINITO,elementos,elementos);
     Matriz<string>* recorridoMatriz = caminoMinimoTiempo(matrizAux);
@@ -233,7 +228,7 @@ void Grafo::minimoTiempo(string origen , string destino , Diccionario<string, Ae
         if (tiempoMinimo == F_INFINITO)
             throw (ExcepcionVuelo());
 
-        cout << "\n\t\t---Duracion---: "<<tiempoMinimo<<"hrs\n";
+        cout << "\n\tDuracion: " << tiempoMinimo << "hrs\n";
         mostrarEscalas( posOrigen, posDestino,recorridoMatriz,pDiccionario);
 
     }
@@ -246,7 +241,7 @@ void Grafo::minimoTiempo(string origen , string destino , Diccionario<string, Ae
     delete recorridoMatriz;
 }
 
-void Grafo::minimoPrecio(string origen , string destino , Diccionario<string, Aeropuerto*>* &pDiccionario)
+void Grafo::minimoPrecio(string origen, string destino, Diccionario<string, Aeropuerto*>* &pDiccionario)
 {
     Matriz<int>* matrizAux = new Matriz<int>(E_INFINITO,elementos,elementos);
     Matriz<string>* recorridoMatriz = caminoMinimoPrecio(matrizAux);
@@ -260,7 +255,7 @@ void Grafo::minimoPrecio(string origen , string destino , Diccionario<string, Ae
         if (precioMinimo == E_INFINITO)
             throw (ExcepcionVuelo());
 
-        cout << "\n\t\t---Precio---:"<<precioMinimo<<"$\n";
+        cout << "\n\tPrecio: $" << precioMinimo << "\n";
         mostrarEscalas(posOrigen,posDestino,recorridoMatriz,pDiccionario);
 
     }

@@ -9,13 +9,12 @@
 class Grafo {
 
     private:
-        Matriz<int>* precioMatriz;
-        Matriz<int>* preciosMinimos;
-        Matriz<float>* tiempoMatriz;
-        Matriz<float>* tiemposMinimos;
-        Matriz<string>* recorridosMinimos;
-        Lista<string>* vertices;
+        Matriz<int> *precioMatriz, *preciosMinimos;
+        Matriz<float> *tiempoMatriz, *tiemposMinimos;
+        Matriz<string> *recorridosMinimos;
+        Lista<string> *vertices;
         int elementos;
+        bool preciosMinCalculado, tiemposMinCalculados, recorridosMinCalculados;
 
     public:
 

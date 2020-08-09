@@ -8,25 +8,28 @@ const string     VACIO = "---";
 Grafo::Grafo() {
     this->elementos = 0;
     this->precioMatriz = new Matriz<int>;
-    this->preciosMinimos = new Matriz<int>;
+    this->preciosMinimos = 0;
     this->tiempoMatriz = new Matriz<float>;
-    this->tiemposMinimos = new Matriz<float>;
-    this->recorridosMinimos = new Matriz<string>;
+    this->tiemposMinimos = 0;
+    this->recorridosMinimos = 0;
     this->vertices = new Lista<string>;
     precioMatriz->asignarInicializador(E_INFINITO);
-    preciosMinimos->asignarInicializador(E_INFINITO);
     tiempoMatriz->asignarInicializador(F_INFINITO);
-    tiemposMinimos->asignarInicializador(F_INFINITO);
-    recorridosMinimos->asignarInicializador(VACIO);
+    preciosMinCalculado = false;
+    tiemposMinCalculados = false;
+    recorridosMinCalculados = false;
 }
 
 Grafo::~Grafo() {
     delete precioMatriz;
-    delete preciosMinimos;
     delete tiempoMatriz;
-    delete tiemposMinimos;
-    delete recorridosMinimos;
     delete vertices;
+    if (preciosMinCalculado)
+        delete preciosMinimos;
+    if (tiemposMinCalculados)
+        delete tiemposMinimos;
+    if (recorridosMinCalculados)
+        delete recorridosMinimos;
 }
 
 bool Grafo::existeArista(string origen, string destino) {
@@ -80,9 +83,6 @@ void Grafo::insertarArista(string origen, string destino, int precio, float tiem
         else if (existeVertice(origen)) {
             precioMatriz->agregarFilasColumnas(1, 1);
             tiempoMatriz->agregarFilasColumnas(1, 1);
-            tiempoMatriz->agregarFilasColumnas(1, 1);
-            preciosMinimos->agregarFilasColumnas(1, 1);
-            recorridosMinimos->agregarFilasColumnas(1, 1);
             vertices->insertar(destino);
             posicionOrigen = vertices->obtenerPosicion(origen);
             posicionDestino = vertices->obtenerPosicion(destino);
@@ -94,9 +94,6 @@ void Grafo::insertarArista(string origen, string destino, int precio, float tiem
         else if (existeVertice(destino)) {
             precioMatriz->agregarFilasColumnas(1, 1);
             tiempoMatriz->agregarFilasColumnas(1, 1);
-            preciosMinimos->agregarFilasColumnas(1, 1);
-            tiemposMinimos->agregarFilasColumnas(1, 1);
-            recorridosMinimos->agregarFilasColumnas(1, 1);
             vertices->insertar(origen);
             posicionOrigen = vertices->obtenerPosicion(origen);
             posicionDestino = vertices->obtenerPosicion(destino);
@@ -108,9 +105,6 @@ void Grafo::insertarArista(string origen, string destino, int precio, float tiem
         else {
             precioMatriz->agregarFilasColumnas(2, 2);
             tiempoMatriz->agregarFilasColumnas(2, 2);
-            preciosMinimos->agregarFilasColumnas(2, 2);
-            tiemposMinimos->agregarFilasColumnas(2, 2);
-            recorridosMinimos->agregarFilasColumnas(2, 2);
             vertices->insertar(origen);
             vertices->insertar(destino);
             posicionOrigen = vertices->obtenerPosicion(origen);
@@ -125,6 +119,13 @@ void Grafo::insertarArista(string origen, string destino, int precio, float tiem
 }
 
 void Grafo::calcularRecorridosMinimos() {
+    if (!recorridosMinCalculados)
+        recorridosMinimos = new Matriz<string>(VACIO, elementos, elementos);
+    else {
+        int filas = recorridosMinimos->longitudFilas();
+        if (filas < elementos)
+            recorridosMinimos->agregarFilasColumnas((elementos - filas), (elementos - filas));
+    }
     for (int i = 0; i < elementos; i++) {
         for (int j = 0; j < elementos; j++) {
             if (i != j) {
@@ -133,12 +134,22 @@ void Grafo::calcularRecorridosMinimos() {
             }
         }
     }
+    recorridosMinCalculados = true;
 }
 
 void Grafo::calcularPreciosMinimos() {
 
+    if (!preciosMinCalculado)
+        preciosMinimos = new Matriz<int>(E_INFINITO, elementos, elementos);
+    else {
+        int filas = preciosMinimos->longitudFilas();
+        if (filas < elementos)
+            preciosMinimos->agregarFilasColumnas((elementos - filas), (elementos - filas));
+    }
     precioMatriz->copiarMatriz(preciosMinimos);
-    calcularRecorridosMinimos();
+
+    if (!recorridosMinCalculados)
+        calcularRecorridosMinimos();
 
     for (unsigned k = 0; k < elementos; k++) {
         for (unsigned i = 0;  i < elementos; i++) {
@@ -154,12 +165,23 @@ void Grafo::calcularPreciosMinimos() {
             }
         }
     }
+    preciosMinCalculado = true;
 }
 
 void Grafo::calcularTiemposMinimos() {
 
+    if (!tiemposMinCalculados)
+        tiemposMinimos = new Matriz<float>(F_INFINITO, elementos, elementos);
+    else {
+        int filas = tiemposMinimos->longitudFilas();
+        if (filas < elementos)
+            tiemposMinimos->agregarFilasColumnas((elementos - filas), (elementos - filas));
+    }
+
     tiempoMatriz->copiarMatriz(tiemposMinimos);
-    calcularRecorridosMinimos();
+
+    if (!recorridosMinCalculados)
+        calcularRecorridosMinimos();
 
     for (unsigned k = 0; k < elementos; k++) {
         for (unsigned i = 0;  i < elementos; i++) {
@@ -175,6 +197,7 @@ void Grafo::calcularTiemposMinimos() {
             }
         }
     }
+    tiemposMinCalculados = true;
 }
 
 void Grafo::mostrarEscalas(unsigned posOrigen, unsigned posDestino, Matriz<string>* &recorridoMatriz, Diccionario<string, Aeropuerto*>* &pDiccionario) {

@@ -10,7 +10,7 @@ const char MENOR_TIEMPO = '2';
 const char VOLVER_MENU  = '0';
 
 void MenuVuelo::mostrarOpciones() {
-    cout << "\n\t------------------- Menu Vuelo -------------------\n";
+    cout << "\n\t------------------- Menu Vuelo -------------------";
     cout << "\n\t" << MENOR_COSTO << ". Menor costo";
     cout << "\n\t" << MENOR_TIEMPO << ". Menor tiempo";
     cout << "\n\t" << VOLVER_MENU << ". Volver al menu principal";

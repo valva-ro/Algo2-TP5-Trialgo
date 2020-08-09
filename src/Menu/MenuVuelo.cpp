@@ -1,7 +1,7 @@
 #include <iostream>
 
+#include "../Validaciones.h"
 #include "MenuVuelo.h"
-#include "Validaciones.h"
 
 using namespace std;
 

@@ -1,5 +1,5 @@
 #include "Grafo.h"
-#include "ExcepcionVuelo.h"
+#include "../../excepciones/ExcepcionVuelo.h"
 
 const int   E_INFINITO = 100000;
 const float F_INFINITO = 100000.0;

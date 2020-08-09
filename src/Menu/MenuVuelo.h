@@ -1,9 +1,9 @@
 #ifndef TP5_TRIALGO_MENUVUELO_H
 #define TP5_TRIALGO_MENUVUELO_H
 
-#include "Diccionario.h"
-#include "Aeropuerto.h"
-#include "Grafo.h"
+#include "../Estructuras No Lineales/Diccionario.h"
+#include "../Aeropuerto.h"
+#include "../Estructuras No Lineales/Grafo.h"
 
 class MenuVuelo {
 

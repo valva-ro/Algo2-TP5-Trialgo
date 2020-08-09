@@ -1,8 +1,8 @@
 #ifndef TP5_TRIALGO_GRAFO_H
 #define TP5_TRIALGO_GRAFO_H
 
-#include "Lista.h"
-#include "Aeropuerto.h"
+#include "../Estructuras Lineales/Lista.h"
+#include "../Aeropuerto.h"
 #include "Diccionario.h"
 #include "Matriz.h"
 

@@ -16,7 +16,7 @@
                          los aeropuertos y el tercer argumento para los vuelos
 */
 
-#include "Menu.h"
+#include "Menu/Menu.h"
 const int AEROPUERTOS_TXT = 2;
 const int AEROPUERTO_Y_VUELOS_TXT = 3;
 

@@ -56,6 +56,9 @@ void MenuVuelo::menorCosto() {
     validacion.longitudString(destino, 3);
     validacion.convertirEnMayusculas(destino);
 
+    vuelos->calcularPreciosMinimos();
+    vuelos->calcularRecorridosMinimos();
+
     if (vuelos->existeVertice(origen) && vuelos->existeVertice(destino)) {
         cout << "\n\tOrigen:";
         if (aeropuertos->existe(origen))
@@ -69,7 +72,7 @@ void MenuVuelo::menorCosto() {
         else
             cout << "\n\t" << destino << "\n";
 
-        vuelos->minimoPrecio(origen,destino,aeropuertos);
+        vuelos->minimoPrecio(origen, destino, aeropuertos);
 
     }
     else
@@ -90,6 +93,9 @@ void MenuVuelo::menorTiempo() {
     validacion.longitudString(destino, 3);
     validacion.convertirEnMayusculas(destino);
 
+    vuelos->calcularTiemposMinimos();
+    vuelos->calcularRecorridosMinimos();
+
     if (vuelos->existeVertice(origen) && vuelos->existeVertice(destino)) {
         cout << "\n\tOrigen:";
         if (aeropuertos->existe(origen))
@@ -98,13 +104,12 @@ void MenuVuelo::menorTiempo() {
             cout << "\n\t" << origen << "\n";
 
         cout << "\n\tDestino:";
-
         if (aeropuertos->existe(destino))
             cout << *aeropuertos->obtenerValor(destino);
         else
             cout << "\n\t" << destino << "\n";
 
-        vuelos->minimoTiempo(origen,destino,aeropuertos);
+        vuelos->minimoTiempo(origen, destino, aeropuertos);
 
     }
     else

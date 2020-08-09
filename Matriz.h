@@ -418,15 +418,12 @@ Tipo Matriz<Tipo>::obtenerValor(const unsigned posicionFila, const unsigned posi
 }
 
 template < class Tipo>
-void Matriz<Tipo>::copiarMatriz(Matriz<Tipo>* &aux)
-{
+void Matriz<Tipo>::copiarMatriz(Matriz<Tipo>* &aux) {
     Tipo valor;
-    for(unsigned i = 0 ; i < filas; i++)
-    {
-        for(unsigned j = 0 ; j < columnas ; j ++ )
-        {
-            valor = this->obtenerValor(i,j);
-            aux->modificarElemento(valor,i,j);
+    for(unsigned i = 0; i < filas; i++) {
+        for(unsigned j = 0; j < columnas; j++) {
+            valor = this->obtenerValor(i, j);
+            aux->modificarElemento(valor, i, j);
         }
     }
 }

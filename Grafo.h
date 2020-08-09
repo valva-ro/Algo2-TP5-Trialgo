@@ -6,12 +6,14 @@
 #include "Diccionario.h"
 #include "Matriz.h"
 
-
 class Grafo {
 
     private:
         Matriz<int>* precioMatriz;
+        Matriz<int>* preciosMinimos;
         Matriz<float>* tiempoMatriz;
+        Matriz<float>* tiemposMinimos;
+        Matriz<string>* recorridosMinimos;
         Lista<string>* vertices;
         int elementos;
 
@@ -21,11 +23,6 @@ class Grafo {
         //PRE: -
         //POST: Crea un grafo vacio reservando memoria para las estructuras
         Grafo();
-
-        //DESCRIPCION: Constructor con parametros
-        //PRE: -
-        //POST: Crea un objeto grafo asignando los atributos con los valores recibidos
-        Grafo(Matriz<int>* precio, Matriz<float>* distancia, int elementos, Lista<string>* vertices);
 
         //DESCRIPCION: Destructor del grafo
         //PRE: Las estructuras (matrices y lista) deben estar en memoria dinamica
@@ -61,27 +58,27 @@ class Grafo {
 
         //PRE:  Matriz inicializada con NONE(x)
         //POST: Genera  la matriz de recorrido para el algoritmo
-        Matriz<string>* generarRecorrido();
+        void calcularRecorridosMinimos();
 
         //PRE:  Matriz cargada
         //POST: Devuelve la matriz con los recorridos minimos y modifica la matriz de tiempo
-        Matriz<string>* caminoMinimoTiempo(Matriz<float>* &tiempoMatriz);
+        void calcularTiemposMinimos();
 
         //PRE:  Matriz cargada
         //POST: Devuelve la matriz con los recorridos minimos y modifica la matriz de precio
-        Matriz<string>* caminoMinimoPrecio(Matriz<int>* &precioMatriz);
+        void calcularPreciosMinimos();
 
         //PRE:  Matriz cargada
         //POST: Devuelve una lista con las escalas del viaje
-        void mostrarEscalas(unsigned posOrigen, unsigned posDestino, Matriz<string>* &recorridoMatriz,Diccionario<string, Aeropuerto*>* &pDiccionario);
+        void mostrarEscalas(unsigned posOrigen, unsigned posDestino, Matriz<string>* &recorridoMatriz, Diccionario<string, Aeropuerto*>* &pDiccionario);
 
         //PRE :Recibe el destino y el origen validados
         //POST:Arma el pasaje del vuelo , de no se posible , corre la excepcion de vuelo
-        void minimoPrecio(string origen, string destino , Diccionario<string, Aeropuerto*>* &pDiccionario);
+        void minimoPrecio(string origen, string destino, Diccionario<string, Aeropuerto*>* &pDiccionario);
 
         //PRE :Recibe el destino y el origen ya validados
         //POST:Arma el pasaje del vuelo , de no se posible , corre la excepcion de vuelo
-        void minimoTiempo(string origen, string destino,Diccionario<string, Aeropuerto*>* &pDiccionario);
+        void minimoTiempo(string origen, string destino, Diccionario<string, Aeropuerto*>* &pDiccionario);
 };
 
 #endif //TP5_TRIALGO_GRAFO_H

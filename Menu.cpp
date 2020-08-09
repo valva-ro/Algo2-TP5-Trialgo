@@ -1,9 +1,9 @@
 #include "Menu.h"
 #include <iostream>
 
-const char MENU_AEROPUERTO = '1';
-const char MENU_VUELO = '2';
-const char SALIR = '0';
+const char MENU_AEROPUERTO = '1',
+                MENU_VUELO = '2',
+                     SALIR = '0';
 
 using namespace std;
 
@@ -21,7 +21,6 @@ Menu::Menu(const string& rutaArchAeropuertos, const string& rutaArchVuelos) {
 }
 
 Menu::~Menu() {
-
     menuAeropuerto.liberarRecursos();
     menuVuelo.liberarRecursos();
 }
@@ -37,7 +36,6 @@ void Menu::mostrarOpciones() {
 
 void Menu::selectorOpcion() {
     cin >> opcion;
-
     switch (opcion) {
         case MENU_AEROPUERTO: menuAeropuerto.mostrarOpciones(); break;
         case MENU_VUELO: menuVuelo.mostrarOpciones(); break;
@@ -45,7 +43,6 @@ void Menu::selectorOpcion() {
         default: cout <<  "\tValor incorrecto. Debe ingresar un numero del 1 al 3. Volviendo al Menu principal\n"; break;
     }
 
-    if(opcion!=SALIR){
+    if(opcion!=SALIR)
         mostrarOpciones();
-    }
 }

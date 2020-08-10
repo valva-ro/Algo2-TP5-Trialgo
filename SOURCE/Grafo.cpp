@@ -117,12 +117,12 @@ void Grafo::mostrarCaminosMinimosPrecios(string origen, string destino, Dicciona
     int posOrigen = vertices->obtenerPosicion(origen);
     int posDestino = vertices->obtenerPosicion(destino);
 
-    cout << "\n\t----- Origen ----";
+    cout << "\n\tOrigen:";
     if (aeropuertos->existe(origen))
         cout << *aeropuertos->obtenerValor(origen);
     else
         cout << "\n\t" << origen;
-    cout << "\n\t---- Destino ----";
+    cout << "\n\tDestino:";
     if (aeropuertos->existe(destino))
         cout << *aeropuertos->obtenerValor(destino);
     else
@@ -152,12 +152,12 @@ void Grafo::mostrarCaminosMinimosTiempos(string origen, string destino, Dicciona
     int posOrigen = vertices->obtenerPosicion(origen);
     int posDestino = vertices->obtenerPosicion(destino);
 
-    cout << "\n\t----- Origen ----";
+    cout << "\n\tOrigen:";
     if (aeropuertos->existe(origen))
         cout << *aeropuertos->obtenerValor(origen);
     else
         cout << "\n\t" << origen;
-    cout << "\n\t---- Destino ----";
+    cout << "\n\tDestino:";
     if (aeropuertos->existe(destino))
         cout << *aeropuertos->obtenerValor(destino);
     else
@@ -228,22 +228,6 @@ CaminoMinimoPrecio Grafo::caminoMinimoPrecio() {
                 }
             }
         }
-    }
-
-    cout << "\n\t--------------- PRECIOS ---------------\n";
-    for (int i = 0; i < elementos; ++i) {
-        for (int j = 0; j < elementos; ++j) {
-            cout << "\t" << minPrecio.precios->obtenerValor(i, j);
-        }
-        cout << "\n";
-    }
-
-    cout << "\n\t--------------- RUTAS ---------------\n";
-    for (int i = 0; i < elementos; ++i) {
-        for (int j = 0; j < elementos; ++j) {
-            cout << "\t" << minPrecio.rutas->obtenerValor(i, j);
-        }
-        cout << "\n";
     }
     return minPrecio;
 }

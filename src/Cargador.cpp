@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../HEADERS/Cargador.h"
+#include "Cargador.h"
 
     /// METODOS PRIVADOS ///
 

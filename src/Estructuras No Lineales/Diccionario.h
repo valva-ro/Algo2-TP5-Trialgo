@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "NodoDiccionario.h"
-#include "Cola.h"
+#include "../Estructuras Lineales/Cola.h"
 
 using namespace std;
 

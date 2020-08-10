@@ -1,9 +1,9 @@
 #ifndef TP5_TRIALGO_GRAFO_H
 #define TP5_TRIALGO_GRAFO_H
 
-#include "Lista.h"
+#include "../Estructuras Lineales/Lista.h"
 #include "Diccionario.h"
-#include "Aeropuerto.h"
+#include "../Aeropuerto.h"
 #include "Matriz.h"
 
 struct CaminoMinimoPrecio{

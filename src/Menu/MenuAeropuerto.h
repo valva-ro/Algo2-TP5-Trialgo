@@ -1,9 +1,9 @@
 #ifndef TP5_TRIALGO_MENUAEROPUERTO_H
 #define TP5_TRIALGO_MENUAEROPUERTO_H
 
-#include "Cargador.h"
-#include "Aeropuerto.h"
-#include "Diccionario.h"
+#include "../Cargador.h"
+#include "../Aeropuerto.h"
+#include "../Estructuras No Lineales/Diccionario.h"
 
 class MenuAeropuerto {
 private:

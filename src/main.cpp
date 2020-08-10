@@ -16,14 +16,14 @@
                          los aeropuertos y el tercer argumento para los vuelos
 */
 
-#include "../HEADERS/Menu.h"
+#include "Menu/Menu.h"
 const int AEROPUERTOS_TXT = 2;
 const int AEROPUERTO_Y_VUELOS_TXT = 3;
 
 int main(int argc, char *argv[]) {
 
-    string archAeropuertos = "archivoAeropuertos.txt";
-    string archVuelos = "archivoVuelos.txt";
+    string archAeropuertos = "../res/archivoAeropuertos.txt";
+    string archVuelos = "../res/archivoVuelos.txt";
 
     switch (argc) {
         case AEROPUERTOS_TXT:

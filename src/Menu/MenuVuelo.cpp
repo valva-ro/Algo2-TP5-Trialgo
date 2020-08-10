@@ -1,6 +1,6 @@
 #include <iostream>
-#include "../HEADERS/MenuVuelo.h"
-#include "../HEADERS/Validaciones.h"
+#include "MenuVuelo.h"
+#include "../Validaciones.h"
 
 using namespace std;
 

@@ -235,9 +235,6 @@ CaminoMinimoPrecio Grafo::caminoMinimoPrecio() {
                     minPrecio.precios->modificarElemento(precioMin, i, j);
                     minPrecio.rutas->modificarElemento(vertices->obtenerDato(k), i, j);
                 }
-                else if (i != j && precioMin == minPrecio.precios->obtenerValor(i, j) && precioMin < E_INFINITO) {
-                    // TODO: Guardar esta posibilidad en algun lado
-                }
             }
         }
     }
@@ -255,9 +252,6 @@ CaminoMinimoTiempo Grafo::caminoMinimoTiempo() {
                 if (i != j && tiempoMin < minTiempo.tiempos->obtenerValor(i, j)) {
                     minTiempo.tiempos->modificarElemento(tiempoMin, i, j);
                     minTiempo.rutas->modificarElemento(vertices->obtenerDato(k), i, j);
-                }
-                else if (i != j && tiempoMin == minTiempo.tiempos->obtenerValor(i, j) && tiempoMin < F_INFINITO) {
-                    // TODO: Guardar esta posibilidad en algun lado
                 }
             }
         }

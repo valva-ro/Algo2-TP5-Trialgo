@@ -175,9 +175,17 @@ void Grafo::mostrarCaminosMinimos(string origen, string destino, CaminoMinimoTie
 CaminoMinimoPrecio Grafo::inicializarMatricesPrecio() {
 
     CaminoMinimoPrecio inicializado;
-    inicializado.precios = new Matriz<int>(precioMatriz->obtenerInicializador(), elementos, elementos);
-    inicializado.rutas = new Matriz<string>(NULO, elementos, elementos);
-
+    if (!inicializado.calculado) {
+        inicializado.precios = new Matriz<int>(precioMatriz->obtenerInicializador(), elementos, elementos);
+        inicializado.rutas = new Matriz<string>(NULO, elementos, elementos);
+        inicializado.calculado = true;
+    }
+    else {
+        delete inicializado.precios;
+        delete inicializado.rutas;
+        inicializado.precios = new Matriz<int>(precioMatriz->obtenerInicializador(), elementos, elementos);
+        inicializado.rutas = new Matriz<string>(NULO, elementos, elementos);
+    }
     for (int i = 0; i < elementos; i++) {
         for (int j = 0; j < elementos; j++) {
             if (i != j) {
@@ -192,13 +200,22 @@ CaminoMinimoPrecio Grafo::inicializarMatricesPrecio() {
 CaminoMinimoTiempo Grafo::inicializarMatricesTiempo() {
 
     CaminoMinimoTiempo inicializado;
-    inicializado.tiempos = new Matriz<float>(tiempoMatriz->obtenerInicializador(), elementos, elementos);
-    inicializado.rutas = new Matriz<string>(NULO, elementos, elementos);
+    if (!inicializado.calculado) {
+        inicializado.tiempos = new Matriz<float>(tiempoMatriz->obtenerInicializador(), elementos, elementos);
+        inicializado.rutas = new Matriz<string>(NULO, elementos, elementos);
+        inicializado.calculado = true;
+    }
+    else {
+        delete inicializado.tiempos;
+        delete inicializado.rutas;
+        inicializado.tiempos = new Matriz<float>(tiempoMatriz->obtenerInicializador(), elementos, elementos);
+        inicializado.rutas = new Matriz<string>(NULO, elementos, elementos);
+    }
 
     for (int i = 0; i < elementos; i++) {
         for (int j = 0; j < elementos; j++) {
             if (i != j) {
-                inicializado.tiempos->modificarElemento(tiempoMatriz->obtenerValor(i,j), i, j);
+                inicializado.tiempos->modificarElemento(tiempoMatriz->obtenerValor(i, j), i, j);
                 inicializado.rutas->modificarElemento(vertices->obtenerDato(i), j, i);
             }
         }
@@ -213,9 +230,13 @@ CaminoMinimoPrecio Grafo::caminoMinimoPrecio() {
     for(int k = 0; k < elementos; k++) {
         for (int i = 0; i < elementos; i++) {
             for (int j = 0; j < elementos; j++) {
-                if (i != j && minPrecio.precios->obtenerValor(i, k) + minPrecio.precios->obtenerValor(k, j) < minPrecio.precios->obtenerValor(i, j)) {
-                    minPrecio.precios->modificarElemento((minPrecio.precios->obtenerValor(i, k) + minPrecio.precios->obtenerValor(k, j)), i, j);
+                int precioMin = minPrecio.precios->obtenerValor(i, k) + minPrecio.precios->obtenerValor(k, j);
+                if (i != j && precioMin < minPrecio.precios->obtenerValor(i, j)) {
+                    minPrecio.precios->modificarElemento(precioMin, i, j);
                     minPrecio.rutas->modificarElemento(vertices->obtenerDato(k), i, j);
+                }
+                else if (i != j && precioMin == minPrecio.precios->obtenerValor(i, j) && precioMin < E_INFINITO) {
+                    // TODO: Guardar esta posibilidad en algun lado
                 }
             }
         }
@@ -230,9 +251,13 @@ CaminoMinimoTiempo Grafo::caminoMinimoTiempo() {
     for(int k = 0; k < elementos; k++) {
         for (int i = 0; i < elementos; i++) {
             for (int j = 0; j < elementos; j++) {
-                if (i != j && minTiempo.tiempos->obtenerValor(i, k) + minTiempo.tiempos->obtenerValor(k, j) < minTiempo.tiempos->obtenerValor(i, j)) {
-                    minTiempo.tiempos->modificarElemento((minTiempo.tiempos->obtenerValor(i, k) + minTiempo.tiempos->obtenerValor(k, j)), i, j);
-                    minTiempo.rutas->modificarElemento(vertices->obtenerDato(k),i,j);
+                float tiempoMin = minTiempo.tiempos->obtenerValor(i, k) + minTiempo.tiempos->obtenerValor(k, j);
+                if (i != j && tiempoMin < minTiempo.tiempos->obtenerValor(i, j)) {
+                    minTiempo.tiempos->modificarElemento(tiempoMin, i, j);
+                    minTiempo.rutas->modificarElemento(vertices->obtenerDato(k), i, j);
+                }
+                else if (i != j && tiempoMin == minTiempo.tiempos->obtenerValor(i, j) && tiempoMin < F_INFINITO) {
+                    // TODO: Guardar esta posibilidad en algun lado
                 }
             }
         }

@@ -9,11 +9,13 @@
 struct CaminoMinimoPrecio{
     Matriz<int>* precios;
     Matriz<string>* rutas;
+    bool calculado = false;
 };
 
 struct CaminoMinimoTiempo{
     Matriz<float>* tiempos;
     Matriz<string>* rutas;
+    bool calculado = false;
 };
 
 class Grafo {

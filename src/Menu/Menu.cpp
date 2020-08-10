@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "Menu.h"
-#include "../Cargador.h"
 
 const char MENU_AEROPUERTO = '1';
 const char MENU_VUELO = '2';

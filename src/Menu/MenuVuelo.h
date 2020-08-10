@@ -10,8 +10,13 @@ private:
     Grafo* vuelos;
     Diccionario<string, Aeropuerto*>* aeropuertos;
     char opcion;
+    CaminoMinimoPrecio caminoMinPrecio;
+    CaminoMinimoTiempo caminoMinTiempo;
+    bool precioMininmoActualizado, tiempoMininmoActualizado;
 
 public:
+    MenuVuelo();
+
     //DESCRIPCION: Le asigna el puntero recibido al atributo por referencia
     //PRE: -
     //POST: Le asigna el puntero recibido al atributo por referencia

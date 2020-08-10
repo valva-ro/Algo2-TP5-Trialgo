@@ -57,7 +57,6 @@ int Grafo::obtenerPrecio(string origen, string destino) {
     if(existeArista(origen,destino))
         precio = precioMatriz->obtenerValor(vertices->obtenerPosicion(origen),vertices->obtenerPosicion(destino));
     return precio;
-
 }
 
 void Grafo::insertarArista(string origen, string destino, int precio, float tiempo) {
@@ -111,9 +110,8 @@ void Grafo::insertarArista(string origen, string destino, int precio, float tiem
         cout<<"\n\tYa existe una ruta que conecta " << origen << " con " << destino;
 }
 
-void Grafo::mostrarCaminosMinimosPrecios(string origen, string destino, Diccionario<string, Aeropuerto*> *&aeropuertos) {
+void Grafo::mostrarCaminosMinimos(string origen, string destino, CaminoMinimoPrecio minPrecio, Diccionario<string, Aeropuerto*> *&aeropuertos) {
 
-    CaminoMinimoPrecio minPrecio = caminoMinimoPrecio();
     int posOrigen = vertices->obtenerPosicion(origen);
     int posDestino = vertices->obtenerPosicion(destino);
 
@@ -141,14 +139,10 @@ void Grafo::mostrarCaminosMinimosPrecios(string origen, string destino, Dicciona
         posOrigen = vertices->obtenerPosicion(minPrecio.rutas->obtenerValor(posOrigen, posDestino));
         i++;
     }
-
-    delete minPrecio.precios;
-    delete minPrecio.rutas;
 }
 
-void Grafo::mostrarCaminosMinimosTiempos(string origen, string destino, Diccionario<string, Aeropuerto*> *&aeropuertos) {
+void Grafo::mostrarCaminosMinimos(string origen, string destino, CaminoMinimoTiempo minTiempo, Diccionario<string, Aeropuerto*> *&aeropuertos) {
 
-    CaminoMinimoTiempo minTiempo = caminoMinimoTiempo();
     int posOrigen = vertices->obtenerPosicion(origen);
     int posDestino = vertices->obtenerPosicion(destino);
 
@@ -176,9 +170,6 @@ void Grafo::mostrarCaminosMinimosTiempos(string origen, string destino, Dicciona
         posOrigen = vertices->obtenerPosicion(minTiempo.rutas->obtenerValor(posOrigen, posDestino));
         i++;
     }
-
-    delete minTiempo.tiempos;
-    delete minTiempo.rutas;
 }
 
 CaminoMinimoPrecio Grafo::inicializarMatricesPrecio() {

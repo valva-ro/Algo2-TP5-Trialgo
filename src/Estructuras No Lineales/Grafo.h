@@ -68,15 +68,25 @@ class Grafo {
         //      devuelve el tiempo de la arista. Sino devuelve F_INFINITO
         float obtenerTiempo(string origen, string destino);
 
+        //DESCRIPCION: Devuelve un struct que contiene las matrices con los caminos minimos de precios
+        //PRE: La matriz de precios debe estar cargada
+        //POST: Devuelve un struct que contiene las matrices con los caminos minimos de precios
+        CaminoMinimoPrecio caminoMinimoPrecio();
+
+        //DESCRIPCION: Devuelve un struct que contiene las matrices con los caminos minimos de tiempos
+        //PRE: La matriz de tiempos debe estar cargada
+        //POST: Devuelve un struct que contiene las matrices con los caminos minimos de tiempos
+        CaminoMinimoTiempo caminoMinimoTiempo();
+
         //DESCRIPCION: Muestra por pantalla la matriz los caminos minimos de precios
         //PRE: La matriz debe estar cargada
         //POST: Muestra por pantalla la matriz los caminos minimos de precios
-        void mostrarCaminosMinimosPrecios(string origen, string destino, Diccionario<string, Aeropuerto*> *&aeropuertos);
+        void mostrarCaminosMinimos(string origen, string destino, CaminoMinimoTiempo caminoMin, Diccionario<string, Aeropuerto*> *&aeropuertos);
 
         //DESCRIPCION: Muestra por pantalla la matriz los caminos minimos de tiempos
         //PRE: La matriz debe estar cargada
         //POST: Muestra por pantalla la matriz los caminos minimos de tiempos
-        void mostrarCaminosMinimosTiempos(string origen, string destino, Diccionario<string, Aeropuerto*> *&aeropuertos);
+        void mostrarCaminosMinimos(string origen, string destino, CaminoMinimoPrecio caminoMin, Diccionario<string, Aeropuerto*> *&aeropuertos);
 
     private:
 
@@ -89,16 +99,6 @@ class Grafo {
         //PRE: La matriz de tiempos debe estar cargada
         //POST: Devuelve un struct con las matrices inicializadas
         CaminoMinimoTiempo inicializarMatricesTiempo();
-
-        //DESCRIPCION: Devuelve un struct que contiene las matrices con los caminos minimos de precios
-        //PRE: La matriz de precios debe estar cargada
-        //POST: Devuelve un struct que contiene las matrices con los caminos minimos de precios
-        CaminoMinimoPrecio caminoMinimoPrecio();
-
-        //DESCRIPCION: Devuelve un struct que contiene las matrices con los caminos minimos de tiempos
-        //PRE: La matriz de tiempos debe estar cargada
-        //POST: Devuelve un struct que contiene las matrices con los caminos minimos de tiempos
-        CaminoMinimoTiempo caminoMinimoTiempo();
 };
 
 #endif //TP5_TRIALGO_GRAFO_H

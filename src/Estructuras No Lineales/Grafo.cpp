@@ -2,7 +2,6 @@
 
 const int E_INFINITO = 999999;
 const float F_INFINITO = 999998.3;
-const string NULO = "---";
 
 Grafo::Grafo() {
     this->elementos = 0;
@@ -13,20 +12,13 @@ Grafo::Grafo() {
     tiempoMatriz->asignarInicializador(F_INFINITO);
 }
 
-Grafo::Grafo(Matriz<int> *precio, Matriz<float> *tiempo, int elementos, Lista<string> *vertices) {
-    this->tiempoMatriz = tiempo;
-    this->elementos = vertices->obtenerTam();
-    this->precioMatriz = precio;
-    this->vertices = vertices;
-}
-
 Grafo::~Grafo() {
     delete precioMatriz;
     delete tiempoMatriz;
     delete vertices;
 }
 
-bool Grafo::existeArista(string origen, string destino) {
+bool Grafo::existeArista(const string &origen, const string &destino) {
     bool existe = false;
     if (existeVertice(origen) && existeVertice(destino)) {
         int posicionOrigen = vertices->obtenerPosicion(origen);
@@ -38,30 +30,30 @@ bool Grafo::existeArista(string origen, string destino) {
     return existe;
 }
 
-bool Grafo::existeVertice(string vertice) {
+bool Grafo::existeVertice(const string &vertice) {
     bool existe = false;
     if (vertices->obtenerPosicion(vertice) != -1)
         existe = true;
     return  existe;
 }
 
-float Grafo::obtenerTiempo(string origen, string destino) {
+float Grafo::obtenerTiempo(const string &origen, const string &destino) {
     float tiempo = F_INFINITO;
     if(existeArista(origen,destino))
         tiempo = tiempoMatriz->obtenerValor(vertices->obtenerPosicion(origen),vertices->obtenerPosicion(destino));
     return tiempo;
 }
 
-int Grafo::obtenerPrecio(string origen, string destino) {
+int Grafo::obtenerPrecio(const string &origen, const string &destino) {
     int precio = E_INFINITO;
     if(existeArista(origen,destino))
         precio = precioMatriz->obtenerValor(vertices->obtenerPosicion(origen),vertices->obtenerPosicion(destino));
     return precio;
 }
 
-void Grafo::insertarArista(string origen, string destino, int precio, float tiempo) {
-    int posicionDestino;
-    int posicionOrigen;
+void Grafo::insertarArista(const string &origen, const string &destino, int precio, float tiempo) {
+
+    unsigned int posicionDestino, posicionOrigen;
 
     if(!existeArista(origen,destino)) {
 
@@ -123,7 +115,7 @@ void Grafo::mostrarRuta(string recorrido[], unsigned pos,
         cout << "\n\t" << escala << "\n";
 }
 
-void Grafo::mostrarCaminosMinimos(string origen, string destino, unsigned distancias[], string recorrido[],
+void Grafo::mostrarCaminosMinimos(const string &origen, const string &destino, unsigned distancias[], string recorrido[],
                                   Diccionario<string, Aeropuerto *> *&aeropuertos) {
     cout << "\n\tOrigen:";
     if (aeropuertos->existe(origen))
@@ -142,7 +134,7 @@ void Grafo::mostrarCaminosMinimos(string origen, string destino, unsigned distan
     mostrarRuta(recorrido, posDestino, aeropuertos);
 }
 
-unsigned Grafo::distanciaMinima(unsigned *distancias, bool visitados[]) {
+unsigned Grafo::distanciaMinima(unsigned distancias[], bool visitados[]) {
     unsigned min = E_INFINITO, indiceMin = 0;
     for (unsigned i = 0; i < elementos; i++) {
         if (!visitados[i] && distancias[i] <= min) {
@@ -153,7 +145,7 @@ unsigned Grafo::distanciaMinima(unsigned *distancias, bool visitados[]) {
     return indiceMin;
 }
 
-void Grafo::caminoMinimoPrecio(string origen, string destino, Diccionario<string, Aeropuerto *> *&aeropuertos) {
+void Grafo::caminoMinimoPrecio(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos) {
 
     unsigned distancias[elementos];
     bool visitados[elementos];
@@ -174,7 +166,7 @@ void Grafo::caminoMinimoPrecio(string origen, string destino, Diccionario<string
             unsigned minDist = distancias[posMin] + precioMatriz->obtenerValor(posMin, j);
             if (!visitados[j] && distancias[posMin] != E_INFINITO && minDist < distancias[j]) {
                 distancias[j] = minDist;
-                recorrido[j] = posMin;
+                recorrido[j] = vertices->obtenerDato(posMin);
             }
         }
     }
@@ -185,6 +177,6 @@ void Grafo::caminoMinimoPrecio(string origen, string destino, Diccionario<string
     mostrarCaminosMinimos(origen, destino, distancias, recorrido, aeropuertos);
 }
 
-void Grafo::caminoMinimoTiempo(string origen, string destino, Diccionario<string, Aeropuerto *> *&aeropuertos) {
+void Grafo::caminoMinimoTiempo(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos) {
     //TODO
 }

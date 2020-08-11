@@ -21,11 +21,6 @@ class Grafo {
         //POST: Crea un grafo vacio reservando memoria para las estructuras
         Grafo();
 
-        //DESCRIPCION: Constructor con parametros
-        //PRE: -
-        //POST: Crea un objeto grafo asignando los atributos con los valores recibidos
-        Grafo(Matriz<int>* precio, Matriz<float>* distancia, int elementos, Lista<string>* vertices);
-
         //DESCRIPCION: Destructor del grafo
         //PRE: Las estructuras (matrices y lista) deben estar en memoria dinamica
         //POST: Libera los recursos
@@ -34,44 +29,44 @@ class Grafo {
         //DESCRIPCION: Devuelve verdadero si exsiste el vertice
         //PRE: -
         //POST: Devuelve verdadero si exsiste el vertice
-        bool existeVertice(string vertice);
+        bool existeVertice(const string &vertice);
 
         //DESCRIPCION: Devuelve verdadero si exsiste la arista entre origen y destino
         //PRE: -
         //POST: Devuelve verdadero si exsiste la arista entre origen y destino
-        bool existeArista(string origen, string destino);
+        bool existeArista(const string &origen, const string &destino);
 
         //DESCRIPCION: Si no existe la arista en el grafo, se inserta una nueva con los valores recibidos
         //PRE:
         //POST: Inserta una nueva arista de vertice a destino y asigna los costos en la matriz correspondiente
-        void insertarArista(string origen, string destino, int precio, float distancia);
+        void insertarArista(const string &origen, const string &destino, int precio, float distancia);
 
         //DESCRIPCION: Devuelve el peso "precio" de la arista entre origen y destino
         //PRE: -
         //POST: Si origen y destino pertenecen al grafo y existe una arista que los conecte,
         //      devuelve el precio de la arista. Sino devuelve E_INFINITO
-        int obtenerPrecio(string origen, string destino);
+        int obtenerPrecio(const string &origen, const string &destino);
 
         //DESCRIPCION: Devuelve el peso "horas" de la arista entre origen y destino
         //PRE: -
         //POST: Si origen y destino pertenecen al grafo y existe una arista que los conecte,
         //      devuelve el tiempo de la arista. Sino devuelve F_INFINITO
-        float obtenerTiempo(string origen, string destino);
+        float obtenerTiempo(const string &origen, const string &destino);
 
         //PRE: La matriz debe estar cargada
         //POST: Muestra por pantalla la matriz los caminos minimos de precios
-        void mostrarCaminosMinimos(string origen, string destino, unsigned distancias[], string recorrido[], Diccionario<string, Aeropuerto*> *&aeropuertos);
+        void mostrarCaminosMinimos(const string &origen, const string &destino, unsigned distancias[], string recorrido[], Diccionario<string, Aeropuerto*> *&aeropuertos);
         void mostrarRuta(string recorrido[], unsigned pos, Diccionario<string, Aeropuerto *> *&aeropuertos);
 
         unsigned distanciaMinima(unsigned distancias[], bool visitados[]);
 
         //PRE: La matriz de precios debe estar cargada
         //POST: Devuelve una lista que contiene las precios minimos de origen a destino
-        void caminoMinimoPrecio(string origen, string destino, Diccionario<string, Aeropuerto *> *&aeropuertos);
+        void caminoMinimoPrecio(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos);
 
         //PRE: La matriz de tiempos debe estar cargada
         //POST: Devuelve una lista que contiene las tiempos minimos de origen a destino
-        void caminoMinimoTiempo(string origen, string destino, Diccionario<string, Aeropuerto *> *&aeropuertos);
+        void caminoMinimoTiempo(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos);
 };
 
 #endif //TP5_TRIALGO_GRAFO_H

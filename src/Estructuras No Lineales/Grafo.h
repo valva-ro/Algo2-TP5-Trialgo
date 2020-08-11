@@ -53,19 +53,24 @@ class Grafo {
         //      devuelve el tiempo de la arista. Sino devuelve F_INFINITO
         float obtenerTiempo(const string &origen, const string &destino);
 
-        //PRE: La matriz debe estar cargada
-        //POST: Muestra por pantalla la matriz los caminos minimos de precios
-        void mostrarCaminosMinimos(const string &origen, const string &destino, unsigned distancias[], string recorrido[], Diccionario<string, Aeropuerto*> *&aeropuertos);
-        void mostrarRuta(string recorrido[], unsigned pos, Diccionario<string, Aeropuerto *> *&aeropuertos);
+        //PRE: -
+        //POST: Muestra el camino minimo desde origen hasta destino
+        void mostrarCaminosMinimos(const string &origen, const string &destino, unsigned distancias[], string recorrido[],
+                                   Diccionario<string, Aeropuerto*> *&aeropuertos);
+
+        //PRE: -
+        //POST: Muestra las rutas entre origen y destino
+        void mostrarRuta(string recorrido[], unsigned posOrigen, unsigned posDestino,
+                         Diccionario<string, Aeropuerto *> *&aeropuertos);
 
         unsigned distanciaMinima(unsigned distancias[], bool visitados[]);
 
         //PRE: La matriz de precios debe estar cargada
-        //POST: Devuelve una lista que contiene las precios minimos de origen a destino
+        //POST: Calcula el camino minimo desde origen hasta todos los destinos posibles, y muestra por pantalla el camino minimo a destino
         void caminoMinimoPrecio(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos);
 
         //PRE: La matriz de tiempos debe estar cargada
-        //POST: Devuelve una lista que contiene las tiempos minimos de origen a destino
+        //POST: Calcula el camino minimo desde origen hasta todos los destinos posibles, y muestra por pantalla el camino minimo a destino
         void caminoMinimoTiempo(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos);
 };
 

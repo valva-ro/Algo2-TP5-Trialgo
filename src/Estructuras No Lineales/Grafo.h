@@ -6,18 +6,6 @@
 #include "../Aeropuerto.h"
 #include "Matriz.h"
 
-struct CaminoMinimoPrecio{
-    Matriz<int>* precios;
-    Matriz<string>* rutas;
-    bool calculado = false;
-};
-
-struct CaminoMinimoTiempo{
-    Matriz<float>* tiempos;
-    Matriz<string>* rutas;
-    bool calculado = false;
-};
-
 class Grafo {
 
     private:
@@ -70,37 +58,20 @@ class Grafo {
         //      devuelve el tiempo de la arista. Sino devuelve F_INFINITO
         float obtenerTiempo(string origen, string destino);
 
-        //DESCRIPCION: Devuelve un struct que contiene las matrices con los caminos minimos de precios
-        //PRE: La matriz de precios debe estar cargada
-        //POST: Devuelve un struct que contiene las matrices con los caminos minimos de precios
-        CaminoMinimoPrecio caminoMinimoPrecio();
-
-        //DESCRIPCION: Devuelve un struct que contiene las matrices con los caminos minimos de tiempos
-        //PRE: La matriz de tiempos debe estar cargada
-        //POST: Devuelve un struct que contiene las matrices con los caminos minimos de tiempos
-        CaminoMinimoTiempo caminoMinimoTiempo();
-
-        //DESCRIPCION: Muestra por pantalla la matriz los caminos minimos de precios
         //PRE: La matriz debe estar cargada
         //POST: Muestra por pantalla la matriz los caminos minimos de precios
-        void mostrarCaminosMinimos(string origen, string destino, CaminoMinimoTiempo caminoMin, Diccionario<string, Aeropuerto*> *&aeropuertos);
+        void mostrarCaminosMinimos(string origen, string destino, unsigned distancias[], string recorrido[], Diccionario<string, Aeropuerto*> *&aeropuertos);
+        void mostrarRuta(string recorrido[], unsigned pos, Diccionario<string, Aeropuerto *> *&aeropuertos);
 
-        //DESCRIPCION: Muestra por pantalla la matriz los caminos minimos de tiempos
-        //PRE: La matriz debe estar cargada
-        //POST: Muestra por pantalla la matriz los caminos minimos de tiempos
-        void mostrarCaminosMinimos(string origen, string destino, CaminoMinimoPrecio caminoMin, Diccionario<string, Aeropuerto*> *&aeropuertos);
+        unsigned distanciaMinima(unsigned distancias[], bool visitados[]);
 
-    private:
-
-        //DESCRIPCION: Devuelve un struct con las matrices inicializadas
         //PRE: La matriz de precios debe estar cargada
-        //POST: Devuelve un struct con las matrices inicializadas
-        CaminoMinimoPrecio inicializarMatricesPrecio();
+        //POST: Devuelve una lista que contiene las precios minimos de origen a destino
+        void caminoMinimoPrecio(string origen, string destino, Diccionario<string, Aeropuerto *> *&aeropuertos);
 
-        //DESCRIPCION: Devuelve un struct con las matrices inicializadas
         //PRE: La matriz de tiempos debe estar cargada
-        //POST: Devuelve un struct con las matrices inicializadas
-        CaminoMinimoTiempo inicializarMatricesTiempo();
+        //POST: Devuelve una lista que contiene las tiempos minimos de origen a destino
+        void caminoMinimoTiempo(string origen, string destino, Diccionario<string, Aeropuerto *> *&aeropuertos);
 };
 
 #endif //TP5_TRIALGO_GRAFO_H

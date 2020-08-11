@@ -8,15 +8,6 @@ const char MENOR_COSTO = '1';
 const char MENOR_TIEMPO = '2';
 const char VOLVER_MENU = '0';
 
-MenuVuelo::MenuVuelo() {
-    caminoMinPrecio.precios = 0;
-    caminoMinPrecio.rutas = 0;
-    caminoMinTiempo.tiempos = 0;
-    caminoMinPrecio.rutas = 0;
-    precioMininmoActualizado = false;
-    tiempoMininmoActualizado = false;
-}
-
 void MenuVuelo::asignarGrafoVuelos(Grafo *&grafoVuelos) {
     this->vuelos = grafoVuelos;
 }
@@ -65,13 +56,8 @@ void MenuVuelo::menorCosto() {
     validacion.longitudString(destino, 3);
     validacion.convertirEnMayusculas(destino);
 
-    if (vuelos->existeVertice(origen) && vuelos->existeVertice(destino)) {
-        if (!precioMininmoActualizado) {
-            caminoMinPrecio = vuelos->caminoMinimoPrecio();
-            tiempoMininmoActualizado = true;
-        }
-        vuelos->mostrarCaminosMinimos(origen, destino, caminoMinPrecio, aeropuertos);
-    }
+    if (vuelos->existeVertice(origen) && vuelos->existeVertice(destino))
+        vuelos->caminoMinimoPrecio(origen, destino, aeropuertos);
     else
         cout << "\tNo existe el aeropuerto de origen o destino\n";
 }
@@ -91,22 +77,12 @@ void MenuVuelo::menorTiempo() {
     validacion.longitudString(destino, 3);
     validacion.convertirEnMayusculas(destino);
 
-    if (vuelos->existeVertice(origen) && vuelos->existeVertice(destino)) {
-        if (!tiempoMininmoActualizado) {
-            caminoMinTiempo = vuelos->caminoMinimoTiempo();
-            tiempoMininmoActualizado = true;
-        }
-        vuelos->mostrarCaminosMinimos(origen, destino, caminoMinTiempo, aeropuertos);
-        tiempoMininmoActualizado = true;
-    }
+    if (vuelos->existeVertice(origen) && vuelos->existeVertice(destino))
+        vuelos->caminoMinimoTiempo(origen, destino, aeropuertos);
     else
         cout << "\tNo existe el aeropuerto de origen o destino\n";
 }
 
 void MenuVuelo::liberarRecursos() {
     delete vuelos;
-    delete caminoMinPrecio.precios;
-    delete caminoMinPrecio.rutas;
-    delete caminoMinTiempo.tiempos;
-    delete caminoMinTiempo.rutas;
 }

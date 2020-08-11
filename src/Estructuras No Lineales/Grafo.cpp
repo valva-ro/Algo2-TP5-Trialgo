@@ -1,4 +1,5 @@
 #include "Grafo.h"
+#include "../Estructuras Lineales/Pila.h"
 
 const int E_INFINITO = 999999;
 const float F_INFINITO = 999998.3;
@@ -113,15 +114,15 @@ void Grafo::mostrarRuta(string recorrido[], unsigned posOrigen, unsigned posDest
         cout << "\n\tNo hay escalas!\n";
 
     else {
-        Cola<string> escalas;
+        Pila<string> escalas;
         while (recorrido[posEscala] != origen) {
             escala = recorrido[vertices->obtenerPosicion(escala)];
             posEscala = vertices->obtenerPosicion(escala);
-            escalas.encolar(escala);
+            escalas.agregar(escala);
         }
         while (!escalas.vacia()) {
-            string aeropuerto = escalas.obtenerPrimero();
-            escalas.desencolar();
+            string aeropuerto = escalas.obtenerUltimo();
+            escalas.eliminar();
             cout << "\n\tEscala en:";
             if (aeropuertos->existe(aeropuerto))
                 cout << *aeropuertos->obtenerValor(aeropuerto);

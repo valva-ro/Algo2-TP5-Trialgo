@@ -14,6 +14,7 @@ add_executable(TP5_Trialgo
         "src/Estructuras No Lineales/NodoDiccionario.h"
         "src/Estructuras Lineales/Nodo.h"
         "src/Estructuras Lineales/Cola.h"
+        "src/Estructuras Lineales/Pila.h"
         src/Cargador.h
         src/Cargador.cpp
         excepciones/ExcepcionDiccionario.cpp

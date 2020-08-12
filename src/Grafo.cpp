@@ -169,12 +169,10 @@ RecorridoMinimoTiempo Grafo::dijkstra(const string &origen, Matriz<float> *&tiem
 void Grafo::multiplesPreciosMinimos(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos) {
 
     RecorridoMinimoPrecio recorridoMinActual, recorridoMinNuevo;
-
     string escalaAnterior = origen;
     int precioMinimoActual, precioMinimoNuevo,
-            posDestino = vertices->obtenerPosicion(destino),
-            posEscalaAnterior,
-            i = 1;
+        posDestino = vertices->obtenerPosicion(destino),
+        posEscalaAnterior, i = 1;
 
     Matriz<int>* auxiliar = new Matriz<int>(E_INFINITO, elementos, elementos);
     precioMatriz->copiarMatriz(auxiliar);
@@ -205,11 +203,9 @@ void Grafo::multiplesTiemposMinimos(const string &origen, const string &destino,
 
     RecorridoMinimoTiempo recorridoMinActual, recorridoMinNuevo;
 
-    string escalaAnterior = origen, escalaSiguiente = destino;
+    string escalaAnterior = origen;
     float tiempoMinimoActual, tiempoMinimoNuevo;
-    int posDestino = vertices->obtenerPosicion(destino),
-            posEscalaAnterior, posEscalaSiguiente = posDestino,
-            i = 1;
+    int posDestino = vertices->obtenerPosicion(destino), posEscalaAnterior, i = 1;
 
     Matriz<float>* auxiliar = new Matriz<float>(F_INFINITO, elementos, elementos);
     tiempoMatriz->copiarMatriz(auxiliar);

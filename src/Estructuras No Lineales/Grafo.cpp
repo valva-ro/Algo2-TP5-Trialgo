@@ -3,6 +3,7 @@
 
 const int E_INFINITO = 999999;
 const float F_INFINITO = 999998.3;
+const string VACIO = "-", TIEMPO = "tiempo", PRECIO = "precio";
 
 Grafo::Grafo() {
     this->elementos = 0;
@@ -103,69 +104,7 @@ void Grafo::insertarArista(const string &origen, const string &destino, int prec
         cout<<"\n\tYa existe una ruta que conecta " << origen << " con " << destino;
 }
 
-void Grafo::mostrarRuta(string recorrido[], unsigned posOrigen, unsigned posDestino,
-                        Diccionario<string, Aeropuerto *> *&aeropuertos) {
-
-    string escala = vertices->obtenerDato(posDestino),
-           origen = vertices->obtenerDato(posOrigen),
-           destino = vertices->obtenerDato(posDestino);
-    unsigned posEscala = posDestino;
-
-    if (recorrido[posEscala] == origen)
-        cout << "\n\tNo hay escalas!\n";
-
-    else {
-        Pila<string> escalas;
-        while (recorrido[posEscala] != origen) {
-            escala = recorrido[vertices->obtenerPosicion(escala)];
-            posEscala = vertices->obtenerPosicion(escala);
-            escalas.agregar(escala);
-        }
-        while (!escalas.vacia()) {
-            string aeropuerto = escalas.obtenerUltimo();
-            escalas.eliminar();
-            cout << "\n\tEscala en:";
-            if (aeropuertos->existe(aeropuerto))
-                cout << *aeropuertos->obtenerValor(aeropuerto);
-            else
-                cout << "\n\t" << aeropuerto << "\n";
-        }
-    }
-}
-
-void Grafo::mostrarCaminosMinimos(const string &origen, const string &destino, unsigned distancias[],
-                                  string recorrido[], Diccionario<string, Aeropuerto *> *&aeropuertos) {
-    cout << "\n\tOrigen:";
-    if (aeropuertos->existe(origen))
-        cout << *aeropuertos->obtenerValor(origen);
-    else
-        cout << "\n\t" << origen << "\n";
-
-    cout << "\n\tDestino:";
-    if (aeropuertos->existe(destino))
-        cout << *aeropuertos->obtenerValor(destino);
-    else
-        cout << "\n\t" << destino << "\n";
-
-    unsigned posDestino = vertices->obtenerPosicion(destino);
-    unsigned posOrigen = vertices->obtenerPosicion(origen);
-    cout << "\n\tPrecio min: $" << distancias[posDestino] << "\n";
-    mostrarRuta(recorrido, posOrigen, posDestino, aeropuertos);
-}
-
-unsigned Grafo::distanciaMinima(unsigned distancias[], bool visitados[]) {
-    unsigned min = E_INFINITO, indiceMin = 0;
-    for (unsigned i = 0; i < elementos; i++) {
-        if (!visitados[i] && distancias[i] <= min) {
-            min = distancias[i];
-            indiceMin = i;
-        }
-    }
-    return indiceMin;
-}
-
-void Grafo::caminoMinimoPrecio(const string &origen, const string &destino,
-                               Diccionario<string, Aeropuerto *> *&aeropuertos) {
+void Grafo::caminoMinimoPrecio(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos) {
 
     unsigned distancias[elementos];
     bool visitados[elementos];
@@ -174,7 +113,7 @@ void Grafo::caminoMinimoPrecio(const string &origen, const string &destino,
     for (unsigned i = 0; i < elementos; i++) {
         distancias[i] = E_INFINITO;
         visitados[i] = false;
-        recorrido[i] = "-";
+        recorrido[i] = VACIO;
     }
 
     distancias[vertices->obtenerPosicion(origen)] = 0;
@@ -190,11 +129,10 @@ void Grafo::caminoMinimoPrecio(const string &origen, const string &destino,
             }
         }
     }
-    mostrarCaminosMinimos(origen, destino, distancias, recorrido, aeropuertos);
+    mostrarCaminoMinimo(PRECIO, origen, destino, distancias, recorrido, aeropuertos);
 }
 
-void Grafo::caminoMinimoTiempo(const string &origen, const string &destino,
-                               Diccionario<string, Aeropuerto *> *&aeropuertos) {
+void Grafo::caminoMinimoTiempo(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos) {
     unsigned distancias[elementos];
     bool visitados[elementos];
     string recorrido[elementos];
@@ -202,7 +140,7 @@ void Grafo::caminoMinimoTiempo(const string &origen, const string &destino,
     for (unsigned i = 0; i < elementos; i++) {
         distancias[i] = F_INFINITO;
         visitados[i] = false;
-        recorrido[i] = "-";
+        recorrido[i] = VACIO;
     }
 
     distancias[vertices->obtenerPosicion(origen)] = 0;
@@ -218,5 +156,86 @@ void Grafo::caminoMinimoTiempo(const string &origen, const string &destino,
             }
         }
     }
-    mostrarCaminosMinimos(origen, destino, distancias, recorrido, aeropuertos);
+    mostrarCaminoMinimo(TIEMPO, origen, destino, distancias, recorrido, aeropuertos);
+}
+
+unsigned Grafo::distanciaMinima(unsigned distancias[], bool visitados[]) {
+    unsigned min = E_INFINITO, indiceMin = 0;
+    for (unsigned i = 0; i < elementos; i++) {
+        if (!visitados[i] && distancias[i] <= min) {
+            min = distancias[i];
+            indiceMin = i;
+        }
+    }
+    return indiceMin;
+}
+
+void Grafo::mostrarCaminoMinimo(const string &tipo, const string &origen, const string &destino, unsigned distancias[],
+                                string recorrido[], Diccionario<string, Aeropuerto *> *&aeropuertos) {
+    unsigned posDestino = vertices->obtenerPosicion(destino);
+    unsigned posOrigen = vertices->obtenerPosicion(origen);
+    if (tipo == PRECIO) {
+        mostrarRuta(PRECIO, recorrido, posOrigen, posDestino, aeropuertos);
+        cout << "\n\tPrecio total: $" << distancias[posDestino] << "\n";
+    }
+    else if(tipo == TIEMPO) {
+        mostrarRuta(TIEMPO, recorrido, posOrigen, posDestino, aeropuertos);
+        cout << "\n\tDuracion total: " << distancias[posDestino] << " hs\n";
+    }
+}
+
+void Grafo::mostrarRuta(const string& tipo, string recorrido[], unsigned posOrigen, unsigned posDestino,
+                        Diccionario<string, Aeropuerto *> *&aeropuertos) {
+
+    string origen = vertices->obtenerDato(posOrigen),
+           destino = vertices->obtenerDato(posDestino),
+           escala = destino,
+           escalaAnterior = origen;
+    unsigned posEscalaAnterior = posOrigen,
+             posEscala = posDestino;
+
+    cout << "\n\tOrigen:";
+    if (aeropuertos->existe(origen))
+        cout << *aeropuertos->obtenerValor(origen);
+    else
+        cout << "\n\t" << origen << "\n";
+
+    if (recorrido[posEscala] != origen) {
+        Pila<string> escalas;
+        while (recorrido[posEscala] != origen) {
+            escala = recorrido[vertices->obtenerPosicion(escala)];
+            posEscala = vertices->obtenerPosicion(escala);
+            escalas.agregar(escala);
+        }
+        while (!escalas.vacia()) {
+            escala = escalas.obtenerUltimo();
+            escalas.eliminar();
+            posEscala = vertices->obtenerPosicion(escala);
+
+            cout << "\n\tEscala en:";
+            if (aeropuertos->existe(escala))
+                cout << *aeropuertos->obtenerValor(escala);
+            else
+                cout << "\n\t" << escala << "\n";
+
+            if (tipo == PRECIO)
+                cout << "\n\tPrecio del tramo " << escalaAnterior << " - " << escala << ": $" << precioMatriz->obtenerValor(posEscalaAnterior, posEscala) << "\n";
+            else if(tipo == TIEMPO)
+                cout << "\n\tDuracion del tramo " << escalaAnterior << " - " << escala << ": " << tiempoMatriz->obtenerValor(posEscalaAnterior, posEscala) << " hs\n";
+
+            posEscalaAnterior = vertices->obtenerPosicion(escala);
+            escalaAnterior = vertices->obtenerDato(posEscalaAnterior);}
+    }
+
+    cout << "\n\tDestino:";
+    if (aeropuertos->existe(destino))
+        cout << *aeropuertos->obtenerValor(destino);
+    else
+        cout << "\n\t" << destino << "\n";
+
+    if (tipo == PRECIO)
+        cout << "\n\tPrecio del tramo " << escalaAnterior << " - " << destino << ": $" << precioMatriz->obtenerValor(posEscalaAnterior, posDestino) << "\n";
+    else if(tipo == TIEMPO)
+        cout << "\n\tDuracion del tramo " << escalaAnterior << " - " << destino << ": " << tiempoMatriz->obtenerValor(posEscalaAnterior, posDestino) << " hs\n";
+
 }

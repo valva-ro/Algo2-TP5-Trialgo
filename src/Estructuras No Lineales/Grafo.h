@@ -53,25 +53,39 @@ class Grafo {
         //      devuelve el tiempo de la arista. Sino devuelve F_INFINITO
         float obtenerTiempo(const string &origen, const string &destino);
 
-        //PRE: -
-        //POST: Muestra el camino minimo desde origen hasta destino
-        void mostrarCaminosMinimos(const string &origen, const string &destino, unsigned distancias[], string recorrido[],
-                                   Diccionario<string, Aeropuerto*> *&aeropuertos);
-
-        //PRE: -
-        //POST: Muestra las rutas entre origen y destino
-        void mostrarRuta(string recorrido[], unsigned posOrigen, unsigned posDestino,
-                         Diccionario<string, Aeropuerto *> *&aeropuertos);
-
-        unsigned distanciaMinima(unsigned distancias[], bool visitados[]);
-
-        //PRE: La matriz de precios debe estar cargada
-        //POST: Calcula el camino minimo desde origen hasta todos los destinos posibles, y muestra por pantalla el camino minimo a destino
+        //  PRE: La matriz de precios debe estar cargada
+        // POST: Calcula el camino minimo desde origen hasta todos los destinos posibles, y muestra por pantalla el camino minimo a destino
         void caminoMinimoPrecio(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos);
 
-        //PRE: La matriz de tiempos debe estar cargada
-        //POST: Calcula el camino minimo desde origen hasta todos los destinos posibles, y muestra por pantalla el camino minimo a destino
+        //  PRE: La matriz de tiempos debe estar cargada
+        // POST: Calcula el camino minimo desde origen hasta todos los destinos posibles, y muestra por pantalla el camino minimo a destino
         void caminoMinimoTiempo(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos);
-};
+
+    private:
+
+        //  PRE: distancias[] y recorrido[] deben tener una longitud igual a 'elementos'
+        // POST: Devuelve la posicion que corresponde al valor minimo del vector distancias[]
+        unsigned distanciaMinima(unsigned distancias[], bool visitados[]);
+
+        //  PRE: - distancias[] y recorrido[] deben tener una longitud igual a 'elementos'
+        //       - distancias[] debe tener 0 en la posicion de origen y el resto de las posiciones deben tener
+        //         el peso minimo que requiere llegar al vertice
+        //       - recorrido[] debe tener VACIO en la posicion de origen y el resto de las posiciones deben tener
+        //         cada una el vertice inmediatamente anterior para llegar a esa posicion
+        //       - tipo debe ser PRECIO o TIEMPO
+        // POST: Muestra el camino minimo desde origen hasta destino
+        void mostrarCaminoMinimo(const string &tipo, const string &origen, const string &destino, unsigned distancias[],
+                                 string recorrido[], Diccionario<string, Aeropuerto*> *&aeropuertos);
+
+        //  PRE: - distancias[] y recorrido[] deben tener una longitud igual a 'elementos'
+        //       - distancias[] debe tener 0 en la posicion de origen y el resto de las posiciones deben tener
+        //         el peso minimo que requiere llegar al vertice
+        //       - recorrido[] debe tener VACIO en la posicion de origen y el resto de las posiciones deben tener
+        //         cada una el vertice inmediatamente anterior para llegar a esa posicion
+        //       - tipo debe ser PRECIO o TIEMPO
+        // POST: Muestra las rutas entre origen y destino
+        void mostrarRuta(const string& tipo, string recorrido[], unsigned posOrigen, unsigned posDestino,
+                         Diccionario<string, Aeropuerto *> *&aeropuertos);
+    };
 
 #endif //TP5_TRIALGO_GRAFO_H

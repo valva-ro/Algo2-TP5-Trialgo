@@ -65,7 +65,7 @@ class Grafo {
 
         //  PRE: distancias[] y recorrido[] deben tener una longitud igual a 'elementos'
         // POST: Devuelve la posicion que corresponde al valor minimo del vector distancias[]
-        unsigned distanciaMinima(unsigned distancias[], bool visitados[]);
+        int distanciaMinima(float distancias[], bool visitados[]);
 
         //  PRE: - distancias[] y recorrido[] deben tener una longitud igual a 'elementos'
         //       - distancias[] debe tener 0 en la posicion de origen y el resto de las posiciones deben tener
@@ -74,7 +74,7 @@ class Grafo {
         //         cada una el vertice inmediatamente anterior para llegar a esa posicion
         //       - tipo debe ser PRECIO o TIEMPO
         // POST: Muestra el camino minimo desde origen hasta destino
-        void mostrarCaminoMinimo(const string &tipo, const string &origen, const string &destino, unsigned distancias[],
+        void mostrarCaminoMinimo(const string &tipo, const string &origen, const string &destino, float distancias[],
                                  string recorrido[], Diccionario<string, Aeropuerto*> *&aeropuertos);
 
         //  PRE: - distancias[] y recorrido[] deben tener una longitud igual a 'elementos'

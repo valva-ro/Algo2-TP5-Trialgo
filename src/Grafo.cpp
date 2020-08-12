@@ -23,8 +23,8 @@ Grafo::~Grafo() {
 bool Grafo::existeArista(const string &origen, const string &destino) {
     bool existe = false;
     if (existeVertice(origen) && existeVertice(destino)) {
-        int posicionOrigen = vertices->obtenerPosicion(origen);
-        int posicionDestino = vertices->obtenerPosicion(destino);
+        unsigned int posicionOrigen = vertices->obtenerPosicion(origen);
+        unsigned int posicionDestino = vertices->obtenerPosicion(destino);
         if ((tiempoMatriz->obtenerValor(posicionOrigen, posicionDestino) < E_INFINITO) &&
             (precioMatriz->obtenerValor(posicionOrigen, posicionDestino) < F_INFINITO))
             existe = true;
@@ -106,7 +106,7 @@ void Grafo::insertarArista(const string &origen, const string &destino, int prec
 
 void Grafo::caminoMinimoPrecio(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos) {
 
-    unsigned distancias[elementos];
+    float distancias[elementos];
     bool visitados[elementos];
     string recorrido[elementos];
 
@@ -122,7 +122,7 @@ void Grafo::caminoMinimoPrecio(const string &origen, const string &destino, Dicc
         unsigned posMin = distanciaMinima(distancias, visitados);
         visitados[posMin] = true;
         for (unsigned j = 0; j < elementos; j++){
-            unsigned minDist = distancias[posMin] + precioMatriz->obtenerValor(posMin, j);
+            float minDist = distancias[posMin] + precioMatriz->obtenerValor(posMin, j);
             if (!visitados[j] && distancias[posMin] != E_INFINITO && minDist < distancias[j]) {
                 distancias[j] = minDist;
                 recorrido[j] = vertices->obtenerDato(posMin);
@@ -133,7 +133,7 @@ void Grafo::caminoMinimoPrecio(const string &origen, const string &destino, Dicc
 }
 
 void Grafo::caminoMinimoTiempo(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos) {
-    unsigned distancias[elementos];
+    float distancias[elementos];
     bool visitados[elementos];
     string recorrido[elementos];
 
@@ -149,7 +149,7 @@ void Grafo::caminoMinimoTiempo(const string &origen, const string &destino, Dicc
         unsigned posMin = distanciaMinima(distancias, visitados);
         visitados[posMin] = true;
         for (unsigned j = 0; j < elementos; j++){
-            unsigned minDist = distancias[posMin] + tiempoMatriz->obtenerValor(posMin, j);
+            float minDist = distancias[posMin] + tiempoMatriz->obtenerValor(posMin, j);
             if (!visitados[j] && distancias[posMin] != E_INFINITO && minDist < distancias[j]) {
                 distancias[j] = minDist;
                 recorrido[j] = vertices->obtenerDato(posMin);
@@ -159,9 +159,10 @@ void Grafo::caminoMinimoTiempo(const string &origen, const string &destino, Dicc
     mostrarCaminoMinimo(TIEMPO, origen, destino, distancias, recorrido, aeropuertos);
 }
 
-unsigned Grafo::distanciaMinima(unsigned distancias[], bool visitados[]) {
-    unsigned min = E_INFINITO, indiceMin = 0;
-    for (unsigned i = 0; i < elementos; i++) {
+int Grafo::distanciaMinima(float distancias[], bool visitados[]) {
+    float min = F_INFINITO;
+    int indiceMin = 0;
+    for (int i = 0; i < elementos; i++) {
         if (!visitados[i] && distancias[i] <= min) {
             min = distancias[i];
             indiceMin = i;
@@ -170,7 +171,7 @@ unsigned Grafo::distanciaMinima(unsigned distancias[], bool visitados[]) {
     return indiceMin;
 }
 
-void Grafo::mostrarCaminoMinimo(const string &tipo, const string &origen, const string &destino, unsigned distancias[],
+void Grafo::mostrarCaminoMinimo(const string &tipo, const string &origen, const string &destino, float distancias[],
                                 string recorrido[], Diccionario<string, Aeropuerto *> *&aeropuertos) {
     unsigned posDestino = vertices->obtenerPosicion(destino);
     unsigned posOrigen = vertices->obtenerPosicion(origen);
@@ -237,5 +238,4 @@ void Grafo::mostrarRuta(const string& tipo, string recorrido[], unsigned posOrig
         cout << "\n\tPrecio del tramo " << escalaAnterior << " - " << destino << ": $" << precioMatriz->obtenerValor(posEscalaAnterior, posDestino) << "\n";
     else if(tipo == TIEMPO)
         cout << "\n\tDuracion del tramo " << escalaAnterior << " - " << destino << ": " << tiempoMatriz->obtenerValor(posEscalaAnterior, posDestino) << " hs\n";
-
 }

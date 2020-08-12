@@ -172,7 +172,6 @@ void Grafo::multiplesPreciosMinimos(const string &origen, const string &destino,
 
     string escalaAnterior = origen, escalaSiguiente = destino;
     int precioMinimoActual, precioMinimoNuevo,
-        posOrigen = vertices->obtenerPosicion(origen),
         posDestino = vertices->obtenerPosicion(destino),
         posEscalaAnterior, posEscalaSiguiente = posDestino,
         i = 2;
@@ -191,23 +190,18 @@ void Grafo::multiplesPreciosMinimos(const string &origen, const string &destino,
     precioMinimoNuevo = precioMinimoActual;
     while (precioMinimoActual == precioMinimoNuevo && escalaAnterior != destino && escalaAnterior != VACIO && escalaSiguiente != VACIO) {
 
-        // Borro de la matriz la conexion de la escala anterior a destino y vuelvo a calcular dijkstra
         auxiliar->modificarElemento(E_INFINITO, posEscalaAnterior, posEscalaSiguiente);
         recorridoMinNuevo = dijkstra(origen, auxiliar, aeropuertos);
 
-        // Obtengo el nuevo precio minimo para llegar a la escala siguiente (inicialmente su valor es posDestino)
+        cout << "\n\tOPCION " << i << ":\n";
+        mostrarCaminoMinimo(origen, destino, recorridoMinNuevo.precioMinimo, recorridoMinNuevo.rutaMinima,  aeropuertos);
+
         precioMinimoNuevo = recorridoMinNuevo.precioMinimo[posEscalaSiguiente];
 
-        // Actualizo las escalas
         escalaSiguiente = escalaAnterior;
         posEscalaSiguiente = posEscalaAnterior;
         escalaAnterior = recorridoMinNuevo.rutaMinima[posEscalaAnterior];
         posEscalaAnterior = vertices->obtenerPosicion(escalaAnterior);
-
-        if (precioMinimoActual == precioMinimoNuevo) {
-            cout << "\n\tOPCION " << i << ":\n";
-            mostrarCaminoMinimo(origen, destino, recorridoMinNuevo.precioMinimo, recorridoMinNuevo.rutaMinima,  aeropuertos);
-        }
         i++;
     }
     delete auxiliar;

@@ -170,42 +170,34 @@ void Grafo::multiplesPreciosMinimos(const string &origen, const string &destino,
 
     RecorridoMinimoPrecio recorridoMinActual, recorridoMinNuevo;
 
-    string escalaAnterior = origen, escalaSiguiente = destino;
+    string escalaAnterior = origen;
     int precioMinimoActual, precioMinimoNuevo,
-        posDestino = vertices->obtenerPosicion(destino),
-        posEscalaAnterior, posEscalaSiguiente = posDestino,
-        i = 2;
+            posDestino = vertices->obtenerPosicion(destino),
+            posEscalaAnterior,
+            i = 1;
 
     Matriz<int>* auxiliar = new Matriz<int>(E_INFINITO, elementos, elementos);
     precioMatriz->copiarMatriz(auxiliar);
 
     recorridoMinActual = dijkstra(origen, auxiliar, aeropuertos);
     precioMinimoActual = recorridoMinActual.precioMinimo[posDestino];
-
+    recorridoMinNuevo = recorridoMinActual;
     escalaAnterior = recorridoMinActual.rutaMinima[posDestino];
     posEscalaAnterior = vertices->obtenerPosicion(escalaAnterior);
 
-    mostrarCaminoMinimo(origen, destino, recorridoMinActual.precioMinimo, recorridoMinActual.rutaMinima, aeropuertos);
-    auxiliar->modificarElemento(E_INFINITO, posEscalaAnterior, posEscalaSiguiente);
-    recorridoMinNuevo = dijkstra(origen, auxiliar, aeropuertos);
-    precioMinimoNuevo = recorridoMinNuevo.precioMinimo[posEscalaSiguiente];
-
-    while (precioMinimoActual == precioMinimoNuevo && escalaAnterior != destino && escalaAnterior != VACIO && escalaSiguiente != VACIO) {
-
+    do {
         cout << "\n\tOPCION " << i << ":\n";
         mostrarCaminoMinimo(origen, destino, recorridoMinNuevo.precioMinimo, recorridoMinNuevo.rutaMinima, aeropuertos);
 
-        auxiliar->modificarElemento(E_INFINITO, posEscalaAnterior, posEscalaSiguiente);
+        auxiliar->modificarElemento(E_INFINITO, posEscalaAnterior, posDestino);
+
         recorridoMinNuevo = dijkstra(origen, auxiliar, aeropuertos);
-
-        precioMinimoNuevo = recorridoMinNuevo.precioMinimo[posEscalaSiguiente];
-
-        escalaSiguiente = escalaAnterior;
-        posEscalaSiguiente = posEscalaAnterior;
-        escalaAnterior = recorridoMinNuevo.rutaMinima[posEscalaAnterior];
+        precioMinimoNuevo = recorridoMinNuevo.precioMinimo[posDestino];
+        escalaAnterior = recorridoMinNuevo.rutaMinima[posDestino];
         posEscalaAnterior = vertices->obtenerPosicion(escalaAnterior);
         i++;
-    }
+    } while (precioMinimoActual == precioMinimoNuevo && escalaAnterior != destino && escalaAnterior != VACIO);
+
     delete auxiliar;
 }
 
@@ -216,39 +208,32 @@ void Grafo::multiplesTiemposMinimos(const string &origen, const string &destino,
     string escalaAnterior = origen, escalaSiguiente = destino;
     float tiempoMinimoActual, tiempoMinimoNuevo;
     int posDestino = vertices->obtenerPosicion(destino),
-        posEscalaAnterior, posEscalaSiguiente = posDestino,
-        i = 2;
+            posEscalaAnterior, posEscalaSiguiente = posDestino,
+            i = 1;
 
     Matriz<float>* auxiliar = new Matriz<float>(F_INFINITO, elementos, elementos);
     tiempoMatriz->copiarMatriz(auxiliar);
 
     recorridoMinActual = dijkstra(origen, auxiliar, aeropuertos);
     tiempoMinimoActual = recorridoMinActual.tiempoMinimo[posDestino];
-
+    recorridoMinNuevo = recorridoMinActual;
     escalaAnterior = recorridoMinActual.rutaMinima[posDestino];
     posEscalaAnterior = vertices->obtenerPosicion(escalaAnterior);
 
-    mostrarCaminoMinimo(origen, destino, recorridoMinActual.tiempoMinimo, recorridoMinActual.rutaMinima, aeropuertos);
-    auxiliar->modificarElemento(E_INFINITO, posEscalaAnterior, posEscalaSiguiente);
-    recorridoMinNuevo = dijkstra(origen, auxiliar, aeropuertos);
-    tiempoMinimoNuevo = recorridoMinNuevo.tiempoMinimo[posEscalaSiguiente];
 
-    while (tiempoMinimoActual == tiempoMinimoNuevo && escalaAnterior != destino && escalaAnterior != VACIO && escalaSiguiente != VACIO) {
-
+    do {
         cout << "\n\tOPCION " << i << ":\n";
         mostrarCaminoMinimo(origen, destino, recorridoMinNuevo.tiempoMinimo, recorridoMinNuevo.rutaMinima, aeropuertos);
 
-        auxiliar->modificarElemento(E_INFINITO, posEscalaAnterior, posEscalaSiguiente);
+        auxiliar->modificarElemento(E_INFINITO, posEscalaAnterior, posDestino);
+
         recorridoMinNuevo = dijkstra(origen, auxiliar, aeropuertos);
-
-        tiempoMinimoNuevo = recorridoMinNuevo.tiempoMinimo[posEscalaSiguiente];
-
-        escalaSiguiente = escalaAnterior;
-        posEscalaSiguiente = posEscalaAnterior;
-        escalaAnterior = recorridoMinNuevo.rutaMinima[posEscalaAnterior];
+        tiempoMinimoNuevo = recorridoMinNuevo.tiempoMinimo[posDestino];
+        escalaAnterior = recorridoMinNuevo.rutaMinima[posDestino];
         posEscalaAnterior = vertices->obtenerPosicion(escalaAnterior);
         i++;
-    }
+    } while (tiempoMinimoActual == tiempoMinimoNuevo && escalaAnterior != destino && escalaAnterior != VACIO);
+
     delete auxiliar;
 }
 

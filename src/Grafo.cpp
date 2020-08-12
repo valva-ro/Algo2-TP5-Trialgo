@@ -1,8 +1,8 @@
 #include "../include/Grafo.h"
 #include "../include/Pila.h"
 
-const int E_INFINITO = 99;
-const float F_INFINITO = 98.3;
+const int E_INFINITO = 999999;
+const float F_INFINITO = 999998.3;
 const string VACIO = "-", TIEMPO = "tiempo", PRECIO = "precio";
 
 Grafo::Grafo() {
@@ -168,27 +168,21 @@ RecorridoMinimoTiempo Grafo::dijkstra(const string &origen, Matriz<float> *&tiem
 
 void Grafo::multiplesPreciosMinimos(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos) {
 
-    // RecorridoMinimoPrecio es una estructura (dataholder) que tiene un vector de strings y un vector de ints
-    // Lo uso para que dijkstra me pueda devolver las dos cosas empaquetadas
     RecorridoMinimoPrecio recorridoMinActual, recorridoMinNuevo;
 
+    string escalaAnterior = origen, escalaSiguiente = destino;
     int precioMinimoActual, precioMinimoNuevo,
         posOrigen = vertices->obtenerPosicion(origen),
         posDestino = vertices->obtenerPosicion(destino),
         posEscalaAnterior, posEscalaSiguiente = posDestino,
         i = 2;
 
-    string escalaAnterior = origen, escalaSiguiente = destino;
-
-    // Creo una matriz auxiliar que inicialmente va a ser igual a precioMatriz
     Matriz<int>* auxiliar = new Matriz<int>(E_INFINITO, elementos, elementos);
     precioMatriz->copiarMatriz(auxiliar);
 
-    // Guardo el valor minimo de origen a destino actual
     recorridoMinActual = dijkstra(origen, auxiliar, aeropuertos);
     precioMinimoActual = recorridoMinActual.precioMinimo[posDestino];
 
-    // Me fijo cual es el aeropuerto anterior al destino y su posicion en la lista
     escalaAnterior = recorridoMinActual.rutaMinima[posDestino];
     posEscalaAnterior = vertices->obtenerPosicion(escalaAnterior);
 
@@ -283,7 +277,7 @@ void Grafo::mostrarRuta(const string& tipo, string recorrido[], unsigned posOrig
 
     if (recorrido[posEscala] != origen) {
         Pila<string> escalas;
-        while (recorrido[posEscala] != origen) {
+        while (recorrido[posEscala] != origen && recorrido[posEscala] != "-") {
             escala = recorrido[vertices->obtenerPosicion(escala)];
             posEscala = vertices->obtenerPosicion(escala);
             escalas.agregar(escala);

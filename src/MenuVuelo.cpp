@@ -77,10 +77,14 @@ void MenuVuelo::menorTiempo() {
     validacion.longitudString(destino, 3);
     validacion.convertirEnMayusculas(destino);
 
-    if (vuelos->existeVertice(origen) && vuelos->existeVertice(destino))
-        vuelos->multiplesTiemposMinimos(origen, destino, aeropuertos);
+    if (origen != destino) {
+        if (vuelos->existeVertice(origen) && vuelos->existeVertice(destino))
+            vuelos->multiplesTiemposMinimos(origen, destino, aeropuertos);
+        else
+            cout << "\tNo existe el aeropuerto de origen o destino\n";
+    }
     else
-        cout << "\tNo existe el aeropuerto de origen o destino\n";
+        cout << "\tOrigen y destino son iguales!\n";
 }
 
 void MenuVuelo::liberarRecursos() {

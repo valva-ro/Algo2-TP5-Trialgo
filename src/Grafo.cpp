@@ -208,9 +208,44 @@ void Grafo::multiplesPreciosMinimos(const string &origen, const string &destino,
 }
 
 void Grafo::multiplesTiemposMinimos(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos) {
-    RecorridoMinimoTiempo recorridoMin;
-    //TODO: falta implementarlo, estuve probando con precios minimos hasta que funcione
-    mostrarCaminoMinimo(origen, destino, recorridoMin.tiempoMinimo, recorridoMin.rutaMinima, aeropuertos);
+
+    RecorridoMinimoTiempo recorridoMinActual, recorridoMinNuevo;
+
+    string escalaAnterior = origen, escalaSiguiente = destino;
+    float precioMinimoActual, precioMinimoNuevo;
+    int posDestino = vertices->obtenerPosicion(destino),
+        posEscalaAnterior, posEscalaSiguiente = posDestino,
+        i = 2;
+
+    Matriz<float>* auxiliar = new Matriz<float>(F_INFINITO, elementos, elementos);
+    tiempoMatriz->copiarMatriz(auxiliar);
+
+    recorridoMinActual = dijkstra(origen, auxiliar, aeropuertos);
+    precioMinimoActual = recorridoMinActual.tiempoMinimo[posDestino];
+
+    escalaAnterior = recorridoMinActual.rutaMinima[posDestino];
+    posEscalaAnterior = vertices->obtenerPosicion(escalaAnterior);
+
+    mostrarCaminoMinimo(origen, destino, recorridoMinActual.tiempoMinimo, recorridoMinActual.rutaMinima,  aeropuertos);
+
+    precioMinimoNuevo = precioMinimoActual;
+    while (precioMinimoActual == precioMinimoNuevo && escalaAnterior != destino && escalaAnterior != VACIO && escalaSiguiente != VACIO) {
+
+        auxiliar->modificarElemento(E_INFINITO, posEscalaAnterior, posEscalaSiguiente);
+        recorridoMinNuevo = dijkstra(origen, auxiliar, aeropuertos);
+
+        cout << "\n\tOPCION " << i << ":\n";
+        mostrarCaminoMinimo(origen, destino, recorridoMinNuevo.tiempoMinimo, recorridoMinNuevo.rutaMinima,  aeropuertos);
+
+        precioMinimoNuevo = recorridoMinNuevo.tiempoMinimo[posEscalaSiguiente];
+
+        escalaSiguiente = escalaAnterior;
+        posEscalaSiguiente = posEscalaAnterior;
+        escalaAnterior = recorridoMinNuevo.rutaMinima[posEscalaAnterior];
+        posEscalaAnterior = vertices->obtenerPosicion(escalaAnterior);
+        i++;
+    }
+    delete auxiliar;
 }
 
 int Grafo::distanciaMinima(float distancias[], bool visitados[]) {

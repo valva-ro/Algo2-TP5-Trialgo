@@ -6,9 +6,16 @@
 #include "Aeropuerto.h"
 #include "Matriz.h"
 
-struct RecorridoMinimo {
-    string* rutaMinima;
-    float* pesoMinimo;
+const int MAX_VERTICES = 999;
+
+struct RecorridoMinimoPrecio {
+    string rutaMinima[MAX_VERTICES];
+    int precioMinimo[MAX_VERTICES];
+};
+
+struct RecorridoMinimoTiempo {
+    string rutaMinima[MAX_VERTICES];
+    float tiempoMinimo[MAX_VERTICES];
 };
 
 class Grafo {
@@ -68,13 +75,15 @@ class Grafo {
 
         //  PRE: La matriz de precios debe estar cargada
         // POST: Calcula el camino minimo desde origen hasta todos los destinos posibles, y muestra por pantalla el camino minimo a destino
-        void dijkstra(const string &origen, const string &destino, Matriz<int> *&precios,
-                      Diccionario<string, Aeropuerto *> *&aeropuertos);
+        RecorridoMinimoPrecio dijkstra(const string &origen, Matriz<int> *&precios, Diccionario<string, Aeropuerto *> *&aeropuertos);
 
         //  PRE: La matriz de tiempos debe estar cargada
         // POST: Calcula el camino minimo desde origen hasta todos los destinos posibles, y muestra por pantalla el camino minimo a destino
-        void dijkstra(const string &origen, const string &destino, Matriz<float> *&tiempos,
-                      Diccionario<string, Aeropuerto *> *&aeropuertos);
+        RecorridoMinimoTiempo dijkstra(const string &origen, Matriz<float> *&tiempos, Diccionario<string, Aeropuerto *> *&aeropuertos);
+
+        void multiplesPreciosMinimos(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos);
+
+        void multiplesTiemposMinimos(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos);
 
     private:
 

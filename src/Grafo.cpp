@@ -1,8 +1,8 @@
 #include "../include/Grafo.h"
 #include "../include/Pila.h"
 
-const int E_INFINITO = 999999;
-const float F_INFINITO = 999998.3;
+const int E_INFINITO = 99;
+const float F_INFINITO = 98.3;
 const string VACIO = "-", TIEMPO = "tiempo", PRECIO = "precio";
 
 Grafo::Grafo() {
@@ -112,62 +112,117 @@ void Grafo::insertarArista(const string &origen, const string &destino, int prec
         cout<<"\n\tYa existe una ruta que conecta " << origen << " con " << destino;
 }
 
-void Grafo::dijkstra(const string &origen, const string &destino, Matriz<int> *&precios,
-                     Diccionario<string, Aeropuerto *> *&aeropuertos) {
+RecorridoMinimoPrecio Grafo::dijkstra(const string &origen, Matriz<int> *&precios, Diccionario<string, Aeropuerto *> *&aeropuertos) {
 
-    int distancias[elementos];
+    RecorridoMinimoPrecio recorridoMin;
     bool visitados[elementos];
-    string recorrido[elementos];
 
     for (unsigned i = 0; i < elementos; i++) {
-        distancias[i] = E_INFINITO;
+        recorridoMin.precioMinimo[i] = E_INFINITO;
+        recorridoMin.rutaMinima[i] = VACIO;
         visitados[i] = false;
-        recorrido[i] = VACIO;
     }
 
-    distancias[vertices->obtenerPosicion(origen)] = 0;
+    recorridoMin.precioMinimo[vertices->obtenerPosicion(origen)] = 0;
 
     for (unsigned i = 0; i < elementos - 1; i++) {
-        unsigned posMin = distanciaMinima(distancias, visitados);
+        unsigned posMin = distanciaMinima(recorridoMin.precioMinimo, visitados);
         visitados[posMin] = true;
         for (unsigned j = 0; j < elementos; j++){
-            int minDist = distancias[posMin] + precios->obtenerValor(posMin, j);
-            if (!visitados[j] && distancias[posMin] != E_INFINITO && minDist < distancias[j]) {
-                distancias[j] = minDist;
-                recorrido[j] = vertices->obtenerDato(posMin);
+            int minDist = recorridoMin.precioMinimo[posMin] + precios->obtenerValor(posMin, j);
+            if (!visitados[j] && recorridoMin.precioMinimo[posMin] != E_INFINITO && minDist < recorridoMin.precioMinimo[j]) {
+                recorridoMin.precioMinimo[j] = minDist;
+                recorridoMin.rutaMinima[j] = vertices->obtenerDato(posMin);
             }
         }
     }
-    mostrarCaminoMinimo(origen, destino, distancias, recorrido, aeropuertos);
+    return recorridoMin;
 }
 
-void Grafo::dijkstra(const string &origen, const string &destino, Matriz<float> *&tiempos,
-                     Diccionario<string, Aeropuerto *> *&aeropuertos) {
+RecorridoMinimoTiempo Grafo::dijkstra(const string &origen, Matriz<float> *&tiempos, Diccionario<string, Aeropuerto *> *&aeropuertos) {
 
-    float distancias[elementos];
+    RecorridoMinimoTiempo recorridoMin;
     bool visitados[elementos];
-    string recorrido[elementos];
 
     for (unsigned i = 0; i < elementos; i++) {
-        distancias[i] = F_INFINITO;
+        recorridoMin.tiempoMinimo[i] = F_INFINITO;
+        recorridoMin.rutaMinima[i] = VACIO;
         visitados[i] = false;
-        recorrido[i] = VACIO;
     }
 
-    distancias[vertices->obtenerPosicion(origen)] = 0;
+    recorridoMin.tiempoMinimo[vertices->obtenerPosicion(origen)] = 0;
 
     for (unsigned i = 0; i < elementos - 1; i++) {
-        unsigned posMin = distanciaMinima(distancias, visitados);
+        unsigned posMin = distanciaMinima(recorridoMin.tiempoMinimo, visitados);
         visitados[posMin] = true;
         for (unsigned j = 0; j < elementos; j++){
-            float minDist = distancias[posMin] + tiempos->obtenerValor(posMin, j);
-            if (!visitados[j] && distancias[posMin] != E_INFINITO && minDist < distancias[j]) {
-                distancias[j] = minDist;
-                recorrido[j] = vertices->obtenerDato(posMin);
+            float minDist = recorridoMin.tiempoMinimo[posMin] + tiempos->obtenerValor(posMin, j);
+            if (!visitados[j] && recorridoMin.tiempoMinimo[posMin] != E_INFINITO && minDist < recorridoMin.tiempoMinimo[j]) {
+                recorridoMin.tiempoMinimo[j] = minDist;
+                recorridoMin.rutaMinima[j] = vertices->obtenerDato(posMin);
             }
         }
     }
-    mostrarCaminoMinimo(origen, destino, distancias, recorrido, aeropuertos);
+    return recorridoMin;
+}
+
+void Grafo::multiplesPreciosMinimos(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos) {
+
+    // RecorridoMinimoPrecio es una estructura (dataholder) que tiene un vector de strings y un vector de ints
+    // Lo uso para que dijkstra me pueda devolver las dos cosas empaquetadas
+    RecorridoMinimoPrecio recorridoMinActual, recorridoMinNuevo;
+
+    int precioMinimoActual, precioMinimoNuevo,
+        posOrigen = vertices->obtenerPosicion(origen),
+        posDestino = vertices->obtenerPosicion(destino),
+        posEscalaAnterior, posEscalaSiguiente = posDestino,
+        i = 2;
+
+    string escalaAnterior = origen, escalaSiguiente = destino;
+
+    // Creo una matriz auxiliar que inicialmente va a ser igual a precioMatriz
+    Matriz<int>* auxiliar = new Matriz<int>(E_INFINITO, elementos, elementos);
+    precioMatriz->copiarMatriz(auxiliar);
+
+    // Guardo el valor minimo de origen a destino actual
+    recorridoMinActual = dijkstra(origen, auxiliar, aeropuertos);
+    precioMinimoActual = recorridoMinActual.precioMinimo[posDestino];
+
+    // Me fijo cual es el aeropuerto anterior al destino y su posicion en la lista
+    escalaAnterior = recorridoMinActual.rutaMinima[posDestino];
+    posEscalaAnterior = vertices->obtenerPosicion(escalaAnterior);
+
+    mostrarCaminoMinimo(origen, destino, recorridoMinActual.precioMinimo, recorridoMinActual.rutaMinima,  aeropuertos);
+
+    precioMinimoNuevo = precioMinimoActual;
+    while (precioMinimoActual == precioMinimoNuevo && escalaAnterior != destino && escalaAnterior != VACIO && escalaSiguiente != VACIO) {
+
+        // Borro de la matriz la conexion de la escala anterior a destino y vuelvo a calcular dijkstra
+        auxiliar->modificarElemento(E_INFINITO, posEscalaAnterior, posEscalaSiguiente);
+        recorridoMinNuevo = dijkstra(origen, auxiliar, aeropuertos);
+
+        // Obtengo el nuevo precio minimo para llegar a la escala siguiente (inicialmente su valor es posDestino)
+        precioMinimoNuevo = recorridoMinNuevo.precioMinimo[posEscalaSiguiente];
+
+        // Actualizo las escalas
+        escalaSiguiente = escalaAnterior;
+        posEscalaSiguiente = posEscalaAnterior;
+        escalaAnterior = recorridoMinNuevo.rutaMinima[posEscalaAnterior];
+        posEscalaAnterior = vertices->obtenerPosicion(escalaAnterior);
+
+        if (precioMinimoActual == precioMinimoNuevo) {
+            cout << "\n\tOPCION " << i << ":\n";
+            mostrarCaminoMinimo(origen, destino, recorridoMinNuevo.precioMinimo, recorridoMinNuevo.rutaMinima,  aeropuertos);
+        }
+        i++;
+    }
+    delete auxiliar;
+}
+
+void Grafo::multiplesTiemposMinimos(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos) {
+    RecorridoMinimoTiempo recorridoMin;
+    //TODO: falta implementarlo, estuve probando con precios minimos hasta que funcione
+    mostrarCaminoMinimo(origen, destino, recorridoMin.tiempoMinimo, recorridoMin.rutaMinima, aeropuertos);
 }
 
 int Grafo::distanciaMinima(float distancias[], bool visitados[]) {

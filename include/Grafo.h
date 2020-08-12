@@ -59,6 +59,14 @@ class Grafo {
         float obtenerTiempo(const string &origen, const string &destino);
 
         //  PRE: La matriz de precios debe estar cargada
+        // POST: Devuelve el puntero a la matriz de precios
+        Matriz<int>*& obtenerPrecioMatriz();
+
+        //  PRE: La matriz de tiempos debe estar cargada
+        // POST: Devuelve el puntero a la matriz de tiempos
+        Matriz<float>*& obtenerTiempoMatriz();
+
+        //  PRE: La matriz de precios debe estar cargada
         // POST: Calcula el camino minimo desde origen hasta todos los destinos posibles, y muestra por pantalla el camino minimo a destino
         void dijkstra(const string &origen, const string &destino, Matriz<int> *&precios,
                       Diccionario<string, Aeropuerto *> *&aeropuertos);

@@ -57,7 +57,7 @@ void MenuVuelo::menorCosto() {
     validacion.convertirEnMayusculas(destino);
 
     if (vuelos->existeVertice(origen) && vuelos->existeVertice(destino))
-        vuelos->caminoMinimoPrecio(origen, destino, aeropuertos);
+        vuelos->dijkstra(origen, destino, vuelos->obtenerPrecioMatriz(), aeropuertos);
     else
         cout << "\tNo existe el aeropuerto de origen o destino\n";
 }
@@ -78,7 +78,7 @@ void MenuVuelo::menorTiempo() {
     validacion.convertirEnMayusculas(destino);
 
     if (vuelos->existeVertice(origen) && vuelos->existeVertice(destino))
-        vuelos->caminoMinimoTiempo(origen, destino, aeropuertos);
+        vuelos->dijkstra(origen, destino, vuelos->obtenerTiempoMatriz(), aeropuertos);
     else
         cout << "\tNo existe el aeropuerto de origen o destino\n";
 }

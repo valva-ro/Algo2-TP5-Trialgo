@@ -216,7 +216,6 @@ void Grafo::multiplesTiemposMinimos(const string &origen, const string &destino,
     escalaAnterior = recorridoMinActual.rutaMinima[posDestino];
     posEscalaAnterior = vertices->obtenerPosicion(escalaAnterior);
 
-
     do {
         cout << "\n\tOPCION " << i << ":\n";
         mostrarCaminoMinimo(origen, destino, recorridoMinNuevo.tiempoMinimo, recorridoMinNuevo.rutaMinima, aeropuertos);

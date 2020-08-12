@@ -81,8 +81,14 @@ class Grafo {
         // POST: Calcula el camino minimo desde origen hasta todos los destinos posibles, y muestra por pantalla el camino minimo a destino
         RecorridoMinimoTiempo dijkstra(const string &origen, Matriz<float> *&tiempos, Diccionario<string, Aeropuerto *> *&aeropuertos);
 
+        //  PRE: La matriz de tiempos debe estar cargada
+        // POST: Calcula todos los caminos minimos con igual precio desde origen hasta todos los destinos posibles y
+        //       muestra por pantalla solo los caminos minimos a destino
         void multiplesPreciosMinimos(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos);
 
+        //  PRE: La matriz de tiempos debe estar cargada
+        // POST: Calcula todos los caminos minimos con igual tiempo desde origen hasta todos los destinos posibles y
+        //       muestra por pantalla solo los caminos minimos a destino
         void multiplesTiemposMinimos(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos);
 
     private:

@@ -130,7 +130,7 @@ void Grafo::dijkstra(const string &origen, const string &destino, Matriz<int> *&
             }
         }
     }
-    mostrarCaminoMinimo(PRECIO, origen, destino, distancias, recorrido, aeropuertos);
+    mostrarCaminoMinimo(origen, destino, distancias, recorrido, aeropuertos);
 }
 
 void Grafo::dijkstra(const string &origen, const string &destino, Matriz<float> *&tiempos,
@@ -159,7 +159,7 @@ void Grafo::dijkstra(const string &origen, const string &destino, Matriz<float> 
             }
         }
     }
-    mostrarCaminoMinimo(TIEMPO, origen, destino, distancias, recorrido, aeropuertos);
+    mostrarCaminoMinimo(origen, destino, distancias, recorrido, aeropuertos);
 }
 
 int Grafo::distanciaMinima(float distancias[], bool visitados[]) {

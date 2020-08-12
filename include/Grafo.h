@@ -53,6 +53,11 @@ class Grafo {
         //POST: Inserta una nueva arista de vertice a destino y asigna los costos en la matriz correspondiente
         void insertarArista(const string &origen, const string &destino, int precio, float distancia);
 
+        //  PRE: -
+        // POST: Si existe la arista en el grafo se elimina.
+        //      No se eliminan los vertices, solo la arista
+        void eliminarArista(string origen, string destino);
+
         //DESCRIPCION: Devuelve el peso "precio" de la arista entre origen y destino
         //PRE: -
         //POST: Si origen y destino pertenecen al grafo y existe una arista que los conecte,
@@ -91,7 +96,15 @@ class Grafo {
         //       muestra por pantalla solo los caminos minimos a destino
         void multiplesTiemposMinimos(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos);
 
+        //PRE : -
+        //POST: Muestra el recorrido en profundidad empezando por el primer vertice que se agrego al grafo
+        void mostrarRecorridoProfundidad();
+
     private:
+
+        //PRE : El vector visitados debe tener la misma cantidad de elementos que el grafo
+        //POST: Muestra el recorrido en profundidad desde comienzo
+        void recorridoEnProfundidad(string comienzo, bool visitados[]);
 
         //  PRE: distancias[] y recorrido[] deben tener una longitud igual a 'elementos'
         // POST: Devuelve la posicion que corresponde al valor minimo del vector distancias[]

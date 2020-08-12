@@ -112,6 +112,18 @@ void Grafo::insertarArista(const string &origen, const string &destino, int prec
         cout<<"\n\tYa existe una ruta que conecta " << origen << " con " << destino;
 }
 
+void Grafo:: eliminarArista(string origen, string destino) {
+    if (existeArista(origen, destino)) {
+        unsigned posOrigen = vertices->obtenerPosicion(origen);
+        unsigned posDestino = vertices->obtenerPosicion(destino);
+        precioMatriz->modificarElemento(E_INFINITO, posOrigen, posDestino);
+        tiempoMatriz->modificarElemento(F_INFINITO, posOrigen, posDestino);
+        cout << "\n\tVuelo que conectaba " << origen << " y " << destino << " eliminado";
+    }
+    else
+        cout << "\n\tNo existe una conexion entre " << origen << " y " << destino;
+}
+
 RecorridoMinimoPrecio Grafo::dijkstra(const string &origen, Matriz<int> *&precios, Diccionario<string, Aeropuerto *> *&aeropuertos) {
 
     RecorridoMinimoPrecio recorridoMin;
@@ -325,4 +337,22 @@ void Grafo::mostrarRuta(const string& tipo, string recorrido[], unsigned posOrig
         cout << "\n\tPrecio del tramo " << escalaAnterior << " - " << destino << ": $" << precioMatriz->obtenerValor(posEscalaAnterior, posDestino) << "\n";
     else if(tipo == TIEMPO)
         cout << "\n\tDuracion del tramo " << escalaAnterior << " - " << destino << ": " << tiempoMatriz->obtenerValor(posEscalaAnterior, posDestino) << " hs\n";
+}
+
+void Grafo:: mostrarRecorridoProfundidad() {
+    bool visitados[elementos];
+    for (int i = 0; i < elementos; ++i)
+        visitados[i] = false;
+    string primero = vertices->obtenerDato(0);
+    recorridoEnProfundidad(primero, visitados);
+}
+
+void Grafo:: recorridoEnProfundidad(string comienzo, bool visitados[]) {
+    int posComienzo = vertices->obtenerPosicion(comienzo);
+    visitados[posComienzo] = true;
+    cout << "\t" << comienzo;
+    for (int i = 0; i < elementos; ++i) {
+        if (precioMatriz->obtenerValor(posComienzo, i) != E_INFINITO && !visitados[i])
+            recorridoEnProfundidad(vertices->obtenerDato(i), visitados);
+    }
 }

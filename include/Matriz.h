@@ -147,6 +147,10 @@ public:
     // POST: DEVUELVE EL INICIALIZADOR
     Tipo obtenerInicializador();
 
+    //PRE  :RECIBE UN PUNTERO A UNA MATRIZ POR REFERENCIA
+    //POST :COPIA LA MATRIZ A LA OTRA AUXILIAR
+    void copiarMatriz(Matriz<Tipo>* &aux);
+
     // DESTRUCTOR
 
     // PRE:  -
@@ -421,6 +425,16 @@ template < class Tipo >
 Tipo Matriz<Tipo>::obtenerInicializador() {
     if (inicializadorAsignado)
         return inicializador;
+}
+
+template < class Tipo>
+void Matriz<Tipo>::copiarMatriz(Matriz<Tipo>* &aux)
+{
+    Tipo valor;
+    for(unsigned i = 0; i < filas; i++) {
+        for(unsigned j = 0; j < columnas; j ++)
+            aux->modificarElemento(this->obtenerValor(i,j), i, j);
+    }
 }
 
 //--------------------------------------------------DESTRUCTOR--------------------------------------------------//

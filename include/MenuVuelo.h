@@ -43,6 +43,18 @@ public:
     //POST: Se muesrta el camino de menor tiempo
     void menorTiempo();
 
+    //  PRE: -
+    // POST: Se muestran los aeropuertos disponibles
+    void mostrarAeropuertos();
+
+    //  PRE: -
+    // POST: Si no existe en el grafo, se agrega un vuelo nuevo
+    void agregarVuelo();
+
+    //  PRE: -
+    // POST: Si existe en el grafo se elimina el vuelo ingresasdo por el usuario
+    void eliminarVuelo();
+
     //DESCRIPCION: Libera el grafo de memoria dinamica
     //PRE: El grafo debe estar cargado
     //POST: Libera el grafo de memoria dinamica

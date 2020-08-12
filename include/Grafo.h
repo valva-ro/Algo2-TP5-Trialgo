@@ -97,14 +97,10 @@ class Grafo {
         void multiplesTiemposMinimos(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos);
 
         //PRE : -
-        //POST: Muestra el recorrido en profundidad empezando por el primer vertice que se agrego al grafo
-        void mostrarRecorridoProfundidad();
+        //POST: Muestra todos los vertices del grafo
+        void mostrarVertices();
 
     private:
-
-        //PRE : El vector visitados debe tener la misma cantidad de elementos que el grafo
-        //POST: Muestra el recorrido en profundidad desde comienzo
-        void recorridoEnProfundidad(string comienzo, bool visitados[]);
 
         //  PRE: distancias[] y recorrido[] deben tener una longitud igual a 'elementos'
         // POST: Devuelve la posicion que corresponde al valor minimo del vector distancias[]

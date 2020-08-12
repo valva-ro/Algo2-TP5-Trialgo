@@ -339,20 +339,8 @@ void Grafo::mostrarRuta(const string& tipo, string recorrido[], unsigned posOrig
         cout << "\n\tDuracion del tramo " << escalaAnterior << " - " << destino << ": " << tiempoMatriz->obtenerValor(posEscalaAnterior, posDestino) << " hs\n";
 }
 
-void Grafo:: mostrarRecorridoProfundidad() {
-    bool visitados[elementos];
+void Grafo:: mostrarVertices() {
     for (int i = 0; i < elementos; ++i)
-        visitados[i] = false;
-    string primero = vertices->obtenerDato(0);
-    recorridoEnProfundidad(primero, visitados);
-}
-
-void Grafo:: recorridoEnProfundidad(string comienzo, bool visitados[]) {
-    int posComienzo = vertices->obtenerPosicion(comienzo);
-    visitados[posComienzo] = true;
-    cout << "\t" << comienzo;
-    for (int i = 0; i < elementos; ++i) {
-        if (precioMatriz->obtenerValor(posComienzo, i) != E_INFINITO && !visitados[i])
-            recorridoEnProfundidad(vertices->obtenerDato(i), visitados);
-    }
+        cout << "\t" << vertices->obtenerDato(i);
+    cout << "\n";
 }

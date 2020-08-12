@@ -6,6 +6,11 @@
 #include "Aeropuerto.h"
 #include "Matriz.h"
 
+struct RecorridoMinimo {
+    string* rutaMinima;
+    float* pesoMinimo;
+};
+
 class Grafo {
 
     private:
@@ -55,11 +60,13 @@ class Grafo {
 
         //  PRE: La matriz de precios debe estar cargada
         // POST: Calcula el camino minimo desde origen hasta todos los destinos posibles, y muestra por pantalla el camino minimo a destino
-        void caminoMinimoPrecio(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos);
+        void dijkstra(const string &origen, const string &destino, Matriz<int> *&precios,
+                      Diccionario<string, Aeropuerto *> *&aeropuertos);
 
         //  PRE: La matriz de tiempos debe estar cargada
         // POST: Calcula el camino minimo desde origen hasta todos los destinos posibles, y muestra por pantalla el camino minimo a destino
-        void caminoMinimoTiempo(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos);
+        void dijkstra(const string &origen, const string &destino, Matriz<float> *&tiempos,
+                      Diccionario<string, Aeropuerto *> *&aeropuertos);
 
     private:
 
@@ -67,14 +74,26 @@ class Grafo {
         // POST: Devuelve la posicion que corresponde al valor minimo del vector distancias[]
         int distanciaMinima(float distancias[], bool visitados[]);
 
+        //  PRE: distancias[] y recorrido[] deben tener una longitud igual a 'elementos'
+        // POST: Devuelve la posicion que corresponde al valor minimo del vector distancias[]
+        int distanciaMinima(int distancias[], bool visitados[]);
+
         //  PRE: - distancias[] y recorrido[] deben tener una longitud igual a 'elementos'
         //       - distancias[] debe tener 0 en la posicion de origen y el resto de las posiciones deben tener
         //         el peso minimo que requiere llegar al vertice
         //       - recorrido[] debe tener VACIO en la posicion de origen y el resto de las posiciones deben tener
         //         cada una el vertice inmediatamente anterior para llegar a esa posicion
-        //       - tipo debe ser PRECIO o TIEMPO
         // POST: Muestra el camino minimo desde origen hasta destino
-        void mostrarCaminoMinimo(const string &tipo, const string &origen, const string &destino, float distancias[],
+        void mostrarCaminoMinimo(const string &origen, const string &destino, float distancias[],
+                                 string recorrido[], Diccionario<string, Aeropuerto*> *&aeropuertos);
+
+        //  PRE: - distancias[] y recorrido[] deben tener una longitud igual a 'elementos'
+        //       - distancias[] debe tener 0 en la posicion de origen y el resto de las posiciones deben tener
+        //         el peso minimo que requiere llegar al vertice
+        //       - recorrido[] debe tener VACIO en la posicion de origen y el resto de las posiciones deben tener
+        //         cada una el vertice inmediatamente anterior para llegar a esa posicion
+        // POST: Muestra el camino minimo desde origen hasta destino
+        void mostrarCaminoMinimo(const string &origen, const string &destino, int distancias[],
                                  string recorrido[], Diccionario<string, Aeropuerto*> *&aeropuertos);
 
         //  PRE: - distancias[] y recorrido[] deben tener una longitud igual a 'elementos'

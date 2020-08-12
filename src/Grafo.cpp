@@ -104,9 +104,10 @@ void Grafo::insertarArista(const string &origen, const string &destino, int prec
         cout<<"\n\tYa existe una ruta que conecta " << origen << " con " << destino;
 }
 
-void Grafo::caminoMinimoPrecio(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos) {
+void Grafo::dijkstra(const string &origen, const string &destino, Matriz<int> *&precios,
+                     Diccionario<string, Aeropuerto *> *&aeropuertos) {
 
-    float distancias[elementos];
+    int distancias[elementos];
     bool visitados[elementos];
     string recorrido[elementos];
 
@@ -122,7 +123,7 @@ void Grafo::caminoMinimoPrecio(const string &origen, const string &destino, Dicc
         unsigned posMin = distanciaMinima(distancias, visitados);
         visitados[posMin] = true;
         for (unsigned j = 0; j < elementos; j++){
-            float minDist = distancias[posMin] + precioMatriz->obtenerValor(posMin, j);
+            int minDist = distancias[posMin] + precios->obtenerValor(posMin, j);
             if (!visitados[j] && distancias[posMin] != E_INFINITO && minDist < distancias[j]) {
                 distancias[j] = minDist;
                 recorrido[j] = vertices->obtenerDato(posMin);
@@ -132,7 +133,9 @@ void Grafo::caminoMinimoPrecio(const string &origen, const string &destino, Dicc
     mostrarCaminoMinimo(PRECIO, origen, destino, distancias, recorrido, aeropuertos);
 }
 
-void Grafo::caminoMinimoTiempo(const string &origen, const string &destino, Diccionario<string, Aeropuerto *> *&aeropuertos) {
+void Grafo::dijkstra(const string &origen, const string &destino, Matriz<float> *&tiempos,
+                     Diccionario<string, Aeropuerto *> *&aeropuertos) {
+
     float distancias[elementos];
     bool visitados[elementos];
     string recorrido[elementos];
@@ -149,7 +152,7 @@ void Grafo::caminoMinimoTiempo(const string &origen, const string &destino, Dicc
         unsigned posMin = distanciaMinima(distancias, visitados);
         visitados[posMin] = true;
         for (unsigned j = 0; j < elementos; j++){
-            float minDist = distancias[posMin] + tiempoMatriz->obtenerValor(posMin, j);
+            float minDist = distancias[posMin] + tiempos->obtenerValor(posMin, j);
             if (!visitados[j] && distancias[posMin] != E_INFINITO && minDist < distancias[j]) {
                 distancias[j] = minDist;
                 recorrido[j] = vertices->obtenerDato(posMin);
@@ -171,18 +174,32 @@ int Grafo::distanciaMinima(float distancias[], bool visitados[]) {
     return indiceMin;
 }
 
-void Grafo::mostrarCaminoMinimo(const string &tipo, const string &origen, const string &destino, float distancias[],
+int Grafo::distanciaMinima(int distancias[], bool visitados[]) {
+    int min = E_INFINITO;
+    int indiceMin = 0;
+    for (int i = 0; i < elementos; i++) {
+        if (!visitados[i] && distancias[i] <= min) {
+            min = distancias[i];
+            indiceMin = i;
+        }
+    }
+    return indiceMin;
+}
+
+void Grafo::mostrarCaminoMinimo(const string &origen, const string &destino, float distancias[],
                                 string recorrido[], Diccionario<string, Aeropuerto *> *&aeropuertos) {
     unsigned posDestino = vertices->obtenerPosicion(destino);
     unsigned posOrigen = vertices->obtenerPosicion(origen);
-    if (tipo == PRECIO) {
-        mostrarRuta(PRECIO, recorrido, posOrigen, posDestino, aeropuertos);
-        cout << "\n\tPrecio total: $" << distancias[posDestino] << "\n";
-    }
-    else if(tipo == TIEMPO) {
-        mostrarRuta(TIEMPO, recorrido, posOrigen, posDestino, aeropuertos);
-        cout << "\n\tDuracion total: " << distancias[posDestino] << " hs\n";
-    }
+    mostrarRuta(TIEMPO, recorrido, posOrigen, posDestino, aeropuertos);
+    cout << "\n\tDuracion total: " << distancias[posDestino] << " hs\n";
+}
+
+void Grafo::mostrarCaminoMinimo(const string &origen, const string &destino, int distancias[],
+                                string recorrido[], Diccionario<string, Aeropuerto *> *&aeropuertos) {
+    unsigned posDestino = vertices->obtenerPosicion(destino);
+    unsigned posOrigen = vertices->obtenerPosicion(origen);
+    mostrarRuta(PRECIO, recorrido, posOrigen, posDestino, aeropuertos);
+    cout << "\n\tPrecio total: $" << distancias[posDestino] << "\n";
 }
 
 void Grafo::mostrarRuta(const string& tipo, string recorrido[], unsigned posOrigen, unsigned posDestino,

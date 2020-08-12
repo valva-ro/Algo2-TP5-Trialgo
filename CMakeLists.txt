@@ -5,17 +5,17 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(TP5_Trialgo
         src/Validaciones.cpp
-        src/Validaciones.h
-        "src/Estructuras No Lineales/Grafo.cpp"
-        "src/Estructuras No Lineales/Grafo.h"
-        "src/Estructuras Lineales/Lista.h"
-        "src/Estructuras No Lineales/Matriz.h"
-        "src/Estructuras No Lineales/Diccionario.h"
-        "src/Estructuras No Lineales/NodoDiccionario.h"
-        "src/Estructuras Lineales/Nodo.h"
-        "src/Estructuras Lineales/Cola.h"
-        "src/Estructuras Lineales/Pila.h"
-        src/Cargador.h
+        include/Validaciones.h
+        "src/Grafo.cpp"
+        "include/Grafo.h"
+        "include/Lista.h"
+        "include/Matriz.h"
+        "include/Diccionario.h"
+        "include/NodoDiccionario.h"
+        "include/Nodo.h"
+        "include/Cola.h"
+        "include/Pila.h"
+        include/Cargador.h
         src/Cargador.cpp
         excepciones/ExcepcionDiccionario.cpp
         excepciones/ExcepcionDiccionario.h
@@ -23,12 +23,12 @@ add_executable(TP5_Trialgo
         excepciones/ExcepcionGrafo.h
         excepciones/ExcepcionVuelo.cpp
         excepciones/ExcepcionVuelo.h
-        src/Menu/Menu.cpp
-        src/Menu/Menu.h
-        src/Menu/MenuAeropuerto.cpp
-        src/Menu/MenuAeropuerto.h
-        src/Menu/MenuVuelo.cpp
-        src/Menu/MenuVuelo.h
+        src/Menu.cpp
+        include/Menu.h
+        src/MenuAeropuerto.cpp
+        include/MenuAeropuerto.h
+        src/MenuVuelo.cpp
+        include/MenuVuelo.h
         src/Aeropuerto.cpp
-        src/Aeropuerto.h
+        include/Aeropuerto.h
         src/main.cpp)

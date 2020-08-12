@@ -1,9 +1,9 @@
 #ifndef TP5_TRIALGO_GRAFO_H
 #define TP5_TRIALGO_GRAFO_H
 
-#include "../Estructuras Lineales/Lista.h"
+#include "Lista.h"
 #include "Diccionario.h"
-#include "../Aeropuerto.h"
+#include "Aeropuerto.h"
 #include "Matriz.h"
 
 class Grafo {

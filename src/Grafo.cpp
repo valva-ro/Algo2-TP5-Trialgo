@@ -1,5 +1,5 @@
-#include "Grafo.h"
-#include "../Estructuras Lineales/Pila.h"
+#include "../include/Grafo.h"
+#include "../include/Pila.h"
 
 const int E_INFINITO = 999999;
 const float F_INFINITO = 999998.3;

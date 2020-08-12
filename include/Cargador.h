@@ -5,8 +5,8 @@
 #include <fstream>
 
 //Librerias locales
-#include "Estructuras No Lineales/Diccionario.h"
-#include "Estructuras No Lineales/Grafo.h"
+#include "Diccionario.h"
+#include "Grafo.h"
 #include "Aeropuerto.h"
 #include "../excepciones/ExcepcionGrafo.h"
 #include "../excepciones/ExcepcionDiccionario.h"

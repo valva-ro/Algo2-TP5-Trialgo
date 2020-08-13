@@ -15,7 +15,7 @@ void MenuVuelo::mostrarOpciones() {
     cout << "\n\t------------------- Menu Vuelo -------------------";
     cout << "\n\t" << MENOR_COSTO << ". Menor costo";
     cout << "\n\t" << MENOR_TIEMPO << ". Menor tiempo";
-    cout << "\n\t" << VER_AEROPUERTOS << ". Ver aeropuertos disponibles (DFS)";
+    cout << "\n\t" << VER_AEROPUERTOS << ". Ver aeropuertos disponibles";
     cout << "\n\t" << AGREGAR_VUELO << ". Agregar vuelo";
     cout << "\n\t" << ELIMINAR_VUELO << ". Eliminar vuelo";
     cout << "\n\t" << VOLVER_MENU << ". Volver al menu principal";
